@@ -35,7 +35,7 @@
             this.bunifuDragControl1 = new Bunifu.Framework.UI.BunifuDragControl(this.components);
             this.bunifuDragControl2 = new Bunifu.Framework.UI.BunifuDragControl(this.components);
             this.bunifuCustomLabel27 = new Bunifu.Framework.UI.BunifuCustomLabel();
-            this.tbDiagnostico = new WindowsFormsControlLibrary1.BunifuCustomTextbox();
+            this.tbOtroNombre = new WindowsFormsControlLibrary1.BunifuCustomTextbox();
             this.bunifuFlatButton2 = new Bunifu.Framework.UI.BunifuFlatButton();
             this.btnAceptar = new Bunifu.Framework.UI.BunifuThinButton2();
             this.btnCancelar = new Bunifu.Framework.UI.BunifuThinButton2();
@@ -82,17 +82,16 @@
             this.bunifuCustomLabel27.TabIndex = 31;
             this.bunifuCustomLabel27.Text = "Diagnostico:";
             // 
-            // tbDiagnostico
+            // tbOtroNombre
             // 
-            this.tbDiagnostico.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.tbDiagnostico.BorderColor = System.Drawing.Color.BlueViolet;
-            this.tbDiagnostico.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbDiagnostico.Location = new System.Drawing.Point(116, 84);
-            this.tbDiagnostico.MaxLength = 200;
-            this.tbDiagnostico.Name = "tbDiagnostico";
-            this.tbDiagnostico.Size = new System.Drawing.Size(230, 20);
-            this.tbDiagnostico.TabIndex = 32;
-            this.tbDiagnostico.TextChanged += new System.EventHandler(this.tbOtroNombre_TextChanged);
+            this.tbOtroNombre.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.tbOtroNombre.BorderColor = System.Drawing.Color.BlueViolet;
+            this.tbOtroNombre.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbOtroNombre.Location = new System.Drawing.Point(116, 84);
+            this.tbOtroNombre.Name = "tbOtroNombre";
+            this.tbOtroNombre.Size = new System.Drawing.Size(230, 20);
+            this.tbOtroNombre.TabIndex = 32;
+            this.tbOtroNombre.TextChanged += new System.EventHandler(this.tbOtroNombre_TextChanged);
             // 
             // bunifuFlatButton2
             // 
@@ -174,7 +173,7 @@
             this.btnCancelar.IdleFillColor = System.Drawing.Color.LightCyan;
             this.btnCancelar.IdleForecolor = System.Drawing.Color.DarkCyan;
             this.btnCancelar.IdleLineColor = System.Drawing.Color.DarkCyan;
-            this.btnCancelar.Location = new System.Drawing.Point(190, 135);
+            this.btnCancelar.Location = new System.Drawing.Point(183, 135);
             this.btnCancelar.Margin = new System.Windows.Forms.Padding(5);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(156, 41);
@@ -187,11 +186,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(361, 189);
+            this.ClientSize = new System.Drawing.Size(353, 190);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.bunifuFlatButton2);
-            this.Controls.Add(this.tbDiagnostico);
+            this.Controls.Add(this.tbOtroNombre);
             this.Controls.Add(this.bunifuCustomLabel27);
             this.Controls.Add(this.bunifuCustomLabel3);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -209,7 +208,7 @@
         private Bunifu.Framework.UI.BunifuDragControl bunifuDragControl1;
         private Bunifu.Framework.UI.BunifuDragControl bunifuDragControl2;
         private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel27;
-        private WindowsFormsControlLibrary1.BunifuCustomTextbox tbDiagnostico;
+        private WindowsFormsControlLibrary1.BunifuCustomTextbox tbOtroNombre;
         private Bunifu.Framework.UI.BunifuFlatButton bunifuFlatButton2;
         private Bunifu.Framework.UI.BunifuThinButton2 btnCancelar;
         private Bunifu.Framework.UI.BunifuThinButton2 btnAceptar;

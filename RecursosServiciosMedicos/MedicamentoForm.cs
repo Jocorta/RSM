@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;
 
 namespace RecursosServiciosMedicos
 {
@@ -16,24 +15,16 @@ namespace RecursosServiciosMedicos
         public MedicamentoForm()
         {
             InitializeComponent();
-            
         }
-        
 
-
-        SqlConnection ConnMed = new SqlConnection("Data Source=(LocalDb)\\LocalDBDemo;initial catalog=RSM;integrated security=true");
-        
-        
-
-
-private void tbOtroNombre_TextChanged(object sender, EventArgs e)
+        private void tbOtroNombre_TextChanged(object sender, EventArgs e)
         {
-            if (System.Text.RegularExpressions.Regex.IsMatch(tbMedicamento.Text, @"^[a-zA-Z0-9\s]+$") || tbMedicamento.Text.Length < 1)
+            if (System.Text.RegularExpressions.Regex.IsMatch(tbOtroNombre.Text, "^[a-zA-Z0-9]+$") || tbOtroNombre.Text.Length < 1)
             {
             }
             else
             {
-                tbMedicamento.Text = tbMedicamento.Text.Remove(tbMedicamento.Text.Length - 1);
+                tbOtroNombre.Text = tbOtroNombre.Text.Remove(tbOtroNombre.Text.Length - 1);
             }
         }
 
@@ -45,38 +36,11 @@ private void tbOtroNombre_TextChanged(object sender, EventArgs e)
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             //Insertar a la base de datos la informacion
-            if (tbMedicamento.Text != "")
-            {
-                try
-                {
-                    ConnMed.Open();
-                    SqlCommand cmdMed = new SqlCommand("insert into medicamento (nombre) values('" + tbMedicamento.Text + "');", ConnMed);
-                    cmdMed.ExecuteNonQuery();
-                    MessageBox.Show("Medicamento agregado a la base de datos.");
-                    ConnMed.Close();
-                    //Vuelve a cargar en panel principal los ComboBoxes:
-                    Principal priMed = new Principal();
-                    priMed.LlenaCbDiagnostico();
-                    priMed.LlenaCbMedicamento();
-                    
-                    // El form se cierra una vez se agrego el nuevo valor
-                    this.Hide();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Ocurrio el siguiente problema: " + ex.Message + ". Contecte al administrador." + "\t" + ex.GetType());
-                }
-            }            
         }
 
         private void bunifuFlatButton2_Click(object sender, EventArgs e)
         {
             this.Hide();
-        }
-
-        private void MedicamentoForm_Load(object sender, EventArgs e)
-        {
-            
         }
     }
 }
