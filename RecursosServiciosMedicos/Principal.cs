@@ -22,7 +22,7 @@ namespace RecursosServiciosMedicos
         DataTable dsDiagnostico = new DataTable();
         DataTable dsMedicamento = new DataTable();
 
-        public string nombre = "", num_id = "", num_control = "", num_docente = "", seguimiento = "", fecha = "", medicamento = "", diagnostico = "", num_otro = "", edad = "", sexo = "";
+        public string nombre = "", num_id = "", num_control = "", num_docente = "", seguimiento = "", fecha = "", medicamento = "", diagnostico = "", num_otro = "", edad = "", sexo = "",doctor="";
         public bool RegistroSeleccionado = false, bandera1, banderaalumno;
         public int tipo = 0;
 
@@ -30,7 +30,7 @@ namespace RecursosServiciosMedicos
         {
             InitializeComponent();
         }
-        SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\LocalDBDemo;initial catalog=RSM;integrated security=true");
+        SqlConnection conn = new SqlConnection("Data Source=DESKTOP-48PLDOP;initial catalog=RSM;integrated security=true");//conexion base de datos
 
         public Principal(string LoggedUser)
         {
@@ -67,6 +67,7 @@ namespace RecursosServiciosMedicos
             LimpiaDocente();
             LimpiaOtro();
             pnlConsulta.Show();
+            pnlCertificado.Hide();
 
         }
 
@@ -789,17 +790,18 @@ namespace RecursosServiciosMedicos
                     if (banderaalumno == true)
                     {
                         //si es alumno
-                        path = @"C:\Users\jc-mt\Desktop\Documentos\Certificados\Alumnos\Certificado Medico";
+                        path = @"C:\RSM\DocumentosMedicos\Certificados\Alumnos\Certificado Medico";
                         document = application.Documents.Add(Template: path + ".docx");
                         cadQuery = "Select * from alumno where num_control ='" + num_id + "' ";
                     }
                     else
                     {
                         //si es docente
-                        path = @"C:\Users\jc-mt\Desktop\Documentos\Certificados\Docentes\Certificado Medico";
+                        path = @"C:\RSM\DocumentosMedicos\Certificados\Docentes\Certificado Medico";
                         document = application.Documents.Add(Template: path + ".docx");
                         cadQuery = "Select * from docente where num_docente ='" + num_id + "' ";
                     }
+
 
                     SqlCommand comando = new SqlCommand(cadQuery, conn);
                     conn.Open();
@@ -840,6 +842,12 @@ namespace RecursosServiciosMedicos
                             {
                                 field.Select();
                                 application.Selection.TypeText(fecha);
+                            }
+                            else if (field.Code.Text.Contains("Doctor"))
+                            {
+                                field.Select();
+                                doctor = leer3["doctor"].ToString();
+                                application.Selection.TypeText(doctor);
                             }
 
 
@@ -884,8 +892,12 @@ namespace RecursosServiciosMedicos
                     //fuera del plantel
                     var application = new Microsoft.Office.Interop.Word.Application();
                     var document = new Microsoft.Office.Interop.Word.Document();
-                    string path = @"C:\Users\jc-mt\Desktop\Documentos\Certificados\Otros\Certificado Medico";//cambiar a una carpeta de otros
+                    string path = @"C:\RSM\DocumentosMedicos\Certificados\Otros\Certificado Medico";//cambiar a una carpeta de otros
                     document = application.Documents.Add(Template: path + ".docx");
+                    String cadQuery = "Select * from consulta nombre ='" + nombre + "' ";
+                    SqlCommand comando = new SqlCommand(cadQuery, conn);
+                    conn.Open();
+                    SqlDataReader leer3 = comando.ExecuteReader();
                     foreach (Microsoft.Office.Interop.Word.Field field in document.Fields)
                     {
                         if (field.Code.Text.Contains("Nombre"))
@@ -904,6 +916,12 @@ namespace RecursosServiciosMedicos
                         {
                             field.Select();
                             application.Selection.TypeText(fecha);
+                        }
+                        else if (field.Code.Text.Contains("Doctor"))
+                        {
+                            field.Select();
+                            doctor = leer3["doctor"].ToString();
+                            application.Selection.TypeText(doctor);
                         }
                     }
 
@@ -956,14 +974,14 @@ namespace RecursosServiciosMedicos
                     if (banderaalumno == true)
                     {
                         //si es alumno
-                        path = @"C:\Users\jc-mt\Desktop\Documentos\Recetas\Alumnos\Receta";
+                        path = @"C:\RSM\DocumentosMedicos\Recetas\Alumnos\Receta";
                         document = application.Documents.Add(Template: path + ".docx");//cambiar a una carpeta de alumnos
                         cadQuery = "Select * from alumno where num_control ='" + num_id + "' ";
                     }
                     else
                     {
                         //si es docente
-                        path = @"C:\Users\jc-mt\Desktop\Documentos\Recetas\Docentes\Receta";
+                        path = @"C:\RSM\DocumentosMedicos\Recetas\Docentes\Receta";
                         document = application.Documents.Add(Template: path + ".docx");//cambiar a una carpeta docente
                         cadQuery = "Select * from docente where num_docente ='" + num_id + "' ";
                     }
@@ -1018,6 +1036,12 @@ namespace RecursosServiciosMedicos
                                 field.Select();
                                 application.Selection.TypeText(medicamento);
                             }
+                            else if (field.Code.Text.Contains("Doctor"))
+                            {
+                                field.Select();
+                                doctor = leer3["doctor"].ToString();
+                                application.Selection.TypeText(doctor);
+                            }
 
 
 
@@ -1061,8 +1085,14 @@ namespace RecursosServiciosMedicos
                     //fuera del plantel
                     var application = new Microsoft.Office.Interop.Word.Application();
                     var document = new Microsoft.Office.Interop.Word.Document();
-                    string path = @"C:\Users\jc-mt\Desktop\Documentos\Recetas\Otros\Receta";//cambiar a una carpeta de otros
+                    string path = @"C:\RSM\DocumentosMedicos\Recetas\Otros\Receta";//cambiar a una carpeta de otros
                     document = application.Documents.Add(Template: path + ".docx");
+                    String cadQuery = "Select * from consulta nombre ='" + nombre + "' ";
+                    SqlCommand comando = new SqlCommand(cadQuery, conn);
+                    conn.Open();
+
+                    SqlDataReader leer3 = comando.ExecuteReader();
+
                     foreach (Microsoft.Office.Interop.Word.Field field in document.Fields)
                     {
                         if (field.Code.Text.Contains("Nombre"))
@@ -1091,6 +1121,12 @@ namespace RecursosServiciosMedicos
                         {
                             field.Select();
                             application.Selection.TypeText(medicamento);
+                        }
+                        else if (field.Code.Text.Contains("Doctor"))
+                        {
+                            field.Select();
+                            doctor = leer3["doctor"].ToString();
+                            application.Selection.TypeText(doctor);
                         }
                     }
 
