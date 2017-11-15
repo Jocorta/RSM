@@ -863,6 +863,7 @@ namespace RecursosServiciosMedicos
                         document.Close(SaveChanges: false);
                         document = null;
                         application.Quit();
+                        document.Close();
                         MessageBox.Show("Documento Creado E Impreso Con Exito", "Documento de Certidicado", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         tbCodigoCerti.Text = "";
                         chbOtro.Checked = false;
@@ -875,6 +876,7 @@ namespace RecursosServiciosMedicos
                     else
                     {
                         application.Quit();
+                        document.Close();
                         tbCodigoCerti.Text = "";
                         chbOtro.Checked = false;
                         cbTipoDct.Enabled = false;
@@ -883,6 +885,7 @@ namespace RecursosServiciosMedicos
                         chbOtro.Enabled = true;
                         btnImprimir.Enabled = false;
                     }
+
                 }
                 else
                 {
@@ -930,7 +933,7 @@ namespace RecursosServiciosMedicos
                         document = application.Documents.Add(path + "-" + nombre + ".docx");
                         application.ActivePrinter = pDialog.PrinterSettings.PrinterName;
                         application.ActiveDocument.PrintOut(); //this will also work: doc.PrintOut();
-                        document.Close(SaveChanges: false);
+                        document.Close();
                         document = null;
                         application.Quit();
                         MessageBox.Show("Documento Creado E Impreso Con Exito", "Documento de Certidicado", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -944,6 +947,7 @@ namespace RecursosServiciosMedicos
                     }
                     else
                     {
+                        document.Close();
                         application.Quit();
                         tbCodigoCerti.Text = "";
                         chbOtro.Checked = false;
@@ -1051,9 +1055,9 @@ namespace RecursosServiciosMedicos
                         document = application.Documents.Add(path + "-" + nombre + ".docx");
                         application.ActivePrinter = pDialog.PrinterSettings.PrinterName;
                         application.ActiveDocument.PrintOut(); //this will also work: doc.PrintOut();
-                        document.Close(SaveChanges: false);
+                        document.Close();
                         document = null;
-                        application.Quit();
+                        application.Quit();  
                         MessageBox.Show("Documento Creado E Impreso Con Exito", "Documento de Certidicado", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         tbCodigoCerti.Text = "";
                         chbOtro.Checked = false;
@@ -1065,7 +1069,8 @@ namespace RecursosServiciosMedicos
                     }
                     else
                     {
-                        application.Quit();
+                        document.Close();
+                        application.Quit();                      
                         tbCodigoCerti.Text = "";
                         chbOtro.Checked = false;
                         cbTipoDct.Enabled = false;
@@ -1133,7 +1138,7 @@ namespace RecursosServiciosMedicos
                         document = application.Documents.Add(path + "-" + nombre + ".docx");
                         application.ActivePrinter = pDialog.PrinterSettings.PrinterName;
                         application.ActiveDocument.PrintOut(); //this will also work: doc.PrintOut();
-                        document.Close(SaveChanges: false);
+                        document.Close();
                         document = null;
                         application.Quit();
                         MessageBox.Show("Documento Creado E Impreso Con Exito", "Documento de Certidicado", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -1147,6 +1152,7 @@ namespace RecursosServiciosMedicos
                     }
                     else
                     {
+                        document.Close();
                         application.Quit();
                         tbCodigoCerti.Text = "";
                         chbOtro.Checked = false;
