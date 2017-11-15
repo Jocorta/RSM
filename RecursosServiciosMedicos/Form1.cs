@@ -16,7 +16,7 @@ namespace RecursosServiciosMedicos
     public partial class Form1 : Form
     {
         
-        SqlConnection con = new SqlConnection("Data Source=(LocalDb)\\LocalDBDemo;initial catalog=RSM;integrated security=true");
+        SqlConnection con = new SqlConnection("Data Source=DESKTOP-48PLDOP;initial catalog=RSM;integrated security=true");
 
         Boolean UserEnter = true, PasswordEnter = true;
         public Form1()
