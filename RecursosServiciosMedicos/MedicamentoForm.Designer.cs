@@ -34,7 +34,7 @@
             this.bunifuCustomLabel3 = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.btnCancelar = new Bunifu.Framework.UI.BunifuThinButton2();
             this.btnAceptar = new Bunifu.Framework.UI.BunifuThinButton2();
-            this.tbOtroNombre = new WindowsFormsControlLibrary1.BunifuCustomTextbox();
+            this.tbMedicamento = new WindowsFormsControlLibrary1.BunifuCustomTextbox();
             this.bunifuCustomLabel27 = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.bunifuFlatButton2 = new Bunifu.Framework.UI.BunifuFlatButton();
             this.bunifuDragControl1 = new Bunifu.Framework.UI.BunifuDragControl(this.components);
@@ -111,16 +111,17 @@
             this.btnAceptar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
-            // tbOtroNombre
+            // tbMedicamento
             // 
-            this.tbOtroNombre.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.tbOtroNombre.BorderColor = System.Drawing.Color.BlueViolet;
-            this.tbOtroNombre.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbOtroNombre.Location = new System.Drawing.Point(133, 79);
-            this.tbOtroNombre.Name = "tbOtroNombre";
-            this.tbOtroNombre.Size = new System.Drawing.Size(230, 20);
-            this.tbOtroNombre.TabIndex = 37;
-            this.tbOtroNombre.TextChanged += new System.EventHandler(this.tbOtroNombre_TextChanged);
+            this.tbMedicamento.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.tbMedicamento.BorderColor = System.Drawing.Color.BlueViolet;
+            this.tbMedicamento.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbMedicamento.Location = new System.Drawing.Point(133, 79);
+            this.tbMedicamento.MaxLength = 200;
+            this.tbMedicamento.Name = "tbMedicamento";
+            this.tbMedicamento.Size = new System.Drawing.Size(230, 20);
+            this.tbMedicamento.TabIndex = 37;
+            this.tbMedicamento.TextChanged += new System.EventHandler(this.tbOtroNombre_TextChanged);
             // 
             // bunifuCustomLabel27
             // 
@@ -190,12 +191,13 @@
             this.Controls.Add(this.bunifuFlatButton2);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAceptar);
-            this.Controls.Add(this.tbOtroNombre);
+            this.Controls.Add(this.tbMedicamento);
             this.Controls.Add(this.bunifuCustomLabel27);
             this.Controls.Add(this.bunifuCustomLabel3);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MedicamentoForm";
             this.Text = "MedicamentoForm";
+            this.Load += new System.EventHandler(this.MedicamentoForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -207,7 +209,7 @@
         private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel3;
         private Bunifu.Framework.UI.BunifuThinButton2 btnCancelar;
         private Bunifu.Framework.UI.BunifuThinButton2 btnAceptar;
-        private WindowsFormsControlLibrary1.BunifuCustomTextbox tbOtroNombre;
+        private WindowsFormsControlLibrary1.BunifuCustomTextbox tbMedicamento;
         private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel27;
         private Bunifu.Framework.UI.BunifuFlatButton bunifuFlatButton2;
         private Bunifu.Framework.UI.BunifuDragControl bunifuDragControl1;

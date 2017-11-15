@@ -66,14 +66,13 @@
             this.bunifuFlatButton1.IconVisible = true;
             this.bunifuFlatButton1.IconZoom = 90D;
             this.bunifuFlatButton1.IsTab = false;
-            this.bunifuFlatButton1.Location = new System.Drawing.Point(183, 223);
-            this.bunifuFlatButton1.Margin = new System.Windows.Forms.Padding(5);
+            this.bunifuFlatButton1.Location = new System.Drawing.Point(137, 181);
             this.bunifuFlatButton1.Name = "bunifuFlatButton1";
             this.bunifuFlatButton1.Normalcolor = System.Drawing.Color.DarkCyan;
             this.bunifuFlatButton1.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.bunifuFlatButton1.OnHoverTextColor = System.Drawing.Color.White;
             this.bunifuFlatButton1.selected = false;
-            this.bunifuFlatButton1.Size = new System.Drawing.Size(77, 59);
+            this.bunifuFlatButton1.Size = new System.Drawing.Size(58, 48);
             this.bunifuFlatButton1.TabIndex = 3;
             this.bunifuFlatButton1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.bunifuFlatButton1.Textcolor = System.Drawing.Color.White;
@@ -87,10 +86,9 @@
             this.tbUsuario.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.tbUsuario.ForeColor = System.Drawing.Color.DarkCyan;
             this.tbUsuario.Icon = ((System.Drawing.Image)(resources.GetObject("tbUsuario.Icon")));
-            this.tbUsuario.Location = new System.Drawing.Point(57, 65);
-            this.tbUsuario.Margin = new System.Windows.Forms.Padding(5);
+            this.tbUsuario.Location = new System.Drawing.Point(43, 53);
             this.tbUsuario.Name = "tbUsuario";
-            this.tbUsuario.Size = new System.Drawing.Size(333, 52);
+            this.tbUsuario.Size = new System.Drawing.Size(250, 42);
             this.tbUsuario.TabIndex = 1;
             this.tbUsuario.text = "Usuario";
             this.tbUsuario.OnTextChange += new System.EventHandler(this.tbUsuario_OnTextChange);
@@ -106,10 +104,9 @@
             this.tbContraseña.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.tbContraseña.ForeColor = System.Drawing.Color.DarkCyan;
             this.tbContraseña.Icon = ((System.Drawing.Image)(resources.GetObject("tbContraseña.Icon")));
-            this.tbContraseña.Location = new System.Drawing.Point(57, 143);
-            this.tbContraseña.Margin = new System.Windows.Forms.Padding(5);
+            this.tbContraseña.Location = new System.Drawing.Point(43, 116);
             this.tbContraseña.Name = "tbContraseña";
-            this.tbContraseña.Size = new System.Drawing.Size(333, 52);
+            this.tbContraseña.Size = new System.Drawing.Size(250, 42);
             this.tbContraseña.TabIndex = 2;
             this.tbContraseña.text = "Contraseña";
             this.tbContraseña.OnTextChange += new System.EventHandler(this.tbContraseña_OnTextChange);
@@ -129,10 +126,9 @@
             this.bunifuCustomLabel1.AutoSize = true;
             this.bunifuCustomLabel1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bunifuCustomLabel1.ForeColor = System.Drawing.Color.Teal;
-            this.bunifuCustomLabel1.Location = new System.Drawing.Point(65, 14);
-            this.bunifuCustomLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.bunifuCustomLabel1.Location = new System.Drawing.Point(49, 11);
             this.bunifuCustomLabel1.Name = "bunifuCustomLabel1";
-            this.bunifuCustomLabel1.Size = new System.Drawing.Size(298, 32);
+            this.bunifuCustomLabel1.Size = new System.Drawing.Size(235, 25);
             this.bunifuCustomLabel1.TabIndex = 3;
             this.bunifuCustomLabel1.Text = "Registro Servicios Medicos";
             // 
@@ -157,14 +153,13 @@
             this.bunifuFlatButton2.IconVisible = true;
             this.bunifuFlatButton2.IconZoom = 90D;
             this.bunifuFlatButton2.IsTab = false;
-            this.bunifuFlatButton2.Location = new System.Drawing.Point(416, 1);
-            this.bunifuFlatButton2.Margin = new System.Windows.Forms.Padding(5);
+            this.bunifuFlatButton2.Location = new System.Drawing.Point(312, 1);
             this.bunifuFlatButton2.Name = "bunifuFlatButton2";
             this.bunifuFlatButton2.Normalcolor = System.Drawing.Color.Transparent;
             this.bunifuFlatButton2.OnHovercolor = System.Drawing.Color.Transparent;
             this.bunifuFlatButton2.OnHoverTextColor = System.Drawing.Color.White;
             this.bunifuFlatButton2.selected = false;
-            this.bunifuFlatButton2.Size = new System.Drawing.Size(31, 28);
+            this.bunifuFlatButton2.Size = new System.Drawing.Size(23, 23);
             this.bunifuFlatButton2.TabIndex = 4;
             this.bunifuFlatButton2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.bunifuFlatButton2.Textcolor = System.Drawing.Color.White;
@@ -180,19 +175,17 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(448, 297);
+            this.ClientSize = new System.Drawing.Size(336, 241);
             this.Controls.Add(this.bunifuFlatButton2);
             this.Controls.Add(this.bunifuCustomLabel1);
             this.Controls.Add(this.tbContraseña);
             this.Controls.Add(this.tbUsuario);
             this.Controls.Add(this.bunifuFlatButton1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form1_KeyPress);
