@@ -71,8 +71,6 @@ namespace RecursosServiciosMedicos
 
         }
 
-        
-
         private void cbAlumno_OnChange(object sender, EventArgs e)
         {
             if (cbAlumno.Checked)
@@ -200,20 +198,8 @@ namespace RecursosServiciosMedicos
             AbreDiagnostico();
         }
 
-        private void AbreDiagnostico()
-        {
-            if (!diagnosticoFormObjeto.Visible)
-            {
-                diagnosticoFormObjeto.Show();
-            }
-        }
-        private void AbreMedicamento()
-        {
-            if (!medicamentoFormObjeto.Visible)
-            {
-                medicamentoFormObjeto.Show();
-            }
-        }
+      
+
         private void btnOtro_OtroMedicamento_Click(object sender, EventArgs e)
         {
             AbreMedicamento();
@@ -270,6 +256,22 @@ namespace RecursosServiciosMedicos
             tbOtroMotivo.Text = "";
         }
         #endregion
+
+        private void AbreDiagnostico()
+        {
+            if (!diagnosticoFormObjeto.Visible)
+            {
+                diagnosticoFormObjeto.Show();
+            }
+        }
+
+        private void AbreMedicamento()
+        {
+            if (!medicamentoFormObjeto.Visible)
+            {
+                medicamentoFormObjeto.Show();
+            }
+        }
 
         private void BuscaPaciente()
         {
@@ -714,6 +716,173 @@ namespace RecursosServiciosMedicos
 
         }
 
+        //Metodo de Imprimir
+        private void Imprimir(Microsoft.Office.Interop.Word.Document doc, Microsoft.Office.Interop.Word.Application app, string path)
+        {
+            PrintDialog pDialog = new PrintDialog();
+            if (pDialog.ShowDialog() == DialogResult.OK)
+            {
+                doc = app.Documents.Add(path);
+                app.ActivePrinter = pDialog.PrinterSettings.PrinterName;
+                app.ActiveDocument.PrintOut();
+
+                doc.Close();
+                doc = null;
+                app.Quit();
+                MessageBox.Show("Documento Creado E Impreso Con Exito", "Documento de Certidicado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                tbCodigoCerti.Text = "";
+                chbOtro.Checked = false;
+                cbTipoDct.Enabled = false;
+                cbTipoDct.SelectedIndex = -1;
+                tbCodigoCerti.Enabled = true;
+                chbOtro.Enabled = true;
+                btnImprimir.Enabled = false;
+            }
+            else
+            {
+                doc.Close();
+                app.Quit();
+                tbCodigoCerti.Text = "";
+                chbOtro.Checked = false;
+                cbTipoDct.Enabled = false;
+                cbTipoDct.SelectedIndex = -1;
+                tbCodigoCerti.Enabled = true;
+                chbOtro.Enabled = true;
+                btnImprimir.Enabled = false;
+            }
+        }
+        //Metodo Llenar Documento de Alguien del Plantel
+        private void LlenarDocPlantel(Microsoft.Office.Interop.Word.Document doc, Microsoft.Office.Interop.Word.Application app, string tipodoc)
+        {
+
+            string cadQuery;
+            string path;
+            if (banderaalumno == true)
+            {
+                //si es alumno
+                path = @"C:\RSM\DocumentosMedicos\" + tipodoc + @"s\Alumnos\" + tipodoc;
+                doc = app.Documents.Add(Template: path + ".docx");
+                cadQuery = "Select * from alumno  where num_control ='" + num_id + "' ";
+            }
+            else
+            {
+                //si es docente
+                path = @"C:\RSM\DocumentosMedicos\" + tipodoc + @"s\Docentes\" + tipodoc;
+                doc = app.Documents.Add(Template: path + ".docx");
+                cadQuery = "Select * from docente where num_docente ='" + num_id + "' ";
+            }
+
+
+            SqlCommand comando = new SqlCommand(cadQuery, conn);
+            conn.Open();
+
+            SqlDataReader leer3 = comando.ExecuteReader();
+            if (leer3.Read() == true)
+            {
+                foreach (Microsoft.Office.Interop.Word.Field field in doc.Fields)
+                {
+                    if (field.Code.Text.Contains("Nombre"))
+                    {
+
+                        field.Select();
+                        string nombrecerti;
+
+                        if (banderaalumno == true)
+                        {
+                            //nombre de alumno
+                            nombrecerti = leer3["nombre"].ToString() + " " + leer3["nombre_paterno"].ToString() + " " + leer3["nombre_materno"].ToString();
+                            nombre = nombrecerti;
+                        }
+                        else
+                        {
+                            //nombre de docente
+                            nombrecerti = leer3["nombre"].ToString();
+                            nombre = nombrecerti;
+                        }
+
+                        app.Selection.TypeText(nombre);
+                    }
+                    else if (field.Code.Text.Contains("Edad"))
+                    {
+                        field.Select();
+                        app.Selection.TypeText(edad);
+
+                    }
+                    else if (field.Code.Text.Contains("Fecha"))
+                    {
+                        field.Select();
+                        app.Selection.TypeText(fecha);
+                    }
+                    else if (field.Code.Text.Contains("Doctor"))
+                    {
+                        field.Select();
+                        app.Selection.TypeText(doctor);
+                    }
+
+
+
+                }
+            }
+            conn.Close();
+            doc.SaveAs(path + "-" + nombre + ".docx");
+            string finalpath = path + "-" + nombre + ".docx";
+
+            Imprimir(doc, app, finalpath);
+        }
+        //Metodo Llenar Documento de ALguien Fuera del Plantel
+        private void LlenarDocFueraPlantel(Microsoft.Office.Interop.Word.Document doc, Microsoft.Office.Interop.Word.Application app, string tipodoc)
+        {
+            string path = @"C:\RSM\DocumentosMedicos\" + tipodoc + @"s\Otros\" + tipodoc;
+            doc = app.Documents.Add(Template: path + ".docx");
+            String cadQuery = "Select * from consulta nombre ='" + nombre + "' ";
+            SqlCommand comando = new SqlCommand(cadQuery, conn);
+            conn.Open();
+
+            foreach (Microsoft.Office.Interop.Word.Field field in doc.Fields)
+            {
+                if (field.Code.Text.Contains("Nombre"))
+                {
+                    field.Select();
+                    app.Selection.TypeText(nombre);
+
+                }
+                else if (field.Code.Text.Contains("Edad"))
+                {
+                    field.Select();
+                    app.Selection.TypeText(edad);
+
+                }
+                else if (field.Code.Text.Contains("Fecha"))
+                {
+                    field.Select();
+                    app.Selection.TypeText(fecha);
+                }
+                else if (field.Code.Text.Contains("Diagnostico"))
+                {
+                    field.Select();
+                    app.Selection.TypeText(diagnostico);
+                }
+                else if (field.Code.Text.Contains("Medicamento"))
+                {
+                    field.Select();
+                    app.Selection.TypeText(medicamento);
+                }
+                else if (field.Code.Text.Contains("Doctor"))
+                {
+                    field.Select();
+                    app.Selection.TypeText(doctor);
+                }
+            }
+
+            conn.Close();
+            doc.SaveAs(path + "-" + nombre + ".docx");
+            string finalpath = path + "-" + nombre + ".docx";
+
+            Imprimir(doc, app, finalpath);
+        }
+
+
         //******||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
         private void btnOtroRealizarConsulta_Click(object sender, EventArgs e)
@@ -775,394 +944,33 @@ namespace RecursosServiciosMedicos
 
         private void btnImprimir_Click(object sender, EventArgs e)
         {
+            var application = new Microsoft.Office.Interop.Word.Application();
+            var document = new Microsoft.Office.Interop.Word.Document();
+
             if (tipo == 1)
             {
-                //tipo certificado
+                string tipodedoc = "CertificadoMedico";
+
                 if (chbOtro.Checked == false)
                 {
-                    //si es de dentro del plantel
-                    var application = new Microsoft.Office.Interop.Word.Application();
-                    var document = new Microsoft.Office.Interop.Word.Document();
-                    string cadQuery;
-                    string path;
-                    if (banderaalumno == true)
-                    {
-                        //si es alumno
-                        path = @"C:\RSM\DocumentosMedicos\Certificados\Alumnos\Certificado Medico";
-                        document = application.Documents.Add(Template: path + ".docx");
-                        cadQuery = "Select * from alumno  where num_control ='" + num_id + "' ";
-                    }
-                    else
-                    {
-                        //si es docente
-                        path = @"C:\RSM\DocumentosMedicos\Certificados\Docentes\Certificado Medico";
-                        document = application.Documents.Add(Template: path + ".docx");
-                        cadQuery = "Select * from docente where num_docente ='" + num_id + "' ";
-                    }
-
-
-                    SqlCommand comando = new SqlCommand(cadQuery, conn);
-                    conn.Open();
-
-                    SqlDataReader leer3 = comando.ExecuteReader();
-                    if (leer3.Read() == true)
-                    {
-                        foreach (Microsoft.Office.Interop.Word.Field field in document.Fields)
-                        {
-                            if (field.Code.Text.Contains("Nombre"))
-                            {
-                                // if (leer.Read() == true)
-                                field.Select();
-                                string nombrecerti;
-
-                                if (banderaalumno == true)
-                                {
-                                    //nombre de alumno
-                                    nombrecerti = leer3["nombre"].ToString() + " " + leer3["nombre_paterno"].ToString() + " " + leer3["nombre_materno"].ToString();
-                                    nombre = nombrecerti;
-                                }
-                                else
-                                {
-                                    //nombre de docente
-                                    nombrecerti = leer3["nombre"].ToString();
-                                    nombre = nombrecerti;
-                                }
-
-                                application.Selection.TypeText(nombre);
-                            }
-                            else if (field.Code.Text.Contains("Edad"))
-                            {
-                                field.Select();
-                                application.Selection.TypeText(edad);
-
-                            }
-                            else if (field.Code.Text.Contains("Fecha"))
-                            {
-                                field.Select();
-                                application.Selection.TypeText(fecha);
-                            }
-                            else if (field.Code.Text.Contains("Doctor"))
-                            {
-                                field.Select();
-                                application.Selection.TypeText(doctor);
-                            }
-
-
-
-                        }
-                    }
-                    conn.Close();
-                    document.SaveAs(path + "-" + nombre + ".docx");
-
-                    PrintDialog pDialog = new PrintDialog();
-                    if (pDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        document = application.Documents.Add(path + "-" + nombre + ".docx");
-                        application.ActivePrinter = pDialog.PrinterSettings.PrinterName;
-                        application.ActiveDocument.PrintOut(); //this will also work: doc.PrintOut();
-                        document.Close(SaveChanges: false);
-                        document = null;
-                        application.Quit();
-                        document.Close();
-                        MessageBox.Show("Documento Creado E Impreso Con Exito", "Documento de Certidicado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        tbCodigoCerti.Text = "";
-                        chbOtro.Checked = false;
-                        cbTipoDct.Enabled = false;
-                        cbTipoDct.SelectedIndex = -1;
-                        tbCodigoCerti.Enabled = true;
-                        chbOtro.Enabled = true;
-                        btnImprimir.Enabled = false;
-                    }
-                    else
-                    {
-                        application.Quit();
-                        document.Close();
-                        tbCodigoCerti.Text = "";
-                        chbOtro.Checked = false;
-                        cbTipoDct.Enabled = false;
-                        cbTipoDct.SelectedIndex = -1;
-                        tbCodigoCerti.Enabled = true;
-                        chbOtro.Enabled = true;
-                        btnImprimir.Enabled = false;
-                    }
-
+                    LlenarDocPlantel(document, application, tipodedoc);
                 }
                 else
                 {
-                    //fuera del plantel
-                    var application = new Microsoft.Office.Interop.Word.Application();
-                    var document = new Microsoft.Office.Interop.Word.Document();
-                    string path = @"C:\RSM\DocumentosMedicos\Certificados\Otros\Certificado Medico";//cambiar a una carpeta de otros
-                    document = application.Documents.Add(Template: path + ".docx");
-                    String cadQuery = "Select * from consulta nombre ='" + nombre + "' ";
-                    SqlCommand comando = new SqlCommand(cadQuery, conn);
-                    conn.Open();
-                    SqlDataReader leer3 = comando.ExecuteReader();
-                    foreach (Microsoft.Office.Interop.Word.Field field in document.Fields)
-                    {
-                        if (field.Code.Text.Contains("Nombre"))
-                        {
-                            field.Select();
-                            application.Selection.TypeText(nombre);
-
-                        }
-                        else if (field.Code.Text.Contains("Edad"))
-                        {
-                            field.Select();
-                            application.Selection.TypeText(edad);
-
-                        }
-                        else if (field.Code.Text.Contains("Fecha"))
-                        {
-                            field.Select();
-                            application.Selection.TypeText(fecha);
-                        }
-                        else if (field.Code.Text.Contains("Doctor"))
-                        {
-                            field.Select();
-                            application.Selection.TypeText(doctor);
-                        }
-                    }
-
-                    conn.Close();
-                    document.SaveAs(path + "-" + nombre + ".docx");
-
-                    PrintDialog pDialog = new PrintDialog();
-                    if (pDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        document = application.Documents.Add(path + "-" + nombre + ".docx");
-                        application.ActivePrinter = pDialog.PrinterSettings.PrinterName;
-                        application.ActiveDocument.PrintOut(); //this will also work: doc.PrintOut();
-                        document.Close();
-                        document = null;
-                        application.Quit();
-                        MessageBox.Show("Documento Creado E Impreso Con Exito", "Documento de Certidicado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        tbCodigoCerti.Text = "";
-                        chbOtro.Checked = false;
-                        cbTipoDct.Enabled = false;
-                        cbTipoDct.SelectedIndex = -1;
-                        tbCodigoCerti.Enabled = true;
-                        chbOtro.Enabled = true;
-                        btnImprimir.Enabled = false;
-                    }
-                    else
-                    {
-                        document.Close();
-                        application.Quit();
-                        tbCodigoCerti.Text = "";
-                        chbOtro.Checked = false;
-                        cbTipoDct.Enabled = false;
-                        cbTipoDct.SelectedIndex = -1;
-                        tbCodigoCerti.Enabled = true;
-                        chbOtro.Enabled = true;
-                        btnImprimir.Enabled = false;
-                    }
+                    LlenarDocFueraPlantel(document, application, tipodedoc);
                 }
             } //tipo certificado
             else
             {
                 //tipo receta
-                //tipo certificado
+                string tipodedoc = "Receta";
                 if (chbOtro.Checked == false)
                 {
-                    //si es de dentro del plantel
-                    var application = new Microsoft.Office.Interop.Word.Application();
-                    var document = new Microsoft.Office.Interop.Word.Document();
-
-                    string cadQuery;
-                    string path;
-                    if (banderaalumno == true)
-                    {
-                        //si es alumno
-                        path = @"C:\RSM\DocumentosMedicos\Recetas\Alumnos\Receta";
-                        document = application.Documents.Add(Template: path + ".docx");//cambiar a una carpeta de alumnos
-                        cadQuery = "Select * from alumno where num_control ='" + num_id + "' ";
-                    }
-                    else
-                    {
-                        //si es docente
-                        path = @"C:\RSM\DocumentosMedicos\Recetas\Docentes\Receta";
-                        document = application.Documents.Add(Template: path + ".docx");//cambiar a una carpeta docente
-                        cadQuery = "Select * from docente where num_docente ='" + num_id + "' ";
-                    }
-
-                    SqlCommand comando = new SqlCommand(cadQuery, conn);
-                    conn.Open();
-
-                    SqlDataReader leer3 = comando.ExecuteReader();
-                    if (leer3.Read() == true)
-                    {
-                        foreach (Microsoft.Office.Interop.Word.Field field in document.Fields)
-                        {
-                            if (field.Code.Text.Contains("Nombre"))
-                            {
-                                // if (leer.Read() == true)
-                                field.Select();
-                                string nombrecerti;
-
-                                if (banderaalumno == true)
-                                {
-                                    //nombre de alumno
-                                    nombrecerti = leer3["nombre"].ToString() + " " + leer3["nombre_paterno"].ToString() + " " + leer3["nombre_materno"].ToString();
-                                    nombre = nombrecerti;
-                                }
-                                else
-                                {
-                                    //nombre de docente
-                                    nombrecerti = leer3["nombre"].ToString();
-                                    nombre = nombrecerti;
-                                }
-
-                                application.Selection.TypeText(nombre);
-                            }
-                            else if (field.Code.Text.Contains("Edad"))
-                            {
-                                field.Select();
-                                application.Selection.TypeText(edad);
-
-                            }
-                            else if (field.Code.Text.Contains("Fecha"))
-                            {
-                                field.Select();
-                                application.Selection.TypeText(fecha);
-                            }
-                            else if (field.Code.Text.Contains("Diagnostico"))
-                            {
-                                field.Select();
-                                application.Selection.TypeText(diagnostico);
-                            }
-                            else if (field.Code.Text.Contains("Medicamento"))
-                            {
-                                field.Select();
-                                application.Selection.TypeText(medicamento);
-                            }
-                            else if (field.Code.Text.Contains("Doctor"))
-                            {
-                                field.Select();
-                                application.Selection.TypeText(doctor);
-                            }
-
-
-
-                        }
-                    }
-                    conn.Close();
-                    document.SaveAs(path + "-" + nombre + ".docx");
-
-                    PrintDialog pDialog = new PrintDialog();
-                    if (pDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        document = application.Documents.Add(path + "-" + nombre + ".docx");
-                        application.ActivePrinter = pDialog.PrinterSettings.PrinterName;
-                        application.ActiveDocument.PrintOut(); //this will also work: doc.PrintOut();
-                        document.Close();
-                        document = null;
-                        application.Quit();  
-                        MessageBox.Show("Documento Creado E Impreso Con Exito", "Documento de Certidicado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        tbCodigoCerti.Text = "";
-                        chbOtro.Checked = false;
-                        cbTipoDct.Enabled = false;
-                        cbTipoDct.SelectedIndex = -1;
-                        tbCodigoCerti.Enabled = true;
-                        chbOtro.Enabled = true;
-                        btnImprimir.Enabled = false;
-                    }
-                    else
-                    {
-                        document.Close();
-                        application.Quit();                      
-                        tbCodigoCerti.Text = "";
-                        chbOtro.Checked = false;
-                        cbTipoDct.Enabled = false;
-                        cbTipoDct.SelectedIndex = -1;
-                        tbCodigoCerti.Enabled = true;
-                        chbOtro.Enabled = true;
-                        btnImprimir.Enabled = false;
-                    }
+                    LlenarDocPlantel(document, application, tipodedoc);
                 }
                 else
                 {
-                    //fuera del plantel
-                    var application = new Microsoft.Office.Interop.Word.Application();
-                    var document = new Microsoft.Office.Interop.Word.Document();
-                    string path = @"C:\RSM\DocumentosMedicos\Recetas\Otros\Receta";//cambiar a una carpeta de otros
-                    document = application.Documents.Add(Template: path + ".docx");
-                    String cadQuery = "Select * from consulta nombre ='" + nombre + "' ";
-                    SqlCommand comando = new SqlCommand(cadQuery, conn);
-                    conn.Open();
-
-                    SqlDataReader leer3 = comando.ExecuteReader();
-
-                    foreach (Microsoft.Office.Interop.Word.Field field in document.Fields)
-                    {
-                        if (field.Code.Text.Contains("Nombre"))
-                        {
-                            field.Select();
-                            application.Selection.TypeText(nombre);
-
-                        }
-                        else if (field.Code.Text.Contains("Edad"))
-                        {
-                            field.Select();
-                            application.Selection.TypeText(edad);
-
-                        }
-                        else if (field.Code.Text.Contains("Fecha"))
-                        {
-                            field.Select();
-                            application.Selection.TypeText(fecha);
-                        }
-                        else if (field.Code.Text.Contains("Diagnostico"))
-                        {
-                            field.Select();
-                            application.Selection.TypeText(diagnostico);
-                        }
-                        else if (field.Code.Text.Contains("Medicamento"))
-                        {
-                            field.Select();
-                            application.Selection.TypeText(medicamento);
-                        }
-                        else if (field.Code.Text.Contains("Doctor"))
-                        {
-                            field.Select();
-                            application.Selection.TypeText(doctor);
-                        }
-                    }
-
-                    conn.Close();
-                    document.SaveAs(path + "-" + nombre + ".docx");
-
-                    PrintDialog pDialog = new PrintDialog();
-                    if (pDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        document = application.Documents.Add(path + "-" + nombre + ".docx");
-                        application.ActivePrinter = pDialog.PrinterSettings.PrinterName;
-                        application.ActiveDocument.PrintOut(); //this will also work: doc.PrintOut();
-                        document.Close();
-                        document = null;
-                        application.Quit();
-                        MessageBox.Show("Documento Creado E Impreso Con Exito", "Documento de Certidicado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        tbCodigoCerti.Text = "";
-                        chbOtro.Checked = false;
-                        cbTipoDct.Enabled = false;
-                        cbTipoDct.SelectedIndex = -1;
-                        tbCodigoCerti.Enabled = true;
-                        chbOtro.Enabled = true;
-                        btnImprimir.Enabled = false;
-                    }
-                    else
-                    {
-                        document.Close();
-                        application.Quit();
-                        tbCodigoCerti.Text = "";
-                        chbOtro.Checked = false;
-                        cbTipoDct.Enabled = false;
-                        cbTipoDct.SelectedIndex = -1;
-                        tbCodigoCerti.Enabled = true;
-                        chbOtro.Enabled = true;
-                        btnImprimir.Enabled = false;
-                    }
-                    //print code
+                    LlenarDocFueraPlantel(document, application, tipodedoc);
 
                 }
             } //tipo receta

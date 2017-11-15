@@ -1532,7 +1532,7 @@
             this.pnlListaCerti.Controls.Add(this.bunifuCustomLabel31);
             this.pnlListaCerti.Controls.Add(this.dgvListaCerti);
             this.pnlListaCerti.Controls.Add(this.bunifuCustomLabel30);
-            this.pnlListaCerti.Location = new System.Drawing.Point(35, 296);
+            this.pnlListaCerti.Location = new System.Drawing.Point(24, 64);
             this.pnlListaCerti.Name = "pnlListaCerti";
             this.pnlListaCerti.Size = new System.Drawing.Size(678, 404);
             this.pnlListaCerti.TabIndex = 34;
@@ -1559,7 +1559,7 @@
             this.btnAtras.IconVisible = true;
             this.btnAtras.IconZoom = 90D;
             this.btnAtras.IsTab = false;
-            this.btnAtras.Location = new System.Drawing.Point(8, 7);
+            this.btnAtras.Location = new System.Drawing.Point(10, 4);
             this.btnAtras.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnAtras.Name = "btnAtras";
             this.btnAtras.Normalcolor = System.Drawing.Color.Transparent;
