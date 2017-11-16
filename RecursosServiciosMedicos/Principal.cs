@@ -21,13 +21,16 @@ namespace RecursosServiciosMedicos
         MedicamentoForm medicamentoFormObjeto = new MedicamentoForm();
         DataTable dsDiagnostico = new DataTable();
         DataTable dsMedicamento = new DataTable();
-        
+
+        public string nombre = "", num_id = "", num_control = "", num_docente = "", seguimiento = "", fecha = "", medicamento = "", diagnostico = "", num_otro = "", edad = "", sexo = "",doctor="";
+        public bool RegistroSeleccionado = false, banderaalumno;
+        public int tipo = 0;
 
         public Principal()
         {
             InitializeComponent();
         }
-        SqlConnection conn = new SqlConnection("Data Source=(LocalDb)\\LocalDBDemo;initial catalog=RSM;integrated security=true");
+        SqlConnection conn = new SqlConnection("Data Source=DESKTOP-48PLDOP;initial catalog=RSM;integrated security=true");//conexion base de datos
 
         public Principal(string LoggedUser)
         {
@@ -64,10 +67,9 @@ namespace RecursosServiciosMedicos
             LimpiaDocente();
             LimpiaOtro();
             pnlConsulta.Show();
+            pnlCertificado.Hide();
 
         }
-
-        
 
         private void cbAlumno_OnChange(object sender, EventArgs e)
         {
@@ -123,6 +125,16 @@ namespace RecursosServiciosMedicos
             Separator.Location = new Point(15, 272);
             Separator.Show();
             pnlConsulta.Hide();
+            pnlCertificado.Show();
+
+            tbCodigoCerti.Text = "";
+            tbCodigoCerti.Enabled = true;
+            cbTipoDct.Enabled = false;
+            cbTipoDct.SelectedIndex = -1;
+            btnImprimir.Enabled = false;
+            chbOtro.Enabled = true;
+            btnCancelar.Hide();
+            pnlListaCerti.Hide();
         }
 
         private void btnConsultoria_Click(object sender, EventArgs e)
@@ -186,20 +198,8 @@ namespace RecursosServiciosMedicos
             AbreDiagnostico();
         }
 
-        private void AbreDiagnostico()
-        {
-            if (!diagnosticoFormObjeto.Visible)
-            {
-                diagnosticoFormObjeto.Show();
-            }
-        }
-        private void AbreMedicamento()
-        {
-            if (!medicamentoFormObjeto.Visible)
-            {
-                medicamentoFormObjeto.Show();
-            }
-        }
+      
+
         private void btnOtro_OtroMedicamento_Click(object sender, EventArgs e)
         {
             AbreMedicamento();
@@ -256,6 +256,22 @@ namespace RecursosServiciosMedicos
             tbOtroMotivo.Text = "";
         }
         #endregion
+
+        private void AbreDiagnostico()
+        {
+            if (!diagnosticoFormObjeto.Visible)
+            {
+                diagnosticoFormObjeto.Show();
+            }
+        }
+
+        private void AbreMedicamento()
+        {
+            if (!medicamentoFormObjeto.Visible)
+            {
+                medicamentoFormObjeto.Show();
+            }
+        }
 
         private void BuscaPaciente()
         {
@@ -700,6 +716,173 @@ namespace RecursosServiciosMedicos
 
         }
 
+        //Metodo de Imprimir
+        private void Imprimir(Microsoft.Office.Interop.Word.Document doc, Microsoft.Office.Interop.Word.Application app, string path)
+        {
+            PrintDialog pDialog = new PrintDialog();
+            if (pDialog.ShowDialog() == DialogResult.OK)
+            {
+                doc = app.Documents.Add(path);
+                app.ActivePrinter = pDialog.PrinterSettings.PrinterName;
+                app.ActiveDocument.PrintOut();
+
+                doc.Close();
+                doc = null;
+                app.Quit();
+                MessageBox.Show("Documento Creado E Impreso Con Exito", "Documento de Certidicado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                tbCodigoCerti.Text = "";
+                chbOtro.Checked = false;
+                cbTipoDct.Enabled = false;
+                cbTipoDct.SelectedIndex = -1;
+                tbCodigoCerti.Enabled = true;
+                chbOtro.Enabled = true;
+                btnImprimir.Enabled = false;
+            }
+            else
+            {
+                doc.Close();
+                app.Quit();
+                tbCodigoCerti.Text = "";
+                chbOtro.Checked = false;
+                cbTipoDct.Enabled = false;
+                cbTipoDct.SelectedIndex = -1;
+                tbCodigoCerti.Enabled = true;
+                chbOtro.Enabled = true;
+                btnImprimir.Enabled = false;
+            }
+        }
+        //Metodo Llenar Documento de Alguien del Plantel
+        private void LlenarDocPlantel(Microsoft.Office.Interop.Word.Document doc, Microsoft.Office.Interop.Word.Application app, string tipodoc)
+        {
+
+            string cadQuery;
+            string path;
+            if (banderaalumno == true)
+            {
+                //si es alumno
+                path = @"C:\RSM\DocumentosMedicos\" + tipodoc + @"s\Alumnos\" + tipodoc;
+                doc = app.Documents.Add(Template: path + ".docx");
+                cadQuery = "Select * from alumno  where num_control ='" + num_id + "' ";
+            }
+            else
+            {
+                //si es docente
+                path = @"C:\RSM\DocumentosMedicos\" + tipodoc + @"s\Docentes\" + tipodoc;
+                doc = app.Documents.Add(Template: path + ".docx");
+                cadQuery = "Select * from docente where num_docente ='" + num_id + "' ";
+            }
+
+
+            SqlCommand comando = new SqlCommand(cadQuery, conn);
+            conn.Open();
+
+            SqlDataReader leer3 = comando.ExecuteReader();
+            if (leer3.Read() == true)
+            {
+                foreach (Microsoft.Office.Interop.Word.Field field in doc.Fields)
+                {
+                    if (field.Code.Text.Contains("Nombre"))
+                    {
+
+                        field.Select();
+                        string nombrecerti;
+
+                        if (banderaalumno == true)
+                        {
+                            //nombre de alumno
+                            nombrecerti = leer3["nombre"].ToString() + " " + leer3["nombre_paterno"].ToString() + " " + leer3["nombre_materno"].ToString();
+                            nombre = nombrecerti;
+                        }
+                        else
+                        {
+                            //nombre de docente
+                            nombrecerti = leer3["nombre"].ToString();
+                            nombre = nombrecerti;
+                        }
+
+                        app.Selection.TypeText(nombre);
+                    }
+                    else if (field.Code.Text.Contains("Edad"))
+                    {
+                        field.Select();
+                        app.Selection.TypeText(edad);
+
+                    }
+                    else if (field.Code.Text.Contains("Fecha"))
+                    {
+                        field.Select();
+                        app.Selection.TypeText(fecha);
+                    }
+                    else if (field.Code.Text.Contains("Doctor"))
+                    {
+                        field.Select();
+                        app.Selection.TypeText(doctor);
+                    }
+
+
+
+                }
+            }
+            conn.Close();
+            doc.SaveAs(path + "-" + nombre + ".docx");
+            string finalpath = path + "-" + nombre + ".docx";
+
+            Imprimir(doc, app, finalpath);
+        }
+        //Metodo Llenar Documento de ALguien Fuera del Plantel
+        private void LlenarDocFueraPlantel(Microsoft.Office.Interop.Word.Document doc, Microsoft.Office.Interop.Word.Application app, string tipodoc)
+        {
+            string path = @"C:\RSM\DocumentosMedicos\" + tipodoc + @"s\Otros\" + tipodoc;
+            doc = app.Documents.Add(Template: path + ".docx");
+            String cadQuery = "Select * from consulta nombre ='" + nombre + "' ";
+            SqlCommand comando = new SqlCommand(cadQuery, conn);
+            conn.Open();
+
+            foreach (Microsoft.Office.Interop.Word.Field field in doc.Fields)
+            {
+                if (field.Code.Text.Contains("Nombre"))
+                {
+                    field.Select();
+                    app.Selection.TypeText(nombre);
+
+                }
+                else if (field.Code.Text.Contains("Edad"))
+                {
+                    field.Select();
+                    app.Selection.TypeText(edad);
+
+                }
+                else if (field.Code.Text.Contains("Fecha"))
+                {
+                    field.Select();
+                    app.Selection.TypeText(fecha);
+                }
+                else if (field.Code.Text.Contains("Diagnostico"))
+                {
+                    field.Select();
+                    app.Selection.TypeText(diagnostico);
+                }
+                else if (field.Code.Text.Contains("Medicamento"))
+                {
+                    field.Select();
+                    app.Selection.TypeText(medicamento);
+                }
+                else if (field.Code.Text.Contains("Doctor"))
+                {
+                    field.Select();
+                    app.Selection.TypeText(doctor);
+                }
+            }
+
+            conn.Close();
+            doc.SaveAs(path + "-" + nombre + ".docx");
+            string finalpath = path + "-" + nombre + ".docx";
+
+            Imprimir(doc, app, finalpath);
+        }
+
+
         //******||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
         private void btnOtroRealizarConsulta_Click(object sender, EventArgs e)
@@ -722,6 +905,300 @@ namespace RecursosServiciosMedicos
                 LimpiaAlumno();
                 LimpiaDocente();
                 LimpiaOtro();
+            }
+        }
+
+        private void chbOtro_CheckedChanged(object sender, EventArgs e)
+        {
+            //Determinar si es dentro o fuera del plantel
+            if (chbOtro.Checked == true)
+            {
+                //Es de Fuera
+                lblTituloIngreso.Text = "Ingrese el nombre del Paciente";       
+                tbCodigoCerti.MaxLength = 60;
+                //Textbox solo admite letras
+            }
+            else
+            {
+                //Es de dentro
+                lblTituloIngreso.Text = "Ingrese el numero identificador del Paciente";
+                tbCodigoCerti.MaxLength = 10;
+                //textbox solo admite numeros
+            }
+
+            tbCodigoCerti.Text = "";
+
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            tbCodigoCerti.Text = "";
+            cbTipoDct.Enabled = false;
+            cbTipoDct.SelectedIndex = -1;
+            btnImprimir.Enabled = false;
+            tbCodigoCerti.Enabled = true;
+            chbOtro.Enabled = true;
+            chbOtro.Checked = false;
+            btnCancelar.Hide();
+        }
+
+        private void btnImprimir_Click(object sender, EventArgs e)
+        {
+            var application = new Microsoft.Office.Interop.Word.Application();
+            var document = new Microsoft.Office.Interop.Word.Document();
+
+            if (tipo == 1)
+            {
+                string tipodedoc = "CertificadoMedico";
+
+                if (chbOtro.Checked == false)
+                {
+                    LlenarDocPlantel(document, application, tipodedoc);
+                }
+                else
+                {
+                    LlenarDocFueraPlantel(document, application, tipodedoc);
+                }
+            } //tipo certificado
+            else
+            {
+                //tipo receta
+                string tipodedoc = "Receta";
+                if (chbOtro.Checked == false)
+                {
+                    LlenarDocPlantel(document, application, tipodedoc);
+                }
+                else
+                {
+                    LlenarDocFueraPlantel(document, application, tipodedoc);
+
+                }
+            } //tipo receta
+        }
+
+        private void cbTipoDct_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //Determinacion de Tipo de Documento
+            if (cbTipoDct.SelectedIndex == 0)
+            {
+                //Tipo 1 Es Certificado Medico
+                tipo = 1;
+                if (RegistroSeleccionado == true)
+                {
+                    btnImprimir.Enabled = true;
+                }
+            }
+            else
+            {
+                //Tipo 2 es Receta
+                tipo = 2;
+                if (RegistroSeleccionado == true)
+                {
+                    btnImprimir.Enabled = true;
+                }
+            }
+        }
+
+        private void btnAtras_Click(object sender, EventArgs e)
+        {
+            //Panel Del Listado Ocultar
+            pnlListaCerti.Hide();
+        }
+
+        private void tbCodigoCerti_TextChanged(object sender, EventArgs e)
+        {
+            if (chbOtro.Checked == false)
+            {
+                if (System.Text.RegularExpressions.Regex.IsMatch(tbCodigoCerti.Text, @"^[0-9M]+$") || tbCodigoCerti.Text.Length < 1)
+                {
+                }
+                else
+                {
+                    tbCodigoCerti.Text = tbCodigoCerti.Text.Remove(tbCodigoCerti.Text.Length - 1);
+                }
+
+                if (tbCodigoCerti.TextLength < 10)
+                {
+                }
+                else
+                {
+
+                    tbCodigoCerti.Text = tbCodigoCerti.Text.Remove(tbCodigoCerti.Text.Length - 1);//Si se puede encontrar que no detecte lo escrito mejor
+                }
+            }
+            else
+            {
+                if (System.Text.RegularExpressions.Regex.IsMatch(tbCodigoCerti.Text, @"^[a-zA-Z\s]+$") || tbCodigoCerti.Text.Length < 1)
+                {
+                }
+                else
+                {
+                    tbCodigoCerti.Text = tbCodigoCerti.Text.Remove(tbCodigoCerti.Text.Length - 1);
+                }
+                if (tbCodigoCerti.TextLength < 60)
+                {
+                }
+                else
+                {
+                    tbCodigoCerti.Text = tbCodigoCerti.Text.Remove(tbCodigoCerti.Text.Length - 1);//Si se puede encontrar que no detecte lo escrito mejor
+                }
+            }
+        }
+
+        private void btnBuscarCerti_Click(object sender, EventArgs e)
+        {
+            if (tbCodigoCerti.Text != "")
+            {
+
+                if (chbOtro.Checked == false) //buscar por numero de control de alumno y docente ya que es dentro del plantel
+                {
+
+                    input = tbCodigoCerti.Text;
+                    string cadQuery1 = "Select num_control,num_docente,fecha,diagnostico,medicamento,seguimiento,edad,sexo,doctor from consultas where num_control ='" + tbCodigoCerti.Text + "' or num_docente= '" + tbCodigoCerti.Text + "'";
+                    pnlListaCerti.Show();
+
+                    //llenado del Data Grid View
+                    var dataAdapter = new SqlDataAdapter(cadQuery1, conn);
+                    var commandBuilder = new SqlCommandBuilder(dataAdapter);
+                    var ds = new DataSet();
+                    dataAdapter.Fill(ds);
+                    dgvListaCerti.ReadOnly = true;
+                    dgvListaCerti.DataSource = ds.Tables[0];
+
+                    conn.Close();
+                    tbCodigoCerti.Text = input;
+
+                    foreach (DataGridViewRow row in dgvListaCerti.SelectedRows)
+                    {
+                        num_control = row.Cells[0].Value.ToString();
+                        num_docente = row.Cells[1].Value.ToString();
+                        fecha = row.Cells[2].Value.ToString();
+                        diagnostico = row.Cells[3].Value.ToString();
+                        medicamento = row.Cells[4].Value.ToString();
+                        seguimiento = row.Cells[5].Value.ToString();
+                        edad = row.Cells[6].Value.ToString();
+                        sexo = row.Cells[7].Value.ToString();
+                        doctor = row.Cells[8].Value.ToString();
+
+
+                    }
+                    if (num_docente == "")
+                    {
+                        //alumno
+                        num_id = num_control;
+                        banderaalumno = true;
+                        dgvListaCerti.Columns[1].Visible = false;
+                        dgvListaCerti.Columns[0].Visible = true;
+
+                    }
+                    else
+                    {
+                        //docente
+                        num_id = num_docente;
+                        banderaalumno = false;
+                        dgvListaCerti.Columns[0].Visible = false;
+                        dgvListaCerti.Columns[1].Visible = true;
+                    }
+                }
+                else
+                {
+                    //Busqueda por nombre
+                    input = tbCodigoCerti.Text;
+                    string cadQuery1 = "select o.nombre,c.edad,c.sexo,c.fecha,c.diagnostico,c.medicamento,c.seguimiento,c.doctor from consultas as c inner join otro as o on c.num_otro=o.num_otro where nombre like '%" + tbCodigoCerti.Text + "%'";
+                    pnlListaCerti.Show();
+                    //dgvListaCerti.Rows.Clear();
+
+                    var dataAdapter = new SqlDataAdapter(cadQuery1, conn);
+                    var commandBuilder = new SqlCommandBuilder(dataAdapter);
+                    var ds = new DataSet();
+                    dataAdapter.Fill(ds);
+                    dgvListaCerti.ReadOnly = true;
+                    dgvListaCerti.DataSource = ds.Tables[0];
+
+                    conn.Close();
+                    tbCodigoCerti.Text = input;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Porfavor Ingrese un dato en el Buscador", "Error de Busqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void dgvListaCerti_SelectionChanged(object sender, EventArgs e)
+        {
+            //cambio de seleccion de row
+            if (chbOtro.Checked == false)
+            {
+                foreach (DataGridViewRow row in dgvListaCerti.SelectedRows)
+                {
+                    num_control = row.Cells[0].Value.ToString();
+                    num_docente = row.Cells[1].Value.ToString();
+                    fecha = row.Cells[2].Value.ToString();
+                    diagnostico = row.Cells[3].Value.ToString();
+                    medicamento = row.Cells[4].Value.ToString();
+                    seguimiento = row.Cells[5].Value.ToString();
+                    edad = row.Cells[6].Value.ToString();
+                    sexo = row.Cells[7].Value.ToString();
+                    doctor = row.Cells[8].Value.ToString();
+
+
+                }
+                if (num_docente == "")
+                {
+                    //alumno
+                    num_id = num_control;
+                    banderaalumno = true;
+                    dgvListaCerti.Columns[1].Visible = false;
+                    dgvListaCerti.Columns[0].Visible = true;
+
+                }
+                else
+                {
+                    //docente
+                    num_id = num_docente;
+                    banderaalumno = false;
+                    dgvListaCerti.Columns[0].Visible = false;
+                    dgvListaCerti.Columns[1].Visible = true;
+                }
+
+
+            }
+            else
+            {
+                foreach (DataGridViewRow row in dgvListaCerti.SelectedRows)
+                {
+                    //otro
+                    nombre = row.Cells[0].Value.ToString();
+                    edad = row.Cells[1].Value.ToString();
+                    sexo = row.Cells[2].Value.ToString();
+                    fecha = row.Cells[3].Value.ToString();
+                    diagnostico = row.Cells[4].Value.ToString();
+                    medicamento = row.Cells[5].Value.ToString();
+                    seguimiento = row.Cells[6].Value.ToString();
+                    doctor = row.Cells[7].Value.ToString();
+
+                }
+
+            }
+        }
+
+        private void btnListaContinuar_Click(object sender, EventArgs e)
+        {
+            //Verifica que se haya seleccionado uno no en blanco
+            if (num_control == "" && num_docente == "" && nombre == "")
+            {
+                MessageBox.Show("Seleccione un registro no en blanco", "Error de Registro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                pnlListaCerti.Hide();
+                tbCodigoCerti.Enabled = false;
+                chbOtro.Enabled = false;
+                RegistroSeleccionado = true;
+                cbTipoDct.Enabled = true;
+                btnCancelar.Show();
+
             }
         }
 
