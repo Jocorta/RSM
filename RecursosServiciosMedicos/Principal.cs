@@ -21,6 +21,13 @@ namespace RecursosServiciosMedicos
         MedicamentoForm medicamentoFormObjeto = new MedicamentoForm();
         DataTable dsDiagnostico = new DataTable();
         DataTable dsMedicamento = new DataTable();
+        DataTable dsMedicamento2 = new DataTable();
+        DataTable dsMedicamento3 = new DataTable();
+        bool Med2 = false;
+        bool Med3 = false;
+
+
+
 
         public string nombre = "", num_id = "", num_control = "", num_docente = "", seguimiento = "", fecha = "", medicamento = "", diagnostico = "", num_otro = "", edad = "", sexo = "",doctor="";
         public bool RegistroSeleccionado = false, banderaalumno;
@@ -30,7 +37,7 @@ namespace RecursosServiciosMedicos
         {
             InitializeComponent();
         }
-        SqlConnection conn = new SqlConnection("Data Source=DESKTOP-48PLDOP;initial catalog=RSM;integrated security=true");//conexion base de datos
+        SqlConnection conn = new SqlConnection(@"Data Source=(LocalDb)\LocalDBDemo;initial catalog=RSM;integrated security=true");//conexion base de datos
 
         public Principal(string LoggedUser)
         {
@@ -84,6 +91,12 @@ namespace RecursosServiciosMedicos
                 pnlAlumno.Show();
                 pnlDocente.Hide();
                 pnlOtro.Hide();
+                Med2 = false;
+                Med3 = false;
+                ddbAlumnoMedicamento2.Hide();
+                ddbAlumnoMedicamento3.Hide();
+                lblAlumnoMed2.Hide();
+                lblAlumnoMed3.Hide();
             }
         }
 
@@ -100,6 +113,12 @@ namespace RecursosServiciosMedicos
                 pnlAlumno.Hide();
                 pnlDocente.Show();
                 pnlOtro.Hide();
+                Med2 = false;
+                Med3 = false;
+                ddbDocenteMedicamento2.Hide();
+                lblDocMed2.Hide();
+                ddbDocenteMedicamento3.Hide();
+                lblDocMed3.Hide();
             }
         }
 
@@ -116,6 +135,12 @@ namespace RecursosServiciosMedicos
                 pnlAlumno.Hide();
                 pnlDocente.Hide();
                 pnlOtro.Show();
+                Med2 = false;
+                Med3 = false;
+                cbOtroMedicamento2.Hide();
+                lblMed2.Hide();
+                cbOtroMedicamento3.Hide();
+                lblMed3.Hide();
             }
         }
 
@@ -527,9 +552,24 @@ namespace RecursosServiciosMedicos
                 try
                 {
                     conn.Open();
-                    SqlCommand comandoAlumno = new SqlCommand("insert into consultas (num_control, seguimiento, fecha, medicamento, diagnostico, edad, sexo, motivo, doctor) values('" + tbAlumnoNoControl.Text + "', '" + Seguimiento() + "', '" + DateTime.Now + "', '" + ddbAlumnoMedicamento.GetItemText(ddbAlumnoMedicamento.SelectedItem) + "', '" + ddbAlumnoDiagnostico.GetItemText(ddbAlumnoDiagnostico.SelectedItem) + "', " + tbAlumnoEdad.Text + ", '" + tbAlumnoSexo.Text + "', '"+ tbAlumnoMotivo.Text + "', '"+Usuario+"');", conn);
-                    comandoAlumno.ExecuteNonQuery();
-                    MessageBox.Show("La consulta fue agregada a la base de datos exitosamente.","Agregado",MessageBoxButtons.OK);
+                    if (!ddbAlumnoMedicamento2.Visible && !ddbAlumnoMedicamento3.Visible)
+                    {
+                        SqlCommand comandoAlumno = new SqlCommand("insert into consultas (num_control, seguimiento, fecha, medicamento, diagnostico, edad, sexo, motivo, doctor) values('" + tbAlumnoNoControl.Text + "', '" + Seguimiento() + "', '" + DateTime.Now + "', '" + ddbAlumnoMedicamento.GetItemText(ddbAlumnoMedicamento.SelectedItem) + "', '" + ddbAlumnoDiagnostico.GetItemText(ddbAlumnoDiagnostico.SelectedItem) + "', " + tbAlumnoEdad.Text + ", '" + tbAlumnoSexo.Text + "', '" + tbAlumnoMotivo.Text + "', '" + Usuario + "');", conn);
+                        comandoAlumno.ExecuteNonQuery();
+                        MessageBox.Show("La consulta fue agregada a la base de datos exitosamente.", "Agregado", MessageBoxButtons.OK);
+                    }
+                    else if (ddbAlumnoMedicamento2.Visible && !ddbAlumnoMedicamento3.Visible)
+                    {
+                        SqlCommand comandoAlumno = new SqlCommand("insert into consultas (num_control, seguimiento, fecha, medicamento, medicamento2, diagnostico, edad, sexo, motivo, doctor) values('" + tbAlumnoNoControl.Text + "', '" + Seguimiento() + "', '" + DateTime.Now + "', '" + ddbAlumnoMedicamento.GetItemText(ddbAlumnoMedicamento.SelectedItem) + "', '" + ddbAlumnoMedicamento2.GetItemText(ddbAlumnoMedicamento2.SelectedItem) + "', '" + ddbAlumnoDiagnostico.GetItemText(ddbAlumnoDiagnostico.SelectedItem) + "', " + tbAlumnoEdad.Text + ", '" + tbAlumnoSexo.Text + "', '" + tbAlumnoMotivo.Text + "', '" + Usuario + "');", conn);
+                        comandoAlumno.ExecuteNonQuery();
+                        MessageBox.Show("La consulta fue agregada a la base de datos exitosamente.", "Agregado", MessageBoxButtons.OK);
+                    }
+                    else if (ddbAlumnoMedicamento2.Visible && ddbAlumnoMedicamento3.Visible)
+                    {
+                        SqlCommand comandoAlumno = new SqlCommand("insert into consultas (num_control, seguimiento, fecha, medicamento, medicamento2, medicamento3, diagnostico, edad, sexo, motivo, doctor) values('" + tbAlumnoNoControl.Text + "', '" + Seguimiento() + "', '" + DateTime.Now + "', '" + ddbAlumnoMedicamento.GetItemText(ddbAlumnoMedicamento.SelectedItem) + "', '" + ddbAlumnoMedicamento2.GetItemText(ddbAlumnoMedicamento2.SelectedItem) + "', '" + ddbAlumnoMedicamento3.GetItemText(ddbAlumnoMedicamento3.SelectedItem) + "', '" + ddbAlumnoDiagnostico.GetItemText(ddbAlumnoDiagnostico.SelectedItem) + "', " + tbAlumnoEdad.Text + ", '" + tbAlumnoSexo.Text + "', '" + tbAlumnoMotivo.Text + "', '" + Usuario + "');", conn);
+                        comandoAlumno.ExecuteNonQuery();
+                        MessageBox.Show("La consulta fue agregada a la base de datos exitosamente.", "Agregado", MessageBoxButtons.OK);
+                    }
                     conn.Close();
                 }
                 catch (Exception ex)
@@ -542,9 +582,24 @@ namespace RecursosServiciosMedicos
                 try
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("insert into consultas (num_docente, seguimiento, fecha, medicamento, diagnostico, edad, sexo, motivo, doctor) values(" + tbDocenteNoDocente.Text + ", '" + Seguimiento() + "', '" + DateTime.Now + "', '" + ddbDocenteMedicamento.GetItemText(ddbDocenteMedicamento.SelectedItem) + "', '" + ddbDocenteDiagnostico.GetItemText(ddbDocenteDiagnostico.SelectedItem) + "', " + tbDocenteEdad.Text + ", '" + tbDocenteSexo.Text + "', '" + tbDocenteMotivo.Text + "', '" + Usuario + "');", conn);
-                    cmd.ExecuteNonQuery();
-                    MessageBox.Show("Consulta Agregada.");
+                    if (!ddbDocenteMedicamento2.Visible && !ddbDocenteMedicamento3.Visible)
+                    {
+                        SqlCommand cmd = new SqlCommand("insert into consultas (num_docente, seguimiento, fecha, medicamento, diagnostico, edad, sexo, motivo, doctor) values(" + tbDocenteNoDocente.Text + ", '" + Seguimiento() + "', '" + DateTime.Now + "', '" + ddbDocenteMedicamento.GetItemText(ddbDocenteMedicamento.SelectedItem) + "', '" + ddbDocenteDiagnostico.GetItemText(ddbDocenteDiagnostico.SelectedItem) + "', " + tbDocenteEdad.Text + ", '" + tbDocenteSexo.Text + "', '" + tbDocenteMotivo.Text + "', '" + Usuario + "');", conn);
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Consulta Agregada.");
+                    }
+                    else if (ddbDocenteMedicamento2.Visible && !ddbDocenteMedicamento3.Visible)
+                    {
+                        SqlCommand cmd = new SqlCommand("insert into consultas (num_docente, seguimiento, fecha, medicamento, medicamento2, diagnostico, edad, sexo, motivo, doctor) values(" + tbDocenteNoDocente.Text + ", '" + Seguimiento() + "', '" + DateTime.Now + "', '" + ddbDocenteMedicamento.GetItemText(ddbDocenteMedicamento.SelectedItem) + "', '" + ddbDocenteMedicamento2.GetItemText(ddbDocenteMedicamento2.SelectedItem) + "', '" + ddbDocenteDiagnostico.GetItemText(ddbDocenteDiagnostico.SelectedItem) + "', " + tbDocenteEdad.Text + ", '" + tbDocenteSexo.Text + "', '" + tbDocenteMotivo.Text + "', '" + Usuario + "');", conn);
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Consulta Agregada.");
+                    }
+                    else if (ddbDocenteMedicamento2.Visible && ddbDocenteMedicamento3.Visible)
+                    {
+                        SqlCommand cmd = new SqlCommand("insert into consultas (num_docente, seguimiento, fecha, medicamento, medicamento2, medicamento3, diagnostico, edad, sexo, motivo, doctor) values(" + tbDocenteNoDocente.Text + ", '" + Seguimiento() + "', '" + DateTime.Now + "', '" + ddbDocenteMedicamento.GetItemText(ddbDocenteMedicamento.SelectedItem) + "', '" + ddbDocenteMedicamento2.GetItemText(ddbDocenteMedicamento2.SelectedItem) + "', '" + ddbDocenteMedicamento3.GetItemText(ddbDocenteMedicamento3.SelectedItem) + "', '" + ddbDocenteDiagnostico.GetItemText(ddbDocenteDiagnostico.SelectedItem) + "', " + tbDocenteEdad.Text + ", '" + tbDocenteSexo.Text + "', '" + tbDocenteMotivo.Text + "', '" + Usuario + "');", conn);
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Consulta Agregada.");
+                    }
                     conn.Close();
                 }
                 catch (Exception ex)
@@ -578,9 +633,25 @@ namespace RecursosServiciosMedicos
                     //Insertar en Consultas
 
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("insert into consultas (num_otro, seguimiento, fecha, medicamento, diagnostico, edad, sexo, motivo, doctor) values(" + idOtro + ", '" + Seguimiento() + "', '" + DateTime.Now + "', '" + cbOtroMedicamento.GetItemText(cbOtroMedicamento.SelectedItem) + "', '" + cbOtroDiagnostico.GetItemText(cbOtroDiagnostico.SelectedItem) + "', " + tbOtroEdad.Text + ", '" + ddbOtroSexo.SelectedItem + "', '" + tbOtroMotivo.Text + "', '" + Usuario + "');", conn);
-                    cmd.ExecuteNonQuery();
-                    MessageBox.Show("Consulta Agregada a consultas.");
+
+                    if (!cbOtroMedicamento2.Visible && !cbOtroMedicamento3.Visible)
+                    {
+                        SqlCommand cmd = new SqlCommand("insert into consultas (num_otro, seguimiento, fecha, medicamento, diagnostico, edad, sexo, motivo, doctor) values(" + idOtro + ", '" + Seguimiento() + "', '" + DateTime.Now + "', '" + cbOtroMedicamento.GetItemText(cbOtroMedicamento.SelectedItem) + "', '" + cbOtroDiagnostico.GetItemText(cbOtroDiagnostico.SelectedItem) + "', " + tbOtroEdad.Text + ", '" + ddbOtroSexo.SelectedItem + "', '" + tbOtroMotivo.Text + "', '" + Usuario + "');", conn);
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Consulta Agregada a consultas.");
+                    }
+                    else if (cbOtroMedicamento2.Visible && !cbOtroMedicamento3.Visible)
+                    {
+                        SqlCommand cmd = new SqlCommand("insert into consultas (num_otro, seguimiento, fecha, medicamento, medicamento2, diagnostico, edad, sexo, motivo, doctor) values(" + idOtro + ", '" + Seguimiento() + "', '" + DateTime.Now + "', '" + cbOtroMedicamento.GetItemText(cbOtroMedicamento.SelectedItem) + "', '" + cbOtroMedicamento2.GetItemText(cbOtroMedicamento2.SelectedItem) + "', '" + cbOtroDiagnostico.GetItemText(cbOtroDiagnostico.SelectedItem) + "', " + tbOtroEdad.Text + ", '" + ddbOtroSexo.SelectedItem + "', '" + tbOtroMotivo.Text + "', '" + Usuario + "');", conn);
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Consulta Agregada a consultas.");
+                    }
+                    else if (cbOtroMedicamento2.Visible && cbOtroMedicamento3.Visible)
+                    {
+                        SqlCommand cmd = new SqlCommand("insert into consultas (num_otro, seguimiento, fecha, medicamento, medicamento2, medicamento3, diagnostico, edad, sexo, motivo, doctor) values(" + idOtro + ", '" + Seguimiento() + "', '" + DateTime.Now + "', '" + cbOtroMedicamento.GetItemText(cbOtroMedicamento.SelectedItem) + "', '" + cbOtroMedicamento2.GetItemText(cbOtroMedicamento2.SelectedItem) + "', '" + cbOtroMedicamento3.GetItemText(cbOtroMedicamento3.SelectedItem) + "', '" + cbOtroDiagnostico.GetItemText(cbOtroDiagnostico.SelectedItem) + "', " + tbOtroEdad.Text + ", '" + ddbOtroSexo.SelectedItem + "', '" + tbOtroMotivo.Text + "', '" + Usuario + "');", conn);
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Consulta Agregada a consultas.");
+                    }
                     conn.Close();
                 }
                 catch (Exception ex)
@@ -697,6 +768,69 @@ namespace RecursosServiciosMedicos
             cbOtroMedicamento.ValueMember = "nombre";
             cbOtroMedicamento.DataSource = dsMedicamento;
             cbOtroMedicamento.Enabled = true;
+            
+        }
+
+        public void LlenaCbMedicamento2()
+        {
+            //Llenar ComboBox de Medicamento:
+            dsMedicamento2.Clear();
+            //cbOtroMedicamento.Items.Clear();
+            //ddbAlumnoMedicamento.Items.Clear();
+            //ddbDocenteMedicamento.Items.Clear();
+            conn.Open();
+            string strCmdMedicamento2 = "select nombre from medicamento";
+            SqlCommand cmdCbMedicamento2 = new SqlCommand(strCmdMedicamento2, conn);
+            SqlDataAdapter daMedicamento2 = new SqlDataAdapter(strCmdMedicamento2, conn);
+
+            daMedicamento2.Fill(dsMedicamento2);
+            cmdCbMedicamento2.ExecuteNonQuery();
+            conn.Close();
+
+            ddbAlumnoMedicamento2.DisplayMember = "nombre";
+            ddbAlumnoMedicamento2.ValueMember = "nombre";
+            ddbAlumnoMedicamento2.DataSource = dsMedicamento2;
+            ddbAlumnoMedicamento2.Enabled = true;
+            ddbDocenteMedicamento2.DisplayMember = "nombre";
+            ddbDocenteMedicamento2.ValueMember = "nombre";
+            ddbDocenteMedicamento2.DataSource = dsMedicamento2;
+            ddbDocenteMedicamento2.Enabled = true;
+            cbOtroMedicamento2.DisplayMember = "nombre";
+            cbOtroMedicamento2.ValueMember = "nombre";
+            cbOtroMedicamento2.DataSource = dsMedicamento2;
+            cbOtroMedicamento2.Enabled = true;
+
+        }
+
+        public void LlenaCbMedicamento3()
+        {
+            //Llenar ComboBox de Medicamento:
+            dsMedicamento3.Clear();
+            //cbOtroMedicamento.Items.Clear();
+            //ddbAlumnoMedicamento.Items.Clear();
+            //ddbDocenteMedicamento.Items.Clear();
+            conn.Open();
+            string strCmdMedicamento3 = "select nombre from medicamento";
+            SqlCommand cmdCbMedicamento3 = new SqlCommand(strCmdMedicamento3, conn);
+            SqlDataAdapter daMedicamento3 = new SqlDataAdapter(strCmdMedicamento3, conn);
+
+            daMedicamento3.Fill(dsMedicamento3);
+            cmdCbMedicamento3.ExecuteNonQuery();
+            conn.Close();
+
+            ddbAlumnoMedicamento3.DisplayMember = "nombre";
+            ddbAlumnoMedicamento3.ValueMember = "nombre";
+            ddbAlumnoMedicamento3.DataSource = dsMedicamento3;
+            ddbAlumnoMedicamento3.Enabled = true;
+            ddbDocenteMedicamento3.DisplayMember = "nombre";
+            ddbDocenteMedicamento3.ValueMember = "nombre";
+            ddbDocenteMedicamento3.DataSource = dsMedicamento3;
+            ddbDocenteMedicamento3.Enabled = true;
+            cbOtroMedicamento3.DisplayMember = "nombre";
+            cbOtroMedicamento3.ValueMember = "nombre";
+            cbOtroMedicamento3.DataSource = dsMedicamento3;
+            cbOtroMedicamento3.Enabled = true;
+
         }
 
         private string DeterminaSemestre(int numControl)
@@ -1200,6 +1334,102 @@ namespace RecursosServiciosMedicos
                 btnCancelar.Show();
 
             }
+        }
+
+        private void cbOtroMedicamento2_Click(object sender, EventArgs e)
+        {
+            LlenaCbMedicamento2();
+        }
+
+        private void cbOtroMedicamento3_Click(object sender, EventArgs e)
+        {
+            LlenaCbMedicamento3();
+        }
+
+        private void btnOtroMasMed_Click(object sender, EventArgs e)
+        {
+            if (!Med2 && !Med3)
+            {
+                Med2 = true;
+                lblMed2.Visible = true;
+                cbOtroMedicamento2.Visible = true;
+            }
+            else if (Med2 && !Med3)
+            {
+                Med3 = true;
+                lblMed3.Visible = true;
+                cbOtroMedicamento3.Visible = true;
+            }
+            else if (Med2 && Med3)
+            {
+                MessageBox.Show("Tres medicamentos es la cantidad maxima de medicamentos por consulta. En caso de requerir insertar mas medicamentos, ingrese otra consulta", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnDocenteMasMed_Click(object sender, EventArgs e)
+        {
+            
+            if (!Med2 && !Med3)
+            {
+                Med2 = true;
+                lblDocMed2.Visible = true;
+                ddbDocenteMedicamento2.Visible = true;
+            }
+            else if (Med2 && !Med3)
+            {
+                Med3 = true;
+                lblDocMed3.Visible = true;
+                ddbDocenteMedicamento3.Visible = true;
+            }
+            else if (Med2 && Med3)
+            {
+                MessageBox.Show("Tres medicamentos es la cantidad maxima de medicamentos por consulta. En caso de requerir insertar mas medicamentos, ingrese otra consulta", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void ddbDocenteMedicamento2_Click(object sender, EventArgs e)
+        {
+            LlenaCbMedicamento2();
+        }
+
+        private void ddbDocenteMedicamento3_Click(object sender, EventArgs e)
+        {
+            LlenaCbMedicamento3();
+        }
+
+        private void btnAlumnoMasMed_Click(object sender, EventArgs e)
+        {
+            if (!Med2 && !Med3)
+            {
+                Med2 = true;
+                lblAlumnoMed2.Visible = true;
+                ddbAlumnoMedicamento2.Visible = true;
+            }
+            else if (Med2 && !Med3)
+            {
+                Med3 = true;
+                lblAlumnoMed3.Visible = true;
+                ddbAlumnoMedicamento3.Visible = true;
+            }
+            else if (Med2 && Med3)
+            {
+                MessageBox.Show("Tres medicamentos es la cantidad maxima de medicamentos por consulta. En caso de requerir insertar mas medicamentos, ingrese otra consulta", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void ddbAlumnoMedicamento2_Click(object sender, EventArgs e)
+        {
+            LlenaCbMedicamento2();
+        }
+
+        private void ddbAlumnoMedicamento3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void ddbAlumnoMedicamento3_Click(object sender, EventArgs e)
+        {
+            LlenaCbMedicamento3();
         }
 
         private void tbOtroNombre_TextChanged(object sender, EventArgs e)

@@ -1,7 +1,7 @@
 USE [master]
 GO
 
-/****** Object:  Database [RSM]    Script Date: 11/14/2017 7:33:04 PM ******/
+/****** Object:  Database [RSM]    Script Date: 11/21/2017 6:59:01 PM ******/
 CREATE DATABASE [RSM]
  CONTAINMENT = NONE
  ON  PRIMARY 
