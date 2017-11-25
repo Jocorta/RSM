@@ -86,3 +86,18 @@ C:\Users\jc-mt\Documents\GitHub\RSM\RecursosServiciosMedicos\obj\Debug\RecursosS
 C:\Users\jc-mt\Documents\GitHub\RSM\RecursosServiciosMedicos\obj\Debug\RecursosServiciosMedicos.csproj.GenerateResource.Cache
 C:\Users\jc-mt\Documents\GitHub\RSM\RecursosServiciosMedicos\obj\Debug\RecursosServiciosMedicos.exe
 C:\Users\jc-mt\Documents\GitHub\RSM\RecursosServiciosMedicos\obj\Debug\RecursosServiciosMedicos.pdb
+C:\Users\jorge\Documents\Ing.SistemasComputacionales\Semestre 5\ing software\Proyecto final\master bueno\RSM\RecursosServiciosMedicos\bin\Debug\RecursosServiciosMedicos.exe.config
+C:\Users\jorge\Documents\Ing.SistemasComputacionales\Semestre 5\ing software\Proyecto final\master bueno\RSM\RecursosServiciosMedicos\bin\Debug\RecursosServiciosMedicos.exe
+C:\Users\jorge\Documents\Ing.SistemasComputacionales\Semestre 5\ing software\Proyecto final\master bueno\RSM\RecursosServiciosMedicos\bin\Debug\RecursosServiciosMedicos.pdb
+C:\Users\jorge\Documents\Ing.SistemasComputacionales\Semestre 5\ing software\Proyecto final\master bueno\RSM\RecursosServiciosMedicos\bin\Debug\MySql.Data.dll
+C:\Users\jorge\Documents\Ing.SistemasComputacionales\Semestre 5\ing software\Proyecto final\master bueno\RSM\RecursosServiciosMedicos\bin\Debug\MySql.Data.xml
+C:\Users\jorge\Documents\Ing.SistemasComputacionales\Semestre 5\ing software\Proyecto final\master bueno\RSM\RecursosServiciosMedicos\obj\Debug\RecursosServiciosMedicos.csprojResolveAssemblyReference.cache
+C:\Users\jorge\Documents\Ing.SistemasComputacionales\Semestre 5\ing software\Proyecto final\master bueno\RSM\RecursosServiciosMedicos\obj\Debug\RecursosServiciosMedicos.csproj.ResolveComReference.cache
+C:\Users\jorge\Documents\Ing.SistemasComputacionales\Semestre 5\ing software\Proyecto final\master bueno\RSM\RecursosServiciosMedicos\obj\Debug\RecursosServiciosMedicos.DiagnosticoForm.resources
+C:\Users\jorge\Documents\Ing.SistemasComputacionales\Semestre 5\ing software\Proyecto final\master bueno\RSM\RecursosServiciosMedicos\obj\Debug\RecursosServiciosMedicos.Form1.resources
+C:\Users\jorge\Documents\Ing.SistemasComputacionales\Semestre 5\ing software\Proyecto final\master bueno\RSM\RecursosServiciosMedicos\obj\Debug\RecursosServiciosMedicos.MedicamentoForm.resources
+C:\Users\jorge\Documents\Ing.SistemasComputacionales\Semestre 5\ing software\Proyecto final\master bueno\RSM\RecursosServiciosMedicos\obj\Debug\RecursosServiciosMedicos.Principal.resources
+C:\Users\jorge\Documents\Ing.SistemasComputacionales\Semestre 5\ing software\Proyecto final\master bueno\RSM\RecursosServiciosMedicos\obj\Debug\RecursosServiciosMedicos.Properties.Resources.resources
+C:\Users\jorge\Documents\Ing.SistemasComputacionales\Semestre 5\ing software\Proyecto final\master bueno\RSM\RecursosServiciosMedicos\obj\Debug\RecursosServiciosMedicos.csproj.GenerateResource.Cache
+C:\Users\jorge\Documents\Ing.SistemasComputacionales\Semestre 5\ing software\Proyecto final\master bueno\RSM\RecursosServiciosMedicos\obj\Debug\RecursosServiciosMedicos.exe
+C:\Users\jorge\Documents\Ing.SistemasComputacionales\Semestre 5\ing software\Proyecto final\master bueno\RSM\RecursosServiciosMedicos\obj\Debug\RecursosServiciosMedicos.pdb

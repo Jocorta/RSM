@@ -29,1501 +29,15 @@ namespace RecursosServiciosMedicos
         DataTable dsMedicamento3 = new DataTable();
         bool Med2 = false;
         bool Med3 = false;
-        public string nombre = "", num_id = "", num_control = "", num_docente = "", seguimiento = "", fecha = "", medicamento = "", diagnostico = "", num_otro = "", edad = "", sexo = "",doctor="";
+        public string nombre = "", num_id = "", num_control = "", num_docente = "", seguimiento = "", fecha = "", medicamento = "", diagnostico = "", num_otro = "", edad = "", sexo = "", doctor = "";
         public bool RegistroSeleccionado = false, banderaalumno;
         public int tipo = 0;
-
-
         public Principal()
         {
             InitializeComponent();
         }
-        SqlConnection conn = new SqlConnection(@"Data Source=DESKTOP-48PLDOP;initial catalog=RSM;integrated security=true");//conexion base de datos
-
-        public Principal(string LoggedUser)
-        {
-            Usuario = LoggedUser.ToLower();
-            InitializeComponent();
-            lblFecha.Text = DateTime.Now.ToString("MM/dd/yyyy");
-            btnCerrar.Text = Usuario;
-            
-            
-        }
-
-        private void Principal_Load(object sender, EventArgs e)
-        {
-            LlenaCbDiagnostico();
-            LlenaCbMedicamento();
-            LlenaCbEvento();
-            LlenaCbUsuario();
-            LlenaCbUsuario2();
-            cbAlumno.Checked = true;
-            pnlAlumno.Show();
-            Checar();
-
-            if (Usuario == "dse")
-            {
-                btnCertificadoMed.Text = "Administracion";
-
-                pnlBusqueda.Hide();
-                pnlConsulta.Hide();
-                pnlCertificado.Hide();
-
-                pnlConsultoria.Hide();
-                pnlServiciosEscolares.Show();
-                pnlAdministracion.Hide();
-                btnConsulta.Text = "Consultoría Específica";
-                btnConsultoria.Text = "Consultoría General";
-                bunifuCustomLabel30.Text = "Servicios Médicos";
-            }
-
-            LlenaCbDiagnostico();
-            LlenaCbMedicamento();
-            LlenarComboBoxServEsc(comboEvento, "Select nombre from evento", "nombre"); //Llena los ComboBox de evento
-            LlenarComboBoxServEsc(comboGeneracion, "select distinct substring(num_control,1,2) as 'Generación' from alumno order by Generación asc", "Generación"); //Llena ComboBox de generación
-                                                                                                                                                                    // LlenarComboBoxServEsc(comboIT,"",""); //Llena el ComboBox de institutos para eventos
-            pnlConsultoria.Hide();
-
-        }
-
-        private void bunifuFlatButton1_Click(object sender, EventArgs e)
-        {
-            DialogResult dialogResult = MessageBox.Show("¿Cerrar sesión?", "Salir", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.Yes)
-            {
-                this.Hide();
-                Form1 fm1 = new Form1();
-                fm1.Show();
-            }
-        }
-
-        private void bunifuFlatButton2_Click(object sender, EventArgs e)
-        {
-            if (Usuario == "dse")
-            {
-                Separator.Location = new Point(15, 177);
-                Separator.Show();
-                cbSEOtro.Checked = false;
-                cbSEAlumno.Checked = false;
-                cbSEDocente.Checked = false;
-                pnlServiciosEscolares.Hide();
-                pnlAdministracion.Hide();
-                pnlConsulta.Hide();
-                pnlServiciosEscolares.Show();
-                btnExportar.Hide();
-                pnlEvento.Hide();
-                pnlAgregarEvento.Hide();
-
-            }
-            else
-            {
-                Separator.Location = new Point(15, 177);
-                Separator.Show();
-                LimpiaAlumno();
-                LimpiaDocente();
-                LimpiaOtro();
-                pnlConsulta.Show();
-                pnlCertificado.Hide();
-                pnlConsultoria.Hide();
-                pnlAdministracion.Hide();
-                pnlServiciosEscolares.Hide();
-                btnExportar.Hide();
-                pnlEvento.Hide();
-                pnlAgregarEvento.Hide();
-            }
-
-        }
-
-        private void cbAlumno_OnChange(object sender, EventArgs e)
-        {
-            if (cbAlumno.Checked)
-            {
-                LimpiaAlumno();
-                LimpiaDocente();
-                LimpiaOtro();
-                cbDocente.Checked = false;
-                cbOtro.Checked = false;
-                cbSeguimiento.Checked = false;
-                pnlAlumno.Show();
-                pnlDocente.Hide();
-                pnlOtro.Hide();
-                Med2 = false;
-                Med3 = false;
-                ddbAlumnoMedicamento2.Hide();
-                ddbAlumnoMedicamento3.Hide();
-                lblAlumnoMed2.Hide();
-                lblAlumnoMed3.Hide();
-            }
-        }
-
-        private void cbDocente_OnChange(object sender, EventArgs e)
-        {
-            if (cbDocente.Checked)
-            {
-                LimpiaAlumno();
-                LimpiaDocente();
-                LimpiaOtro();
-                cbAlumno.Checked = false;
-                cbOtro.Checked = false;
-                cbSeguimiento.Checked = false;
-                pnlAlumno.Hide();
-                pnlDocente.Show();
-                pnlOtro.Hide();
-                Med2 = false;
-                Med3 = false;
-                ddbDocenteMedicamento2.Hide();
-                lblDocMed2.Hide();
-                ddbDocenteMedicamento3.Hide();
-                lblDocMed3.Hide();
-            }
-        }
-
-        private void cbOtro_OnChange(object sender, EventArgs e)
-        {
-            if (cbOtro.Checked)
-            {
-                LimpiaAlumno();
-                LimpiaDocente();
-                LimpiaOtro();
-                cbDocente.Checked = false;
-                cbAlumno.Checked = false;
-                cbSeguimiento.Checked = false;
-                pnlAlumno.Hide();
-                pnlDocente.Hide();
-                pnlOtro.Show();
-                Med2 = false;
-                Med3 = false;
-                cbOtroMedicamento2.Hide();
-                lblMed2.Hide();
-                cbOtroMedicamento3.Hide();
-                lblMed3.Hide();
-            }
-        }
-
-        private void btnCertificadoMed_Click(object sender, EventArgs e)
-        {
-            if (Usuario == "dse")
-            {
-                cbSEOtro.Checked = false;
-                cbSEAlumno.Checked = false;
-                cbSEDocente.Checked = false;
-                Separator.Location = new Point(15, 272);
-                Separator.Show();
-                pnlConsulta.Hide();
-                pnlConsultoria.Hide();
-                pnlAdministracion.Show();
-                pnlServiciosEscolares.Hide();
-                pnlEvento.Hide();
-                pnlAgregarEvento.Hide();
-            }
-            else
-            {
-                Separator.Location = new Point(15, 272);
-                Separator.Show();
-                pnlConsulta.Hide();
-                pnlCertificado.Show();
-
-                tbCodigoCerti.Text = "";
-                tbCodigoCerti.Enabled = true;
-                cbTipoDct.Enabled = false;
-                cbTipoDct.SelectedIndex = -1;
-                btnImprimir.Enabled = false;
-                chbOtro.Enabled = true;
-                btnCancelar.Hide();
-                pnlListaCerti.Hide();
-                pnlConsultoria.Hide();
-                pnlServiciosEscolares.Hide();
-                pnlEvento.Hide();
-                pnlAgregarEvento.Hide();
-            }      
-        }
-
-        private void tbAlumnoNoControl_TextChanged(object sender, EventArgs e)
-        {
-            if (System.Text.RegularExpressions.Regex.IsMatch(tbAlumnoNoControl.Text, "^[a-zA-Z0-9]+$") || tbAlumnoNoControl.Text.Length < 1)
-            {
-            }
-            else
-            {
-                tbAlumnoNoControl.Text = tbAlumnoNoControl.Text.Remove(tbAlumnoNoControl.Text.Length - 1);
-            }
-        }
-
-        private void tbDocenteNoDocente_TextChanged(object sender, EventArgs e)
-        {
-            if (System.Text.RegularExpressions.Regex.IsMatch(tbDocenteNoDocente.Text, "^[a-zA-Z0-9]+$") || tbDocenteNoDocente.Text.Length < 1)
-            {
-            }
-            else
-            {
-                tbDocenteNoDocente.Text = tbDocenteNoDocente.Text.Remove(tbDocenteNoDocente.Text.Length - 1);
-            }
-        }
-
-        private void btnAlumnoRealizarConsulta_Click(object sender, EventArgs e)
-        {
-            if (ListoParaAgregar())
-            {
-                InsertarConsulta();
-                LimpiaAlumno();
-                LimpiaDocente();
-                LimpiaOtro();
-            }
-        }
-
-        private void btnOtroRealizarConsulta_Click(object sender, EventArgs e)
-        {
-            if (ListoParaAgregar())
-            {
-                InsertarConsulta();
-                LimpiaAlumno();
-                LimpiaDocente();
-                LimpiaOtro();
-            }
-        }
-
-        private void btnDocenteRealizarConsulta_Click(object sender, EventArgs e)
-        {
-
-            if (ListoParaAgregar())
-            {
-                InsertarConsulta();
-                LimpiaAlumno();
-                LimpiaDocente();
-                LimpiaOtro();
-            }
-        }
-
-        private void chbOtro_CheckedChanged(object sender, EventArgs e)
-        {
-            //Determinar si es dentro o fuera del plantel
-            if (chbOtro.Checked == true)
-            {
-                //Es de Fuera
-                lblTituloIngreso.Text = "Ingrese el nombre del Paciente";
-                tbCodigoCerti.MaxLength = 60;
-                //Textbox solo admite letras
-            }
-            else
-            {
-                //Es de dentro
-                lblTituloIngreso.Text = "Ingrese el numero identificador del Paciente";
-                tbCodigoCerti.MaxLength = 10;
-                //textbox solo admite numeros
-            }
-
-            tbCodigoCerti.Text = "";
-
-        }
-
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            tbCodigoCerti.Text = "";
-            cbTipoDct.Enabled = false;
-            cbTipoDct.SelectedIndex = -1;
-            btnImprimir.Enabled = false;
-            tbCodigoCerti.Enabled = true;
-            chbOtro.Enabled = true;
-            chbOtro.Checked = false;
-            btnCancelar.Hide();
-        }
-
-        private void btnImprimir_Click(object sender, EventArgs e)
-        {
-            var application = new Microsoft.Office.Interop.Word.Application();
-            var document = new Microsoft.Office.Interop.Word.Document();
-
-            if (tipo == 1)
-            {
-                string tipodedoc = "CertificadoMedico";
-
-                if (chbOtro.Checked == false)
-                {
-                    LlenarDocPlantel(document, application, tipodedoc);
-                }
-                else
-                {
-                    LlenarDocFueraPlantel(document, application, tipodedoc);
-                }
-            } //tipo certificado
-            else
-            {
-                //tipo receta
-                string tipodedoc = "Receta";
-                if (chbOtro.Checked == false)
-                {
-                    LlenarDocPlantel(document, application, tipodedoc);
-                }
-                else
-                {
-                    LlenarDocFueraPlantel(document, application, tipodedoc);
-
-                }
-            } //tipo receta
-        }
-
-        private void cbTipoDct_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //Determinacion de Tipo de Documento
-            if (cbTipoDct.SelectedIndex == 0)
-            {
-                //Tipo 1 Es Certificado Medico
-                tipo = 1;
-                if (RegistroSeleccionado == true)
-                {
-                    btnImprimir.Enabled = true;
-                }
-            }
-            else
-            {
-                //Tipo 2 es Receta
-                tipo = 2;
-                if (RegistroSeleccionado == true)
-                {
-                    btnImprimir.Enabled = true;
-                }
-            }
-        }
-
-        private void btnAtras_Click(object sender, EventArgs e)
-        {
-            //Panel Del Listado Ocultar
-            pnlListaCerti.Hide();
-        }
-
-        private void tbCodigoCerti_TextChanged(object sender, EventArgs e)
-        {
-            if (chbOtro.Checked == false)
-            {
-                if (System.Text.RegularExpressions.Regex.IsMatch(tbCodigoCerti.Text, @"^[0-9M]+$") || tbCodigoCerti.Text.Length < 1)
-                {
-                }
-                else
-                {
-                    tbCodigoCerti.Text = tbCodigoCerti.Text.Remove(tbCodigoCerti.Text.Length - 1);
-                }
-
-                if (tbCodigoCerti.TextLength < 10)
-                {
-                }
-                else
-                {
-
-                    tbCodigoCerti.Text = tbCodigoCerti.Text.Remove(tbCodigoCerti.Text.Length - 1);//Si se puede encontrar que no detecte lo escrito mejor
-                }
-            }
-            else
-            {
-                if (System.Text.RegularExpressions.Regex.IsMatch(tbCodigoCerti.Text, @"^[a-zA-Z\s]+$") || tbCodigoCerti.Text.Length < 1)
-                {
-                }
-                else
-                {
-                    tbCodigoCerti.Text = tbCodigoCerti.Text.Remove(tbCodigoCerti.Text.Length - 1);
-                }
-                if (tbCodigoCerti.TextLength < 60)
-                {
-                }
-                else
-                {
-                    tbCodigoCerti.Text = tbCodigoCerti.Text.Remove(tbCodigoCerti.Text.Length - 1);//Si se puede encontrar que no detecte lo escrito mejor
-                }
-            }
-        }
-
-        private void btnBuscarCerti_Click(object sender, EventArgs e)
-        {
-            if (tbCodigoCerti.Text != "")
-            {
-
-                if (chbOtro.Checked == false) //buscar por numero de control de alumno y docente ya que es dentro del plantel
-                {
-
-                    input = tbCodigoCerti.Text;
-                    string cadQuery1 = "Select num_control,num_docente,fecha,diagnostico,medicamento,seguimiento,edad,sexo,doctor from consultas where num_control ='" + tbCodigoCerti.Text + "' or num_docente= '" + tbCodigoCerti.Text + "'";
-                    pnlListaCerti.Show();
-
-                    //llenado del Data Grid View
-                    var dataAdapter = new SqlDataAdapter(cadQuery1, conn);
-                    var commandBuilder = new SqlCommandBuilder(dataAdapter);
-                    var ds = new DataSet();
-                    dataAdapter.Fill(ds);
-                    dgvListaCerti.ReadOnly = true;
-                    dgvListaCerti.DataSource = ds.Tables[0];
-
-                    conn.Close();
-                    tbCodigoCerti.Text = input;
-
-                    foreach (DataGridViewRow row in dgvListaCerti.SelectedRows)
-                    {
-                        num_control = row.Cells[0].Value.ToString();
-                        num_docente = row.Cells[1].Value.ToString();
-                        fecha = row.Cells[2].Value.ToString();
-                        diagnostico = row.Cells[3].Value.ToString();
-                        medicamento = row.Cells[4].Value.ToString();
-                        seguimiento = row.Cells[5].Value.ToString();
-                        edad = row.Cells[6].Value.ToString();
-                        sexo = row.Cells[7].Value.ToString();
-                        doctor = row.Cells[8].Value.ToString();
-
-
-                    }
-                    if (num_docente == "")
-                    {
-                        //alumno
-                        num_id = num_control;
-                        banderaalumno = true;
-                        dgvListaCerti.Columns[1].Visible = false;
-                        dgvListaCerti.Columns[0].Visible = true;
-
-                    }
-                    else
-                    {
-                        //docente
-                        num_id = num_docente;
-                        banderaalumno = false;
-                        dgvListaCerti.Columns[0].Visible = false;
-                        dgvListaCerti.Columns[1].Visible = true;
-                    }
-                }
-                else
-                {
-                    //Busqueda por nombre
-                    input = tbCodigoCerti.Text;
-                    string cadQuery1 = "select o.nombre,c.edad,c.sexo,c.fecha,c.diagnostico,c.medicamento,c.seguimiento,c.doctor from consultas as c inner join otro as o on c.num_otro=o.num_otro where nombre like '%" + tbCodigoCerti.Text + "%'";
-                    pnlListaCerti.Show();
-                    //dgvListaCerti.Rows.Clear();
-
-                    var dataAdapter = new SqlDataAdapter(cadQuery1, conn);
-                    var commandBuilder = new SqlCommandBuilder(dataAdapter);
-                    var ds = new DataSet();
-                    dataAdapter.Fill(ds);
-                    dgvListaCerti.ReadOnly = true;
-                    dgvListaCerti.DataSource = ds.Tables[0];
-
-                    conn.Close();
-                    tbCodigoCerti.Text = input;
-                }
-            }
-            else
-            {
-                MessageBox.Show("Porfavor Ingrese un dato en el Buscador", "Error de Busqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void dgvListaCerti_SelectionChanged(object sender, EventArgs e)
-        {
-            //cambio de seleccion de row
-            if (chbOtro.Checked == false)
-            {
-                foreach (DataGridViewRow row in dgvListaCerti.SelectedRows)
-                {
-                    num_control = row.Cells[0].Value.ToString();
-                    num_docente = row.Cells[1].Value.ToString();
-                    fecha = row.Cells[2].Value.ToString();
-                    diagnostico = row.Cells[3].Value.ToString();
-                    medicamento = row.Cells[4].Value.ToString();
-                    seguimiento = row.Cells[5].Value.ToString();
-                    edad = row.Cells[6].Value.ToString();
-                    sexo = row.Cells[7].Value.ToString();
-                    doctor = row.Cells[8].Value.ToString();
-
-
-                }
-                if (num_docente == "")
-                {
-                    //alumno
-                    num_id = num_control;
-                    banderaalumno = true;
-                    dgvListaCerti.Columns[1].Visible = false;
-                    dgvListaCerti.Columns[0].Visible = true;
-
-                }
-                else
-                {
-                    //docente
-                    num_id = num_docente;
-                    banderaalumno = false;
-                    dgvListaCerti.Columns[0].Visible = false;
-                    dgvListaCerti.Columns[1].Visible = true;
-                }
-
-
-            }
-            else
-            {
-                foreach (DataGridViewRow row in dgvListaCerti.SelectedRows)
-                {
-                    //otro
-                    nombre = row.Cells[0].Value.ToString();
-                    edad = row.Cells[1].Value.ToString();
-                    sexo = row.Cells[2].Value.ToString();
-                    fecha = row.Cells[3].Value.ToString();
-                    diagnostico = row.Cells[4].Value.ToString();
-                    medicamento = row.Cells[5].Value.ToString();
-                    seguimiento = row.Cells[6].Value.ToString();
-                    doctor = row.Cells[7].Value.ToString();
-
-                }
-
-            }
-        }
-
-        private void btnListaContinuar_Click(object sender, EventArgs e)
-        {
-            //Verifica que se haya seleccionado uno no en blanco
-            if (num_control == "" && num_docente == "" && nombre == "")
-            {
-                MessageBox.Show("Seleccione un registro no en blanco", "Error de Registro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
-            {
-                pnlListaCerti.Hide();
-                tbCodigoCerti.Enabled = false;
-                chbOtro.Enabled = false;
-                RegistroSeleccionado = true;
-                cbTipoDct.Enabled = true;
-                btnCancelar.Show();
-
-            }
-        }
-
-        private void btnOtroMasMed_Click(object sender, EventArgs e)
-        {
-            if (!Med2 && !Med3)
-            {
-                Med2 = true;
-                lblMed2.Visible = true;
-                cbOtroMedicamento2.Visible = true;
-            }
-            else if (Med2 && !Med3)
-            {
-                Med3 = true;
-                lblMed3.Visible = true;
-                cbOtroMedicamento3.Visible = true;
-            }
-            else if (Med2 && Med3)
-            {
-                MessageBox.Show("Tres medicamentos es la cantidad maxima de medicamentos por consulta. En caso de requerir insertar mas medicamentos, ingrese otra consulta como seguimiento", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
-        private void btnDocenteMasMed_Click(object sender, EventArgs e)
-        {
-
-            if (!Med2 && !Med3)
-            {
-                Med2 = true;
-                lblDocMed2.Visible = true;
-                ddbDocenteMedicamento2.Visible = true;
-            }
-            else if (Med2 && !Med3)
-            {
-                Med3 = true;
-                lblDocMed3.Visible = true;
-                ddbDocenteMedicamento3.Visible = true;
-            }
-            else if (Med2 && Med3)
-            {
-                MessageBox.Show("Tres medicamentos es la cantidad maxima de medicamentos por consulta. En caso de requerir insertar mas medicamentos, ingrese otra consulta como seguimiento", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
-        private void ddbDocenteMedicamento2_Click(object sender, EventArgs e)
-        {
-            LlenaCbMedicamento2();
-        }
-
-        private void btnAlumnoMasMed_Click(object sender, EventArgs e)
-        {
-            if (!Med2 && !Med3)
-            {
-                Med2 = true;
-                lblAlumnoMed2.Visible = true;
-                ddbAlumnoMedicamento2.Visible = true;
-            }
-            else if (Med2 && !Med3)
-            {
-                Med3 = true;
-                lblAlumnoMed3.Visible = true;
-                ddbAlumnoMedicamento3.Visible = true;
-            }
-            else if (Med2 && Med3)
-            {
-                MessageBox.Show("Tres medicamentos es la cantidad maxima de medicamentos por consulta. En caso de requerir insertar mas medicamentos, ingrese otra consulta como seguimiento", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
-        private void tbOtroNombre_TextChanged(object sender, EventArgs e)
-        {
-            if (System.Text.RegularExpressions.Regex.IsMatch(tbOtroNombre.Text, @"^[a-zA-Z0-9\s]+$") || tbOtroNombre.Text.Length < 1)
-            {
-            }
-            else
-            {
-                tbOtroNombre.Text = tbOtroNombre.Text.Remove(tbOtroNombre.Text.Length - 1);
-            }
-        }
-
-        private void tbOtroRelacion_TextChanged(object sender, EventArgs e)
-        {
-            if (System.Text.RegularExpressions.Regex.IsMatch(tbOtroRelacion.Text, @"^[a-zA-Z0-9\s]+$") || tbOtroRelacion.Text.Length < 1)
-            {
-            }
-            else
-            {
-                tbOtroRelacion.Text = tbOtroRelacion.Text.Remove(tbOtroRelacion.Text.Length - 1);
-            }
-        }
-
-        private void tbOtroEdad_TextChanged(object sender, EventArgs e)
-        {
-            if (System.Text.RegularExpressions.Regex.IsMatch(tbOtroEdad.Text, "^[0-9]+$") || tbOtroEdad.Text.Length < 1)
-            {
-            }
-            else
-            {
-                tbOtroEdad.Text = tbOtroEdad.Text.Remove(tbOtroEdad.Text.Length - 1);
-            }
-        }
-
-        private void tbOtroMotivo_TextChanged(object sender, EventArgs e)
-        {
-            if (System.Text.RegularExpressions.Regex.IsMatch(tbOtroMotivo.Text, @"^[a-zA-Z0-9\s]+$") || tbOtroMotivo.Text.Length < 1)
-            {
-            }
-            else
-            {
-                tbOtroMotivo.Text = tbOtroMotivo.Text.Remove(tbOtroMotivo.Text.Length - 1);
-            }
-        }
-
-        private void tbAlumnoMotivo_TextChanged(object sender, EventArgs e)
-        {
-            if (System.Text.RegularExpressions.Regex.IsMatch(tbAlumnoMotivo.Text, @"^[a-zA-Z0-9\s]+$") || tbAlumnoMotivo.Text.Length < 1)
-            {
-            }
-            else
-            {
-                tbAlumnoMotivo.Text = tbAlumnoMotivo.Text.Remove(tbAlumnoMotivo.Text.Length - 1);
-            }
-        }
-
-        private void tbDocenteMotivo_TextChanged(object sender, EventArgs e)
-        {
-            if (System.Text.RegularExpressions.Regex.IsMatch(tbDocenteMotivo.Text, @"^[a-zA-Z0-9\s]+$") || tbDocenteMotivo.Text.Length < 1)
-            {
-            }
-            else
-            {
-                tbDocenteMotivo.Text = tbDocenteMotivo.Text.Remove(tbDocenteMotivo.Text.Length - 1);
-            }
-        }
-
-        private void btnAdminMedDia_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Tenga en cuenta que esta sección es únicamente y solamente para dar de baja medicamentos y diagnósticos en la base de datos.", "Atencion", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            pnlAdminMedDia.Show();
-            pnlAltaAlumno.Hide();
-            pnlAdminUsr.Hide();
-        }
-
-        private void btnAdminBorrarDia_Click(object sender, EventArgs e)
-        {
-            //alter table consultas nocheck constraint all; delete diagnostico where nombre = ''; alter table consultas check constraint all;
-            DialogResult dialogResult = MessageBox.Show("Seguro que desea eliminar el diagnostico " + cbAdminDia.GetItemText(cbAdminDia.SelectedItem) + " de manera permanente?", "Eliminar diagnostico?", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.Yes)
-            {
-                try
-                {
-                    string queryBorrarDia = "alter table consultas nocheck constraint all; delete diagnostico where nombre = '" + cbAdminDia.GetItemText(cbAdminDia.SelectedItem) + "'; alter table consultas check constraint all;";
-                    SqlCommand comandoBorrarDia = new SqlCommand(queryBorrarDia, conn);
-                    conn.Open();
-                    comandoBorrarDia.ExecuteNonQuery();
-                    conn.Close();
-                    MessageBox.Show("Baja realizada con exito.", "Listo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    LlenaCbDiagnostico();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Se presento el siguiente error al realizar la baja en la base de datos: " + ex.Message + ". Asegurese de que el diagnostico no haya sido eliminado anteriormente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-
-
-
-        }
-
-        private void btnAdminBorrarMed_Click(object sender, EventArgs e)
-        {
-
-            DialogResult dialogResult = MessageBox.Show("Seguro que desea eliminar el medicamento "+ cbAdminMed.GetItemText(cbAdminMed.SelectedItem) + " de manera permanente?", "Eliminar medicamento?", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.Yes)
-            {
-                try
-                {
-                    string queryBorrarMed = "alter table consultas nocheck constraint all; delete medicamento where nombre = '" + cbAdminMed.GetItemText(cbAdminMed.SelectedItem) + "'; alter table consultas check constraint all;";
-                    SqlCommand comandoBorrarMed = new SqlCommand(queryBorrarMed, conn);
-                    conn.Open();
-                    comandoBorrarMed.ExecuteNonQuery();
-                    conn.Close();
-                    MessageBox.Show("Baja realizada con exito.", "Listo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    LlenaCbMedicamento();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Se presento el siguiente error al realizar la baja en la base de datos: "+ex.Message+". Asegurese de que el medicamento no haya sido eliminado anteriormente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }             
-            }
-            
-
-            
-        }
-
-        private void btnAdminAlumno_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Tenga en cuenta que en esta sección solamente se agregan alumnos del ITH y de evento. Lea con cuidado las alertas a la hora de realizar cambios", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            LlenaCbEvento();
-            pnlAdminMedDia.Hide();
-            pnlAltaAlumno.Show();
-            pnlAdminUsr.Hide();
-
-        }
-
-        private void btnAltaAlumnosITH_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                DialogResult dialogResult = MessageBox.Show("¡Atención! Tenga en cuenta que solo es posible agregar todos los alumnos inscritos y no es posible agregar en partes. Asegúrese de que el Excel contenga todos los alumnos inscritos en el semestre ya que los alumnos anteriores serán SOBREESCRITOS con los que va a agregar a continuación. ¿Desea continuar?", "Alerta", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (dialogResult == DialogResult.Yes)
-                {
-                    AltaAlumnoIth();
-                    MessageBox.Show("Alumnos agregados exitosamente.", "Operación realizada", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Ocurrió el siguiente problema a la hora de agregar los alumnos: " + ex.Message + ". Asegúrese de que el archivo Excel tenga el formato especificado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void btnAdminAltaAlumnoEvento_Click(object sender, EventArgs e)
-        {
-            string eventoSelected = "";
-            try
-            {
-                DialogResult dialogResult = MessageBox.Show("¡Atención! A continuación, se agregarán los alumnos seleccionados a la base de datos y cuando termine el evento seleccionado serán removidos de la base de datos. Se le recomienda cerciorarse de que se haya seleccionado el evento correcto. ¿Desea continuar?", "Alerta", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (dialogResult == DialogResult.Yes)
-                {
-                    #region MEGA-MEXICANADA
-                    
-                    
-                    SqlCommand cmdLeeEvento = new SqlCommand("select num_evento from evento where nombre = '" + cbAdminAlumnoEvento.GetItemText(cbAdminAlumnoEvento.SelectedItem) + "';", conn);
-                    conn.Open();
-                    SqlDataReader leerEvento = cmdLeeEvento.ExecuteReader();
-                    if (leerEvento.Read())
-                    {
-                        eventoSelected = leerEvento["num_evento"].ToString();
-                    }
-                    
-                    conn.Close();
-                    
-                    
-                    SqlCommand cmdAddMexicanada = new SqlCommand("ALTER TABLE alumno ADD CONSTRAINT DF_Alumno_Evento DEFAULT " + eventoSelected + " FOR evento;", conn);
-                    conn.Open();
-                    cmdAddMexicanada.ExecuteNonQuery();
-                    conn.Close();
-                    #endregion
-                    AltaAlumnoEvento();
-                    #region FIN MEGA-MEXICANADA
-
-
-                    SqlCommand cmdEliminaMexicanada = new SqlCommand("alter table alumno drop constraint df_Alumno_Evento;", conn);
-                    conn.Open();
-                    cmdEliminaMexicanada.ExecuteNonQuery();
-                    conn.Close();
-                    #endregion
-                    MessageBox.Show("Alumnos de evento agregados exitosamente", "Operación realizada", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Ocurrió el siguiente problema a la hora de agregar los alumnos: " + ex.Message + ". Asegúrese de que el archivo Excel tenga el formato especificado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void btnAdminUsuarios_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("En esta sección solamente se puede administrar los usuarios utilizados para usar el software RSM", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            LlenaCbEvento();
-            pnlAdminMedDia.Hide();
-            pnlAltaAlumno.Hide();
-            pnlAdminUsr.Show();
-            LlenaCbUsuario();
-            LlenaCbUsuario2();
-        }
-
-        private void tbAdminCambioPsw_TextChanged(object sender, EventArgs e)
-        {
-            if (System.Text.RegularExpressions.Regex.IsMatch(tbAdminCambioPsw.Text, "^[a-zA-Z0-9]+$") || tbAdminCambioPsw.Text.Length < 1)
-            {
-            }
-            else
-            {
-                tbAdminCambioPsw.Text = tbAdminCambioPsw.Text.Remove(tbAdminCambioPsw.Text.Length - 1);
-            }
-            if (tbAdminCambioPsw.Text.Length > 0)
-            {
-                tbAdminCambioConfirmaPsw.Enabled = true;
-            }
-            else if (tbAdminCambioPsw.Text.Length == 0)
-            {
-                tbAdminCambioConfirmaPsw.Text = "";
-                tbAdminCambioConfirmaPsw.Enabled = false;
-            }
-        }
-
-        private void tbAdminCambioConfirmaPsw_TextChanged(object sender, EventArgs e)
-        {
-            if (System.Text.RegularExpressions.Regex.IsMatch(tbAdminCambioConfirmaPsw.Text, "^[a-zA-Z0-9]+$") || tbAdminCambioConfirmaPsw.Text.Length < 1)
-            {
-            }
-            else
-            {
-                tbAdminCambioConfirmaPsw.Text = tbAdminCambioConfirmaPsw.Text.Remove(tbAdminCambioConfirmaPsw.Text.Length - 1);
-            }
-            if (tbAdminCambioConfirmaPsw.Text.Length > 0)
-            {
-                btnAdminCambiaPsw.Show();
-            }
-            else if (tbAdminCambioConfirmaPsw.Text.Length == 0)
-            {
-                btnAdminCambiaPsw.Hide();
-            }
-        }
-
-        private void tbAdminConfirmBaja_TextChanged(object sender, EventArgs e)
-        {
-            if (System.Text.RegularExpressions.Regex.IsMatch(tbAdminConfirmBaja.Text, "^[a-zA-Z]+$") || tbAdminConfirmBaja.Text.Length < 1)
-            {
-                tbAdminConfirmBaja.Text.ToUpper();
-            }
-            else
-            {
-                tbAdminConfirmBaja.Text = tbAdminConfirmBaja.Text.Remove(tbAdminConfirmBaja.Text.Length - 1);
-            }
-            if (tbAdminConfirmBaja.Text == "BAJA")
-            {
-                btnAdminUsrBaja.Show();
-            }
-            else
-            {
-                btnAdminUsrBaja.Hide();
-            }
-        }
-
-        private void tbAdminAltaUsr_TextChanged(object sender, EventArgs e)
-        {
-            if (System.Text.RegularExpressions.Regex.IsMatch(tbAdminAltaUsr.Text, "^[a-zA-Z0-9]+$") || tbAdminAltaUsr.Text.Length < 1)
-            {
-            }
-            else
-            {
-                tbAdminAltaUsr.Text = tbAdminAltaUsr.Text.Remove(tbAdminAltaUsr.Text.Length - 1);
-            }
-            if (tbAdminAltaUsr.Text.Length > 0)
-            {
-                tbAdminAltaPsw.Enabled = true;
-            }
-            else
-            {
-                tbAdminAltaPsw.Enabled = false;
-            }
-        }
-
-        private void tbAdminAltaPsw_TextChanged(object sender, EventArgs e)
-        {
-            if (System.Text.RegularExpressions.Regex.IsMatch(tbAdminAltaPsw.Text, "^[a-zA-Z0-9]+$") || tbAdminAltaPsw.Text.Length < 1)
-            {
-            }
-            else
-            {
-                tbAdminAltaPsw.Text = tbAdminAltaPsw.Text.Remove(tbAdminAltaPsw.Text.Length - 1);
-            }
-            if (tbAdminAltaPsw.Text.Length > 0)
-            {
-                tbAdminAltaConfirmPsw.Enabled = true;
-            }
-            else
-            {
-                tbAdminAltaConfirmPsw.Text = "";
-                tbAdminAltaConfirmPsw.Enabled = false;
-
-            }
-        }
-
-        private void tbAdminAltaConfirmPsw_TextChanged(object sender, EventArgs e)
-        {
-            if (System.Text.RegularExpressions.Regex.IsMatch(tbAdminAltaConfirmPsw.Text, "^[a-zA-Z0-9]+$") || tbAdminAltaConfirmPsw.Text.Length < 1)
-            {
-            }
-            else
-            {
-                tbAdminAltaConfirmPsw.Text = tbAdminAltaConfirmPsw.Text.Remove(tbAdminAltaConfirmPsw.Text.Length - 1);
-            }
-        }
-
-        private void btnConsultoria_Click(object sender, EventArgs e)
-        {
-            Separator.Location = new Point(15, 364);
-            Separator.Show();
-            pnlBusqueda.Hide();
-            if (Usuario == "dse")
-            {
-
-                cbAlumnoBusqueda.Checked = false;
-                cbDocenteBusqueda.Checked = false;
-                cbOtroBusqueda.Checked = false;
-                Separator.Location = new Point(15, 364);
-                Separator.Show();
-                pnlBusqueda.Hide();
-                pnlCertificado.Hide();
-                pnlConsultoria.Show();
-                pnlAdministracion.Hide();
-                pnlServiciosEscolares.Hide();
-                btnConsultoria.Text = "Consultoría General";
-                bunifuDragControl1.TargetControl = pnlServiciosEscolares;
-                pnlEvento.Hide();
-                pnlAgregarEvento.Hide();
-            }
-            else
-            {
-                cbOtroBusqueda.Checked = false;
-                cbAlumnoBusqueda.Checked = false;
-                cbDocenteBusqueda.Checked = false;
-                btnConsultoria.Text = "Consultoría";
-                pnlConsultoria.Show();
-                pnlServiciosEscolares.Hide();
-                pnlCertificado.Hide();
-                bunifuDragControl1.TargetControl = pnlConsultoria;
-                pnlEvento.Hide();
-                pnlAgregarEvento.Hide();
-            }
-        }
-        private void btnEvento_Click(object sender, EventArgs e)
-        {
-            Separator.Location = new Point(15, 454);
-            Separator.Show();
-            pnlConsulta.Hide();
-            pnlCertificado.Hide();
-            pnlAdministracion.Hide();
-            pnlConsultoria.Hide();
-            pnlServiciosEscolares.Hide();
-            pnlEvento.Show();
-            pnlAgregarEvento.Show();
-        }       
-        private void btnDocenteBuscar_Click(object sender, EventArgs e){BuscaPaciente();}
-        private void btnAlumnoBuscar_Click(object sender, EventArgs e){BuscaPaciente();}
-        private void btnOtro_OtroDiagnostico_Click(object sender, EventArgs e) { AbreDiagnostico(); }
-        private void btnDocente_OtroDiagnostico_Click(object sender, EventArgs e) { AbreDiagnostico(); }
-        private void btnAlumno_OtroDiagnostico_Click(object sender, EventArgs e) { AbreDiagnostico(); }
-        private void btnOtro_OtroMedicamento_Click(object sender, EventArgs e) { AbreMedicamento(); }
-        private void btnDocente_OtroMedicamento_Click(object sender, EventArgs e) { AbreMedicamento(); }
-        private void btnAlumno_OtroMedicamento_Click(object sender, EventArgs e) { AbreMedicamento(); }
-        private void cbOtroDiagnostico_Click(object sender, EventArgs e) { LlenaCbDiagnostico(); }
-        private void cbOtroMedicamento_Click(object sender, EventArgs e) { LlenaCbMedicamento(); }
-        private void ddbAlumnoDiagnostico_Click(object sender, EventArgs e) { LlenaCbDiagnostico(); }
-        private void ddbAlumnoMedicamento_Click(object sender, EventArgs e) { LlenaCbMedicamento(); }
-        private void ddbDocenteDiagnostico_Click(object sender, EventArgs e) { LlenaCbDiagnostico(); }
-        private void ddbDocenteMedicamento_Click(object sender, EventArgs e) { LlenaCbMedicamento(); }
-        private void ddbAlumnoMedicamento2_Click(object sender, EventArgs e) { LlenaCbMedicamento2(); }
-        private void ddbAlumnoMedicamento3_Click(object sender, EventArgs e) { LlenaCbMedicamento3(); }
-        private void ddbDocenteMedicamento3_Click(object sender, EventArgs e) { LlenaCbMedicamento3(); }
-        private void cbOtroMedicamento2_Click(object sender, EventArgs e) { LlenaCbMedicamento2(); }
-        private void cbOtroMedicamento3_Click(object sender, EventArgs e) { LlenaCbMedicamento3(); }
-        private void comboBox1_Click(object sender, EventArgs e) { LlenaCbMedicamento(); }
-        private void cbAdminDia_Click(object sender, EventArgs e) { LlenaCbDiagnostico(); }
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e) { btnAdminAltaAlumnoEvento.Enabled = true; }
-        private void cbAdminAlumnoEvento_Click(object sender, EventArgs e) { LlenaCbEvento(); }
-        private void cbAdminCambioPswUsr_Click(object sender, EventArgs e) { LlenaCbUsuario(); }
-        private void cbAdminBajaUsr_Click(object sender, EventArgs e) { LlenaCbUsuario2(); }
-
-      
-
-        private void txbBusquedaClave_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = !char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && !char.IsSeparator(e.KeyChar) && !char.IsDigit(e.KeyChar);
-        }
-
-        private void cbAlumnoBusqueda_OnChange(object sender, EventArgs e)
-        {
-            calCalendario.Hide();
-            cbAlumnoBusqueda.Checked = true;
-            cbDocenteBusqueda.Checked = false;
-            cbOtroBusqueda.Checked = false;
-            cbFecha.Checked = false;
-            cbNoControl.Checked = false;
-            cbSeguir.Checked = false;
-            cbNoControl.Show();
-            pnlBusqueda.Show();
-            lblControl.Text = "No Control";
-            lblControl.Hide();
-            lblNoControl.Text = "No Control";
-            lblNoControl.Show();
-            lblAlumno.Show();
-            tabResultados.Hide();
-            txbBusquedaClave.Clear();
-            txbBusquedaClave.Hide();
-            //pnlBusqueda.Location = new Point(12, 92);
-        }
-
-        private void cbDocenteBusqueda_OnChange(object sender, EventArgs e)
-        {
-            calCalendario.Hide();
-            cbDocenteBusqueda.Checked = true;
-            cbAlumnoBusqueda.Checked = false;
-            cbOtroBusqueda.Checked = false;
-            cbFecha.Checked = false;
-            cbNoControl.Checked = false;
-            cbSeguir.Checked = false;
-            cbNoControl.Show();
-            lblControl.Text = "No Docente";
-            lblControl.Hide();
-            lblNoControl.Text = "No Docente";
-            lblAlumno.Show();
-            lblNoControl.Show();
-            pnlBusqueda.Show();
-            tabResultados.Hide();
-            txbBusquedaClave.Clear();
-            txbBusquedaClave.Hide();
-
-        }
-
-        private void cbOtroBusqueda_OnChange(object sender, EventArgs e)
-        {
-            calCalendario.Hide();
-            cbOtroBusqueda.Checked = true;
-            cbAlumnoBusqueda.Checked = false;
-            cbDocenteBusqueda.Checked = false;
-            cbFecha.Checked = false;
-            cbNoControl.Checked = false;
-            cbSeguir.Checked = false;
-            //cbNoControl.Hide();
-            lblNoControl.Show();
-            lblNoControl.Text = "Nombre";
-            lblControl.Hide();
-            lblControl.Text = "Nombre";
-            pnlBusqueda.Show();
-            tabResultados.Hide();
-            txbBusquedaClave.Clear();
-            txbBusquedaClave.Hide();
-
-        }
-
-        private void cbFecha_OnChange(object sender, EventArgs e)
-        {
-            calCalendario.Show();
-            calCalendario.SelectionStart = DateTime.Now;
-            calCalendario.BackColor = Color.DarkGray;
-            cbFecha.Checked = true;
-            cbNoControl.Checked = false;
-            lblControl.Show();
-            lblControl.Location = new Point(143, 83);
-            lblControl.Text = "Seleccione fecha de consulta";
-            tabResultados.Hide();
-            txbBusquedaClave.Hide();
-        }
-
-        private void cbNoControl_OnChange(object sender, EventArgs e)
-        {
-            calCalendario.Hide();
-            cbFecha.Checked = false;
-            cbNoControl.Checked = true;
-            lblControl.Show();
-            lblControl.Location = new Point(117, 137);
-            if (cbAlumnoBusqueda.Checked)
-            {
-                lblControl.Text = "No Control";
-            }
-            else if (cbDocenteBusqueda.Checked)
-            {
-                lblControl.Text = "No Docente";
-            }
-            else if (cbOtroBusqueda.Checked)
-            {
-                lblControl.Text = "Nombre";
-            }
-            tabResultados.Hide();
-            txbBusquedaClave.Show();
-        }
-
-        private void cbSeguir_OnChange(object sender, EventArgs e)
-        {
-            tabResultados.Hide();
-            //cbFecha.Checked = false;
-            //cbNoControl.Checked = false;
-            //cbSeguir.Checked = true;
-            if (cbFecha.Checked)
-            {
-                calCalendario.Show();
-            }
-            if (cbNoControl.Checked)
-            {
-                lblControl.Show();
-                txbBusquedaClave.Show();
-            }
-
-        }
-
-        
-
-        private void cbSEAlumno_OnChange(object sender, EventArgs e)
-        {
-            ShowControlesSE();
-            comboCarrera.Items.Clear();
-            comboCarrera.Items.Insert(0, "Seleccione");
-            LlenarComboBoxServEsc(comboCarrera, "select distinct carrera from alumno", "carrera");//Llena ComboBox Carrera
-            cbFalse();
-            cbSEAlumno.Checked = true;
-            cbSEDocente.Checked = false;
-            cbSEOtro.Checked = false;
-            cbSELapso.Location = new Point(35, 77);
-            dtpInicio.Location = new Point(43, 223);
-            dtpFinal.Location = new Point(43, 270);
-            lblSECarreraArea.Text = "Carrera";
-            lblSECarrArMini.Text = "Carrera";
-            lblSELapso.Location = new Point(66, 77);
-            lblSEFechaInicio.Location = new Point(81, 207);
-            lblSEFechaFinal.Location = new Point(81, 254);
-
-
-            pnlSE.Show();
-        }
-
-        private void cbSEDocente_OnChange(object sender, EventArgs e)
-        {
-            ShowControlesSE();
-            comboCarrera.Items.Clear();
-            comboCarrera.Items.Insert(0, "Seleccione");
-            LlenarComboBoxServEsc(comboCarrera, "select distinct departamento from docente", "departamento");//Llena ComboBox Carrera
-            cbFalse();
-            cbEvento.Hide();
-            cbSEAlumno.Checked = false;
-            cbSEDocente.Checked = true;
-            cbSEOtro.Checked = false;
-            cbSEGeneracion.Hide();
-            cbSELapso.Location = cbSEGeneracion.Location;
-            comboGeneracion.Hide();
-            comboEvento.Hide();
-            dtpInicio.Location = new Point(43, 170);
-            dtpFinal.Location = new Point(43, 217);
-            lblSEEvento.Hide();
-            lblSEEventoMini.Hide();
-            lblSECarreraArea.Text = "Área";
-            lblSECarrArMini.Text = "Área";
-            lblSEGene.Hide();
-            lblSEGeneMini.Hide();
-            lblSELapso.Location = lblSEGene.Location;
-            lblSEFechaInicio.Location = new Point(81, 154);
-            lblSEFechaFinal.Location = new Point(81, 201);
-            pnlSE.Show();
-        }
-
-        private void cbSEOtro_OnChange(object sender, EventArgs e)
-        {
-            ShowControlesSE();
-            cbFalse();
-            cbSEAlumno.Checked = false;
-            cbSEDocente.Checked = false;
-            cbSEOtro.Checked = true;
-            cbSECarrera.Hide();
-            cbSEGeneracion.Hide();
-            cbSELapso.Show();
-            comboCarrera.Hide();
-            comboGeneracion.Hide();
-            dtpInicio.Location = new Point(43, 126);
-            dtpInicio.Enabled = true;
-            dtpFinal.Location = new Point(43, 173);
-            dtpFinal.Enabled = true;
-            lblSECarreraArea.Hide();
-            lblSEGene.Hide();
-            cbSELapso.Location = new Point(60,23);
-            lblSELapso.Location = new Point(81, 23);
-            lblSECarrArMini.Hide();
-            lblSEGeneMini.Hide();
-            lblSEFechaInicio.Location = new Point(81, 110);
-            lblSEFechaFinal.Location = new Point(81, 157);
-            pnlSE.Show();
-        }
-
-        private void cbEvento_OnChange(object sender, EventArgs e)
-        {
-            if (cbEvento.Checked)
-            {
-                if (cbSEDocente.Checked)
-                {
-                    MessageBox.Show(this, "Para buscar a un docente de evento, seleccione el apartado de 'Otro'", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    cbEvento.Checked = false;
-                }
-                else
-                {
-                    comboEvento.Enabled = true;
-                }
-
-                //comboIT.Enabled = true;
-            }
-            else
-            {
-                comboEvento.Enabled = false;
-
-            }
-        }
-
-        private void btnAdminUsrBaja_Click(object sender, EventArgs e)
-        {
-            if (tbAdminConfirmBaja.Text == "BAJA")
-            {
-                DialogResult dialogResult = MessageBox.Show("Seguro que desea cambiar la contraseña del usuario " + cbAdminCambioPswUsr.GetItemText(cbAdminCambioPswUsr.SelectedItem) + "?", "Cambiar contraseña?", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
-                {
-                    try
-                    {
-                        string queryBorraUsr = "delete usuario where usuario = '" + cbAdminBajaUsr.GetItemText(cbAdminBajaUsr.SelectedItem) + "';";
-                        SqlCommand cmdBorraUsr = new SqlCommand(queryBorraUsr, conn);
-                        conn.Open();
-                        cmdBorraUsr.ExecuteNonQuery();
-                        conn.Close();
-                        MessageBox.Show("Cambio realizado con exito.", "Listo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        LlenaCbUsuario();
-                        LlenaCbUsuario2();
-                        tbAdminConfirmBaja.Text = "";
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Se presento el siguiente error al realizar el cambio en la base de datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-
-                }
-                else
-                {
-                    tbAdminConfirmBaja.Text = "";
-                }
-
-            }
-        } //BORRA USUARIO DE LA BD
-
-        private void btnAdminCambiaPsw_Click(object sender, EventArgs e)
-        {
-            if (tbAdminCambioPsw.Text == tbAdminCambioConfirmaPsw.Text)
-            {
-                DialogResult dialogResult = MessageBox.Show("Seguro que desea cambiar la contraseña del usuario " + cbAdminCambioPswUsr.GetItemText(cbAdminCambioPswUsr.SelectedItem) + "?", "Cambiar contraseña?", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
-                {
-                    try
-                    {
-                        string queryCambiaPsw = "update usuario set contraseña = '" + tbAdminCambioPsw.Text + "' where usuario = '" + cbAdminCambioPswUsr.GetItemText(cbAdminCambioPswUsr.SelectedItem) + "';";
-                        SqlCommand cmdCambiaPsw = new SqlCommand(queryCambiaPsw, conn);
-                        conn.Open();
-                        cmdCambiaPsw.ExecuteNonQuery();
-                        conn.Close();
-                        MessageBox.Show("Cambio realizado con exito.", "Listo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        LlenaCbUsuario();
-                        LlenaCbUsuario2();
-                        tbAdminCambioConfirmaPsw.Text = "";
-                        tbAdminCambioPsw.Text = "";
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Se presento el siguiente error al realizar el cambio en la base de datos: " + ex.Message + ". Asegurese de que los datos sean correctos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-                else
-                {
-                    tbAdminCambioConfirmaPsw.Text = "";
-                    tbAdminCambioPsw.Text = "";
-                }
-            }
-            else
-            {
-                MessageBox.Show("Contraseñas no coinciden", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        } //CAMBIA PSW DEL USUARIO
-
-        private void btnAdminAltaUsr_Click(object sender, EventArgs e)
-        {
-            if (tbAdminAltaPsw.Text == tbAdminAltaConfirmPsw.Text)
-            {
-                DialogResult dialogResult = MessageBox.Show("Seguro que desea agregar a la base de datos el usuario " + tbAdminAltaUsr.Text + "?", "Agregar usuario?", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
-                {
-                    try
-                    {
-                        string queryAltaUsr = "insert into usuario (usuario, contraseña, nivel) values ('" + tbAdminAltaUsr.Text + "', '" + tbAdminAltaPsw.Text + "', 0);";
-                        SqlCommand cmdAltaUsr = new SqlCommand(queryAltaUsr, conn);
-                        conn.Open();
-                        cmdAltaUsr.ExecuteNonQuery();
-                        conn.Close();
-                        MessageBox.Show("Cambio realizado con exito.", "Listo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        LlenaCbUsuario();
-                        LlenaCbUsuario2();
-                        tbAdminAltaConfirmPsw.Text = "";
-                        tbAdminAltaPsw.Text = "";
-                        tbAdminAltaUsr.Text = "";
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Se presento el siguiente error al realizar el cambio en la base de datos: " + ex.Message + ". Asegurese de que los datos sean correctos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-                else
-                {
-                    tbAdminAltaConfirmPsw.Text = "";
-                    tbAdminAltaPsw.Text = "";
-                    tbAdminAltaUsr.Text = "";
-                }
-            }
-            else
-            {
-                MessageBox.Show("Contraseñas no coinciden", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        } //AGREGA USUARIO A LA BD
-
-        private void cbSECarrera_OnChange(object sender, EventArgs e)
-        {
-            if (cbSECarrera.Checked)
-            {
-                comboCarrera.Enabled = true;
-            }
-            else
-            {
-                comboCarrera.Enabled = false;
-
-            }
-        }
-
-        private void cbSEGeneracion_OnChange(object sender, EventArgs e)
-        {
-            if (cbSEGeneracion.Checked)
-            {
-                comboGeneracion.Enabled = true;
-            }
-            else
-            {
-                comboGeneracion.Enabled = false;
-
-            }
-        }
-
-        private void cbSELapso_OnChange(object sender, EventArgs e)
-        {
-            if (cbSELapso.Checked)
-            {
-                dtpInicio.Enabled = true;
-                dtpFinal.Enabled = true;
-            }
-            else
-            {
-                dtpInicio.Enabled = false;
-                dtpFinal.Enabled = false;
-            }
-        }
-
-        private void botSEBuscar_Click(object sender, EventArgs e)
-        {
-            if (!cbSECarrera.Checked && !cbSELapso.Checked && !cbSEGeneracion.Checked && !cbEvento.Checked && !cbSEOtro.Checked)
-            {
-
-                MessageBox.Show(this, "Seleccione un parámetro de búsqueda", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            }
-            else
-            {
-                BuscaConsulta(1);
-
-            }
-        }
-
-        private void botBack_Click(object sender, EventArgs e)
-        {
-
-            if (!tabSEResultados.Visible)
-            {
-                MessageBox.Show(this, "Debe realizar una búsqueda primero", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            }
-            else
-            {
-                tabSEResultados.Hide();
-                btnExportar.Hide();
-                ShowControlesSE();
-                if (cbSEDocente.Checked)
-                {
-                    ShowControlesSE();
-                    cbSEGeneracion.Hide();
-                    cbEvento.Hide();
-                    comboEvento.Hide();
-                    comboGeneracion.Hide();
-                    lblSEEvento.Hide();
-                    lblSEEventoMini.Hide();
-                    lblSEGene.Hide();
-                    lblSEGeneMini.Hide();
-                }
-                else if (cbSEOtro.Checked)
-                {
-                    cbSECarrera.Hide();
-                    cbSEGeneracion.Hide();
-                    cbSELapso.Hide();
-                    comboCarrera.Hide();
-                    comboGeneracion.Hide();
-                    lblSECarreraArea.Hide();
-                    lblSEGene.Hide();
-                    lblSECarrArMini.Hide();
-                    lblSEGeneMini.Hide();
-                }
-            }
-        }
-
-        private void txbBusquedaClave_OnTextChange(object sender, EventArgs e)
-        {
-            if (System.Text.RegularExpressions.Regex.IsMatch(txbBusquedaClave.Text, "^[a-zA-Z]+$") || txbBusquedaClave.Text.Length < 1)
-            {
-            }
-            else if (txbBusquedaClave.Text == " ")
-            {
-                txbBusquedaClave.Text = txbBusquedaClave.Text.Remove(txbBusquedaClave.Text.Length - 1);
-            }
-        }
-
-        private void botBusquedaAlumno_Click(object sender, EventArgs e) //Boton de búsqueda 
-        {
-            try
-            {
-                if ((!cbOtroBusqueda.Checked && !cbAlumnoBusqueda.Checked && !cbDocenteBusqueda.Checked) || (!cbNoControl.Checked && !cbFecha.Checked))
-                {
-                    MessageBox.Show(this, "Ingrese los datos correctamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    lblControl.Hide();
-                    txbBusquedaClave.Hide();
-                    calCalendario.Hide();
-                    BuscaConsulta(2);
-
-                }
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Ocurrio el siguiente problema: " + ex.Message + "Contecte al administrador." + "\t" + ex.GetType());
-                conn.Close();
-            }
-
-
-
-        }
-
+        SqlConnection conn = new SqlConnection(@"Data Source=(LocalDb)\LocalDBDemo;initial catalog=RSM;integrated security=true");//conexion base de datos
         #region Funciones
-
         #region Funciones Limpiadoras
         private void LimpiaAlumno()
         {
@@ -1565,6 +79,65 @@ namespace RecursosServiciosMedicos
             {
                 medicamentoFormObjeto.Show();
             }
+        }
+        private void AltaDocente()
+        {
+            string data_source;
+
+            OpenFileDialog choofdlog = new OpenFileDialog();
+            choofdlog.Filter = "Archivo Excel |*.xlsx;*.xls;*.xlsm";
+            choofdlog.FilterIndex = 1;
+            choofdlog.Multiselect = false;
+
+            if (choofdlog.ShowDialog() == DialogResult.OK)
+            {
+                data_source = choofdlog.FileName;//path de el archivo excel
+                //variables de documento excel
+                var xlapp = new Microsoft.Office.Interop.Excel.Application();
+                Microsoft.Office.Interop.Excel.Workbook xldoc = xlapp.Workbooks.Open(data_source);
+                Microsoft.Office.Interop.Excel.Worksheet hoja = xldoc.Sheets[1] as Microsoft.Office.Interop.Excel.Worksheet;
+                xldoc = xlapp.Workbooks.Add(data_source);
+                hoja = xldoc.Sheets[1] as Microsoft.Office.Interop.Excel.Worksheet;
+                //conexion OleDb para jalar la info del excel
+                string conexion = "Provider=Microsoft.Jet.OleDb.4.0; Data Source=" + data_source + ";Extended Properties=\"Excel 8.0; HDR=Yes\"";//conexion al archivo excel
+                OleDbConnection origen = default(OleDbConnection);
+                origen = new OleDbConnection(conexion);
+                //seleccion de todo dentro de la hoja
+                OleDbCommand seleccion = default(OleDbCommand);
+                seleccion = new OleDbCommand("Select * From [" + hoja.Name + "$]", origen);
+                //llenador
+                OleDbDataAdapter adaptador = new OleDbDataAdapter();
+                adaptador.SelectCommand = seleccion;
+                DataSet ds = new DataSet();
+                adaptador.Fill(ds);
+                //cerrar cosas abiertas
+                origen.Close();
+                xldoc.Close(SaveChanges: false);
+                xlapp.Quit();
+                adaptador.Dispose();
+                seleccion.Dispose();
+                //Conexion Base de datos
+                conn.Open();
+                //Limpiar Tabla
+                string commandText = "ALTER TABLE docente nocheck constraint all; " +
+                    "ALTER TABLE consultas nocheck constraint all; delete from docente; " +
+                    "ALTER TABLE docente check constraint all; " +
+                    "ALTER TABLE consultas check constraint all;";
+                using (SqlCommand cmd = new SqlCommand(commandText, conn))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                //Importar lo dentro del data set
+                SqlBulkCopy importar = default(SqlBulkCopy);
+                importar = new SqlBulkCopy(conn);
+                importar.DestinationTableName = "docente";
+                importar.WriteToServer(ds.Tables[0]);
+                conn.Close();
+            }
+            else
+            {
+            }
+
         }
         private void AltaAlumnoIth()
         {
@@ -1929,9 +502,6 @@ namespace RecursosServiciosMedicos
             }
 
         }
-
-
-
         public void LlenaCbUsuario()
         {
             dsUsuario.Clear();
@@ -1968,9 +538,6 @@ namespace RecursosServiciosMedicos
             cbAdminCambioPswUsr.DataSource = dsUsuario2;
             cbAdminCambioPswUsr.Enabled = true;
         }
-
-       
-
         private string Seguimiento()
         {
             if (cbSeguimiento.Checked)
@@ -2144,9 +711,6 @@ namespace RecursosServiciosMedicos
         {
             // Llenar ComboBox de Diagnostico:
             dsDiagnostico.Clear();
-            //cbOtroDiagnostico.Items.Clear();
-            //ddbAlumnoDiagnostico.Items.Clear();
-            //ddbDocenteDiagnostico.Items.Clear();
             conn.Open();
             string strCmdDiagnostico = "select nombre from diagnostico";
             SqlCommand cmdCbDiagnostico = new SqlCommand(strCmdDiagnostico, conn);
@@ -2177,9 +741,6 @@ namespace RecursosServiciosMedicos
         {
             //Llenar ComboBox de Medicamento:
             dsMedicamento.Clear();
-            //cbOtroMedicamento.Items.Clear();
-            //ddbAlumnoMedicamento.Items.Clear();
-            //ddbDocenteMedicamento.Items.Clear();
             conn.Open();
             string strCmdMedicamento = "select nombre from medicamento";
             SqlCommand cmdCbMedicamento = new SqlCommand(strCmdMedicamento, conn);
@@ -2210,9 +771,6 @@ namespace RecursosServiciosMedicos
         {
             //Llenar ComboBox de Medicamento:
             dsMedicamento2.Clear();
-            //cbOtroMedicamento.Items.Clear();
-            //ddbAlumnoMedicamento.Items.Clear();
-            //ddbDocenteMedicamento.Items.Clear();
             conn.Open();
             string strCmdMedicamento2 = "select nombre from medicamento";
             SqlCommand cmdCbMedicamento2 = new SqlCommand(strCmdMedicamento2, conn);
@@ -2240,18 +798,13 @@ namespace RecursosServiciosMedicos
         {
             //Llenar ComboBox de Medicamento:
             dsMedicamento3.Clear();
-            //cbOtroMedicamento.Items.Clear();
-            //ddbAlumnoMedicamento.Items.Clear();
-            //ddbDocenteMedicamento.Items.Clear();
             conn.Open();
             string strCmdMedicamento3 = "select nombre from medicamento";
             SqlCommand cmdCbMedicamento3 = new SqlCommand(strCmdMedicamento3, conn);
             SqlDataAdapter daMedicamento3 = new SqlDataAdapter(strCmdMedicamento3, conn);
-
             daMedicamento3.Fill(dsMedicamento3);
             cmdCbMedicamento3.ExecuteNonQuery();
             conn.Close();
-
             ddbAlumnoMedicamento3.DisplayMember = "nombre";
             ddbAlumnoMedicamento3.ValueMember = "nombre";
             ddbAlumnoMedicamento3.DataSource = dsMedicamento3;
@@ -2264,7 +817,6 @@ namespace RecursosServiciosMedicos
             cbOtroMedicamento3.ValueMember = "nombre";
             cbOtroMedicamento3.DataSource = dsMedicamento3;
             cbOtroMedicamento3.Enabled = true;
-
         }
         public void LlenaCbEvento()
         {
@@ -2273,11 +825,9 @@ namespace RecursosServiciosMedicos
             string strCmdCbEvento = "select nombre from evento";
             SqlCommand cmdCbDiagnostico = new SqlCommand(strCmdCbEvento, conn);
             SqlDataAdapter daEvento = new SqlDataAdapter(strCmdCbEvento, conn);
-
             daEvento.Fill(dsEvento);
             cmdCbDiagnostico.ExecuteNonQuery();
             conn.Close();
-
             cbAdminAlumnoEvento.DisplayMember = "nombre";
             cbAdminAlumnoEvento.ValueMember = "nombre";
             cbAdminAlumnoEvento.DataSource = dsEvento;
@@ -2287,7 +837,6 @@ namespace RecursosServiciosMedicos
         {
             string Añostring;
             int Añoescolar;
-            //                                                                                                                                                                                                                                            Perdon a la persona que tenga que arreglar esto, pero lo mas seguro es que ya estemos muertos :)
             Añostring = "20" + numControl.ToString().Substring(0, 2);
             Añoescolar = Convert.ToInt32(DateTime.Now.Year.ToString()) - Convert.ToInt32(Añostring);
             Añoescolar = Añoescolar * 2;
@@ -2297,11 +846,7 @@ namespace RecursosServiciosMedicos
                 Añoescolar++;
             }
             return (Añoescolar.ToString());
-
         }
-
-
-
         //Metodo de Imprimir
         private void Imprimir(Microsoft.Office.Interop.Word.Document doc, Microsoft.Office.Interop.Word.Application app, string path)
         {
@@ -2311,12 +856,10 @@ namespace RecursosServiciosMedicos
                 doc = app.Documents.Add(path);
                 app.ActivePrinter = pDialog.PrinterSettings.PrinterName;
                 app.ActiveDocument.PrintOut();
-
                 doc.Close();
                 doc = null;
                 app.Quit();
                 MessageBox.Show("Documento Creado E Impreso Con Exito", "Documento de Certidicado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                 tbCodigoCerti.Text = "";
                 chbOtro.Checked = false;
                 cbTipoDct.Enabled = false;
@@ -2338,12 +881,6 @@ namespace RecursosServiciosMedicos
                 btnImprimir.Enabled = false;
             }
         }
-
-        private void pnlConsultoria_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void btnImportar_Click(object sender, EventArgs e)
         {
             if (Usuario == "dse")
@@ -2355,7 +892,6 @@ namespace RecursosServiciosMedicos
                 ImportarExcel(tabResultados);
             }
         }
-
         private void btnAgregarEvento_Click(object sender, EventArgs e)
         {
             string fechi = calEventoIni.SelectionStart.ToString("yyyy-MM-dd h:mm tt");
@@ -2363,7 +899,6 @@ namespace RecursosServiciosMedicos
             try
             {
                 conn.Open();
-
                 SqlCommand comandoEvento = new SqlCommand("insert into evento (nombre, fecha_inicio, fecha_fin) values( '" + tbEvento.Text + "' ,  '" + fechi + "', '" + fechf + "');", conn);
                 comandoEvento.ExecuteNonQuery();
                 MessageBox.Show("El evento ha sido creado exitosamente.", "Creado", MessageBoxButtons.OK);
@@ -2374,11 +909,9 @@ namespace RecursosServiciosMedicos
                 MessageBox.Show("Favor de ingresar todos los campos", "Alerta", MessageBoxButtons.OK);
             }
         }
-
         //Metodo Llenar Documento de Alguien del Plantel
         private void LlenarDocPlantel(Microsoft.Office.Interop.Word.Document doc, Microsoft.Office.Interop.Word.Application app, string tipodoc)
         {
-
             string cadQuery;
             string path;
             if (banderaalumno == true)
@@ -2395,11 +928,8 @@ namespace RecursosServiciosMedicos
                 doc = app.Documents.Add(Template: path + ".docx");
                 cadQuery = "Select * from docente where num_docente ='" + num_id + "' ";
             }
-
-
             SqlCommand comando = new SqlCommand(cadQuery, conn);
             conn.Open();
-
             SqlDataReader leer3 = comando.ExecuteReader();
             if (leer3.Read() == true)
             {
@@ -2407,10 +937,8 @@ namespace RecursosServiciosMedicos
                 {
                     if (field.Code.Text.Contains("Nombre"))
                     {
-
                         field.Select();
                         string nombrecerti;
-
                         if (banderaalumno == true)
                         {
                             //nombre de alumno
@@ -2423,14 +951,12 @@ namespace RecursosServiciosMedicos
                             nombrecerti = leer3["nombre"].ToString();
                             nombre = nombrecerti;
                         }
-
                         app.Selection.TypeText(nombre);
                     }
                     else if (field.Code.Text.Contains("Edad"))
                     {
                         field.Select();
                         app.Selection.TypeText(edad);
-
                     }
                     else if (field.Code.Text.Contains("Fecha"))
                     {
@@ -2442,60 +968,14 @@ namespace RecursosServiciosMedicos
                         field.Select();
                         app.Selection.TypeText(doctor);
                     }
-
-
-
                 }
             }
             conn.Close();
             doc.SaveAs(path + "-" + nombre + ".docx");
             string finalpath = path + "-" + nombre + ".docx";
-
             Imprimir(doc, app, finalpath);
         }
-
-        private void tbFechaIniEvento_MouseClick(object sender, MouseEventArgs e)
-        {
-            calEventoIni.Show();
-        }
-
-        private void calEventoIni_DateChanged(object sender, DateRangeEventArgs e)
-        {
-            tbFechaIniEvento.Text = calEventoIni.SelectionStart.ToString();
-        }
-
-        private void calEventoIni_Leave(object sender, EventArgs e)
-        {
-            calEventoIni.Hide();
-        }
-
-        private void tbFechaFinEvento_MouseClick(object sender, MouseEventArgs e)
-        {
-            calEventoFin.Show();
-        }
-
-        private void calEventoFin_Leave(object sender, EventArgs e)
-        {
-            calEventoFin.Hide();
-        }
-
-        private void calEventoFin_DateChanged(object sender, DateRangeEventArgs e)
-        {
-            tbFechaFinEvento.Text = calEventoFin.SelectionStart.ToString();
-        }
-
-        private void pnlAgregarEvento_Click(object sender, EventArgs e)
-        {
-            calEventoFin.Hide();
-            calEventoIni.Hide();
-        }
-
-        private void pnlEvento_Click(object sender, EventArgs e)
-        {
-            calEventoFin.Hide();
-            calEventoIni.Hide();
-        }
-
+        private void pnlEvento_Click(object sender, EventArgs e) { calEventoFin.Hide(); calEventoIni.Hide(); }
         //Metodo Llenar Documento de ALguien Fuera del Plantel
         private void LlenarDocFueraPlantel(Microsoft.Office.Interop.Word.Document doc, Microsoft.Office.Interop.Word.Application app, string tipodoc)
         {
@@ -2504,20 +984,17 @@ namespace RecursosServiciosMedicos
             String cadQuery = "Select * from consulta nombre ='" + nombre + "' ";
             SqlCommand comando = new SqlCommand(cadQuery, conn);
             conn.Open();
-
             foreach (Microsoft.Office.Interop.Word.Field field in doc.Fields)
             {
                 if (field.Code.Text.Contains("Nombre"))
                 {
                     field.Select();
                     app.Selection.TypeText(nombre);
-
                 }
                 else if (field.Code.Text.Contains("Edad"))
                 {
                     field.Select();
                     app.Selection.TypeText(edad);
-
                 }
                 else if (field.Code.Text.Contains("Fecha"))
                 {
@@ -2540,18 +1017,14 @@ namespace RecursosServiciosMedicos
                     app.Selection.TypeText(doctor);
                 }
             }
-
             conn.Close();
             doc.SaveAs(path + "-" + nombre + ".docx");
             string finalpath = path + "-" + nombre + ".docx";
-
             Imprimir(doc, app, finalpath);
         }
-
-        //metodos kike
+        //metodos CONSULTORIA
         private void HideControlesSE()
         {
-
             cbSEGeneracion.Hide();
             cbSECarrera.Hide();
             cbSELapso.Hide();
@@ -2571,12 +1044,9 @@ namespace RecursosServiciosMedicos
             lblSELapso.Hide();
             lblSEFechaInicio.Hide();
             lblSEFechaFinal.Hide();
-
         }
-
         private void ShowControlesSE()
         {
-
             cbSEGeneracion.Show();
             cbSECarrera.Show();
             cbSELapso.Show();
@@ -2600,9 +1070,7 @@ namespace RecursosServiciosMedicos
             lblTotalRegistros.Hide();
             lblKEv.Hide();
         }
-
-
-        private void Aparece(DataGridView tab)//Para que la tabla se ajuste al tamaño del panel y se muestre 
+        private void Aparece(DataGridView tab)
         {
             tab.Width = 450;
             tab.Height = 218;
@@ -2611,9 +1079,8 @@ namespace RecursosServiciosMedicos
             tab.Show();
             HideControlesSE();
 
-        }
-
-        private void LlenarComboBoxServEsc(ComboBox combo, string querty, string atributo) //Llenar ComboBox de busqueda para SE
+        }//Para que la tabla se ajuste al tamaño del panel y se muestre    
+        private void LlenarComboBoxServEsc(ComboBox combo, string querty, string atributo)
         {
             SqlCommand cmd = new SqlCommand(querty, conn);
             cmd.CommandText = querty;
@@ -2630,9 +1097,8 @@ namespace RecursosServiciosMedicos
 
             reader.Close();
             conn.Close();
-        }
-
-        private bool Reader(string querty) //Ver si la busqueda existe en la BD 
+        }//Llenar ComboBox de busqueda para SE
+        private bool Reader(string querty)
         {
             bool r;
             SqlCommand comando = new SqlCommand(querty, conn);
@@ -2647,10 +1113,7 @@ namespace RecursosServiciosMedicos
             }
             leer.Close();
             return r;
-        }
-
-
-
+        }//Ver si la busqueda existe en la BD 
         private void HacerConsulta(string txb, int caso, string control, int tipoUsuario) //Diferentes casos de usuario normal 
         {
             try
@@ -2661,7 +1124,6 @@ namespace RecursosServiciosMedicos
                     #region Usuario SE
                     switch (caso)
                     {
-
                         #region Alumno
                         case 1: //Carrera, lapso, gene, evento
                             #region Carrera, lapso, gene, evento
@@ -3330,7 +1792,6 @@ namespace RecursosServiciosMedicos
 
                         #endregion  //No sé, pero no se mueve porque si no está, no funciona :)
                         #endregion //Alumno
-
                         #region Docente
                         //Lapso, area, evento
                         //case 16:
@@ -3476,7 +1937,6 @@ namespace RecursosServiciosMedicos
                         //    break;
 
                         #endregion //Docente
-
                         #region Otro
 
                         //Lapso y evento
@@ -3558,11 +2018,7 @@ namespace RecursosServiciosMedicos
                             break;
 
                             #endregion //Otro
-
-
-
                     }
-
                     #endregion //Usuario SE
                 }
                 else if (tipoUsuario == 2)
@@ -3570,7 +2026,6 @@ namespace RecursosServiciosMedicos
                     #region Usuario Normal
                     if (cbSeguir.Checked)
                     {
-
                         switch (caso)
                         {
                             case 1: //Alumno fecha y seguimiento
@@ -3598,19 +2053,14 @@ namespace RecursosServiciosMedicos
                                     tabResultados.DataSource = ds.Tables[0];
                                     btnExportar.Visible = true;
                                 }
-
                                 conn.Close();
-
                                 break;
-
                             case 2:  //Alumno clave y seguimiento
                                 conn.Open();
                                 buscar = " select c.num_control as 'Número de Control', a.nombre as 'Nombre', a.nombre_paterno as 'Apellido Paterno', " +
                                                 " a.nombre_materno as 'Apellido Materno', a.carrera as Carrera, c.seguimiento as Seguimiento," +
                                                 "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento from " +
                                                 "consultas as c inner join alumno as a on c.num_control=a.num_control where c.seguimiento='Si' and c." + control + " = " + txb;
-
-
                                 if (!Reader(buscar))
                                 {
                                     MessageBox.Show(this, "No se encontró consulta registrada con estos datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -3630,9 +2080,7 @@ namespace RecursosServiciosMedicos
                                     btnExportar.Visible = true;
                                 }
                                 conn.Close();
-
                                 break;
-
                             case 3: //Docente fecha y seguimiento
                                 conn.Open();
                                 buscar = " select c.num_docente as 'Número de Control', d.nombre as 'Nombre', d.departamento as Área, c.seguimiento as Seguimiento," +
@@ -3657,7 +2105,6 @@ namespace RecursosServiciosMedicos
                                     tabResultados.DataSource = ds.Tables[0];
                                     btnExportar.Visible = true;
                                 }
-
                                 conn.Close();
                                 break;
                             case 4: //Docente clave y seguimiento
@@ -3665,7 +2112,6 @@ namespace RecursosServiciosMedicos
                                 buscar = " select c.num_docente as 'Número de Control', d.nombre as 'Nombre', d.departamento as Área, c.seguimiento as Seguimiento," +
                                                 "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento from " +
                                                 "consultas as c inner join docente as d on c.num_docente=d.num_docente where c.seguimiento = 'Si' and c." + control + " = " + txb;
-
                                 if (!Reader(buscar))
                                 {
                                     MessageBox.Show(this, "No se encontró consulta registrada con estos datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -3710,7 +2156,6 @@ namespace RecursosServiciosMedicos
                                     tabResultados.DataSource = ds.Tables[0];
                                     btnExportar.Visible = true;
                                 }
-
                                 conn.Close();
                                 break;
                             case 6: //Otro nombre y seguimiento
@@ -3736,11 +2181,8 @@ namespace RecursosServiciosMedicos
                                     tabResultados.DataSource = ds.Tables[0];
                                     btnExportar.Visible = true;
                                 }
-
                                 conn.Close();
                                 break;
-
-
                         }
                     }
                     else
@@ -3772,7 +2214,6 @@ namespace RecursosServiciosMedicos
                                     tabResultados.DataSource = ds.Tables[0];
                                     btnExportar.Visible = true;
                                 }
-
                                 conn.Close();
                                 break;
                             case 2: //Alumno clave y sin seguimiento
@@ -3781,8 +2222,6 @@ namespace RecursosServiciosMedicos
                                                 " a.nombre_materno as 'Apellido Materno', a.carrera as Carrera, c.seguimiento as Seguimiento," +
                                                 "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento from " +
                                                 "consultas as c inner join alumno as a on c.num_control=a.num_control where c." + control + " = " + txb;
-
-
                                 if (!Reader(buscar))
                                 {
                                     MessageBox.Show(this, "No se encontró consulta registrada con estos datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -3827,7 +2266,6 @@ namespace RecursosServiciosMedicos
                                     tabResultados.DataSource = ds.Tables[0];
                                     btnExportar.Visible = true;
                                 }
-
                                 conn.Close();
                                 break;
                             case 4: //Docente clave y sin seguimiento
@@ -3835,7 +2273,6 @@ namespace RecursosServiciosMedicos
                                 buscar = " select c.num_docente as 'Número de Control', d.nombre as 'Nombre', d.departamento as Área, c.seguimiento as Seguimiento," +
                                                 "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento from " +
                                                 "consultas as c inner join docente as d on c.num_docente=d.num_docente where c." + control + " = " + txb;
-
                                 if (!Reader(buscar))
                                 {
                                     MessageBox.Show(this, "No se encontró consulta registrada con estos datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -3880,7 +2317,6 @@ namespace RecursosServiciosMedicos
                                     tabResultados.DataSource = ds.Tables[0];
                                     btnExportar.Visible = true;
                                 }
-
                                 conn.Close();
                                 break;
                             case 6: //Otro nombre y sin seguimiento
@@ -3906,45 +2342,30 @@ namespace RecursosServiciosMedicos
                                     tabResultados.DataSource = ds.Tables[0];
                                     btnExportar.Visible = true;
                                 }
-
                                 conn.Close();
                                 break;
-
                         }
                     }
                     #endregion
-
                 }
-
-
-
-
-
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show("Ocurrio el siguiente problema: " + ex.Message + "Contecte al administrador." + "\t" + ex.GetType());
                 conn.Close();
             }
-
-
-
-        }   
-
+        }
         private void BuscaConsulta(int tiposDeUsuario) //Busca en base de datos
         {
             int a = 0;
             int b = 0;
-
-
             try
             {
                 switch (tiposDeUsuario) //Para ver si es normal o SE
                 {
                     case 1:
                         // Para ver si es alumno, docente u otro
-                        #region a
+                        #region contador A
                         if (cbSEAlumno.Checked)
                         {
                             a = 1;
@@ -3958,15 +2379,11 @@ namespace RecursosServiciosMedicos
                             a = 3;
                         }
                         #endregion
-
                         // Para ver si es por Carrera, area, lapso, generacion o evento
                         #region Implementacion
-
                         switch (a)
                         {
-
                             case 1:
-
                                 #region Casos B de alumno
                                 if (cbSECarrera.Checked)
                                 {
@@ -4034,7 +2451,6 @@ namespace RecursosServiciosMedicos
                                     {
                                         b = 12; //Lapso
                                     }
-
                                 }
                                 else
                                       if (cbSEGeneracion.Checked)
@@ -4057,7 +2473,6 @@ namespace RecursosServiciosMedicos
                                     b = 0; //0
                                 }
                                 #endregion //Casos B alumno
-
                                 #region Switch b alumno
                                 switch (b)
                                 {
@@ -4121,14 +2536,10 @@ namespace RecursosServiciosMedicos
                                     case 15:
                                         HacerConsulta(null, b, "", tiposDeUsuario);
                                         break;
-
                                 }
                                 #endregion //Switch B alumno
-
-
                                 break;
                             case 2:
-
                                 #region Casos B de Docente
                                 if (cbSELapso.Checked)
                                 {
@@ -4172,53 +2583,39 @@ namespace RecursosServiciosMedicos
                                 {
                                     b = 0; //0
                                 }
-
                                 #endregion //Casos B Docente
-
                                 #region Switch B Docente
-
                                 switch (b)
                                 {
                                     //Lapso, area, evento
                                     //case 16: HacerConsulta(null, b, "", tiposDeUsuario);
                                     //    break;
-
                                     //Lapso, area
                                     case 17:
                                         HacerConsulta(null, b, "", tiposDeUsuario);
                                         break;
-
                                     //Lapso, evento
                                     //case 18: HacerConsulta(null, b, "", tiposDeUsuario);
                                     //    break;
-
                                     //Lapso
                                     case 19:
                                         HacerConsulta(null, b, "", tiposDeUsuario);
                                         break;
-
                                     //Area, evento
                                     //case 20: HacerConsulta(comboCarrera.SelectedItem.ToString(), b, "departamento", tiposDeUsuario);
                                     //    break;
-
                                     //Area
                                     case 21:
                                         HacerConsulta(comboCarrera.SelectedItem.ToString(), b, "departamento", tiposDeUsuario);
                                         break;
-
                                         //Evento
                                         //case 22: HacerConsulta(comboEvento.SelectedItem.ToString(), b, "evento", tiposDeUsuario);
                                         //    break;
-
                                 }
-
                                 #endregion //Switch B docente
-
                                 break;
                             case 3:
-
                                 #region Casos B Otros
-
                                 if (cbEvento.Checked)
                                 {
                                     b = 23; //Lapso y evento, incluidos docentes
@@ -4227,37 +2624,27 @@ namespace RecursosServiciosMedicos
                                 {
                                     b = 24; //Lapso ITH
                                 }
-
                                 #endregion //B Otro
-
                                 #region Switch Otro
-
                                 switch (b)
                                 {
                                     //Lapso y evento
                                     case 23:
                                         HacerConsulta(comboEvento.SelectedItem.ToString(), b, "evento", tiposDeUsuario);
                                         break;
-
                                     //Lapso
                                     case 24:
                                         HacerConsulta(null, b, "", tiposDeUsuario);
                                         break;
                                 }
-
                                 #endregion //Switch Otro
-
-
-
-
                                 break;
                         }
                         #endregion //Implementación
-
                         break;
                     case 2:
                         // Para ver si es alumno, docente u otro
-                        #region a
+                        #region Contador A
                         if (cbAlumnoBusqueda.Checked)
                         {
                             a = 1;
@@ -4271,9 +2658,8 @@ namespace RecursosServiciosMedicos
                             a = 3;
                         }
                         #endregion
-
                         // Para ver si es por fecha o clave, y si es de seguimiento o no
-                        #region b
+                        #region Contador B
                         if (cbFecha.Checked)
                         {
                             b = 1;
@@ -4283,7 +2669,6 @@ namespace RecursosServiciosMedicos
                             b = 2;
                         }
                         #endregion
-
                         // Para que ejecute los diferentes casos
                         #region Implementacion Normal
                         switch (a)
@@ -4324,12 +2709,8 @@ namespace RecursosServiciosMedicos
                                 break;
                         }
                         #endregion
-
                         break;
                 }
-
-
-
             }
             catch (Exception ex)
             {
@@ -4337,9 +2718,6 @@ namespace RecursosServiciosMedicos
                 conn.Close();
             }
         }
-   
-
-
         private void cbFalse()
         {
             cbSECarrera.Checked = false;
@@ -4356,9 +2734,7 @@ namespace RecursosServiciosMedicos
             cbEvento.Checked = false;
             comboEvento.SelectedIndex = 0;
             comboEvento.Enabled = false;
-        }
-
-
+        }//Funcion regresa todo FALSE en CONSULTA AVANZADA
         private void copyAlltoClipboard(DataGridView tabla)
         {
             tabla.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText;
@@ -4369,7 +2745,6 @@ namespace RecursosServiciosMedicos
 
                 Clipboard.SetDataObject(dataObj);
         }
-
         private void ImportarExcel(DataGridView grid)
         {
             copyAlltoClipboard(grid);
@@ -4386,7 +2761,6 @@ namespace RecursosServiciosMedicos
             CR.Select();
             xlWorkSheet.PasteSpecial(CR, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, true);
         }
-
         public void Checar()
         {
             conn.Open();
@@ -4395,8 +2769,1437 @@ namespace RecursosServiciosMedicos
             MessageBox.Show("Se ha actualizado la base de datos", "Actualizacion", MessageBoxButtons.OK);
             conn.Close();
         }
+        #endregion
+
+        #region Controles Complejos
+        public Principal(string LoggedUser)
+        {
+            Usuario = LoggedUser.ToLower();
+            InitializeComponent();
+            lblFecha.Text = DateTime.Now.ToString("MM/dd/yyyy");
+            btnCerrar.Text = Usuario;
 
 
+        } //CONSTRUCTOR CON USER
+        private void Principal_Load(object sender, EventArgs e)
+        {
+            LlenaCbDiagnostico();
+            LlenaCbMedicamento();
+            LlenaCbEvento();
+            LlenaCbUsuario();
+            LlenaCbUsuario2();
+            cbAlumno.Checked = true;
+            pnlAlumno.Show();
+            Checar();
+
+            if (Usuario == "dse")
+            {
+                btnCertificadoMed.Text = "Administracion";
+                ttSeguimiento.Active = false;
+                pnlBusqueda.Hide();
+                pnlConsulta.Hide();
+                pnlCertificado.Hide();
+
+                pnlConsultoria.Hide();
+                pnlServiciosEscolares.Show();
+                pnlAdministracion.Hide();
+                btnConsulta.Text = "Consultoría Específica";
+                btnConsultoria.Text = "Consultoría General";
+                bunifuCustomLabel30.Text = "Servicios Médicos";
+            }
+
+            LlenaCbDiagnostico();
+            LlenaCbMedicamento();
+            LlenarComboBoxServEsc(comboEvento, "Select nombre from evento", "nombre"); //Llena los ComboBox de evento
+            LlenarComboBoxServEsc(comboGeneracion, "select distinct substring(num_control,1,2) as 'Generación' from alumno order by Generación asc", "Generación"); //Llena ComboBox de generación
+                                                                                                                                                                    // LlenarComboBoxServEsc(comboIT,"",""); //Llena el ComboBox de institutos para eventos
+            pnlConsultoria.Hide();
+
+        } // FUNCTION LOAD
+        private void bunifuFlatButton1_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("¿Cerrar sesión?", "Salir", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                this.Hide();
+                Form1 fm1 = new Form1();
+                fm1.Show();
+            }
+        }//Boton de CERRAR SESION
+        private void bunifuFlatButton2_Click(object sender, EventArgs e)
+        {
+            if (Usuario == "dse")
+            {
+                Separator.Location = new Point(15, 177);
+                Separator.Show();
+                cbSEOtro.Checked = false;
+                cbSEAlumno.Checked = false;
+                cbSEDocente.Checked = false;
+                pnlServiciosEscolares.Hide();
+                pnlAdministracion.Hide();
+                pnlConsulta.Hide();
+                pnlServiciosEscolares.Show();
+                btnExportar.Hide();
+                pnlEvento.Hide();
+                pnlAgregarEvento.Hide();
+
+            }
+            else
+            {
+                Separator.Location = new Point(15, 177);
+                Separator.Show();
+                LimpiaAlumno();
+                LimpiaDocente();
+                LimpiaOtro();
+                pnlConsulta.Show();
+                pnlCertificado.Hide();
+                pnlConsultoria.Hide();
+                pnlAdministracion.Hide();
+                pnlServiciosEscolares.Hide();
+                btnExportar.Hide();
+                pnlEvento.Hide();
+                pnlAgregarEvento.Hide();
+            }
+
+        }//Limpia y muestra PNL CONSULTA
+        private void cbAlumno_OnChange(object sender, EventArgs e)
+        {
+            if (cbAlumno.Checked)
+            {
+                LimpiaAlumno();
+                LimpiaDocente();
+                LimpiaOtro();
+                cbDocente.Checked = false;
+                cbOtro.Checked = false;
+                cbSeguimiento.Checked = false;
+                pnlAlumno.Show();
+                pnlDocente.Hide();
+                pnlOtro.Hide();
+                Med2 = false;
+                Med3 = false;
+                ddbAlumnoMedicamento2.Hide();
+                ddbAlumnoMedicamento3.Hide();
+                lblAlumnoMed2.Hide();
+                lblAlumnoMed3.Hide();
+            }
+        }//Limpia y muestra PNL CONSULTA ALUMNO
+        private void cbDocente_OnChange(object sender, EventArgs e)
+        {
+            if (cbDocente.Checked)
+            {
+                LimpiaAlumno();
+                LimpiaDocente();
+                LimpiaOtro();
+                cbAlumno.Checked = false;
+                cbOtro.Checked = false;
+                cbSeguimiento.Checked = false;
+                pnlAlumno.Hide();
+                pnlDocente.Show();
+                pnlOtro.Hide();
+                Med2 = false;
+                Med3 = false;
+                ddbDocenteMedicamento2.Hide();
+                lblDocMed2.Hide();
+                ddbDocenteMedicamento3.Hide();
+                lblDocMed3.Hide();
+            }
+        }//Limpia y muestra PNL CONSULTA DOCENTE
+        private void cbOtro_OnChange(object sender, EventArgs e)
+        {
+            if (cbOtro.Checked)
+            {
+                LimpiaAlumno();
+                LimpiaDocente();
+                LimpiaOtro();
+                cbDocente.Checked = false;
+                cbAlumno.Checked = false;
+                cbSeguimiento.Checked = false;
+                pnlAlumno.Hide();
+                pnlDocente.Hide();
+                pnlOtro.Show();
+                Med2 = false;
+                Med3 = false;
+                cbOtroMedicamento2.Hide();
+                lblMed2.Hide();
+                cbOtroMedicamento3.Hide();
+                lblMed3.Hide();
+            }
+        }//Limpia y muestra PNL CONSULTA OTRO
+        private void btnCertificadoMed_Click(object sender, EventArgs e)
+        {
+            if (Usuario == "dse")
+            {
+                cbSEOtro.Checked = false;
+                cbSEAlumno.Checked = false;
+                cbSEDocente.Checked = false;
+                Separator.Location = new Point(15, 272);
+                Separator.Show();
+                pnlConsulta.Hide();
+                pnlConsultoria.Hide();
+                pnlAdministracion.Show();
+                pnlServiciosEscolares.Hide();
+                pnlEvento.Hide();
+                pnlAgregarEvento.Hide();
+            }
+            else
+            {
+                Separator.Location = new Point(15, 272);
+                Separator.Show();
+                pnlConsulta.Hide();
+                pnlCertificado.Show();
+
+                tbCodigoCerti.Text = "";
+                tbCodigoCerti.Enabled = true;
+                cbTipoDct.Enabled = false;
+                cbTipoDct.SelectedIndex = -1;
+                btnImprimir.Enabled = false;
+                chbOtro.Enabled = true;
+                btnCancelar.Hide();
+                pnlListaCerti.Hide();
+                pnlConsultoria.Hide();
+                pnlServiciosEscolares.Hide();
+                pnlEvento.Hide();
+                pnlAgregarEvento.Hide();
+            }
+        }//Muestra paneles dependiendo de USR
+        private void tbAlumnoNoControl_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(tbAlumnoNoControl.Text, "^[a-zA-Z0-9]+$") || tbAlumnoNoControl.Text.Length < 1)
+            {
+            }
+            else
+            {
+                tbAlumnoNoControl.Text = tbAlumnoNoControl.Text.Remove(tbAlumnoNoControl.Text.Length - 1);
+            }
+        } // Validacion SQL-INJECTION
+        private void tbDocenteNoDocente_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(tbDocenteNoDocente.Text, "^[a-zA-Z0-9]+$") || tbDocenteNoDocente.Text.Length < 1)
+            {
+            }
+            else
+            {
+                tbDocenteNoDocente.Text = tbDocenteNoDocente.Text.Remove(tbDocenteNoDocente.Text.Length - 1);
+            }
+        }// Validacion SQL-INJECTION
+        private void btnAlumnoRealizarConsulta_Click(object sender, EventArgs e)
+        {
+            if (ListoParaAgregar())
+            {
+                InsertarConsulta();
+                LimpiaAlumno();
+                LimpiaDocente();
+                LimpiaOtro();
+            }
+        }// Verificacion Pre-Consulta
+        private void btnOtroRealizarConsulta_Click(object sender, EventArgs e)
+        {
+            if (ListoParaAgregar())
+            {
+                InsertarConsulta();
+                LimpiaAlumno();
+                LimpiaDocente();
+                LimpiaOtro();
+            }
+        }// Verificacion Pre-Consulta
+        private void btnDocenteRealizarConsulta_Click(object sender, EventArgs e)
+        {
+
+            if (ListoParaAgregar())
+            {
+                InsertarConsulta();
+                LimpiaAlumno();
+                LimpiaDocente();
+                LimpiaOtro();
+            }
+        }// Verificacion Pre-Consulta
+        private void chbOtro_CheckedChanged(object sender, EventArgs e)
+        {
+            //Determinar si es dentro o fuera del plantel
+            if (chbOtro.Checked == true)
+            {
+                //Es de Fuera
+                lblTituloIngreso.Text = "Ingrese el nombre del Paciente";
+                tbCodigoCerti.MaxLength = 60;
+                //Textbox solo admite letras
+            }
+            else
+            {
+                //Es de dentro
+                lblTituloIngreso.Text = "Ingrese el numero identificador del Paciente";
+                tbCodigoCerti.MaxLength = 10;
+                //textbox solo admite numeros
+            }
+
+            tbCodigoCerti.Text = "";
+
+        }// Verificacion Pre-Imprimir Tipo: OTRO
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            tbCodigoCerti.Text = "";
+            cbTipoDct.Enabled = false;
+            cbTipoDct.SelectedIndex = -1;
+            btnImprimir.Enabled = false;
+            tbCodigoCerti.Enabled = true;
+            chbOtro.Enabled = true;
+            chbOtro.Checked = false;
+            btnCancelar.Hide();
+        }// Boton regresa todo como antes
+        private void btnImprimir_Click(object sender, EventArgs e)
+        {
+            var application = new Microsoft.Office.Interop.Word.Application();
+            var document = new Microsoft.Office.Interop.Word.Document();
+
+            if (tipo == 1)
+            {
+                string tipodedoc = "CertificadoMedico";
+
+                if (chbOtro.Checked == false)
+                {
+                    LlenarDocPlantel(document, application, tipodedoc);
+                }
+                else
+                {
+                    LlenarDocFueraPlantel(document, application, tipodedoc);
+                }
+            } //tipo certificado
+            else
+            {
+                //tipo receta
+                string tipodedoc = "Receta";
+                if (chbOtro.Checked == false)
+                {
+                    LlenarDocPlantel(document, application, tipodedoc);
+                }
+                else
+                {
+                    LlenarDocFueraPlantel(document, application, tipodedoc);
+
+                }
+            } //tipo receta
+        }//Ejecuta funciones para IMPRIMIR
+        private void cbTipoDct_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            if (cbTipoDct.SelectedIndex == 0)
+            {
+                //Tipo 1 Es Certificado Medico
+                tipo = 1;
+                if (RegistroSeleccionado == true)
+                {
+                    btnImprimir.Enabled = true;
+                }
+            }
+            else
+            {
+                //Tipo 2 es Receta
+                tipo = 2;
+                if (RegistroSeleccionado == true)
+                {
+                    btnImprimir.Enabled = true;
+                }
+            }
+        }//Determinacion de Tipo de Documento
+        private void tbCodigoCerti_TextChanged(object sender, EventArgs e)
+        {
+            if (chbOtro.Checked == false)
+            {
+                if (System.Text.RegularExpressions.Regex.IsMatch(tbCodigoCerti.Text, @"^[0-9M]+$") || tbCodigoCerti.Text.Length < 1)
+                {
+                }
+                else
+                {
+                    tbCodigoCerti.Text = tbCodigoCerti.Text.Remove(tbCodigoCerti.Text.Length - 1);
+                }
+
+                if (tbCodigoCerti.TextLength < 10)
+                {
+                }
+                else
+                {
+
+                    tbCodigoCerti.Text = tbCodigoCerti.Text.Remove(tbCodigoCerti.Text.Length - 1);
+                }
+            }
+            else
+            {
+                if (System.Text.RegularExpressions.Regex.IsMatch(tbCodigoCerti.Text, @"^[a-zA-Z\s]+$") || tbCodigoCerti.Text.Length < 1)
+                {
+                }
+                else
+                {
+                    tbCodigoCerti.Text = tbCodigoCerti.Text.Remove(tbCodigoCerti.Text.Length - 1);
+                }
+                if (tbCodigoCerti.TextLength < 60)
+                {
+                }
+                else
+                {
+                    tbCodigoCerti.Text = tbCodigoCerti.Text.Remove(tbCodigoCerti.Text.Length - 1);//Si se puede encontrar que no detecte lo escrito mejor
+                }
+            }
+        }//Validaciones en Textbox
+        private void btnBuscarCerti_Click(object sender, EventArgs e)
+        {
+            if (tbCodigoCerti.Text != "")
+            {
+
+                if (chbOtro.Checked == false) //buscar por numero de control de alumno y docente ya que es dentro del plantel
+                {
+
+                    input = tbCodigoCerti.Text;
+                    string cadQuery1 = "Select num_control,num_docente,fecha,diagnostico,medicamento,seguimiento,edad,sexo,doctor from consultas where num_control ='" + tbCodigoCerti.Text + "' or num_docente= '" + tbCodigoCerti.Text + "'";
+                    pnlListaCerti.Show();
+
+                    //llenado del Data Grid View
+                    var dataAdapter = new SqlDataAdapter(cadQuery1, conn);
+                    var commandBuilder = new SqlCommandBuilder(dataAdapter);
+                    var ds = new DataSet();
+                    dataAdapter.Fill(ds);
+                    dgvListaCerti.ReadOnly = true;
+                    dgvListaCerti.DataSource = ds.Tables[0];
+
+                    conn.Close();
+                    tbCodigoCerti.Text = input;
+
+                    foreach (DataGridViewRow row in dgvListaCerti.SelectedRows)
+                    {
+                        num_control = row.Cells[0].Value.ToString();
+                        num_docente = row.Cells[1].Value.ToString();
+                        fecha = row.Cells[2].Value.ToString();
+                        diagnostico = row.Cells[3].Value.ToString();
+                        medicamento = row.Cells[4].Value.ToString();
+                        seguimiento = row.Cells[5].Value.ToString();
+                        edad = row.Cells[6].Value.ToString();
+                        sexo = row.Cells[7].Value.ToString();
+                        doctor = row.Cells[8].Value.ToString();
+
+
+                    }
+                    if (num_docente == "")
+                    {
+                        //alumno
+                        num_id = num_control;
+                        banderaalumno = true;
+                        dgvListaCerti.Columns[1].Visible = false;
+                        dgvListaCerti.Columns[0].Visible = true;
+
+                    }
+                    else
+                    {
+                        //docente
+                        num_id = num_docente;
+                        banderaalumno = false;
+                        dgvListaCerti.Columns[0].Visible = false;
+                        dgvListaCerti.Columns[1].Visible = true;
+                    }
+                }
+                else
+                {
+                    //Busqueda por nombre
+                    input = tbCodigoCerti.Text;
+                    string cadQuery1 = "select o.nombre,c.edad,c.sexo,c.fecha,c.diagnostico,c.medicamento,c.seguimiento,c.doctor from consultas as c inner join otro as o on c.num_otro=o.num_otro where nombre like '%" + tbCodigoCerti.Text + "%'";
+                    pnlListaCerti.Show();
+                    //dgvListaCerti.Rows.Clear();
+
+                    var dataAdapter = new SqlDataAdapter(cadQuery1, conn);
+                    var commandBuilder = new SqlCommandBuilder(dataAdapter);
+                    var ds = new DataSet();
+                    dataAdapter.Fill(ds);
+                    dgvListaCerti.ReadOnly = true;
+                    dgvListaCerti.DataSource = ds.Tables[0];
+
+                    conn.Close();
+                    tbCodigoCerti.Text = input;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Porfavor Ingrese un dato en el Buscador", "Error de Busqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }//A Juan le gusta hacer funciones en botones :)
+        private void dgvListaCerti_SelectionChanged(object sender, EventArgs e)
+        {
+            if (chbOtro.Checked == false)
+            {
+                foreach (DataGridViewRow row in dgvListaCerti.SelectedRows)
+                {
+                    num_control = row.Cells[0].Value.ToString();
+                    num_docente = row.Cells[1].Value.ToString();
+                    fecha = row.Cells[2].Value.ToString();
+                    diagnostico = row.Cells[3].Value.ToString();
+                    medicamento = row.Cells[4].Value.ToString();
+                    seguimiento = row.Cells[5].Value.ToString();
+                    edad = row.Cells[6].Value.ToString();
+                    sexo = row.Cells[7].Value.ToString();
+                    doctor = row.Cells[8].Value.ToString();
+
+
+                }
+                if (num_docente == "")
+                {
+                    //alumno
+                    num_id = num_control;
+                    banderaalumno = true;
+                    dgvListaCerti.Columns[1].Visible = false;
+                    dgvListaCerti.Columns[0].Visible = true;
+
+                }
+                else
+                {
+                    //docente
+                    num_id = num_docente;
+                    banderaalumno = false;
+                    dgvListaCerti.Columns[0].Visible = false;
+                    dgvListaCerti.Columns[1].Visible = true;
+                }
+
+
+            }
+            else
+            {
+                foreach (DataGridViewRow row in dgvListaCerti.SelectedRows)
+                {
+                    //otro
+                    nombre = row.Cells[0].Value.ToString();
+                    edad = row.Cells[1].Value.ToString();
+                    sexo = row.Cells[2].Value.ToString();
+                    fecha = row.Cells[3].Value.ToString();
+                    diagnostico = row.Cells[4].Value.ToString();
+                    medicamento = row.Cells[5].Value.ToString();
+                    seguimiento = row.Cells[6].Value.ToString();
+                    doctor = row.Cells[7].Value.ToString();
+
+                }
+
+            }
+        }//Cambio de seleccion de row
+        private void btnListaContinuar_Click(object sender, EventArgs e)
+        {
+            if (num_control == "" && num_docente == "" && nombre == "")
+            {
+                MessageBox.Show("Seleccione un registro no en blanco", "Error de Registro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                pnlListaCerti.Hide();
+                tbCodigoCerti.Enabled = false;
+                chbOtro.Enabled = false;
+                RegistroSeleccionado = true;
+                cbTipoDct.Enabled = true;
+                btnCancelar.Show();
+            }
+        }//Verifica que se haya seleccionado uno no en blanco
+        private void btnOtroMasMed_Click(object sender, EventArgs e)
+        {
+            if (!Med2 && !Med3)
+            {
+                Med2 = true;
+                lblMed2.Visible = true;
+                cbOtroMedicamento2.Visible = true;
+            }
+            else if (Med2 && !Med3)
+            {
+                Med3 = true;
+                lblMed3.Visible = true;
+                cbOtroMedicamento3.Visible = true;
+            }
+            else if (Med2 && Med3)
+            {
+                MessageBox.Show("Tres medicamentos es la cantidad maxima de medicamentos por consulta. En caso de requerir insertar mas medicamentos, ingrese otra consulta como seguimiento", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }//Validacion para mostrar CB de MEDICAMENTOS
+        private void btnDocenteMasMed_Click(object sender, EventArgs e)
+        {
+
+            if (!Med2 && !Med3)
+            {
+                Med2 = true;
+                lblDocMed2.Visible = true;
+                ddbDocenteMedicamento2.Visible = true;
+            }
+            else if (Med2 && !Med3)
+            {
+                Med3 = true;
+                lblDocMed3.Visible = true;
+                ddbDocenteMedicamento3.Visible = true;
+            }
+            else if (Med2 && Med3)
+            {
+                MessageBox.Show("Tres medicamentos es la cantidad maxima de medicamentos por consulta. En caso de requerir insertar mas medicamentos, ingrese otra consulta como seguimiento", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }//Validacion para mostrar CB de MEDICAMENTOS
+        private void btnAlumnoMasMed_Click(object sender, EventArgs e)
+        {
+            if (!Med2 && !Med3)
+            {
+                Med2 = true;
+                lblAlumnoMed2.Visible = true;
+                ddbAlumnoMedicamento2.Visible = true;
+            }
+            else if (Med2 && !Med3)
+            {
+                Med3 = true;
+                lblAlumnoMed3.Visible = true;
+                ddbAlumnoMedicamento3.Visible = true;
+            }
+            else if (Med2 && Med3)
+            {
+                MessageBox.Show("Tres medicamentos es la cantidad maxima de medicamentos por consulta. En caso de requerir insertar mas medicamentos, ingrese otra consulta como seguimiento", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }//Validacion para mostrar CB de MEDICAMENTOS
+        private void tbOtroNombre_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(tbOtroNombre.Text, @"^[a-zA-Z0-9\s]+$") || tbOtroNombre.Text.Length < 1)
+            {
+            }
+            else
+            {
+                tbOtroNombre.Text = tbOtroNombre.Text.Remove(tbOtroNombre.Text.Length - 1);
+            }
+        }// Validacion SQL-INJECTION
+        private void tbOtroRelacion_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(tbOtroRelacion.Text, @"^[a-zA-Z0-9\s]+$") || tbOtroRelacion.Text.Length < 1)
+            {
+            }
+            else
+            {
+                tbOtroRelacion.Text = tbOtroRelacion.Text.Remove(tbOtroRelacion.Text.Length - 1);
+            }
+        }// Validacion SQL-INJECTION
+        private void tbOtroEdad_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(tbOtroEdad.Text, "^[0-9]+$") || tbOtroEdad.Text.Length < 1)
+            {
+            }
+            else
+            {
+                tbOtroEdad.Text = tbOtroEdad.Text.Remove(tbOtroEdad.Text.Length - 1);
+            }
+        }// Validacion SQL-INJECTION
+        private void tbOtroMotivo_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(tbOtroMotivo.Text, @"^[a-zA-Z0-9\s]+$") || tbOtroMotivo.Text.Length < 1)
+            {
+            }
+            else
+            {
+                tbOtroMotivo.Text = tbOtroMotivo.Text.Remove(tbOtroMotivo.Text.Length - 1);
+            }
+        }// Validacion SQL-INJECTION
+        private void tbAlumnoMotivo_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(tbAlumnoMotivo.Text, @"^[a-zA-Z0-9\s]+$") || tbAlumnoMotivo.Text.Length < 1)
+            {
+            }
+            else
+            {
+                tbAlumnoMotivo.Text = tbAlumnoMotivo.Text.Remove(tbAlumnoMotivo.Text.Length - 1);
+            }
+        }// Validacion SQL-INJECTION
+        private void tbDocenteMotivo_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(tbDocenteMotivo.Text, @"^[a-zA-Z0-9\s]+$") || tbDocenteMotivo.Text.Length < 1)
+            {
+            }
+            else
+            {
+                tbDocenteMotivo.Text = tbDocenteMotivo.Text.Remove(tbDocenteMotivo.Text.Length - 1);
+            }
+        }// Validacion SQL-INJECTION
+        private void btnAdminMedDia_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Tenga en cuenta que esta sección es únicamente y solamente para dar de baja medicamentos y diagnósticos en la base de datos.", "Atencion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            pnlAdminMedDia.Show();
+            pnlAltaAlumno.Hide();
+            pnlAdminUsr.Hide();
+            pnlAdminAltaDocente.Hide();
+        }//Muestra PNL de ALTA-BAJA MEDICAMENTO
+        private void btnAdminBorrarDia_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Seguro que desea eliminar el diagnostico " + cbAdminDia.GetItemText(cbAdminDia.SelectedItem) + " de manera permanente?", "Eliminar diagnostico?", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                try
+                {
+                    string queryBorrarDia = "alter table consultas nocheck constraint all; delete diagnostico where nombre = '" + cbAdminDia.GetItemText(cbAdminDia.SelectedItem) + "'; alter table consultas check constraint all;";
+                    SqlCommand comandoBorrarDia = new SqlCommand(queryBorrarDia, conn);
+                    conn.Open();
+                    comandoBorrarDia.ExecuteNonQuery();
+                    conn.Close();
+                    MessageBox.Show("Baja realizada con exito.", "Listo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LlenaCbDiagnostico();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Se presento el siguiente error al realizar la baja en la base de datos: " + ex.Message + ". Asegurese de que el diagnostico no haya sido eliminado anteriormente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+
+
+        }//BTN ELIMINA DIAGNOSTICO seleccionado
+        private void btnAdminBorrarMed_Click(object sender, EventArgs e)
+        {
+
+            DialogResult dialogResult = MessageBox.Show("Seguro que desea eliminar el medicamento " + cbAdminMed.GetItemText(cbAdminMed.SelectedItem) + " de manera permanente?", "Eliminar medicamento?", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                try
+                {
+                    string queryBorrarMed = "alter table consultas nocheck constraint all; delete medicamento where nombre = '" + cbAdminMed.GetItemText(cbAdminMed.SelectedItem) + "'; alter table consultas check constraint all;";
+                    SqlCommand comandoBorrarMed = new SqlCommand(queryBorrarMed, conn);
+                    conn.Open();
+                    comandoBorrarMed.ExecuteNonQuery();
+                    conn.Close();
+                    MessageBox.Show("Baja realizada con exito.", "Listo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LlenaCbMedicamento();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Se presento el siguiente error al realizar la baja en la base de datos: " + ex.Message + ". Asegurese de que el medicamento no haya sido eliminado anteriormente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+
+
+        }//BTN ELIMINA MEDICAMENTO seleccionado
+        private void btnAdminAlumno_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Tenga en cuenta que en esta sección solamente se agregan alumnos del ITH y de evento. Lea con cuidado las alertas a la hora de realizar cambios", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            LlenaCbEvento();
+            pnlAdminMedDia.Hide();
+            pnlAltaAlumno.Show();
+            pnlAdminUsr.Hide();
+            pnlAdminAltaDocente.Hide();
+
+        }//Muestra PNL de ALTA de ALUMNOS
+        private void btnAltaAlumnosITH_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult dialogResult = MessageBox.Show("¡Atención! Tenga en cuenta que solo es posible agregar todos los alumnos inscritos y no es posible agregar en partes. Asegúrese de que el Excel contenga todos los alumnos inscritos en el semestre ya que los alumnos anteriores serán SOBREESCRITOS con los que va a agregar a continuación. ¿Desea continuar?", "Alerta", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    AltaAlumnoIth();
+                    MessageBox.Show("Alumnos agregados exitosamente.", "Operación realizada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió el siguiente problema a la hora de agregar los alumnos: " + ex.Message + ". Asegúrese de que el archivo Excel tenga el formato especificado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }//Exe funcion dar de ALTA ALUMNOS ITH
+        private void btnAdminAltaAlumnoEvento_Click(object sender, EventArgs e)
+        {
+            string eventoSelected = "";
+            try
+            {
+                DialogResult dialogResult = MessageBox.Show("¡Atención! A continuación, se agregarán los alumnos seleccionados a la base de datos y cuando termine el evento seleccionado serán removidos de la base de datos. Se le recomienda cerciorarse de que se haya seleccionado el evento correcto. ¿Desea continuar?", "Alerta", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    #region MEGA-MEXICANADA
+
+
+                    SqlCommand cmdLeeEvento = new SqlCommand("select num_evento from evento where nombre = '" + cbAdminAlumnoEvento.GetItemText(cbAdminAlumnoEvento.SelectedItem) + "';", conn);
+                    conn.Open();
+                    SqlDataReader leerEvento = cmdLeeEvento.ExecuteReader();
+                    if (leerEvento.Read())
+                    {
+                        eventoSelected = leerEvento["num_evento"].ToString();
+                    }
+
+                    conn.Close();
+
+
+                    SqlCommand cmdAddMexicanada = new SqlCommand("ALTER TABLE alumno ADD CONSTRAINT DF_Alumno_Evento DEFAULT " + eventoSelected + " FOR evento;", conn);
+                    conn.Open();
+                    cmdAddMexicanada.ExecuteNonQuery();
+                    conn.Close();
+                    #endregion
+                    AltaAlumnoEvento();
+                    #region FIN MEGA-MEXICANADA
+
+
+                    SqlCommand cmdEliminaMexicanada = new SqlCommand("alter table alumno drop constraint df_Alumno_Evento;", conn);
+                    conn.Open();
+                    cmdEliminaMexicanada.ExecuteNonQuery();
+                    conn.Close();
+                    #endregion
+                    MessageBox.Show("Alumnos de evento agregados exitosamente", "Operación realizada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió el siguiente problema a la hora de agregar los alumnos: " + ex.Message + ". Asegúrese de que el archivo Excel tenga el formato especificado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }//Exe funcion dar de ALTA ALUMNOS EVENTO
+        private void btnAdminUsuarios_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("En esta sección solamente se puede administrar los usuarios utilizados para usar el software RSM", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            LlenaCbEvento();
+            pnlAdminMedDia.Hide();
+            pnlAltaAlumno.Hide();
+            pnlAdminAltaDocente.Hide();
+            pnlAdminUsr.Show();
+            LlenaCbUsuario();
+            LlenaCbUsuario2();
+        }//Muestra panel de ADMINISTRACION
+        private void tbAdminCambioPsw_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(tbAdminCambioPsw.Text, "^[a-zA-Z0-9]+$") || tbAdminCambioPsw.Text.Length < 1)
+            {
+            }
+            else
+            {
+                tbAdminCambioPsw.Text = tbAdminCambioPsw.Text.Remove(tbAdminCambioPsw.Text.Length - 1);
+            }
+            if (tbAdminCambioPsw.Text.Length > 0)
+            {
+                tbAdminCambioConfirmaPsw.Enabled = true;
+            }
+            else if (tbAdminCambioPsw.Text.Length == 0)
+            {
+                tbAdminCambioConfirmaPsw.Text = "";
+                tbAdminCambioConfirmaPsw.Enabled = false;
+            }
+        }//Multiple VALIDACION TB CAMBIO PSW
+        private void tbAdminCambioConfirmaPsw_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(tbAdminCambioConfirmaPsw.Text, "^[a-zA-Z0-9]+$") || tbAdminCambioConfirmaPsw.Text.Length < 1)
+            {
+            }
+            else
+            {
+                tbAdminCambioConfirmaPsw.Text = tbAdminCambioConfirmaPsw.Text.Remove(tbAdminCambioConfirmaPsw.Text.Length - 1);
+            }
+            if (tbAdminCambioConfirmaPsw.Text.Length > 0)
+            {
+                btnAdminCambiaPsw.Show();
+            }
+            else if (tbAdminCambioConfirmaPsw.Text.Length == 0)
+            {
+                btnAdminCambiaPsw.Hide();
+            }
+        }//Multiple VALIDACION TB CAMBIO PSW
+        private void tbAdminConfirmBaja_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(tbAdminConfirmBaja.Text, "^[a-zA-Z]+$") || tbAdminConfirmBaja.Text.Length < 1)
+            {
+                tbAdminConfirmBaja.Text.ToUpper();
+            }
+            else
+            {
+                tbAdminConfirmBaja.Text = tbAdminConfirmBaja.Text.Remove(tbAdminConfirmBaja.Text.Length - 1);
+            }
+            if (tbAdminConfirmBaja.Text == "BAJA")
+            {
+                btnAdminUsrBaja.Show();
+            }
+            else
+            {
+                btnAdminUsrBaja.Hide();
+            }
+        }//Multiple VALIDACION TB BAJA USR
+        private void tbAdminAltaUsr_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(tbAdminAltaUsr.Text, "^[a-zA-Z0-9]+$") || tbAdminAltaUsr.Text.Length < 1)
+            {
+            }
+            else
+            {
+                tbAdminAltaUsr.Text = tbAdminAltaUsr.Text.Remove(tbAdminAltaUsr.Text.Length - 1);
+            }
+            if (tbAdminAltaUsr.Text.Length > 0)
+            {
+                tbAdminAltaPsw.Enabled = true;
+            }
+            else
+            {
+                tbAdminAltaPsw.Enabled = false;
+            }
+        }//Multiple VALIDACION TB ALTA USR
+        private void tbAdminAltaPsw_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(tbAdminAltaPsw.Text, "^[a-zA-Z0-9]+$") || tbAdminAltaPsw.Text.Length < 1)
+            {
+            }
+            else
+            {
+                tbAdminAltaPsw.Text = tbAdminAltaPsw.Text.Remove(tbAdminAltaPsw.Text.Length - 1);
+            }
+            if (tbAdminAltaPsw.Text.Length > 0)
+            {
+                tbAdminAltaConfirmPsw.Enabled = true;
+            }
+            else
+            {
+                tbAdminAltaConfirmPsw.Text = "";
+                tbAdminAltaConfirmPsw.Enabled = false;
+
+            }
+        }//Multiple VALIDACION TB ALTA USR
+        private void tbAdminAltaConfirmPsw_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(tbAdminAltaConfirmPsw.Text, "^[a-zA-Z0-9]+$") || tbAdminAltaConfirmPsw.Text.Length < 1)
+            {
+            }
+            else
+            {
+                tbAdminAltaConfirmPsw.Text = tbAdminAltaConfirmPsw.Text.Remove(tbAdminAltaConfirmPsw.Text.Length - 1);
+            }
+        }// Validacion SQL-INJECTION
+        private void btnConsultoria_Click(object sender, EventArgs e)
+        {
+            Separator.Location = new Point(15, 364);
+            Separator.Show();
+            pnlBusqueda.Hide();
+            if (Usuario == "dse")
+            {
+
+                cbAlumnoBusqueda.Checked = false;
+                cbDocenteBusqueda.Checked = false;
+                cbOtroBusqueda.Checked = false;
+                Separator.Location = new Point(15, 364);
+                Separator.Show();
+                pnlBusqueda.Hide();
+                pnlCertificado.Hide();
+                pnlConsultoria.Show();
+                pnlAdministracion.Hide();
+                pnlServiciosEscolares.Hide();
+                btnConsultoria.Text = "Consultoría General";
+                bunifuDragControl1.TargetControl = pnlServiciosEscolares;
+                pnlEvento.Hide();
+                pnlAgregarEvento.Hide();
+            }
+            else
+            {
+                cbOtroBusqueda.Checked = false;
+                cbAlumnoBusqueda.Checked = false;
+                cbDocenteBusqueda.Checked = false;
+                btnConsultoria.Text = "Consultoría";
+                pnlConsultoria.Show();
+                pnlServiciosEscolares.Hide();
+                pnlCertificado.Hide();
+                bunifuDragControl1.TargetControl = pnlConsultoria;
+                pnlEvento.Hide();
+                pnlAgregarEvento.Hide();
+            }
+        }//Muestra PNL CONSULTAS AVANZADAS
+        private void btnEvento_Click(object sender, EventArgs e)
+        {
+            Separator.Location = new Point(15, 454);
+            Separator.Show();
+            pnlConsulta.Hide();
+            pnlCertificado.Hide();
+            pnlAdministracion.Hide();
+            pnlConsultoria.Hide();
+            pnlServiciosEscolares.Hide();
+            pnlEvento.Show();
+            pnlAgregarEvento.Show();
+        }        //Muestra PNL EVENTO
+        private void txbBusquedaClave_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && !char.IsSeparator(e.KeyChar) && !char.IsDigit(e.KeyChar);
+        }//Validacion SQL-INJECTION
+        private void cbAlumnoBusqueda_OnChange(object sender, EventArgs e)
+        {
+            calCalendario.Hide();
+            cbAlumnoBusqueda.Checked = true;
+            cbDocenteBusqueda.Checked = false;
+            cbOtroBusqueda.Checked = false;
+            cbFecha.Checked = false;
+            cbNoControl.Checked = false;
+            cbSeguir.Checked = false;
+            cbNoControl.Show();
+            pnlBusqueda.Show();
+            lblControl.Text = "No Control";
+            lblControl.Hide();
+            lblNoControl.Text = "No Control";
+            lblNoControl.Show();
+            lblAlumno.Show();
+            tabResultados.Hide();
+            txbBusquedaClave.Clear();
+            txbBusquedaClave.Hide();
+        }//Cambios en PNL EVENTO al cambiar ALUMNO
+        private void cbDocenteBusqueda_OnChange(object sender, EventArgs e)
+        {
+            calCalendario.Hide();
+            cbDocenteBusqueda.Checked = true;
+            cbAlumnoBusqueda.Checked = false;
+            cbOtroBusqueda.Checked = false;
+            cbFecha.Checked = false;
+            cbNoControl.Checked = false;
+            cbSeguir.Checked = false;
+            cbNoControl.Show();
+            lblControl.Text = "No Docente";
+            lblControl.Hide();
+            lblNoControl.Text = "No Docente";
+            lblAlumno.Show();
+            lblNoControl.Show();
+            pnlBusqueda.Show();
+            tabResultados.Hide();
+            txbBusquedaClave.Clear();
+            txbBusquedaClave.Hide();
+
+        }//Cambios en PNL EVENTO al cambiar DOCENTE
+        private void cbOtroBusqueda_OnChange(object sender, EventArgs e)
+        {
+            calCalendario.Hide();
+            cbOtroBusqueda.Checked = true;
+            cbAlumnoBusqueda.Checked = false;
+            cbDocenteBusqueda.Checked = false;
+            cbFecha.Checked = false;
+            cbNoControl.Checked = false;
+            cbSeguir.Checked = false;
+            //cbNoControl.Hide();
+            lblNoControl.Show();
+            lblNoControl.Text = "Nombre";
+            lblControl.Hide();
+            lblControl.Text = "Nombre";
+            pnlBusqueda.Show();
+            tabResultados.Hide();
+            txbBusquedaClave.Clear();
+            txbBusquedaClave.Hide();
+
+        }//Cambios en PNL EVENTO al cambiar OTRO
+        private void cbFecha_OnChange(object sender, EventArgs e)
+        {
+            calCalendario.Show();
+            calCalendario.SelectionStart = DateTime.Now;
+            calCalendario.BackColor = Color.DarkGray;
+            cbFecha.Checked = true;
+            cbNoControl.Checked = false;
+            lblControl.Show();
+            lblControl.Location = new Point(143, 83);
+            lblControl.Text = "Seleccione fecha de consulta";
+            tabResultados.Hide();
+            txbBusquedaClave.Hide();
+        }//Cambios en PNL EVENTO al cambiar FECHA
+        private void cbNoControl_OnChange(object sender, EventArgs e)
+        {
+            calCalendario.Hide();
+            cbFecha.Checked = false;
+            cbNoControl.Checked = true;
+            lblControl.Show();
+            lblControl.Location = new Point(117, 137);
+            if (cbAlumnoBusqueda.Checked)
+            {
+                lblControl.Text = "No Control";
+            }
+            else if (cbDocenteBusqueda.Checked)
+            {
+                lblControl.Text = "No Docente";
+            }
+            else if (cbOtroBusqueda.Checked)
+            {
+                lblControl.Text = "Nombre";
+            }
+            tabResultados.Hide();
+            txbBusquedaClave.Show();
+        }//Cambios en PNL EVENTO al cambiar el NO.CONTROL
+        private void cbSeguir_OnChange(object sender, EventArgs e)
+        {
+            tabResultados.Hide();
+            if (cbFecha.Checked)
+            {
+                calCalendario.Show();
+            }
+            if (cbNoControl.Checked)
+            {
+                lblControl.Show();
+                txbBusquedaClave.Show();
+            }
+
+        }//Cambios en PNL EVENTO
+        private void cbSEAlumno_OnChange(object sender, EventArgs e)
+        {
+            ShowControlesSE();
+            comboCarrera.Items.Clear();
+            comboCarrera.Items.Insert(0, "Seleccione");
+            LlenarComboBoxServEsc(comboCarrera, "select distinct carrera from alumno", "carrera");//Llena ComboBox Carrera
+            cbFalse();
+            cbSEAlumno.Checked = true;
+            cbSEDocente.Checked = false;
+            cbSEOtro.Checked = false;
+            cbSELapso.Location = new Point(35, 77);
+            dtpInicio.Location = new Point(43, 223);
+            dtpFinal.Location = new Point(43, 270);
+            lblSECarreraArea.Text = "Carrera";
+            lblSECarrArMini.Text = "Carrera";
+            lblSELapso.Location = new Point(66, 77);
+            lblSEFechaInicio.Location = new Point(81, 207);
+            lblSEFechaFinal.Location = new Point(81, 254);
+
+
+            pnlSE.Show();
+        }//Movimientos PNL Servicios Escolares por ALUMNO
+        private void cbSEDocente_OnChange(object sender, EventArgs e)
+        {
+            ShowControlesSE();
+            comboCarrera.Items.Clear();
+            comboCarrera.Items.Insert(0, "Seleccione");
+            LlenarComboBoxServEsc(comboCarrera, "select distinct departamento from docente", "departamento");//Llena ComboBox Carrera
+            cbFalse();
+            cbEvento.Hide();
+            cbSEAlumno.Checked = false;
+            cbSEDocente.Checked = true;
+            cbSEOtro.Checked = false;
+            cbSEGeneracion.Hide();
+            cbSELapso.Location = cbSEGeneracion.Location;
+            comboGeneracion.Hide();
+            comboEvento.Hide();
+            dtpInicio.Location = new Point(43, 170);
+            dtpFinal.Location = new Point(43, 217);
+            lblSEEvento.Hide();
+            lblSEEventoMini.Hide();
+            lblSECarreraArea.Text = "Área";
+            lblSECarrArMini.Text = "Área";
+            lblSEGene.Hide();
+            lblSEGeneMini.Hide();
+            lblSELapso.Location = lblSEGene.Location;
+            lblSEFechaInicio.Location = new Point(81, 154);
+            lblSEFechaFinal.Location = new Point(81, 201);
+            pnlSE.Show();
+        }//Movimientos PNL Servicios Escolares por DOCENTE
+        private void cbSEOtro_OnChange(object sender, EventArgs e)
+        {
+            ShowControlesSE();
+            cbFalse();
+            cbSEAlumno.Checked = false;
+            cbSEDocente.Checked = false;
+            cbSEOtro.Checked = true;
+            cbSECarrera.Hide();
+            cbSEGeneracion.Hide();
+            cbSELapso.Show();
+            comboCarrera.Hide();
+            comboGeneracion.Hide();
+            dtpInicio.Location = new Point(43, 126);
+            dtpInicio.Enabled = false;
+            dtpFinal.Location = new Point(43, 173);
+            dtpFinal.Enabled = false;
+            lblSECarreraArea.Hide();
+            lblSEGene.Hide();
+            cbSELapso.Location = new Point(60, 23);
+            lblSELapso.Location = new Point(81, 23);
+            lblSECarrArMini.Hide();
+            lblSEGeneMini.Hide();
+            lblSEFechaInicio.Location = new Point(81, 110);
+            lblSEFechaFinal.Location = new Point(81, 157);
+            pnlSE.Show();
+        }//Movimientos PNL Servicios Escolares por OTRO
+        private void cbEvento_OnChange(object sender, EventArgs e)
+        {
+            if (cbEvento.Checked)
+            {
+                if (cbSEDocente.Checked)
+                {
+                    MessageBox.Show(this, "Para buscar a un docente de evento, seleccione el apartado de 'Otro'", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    cbEvento.Checked = false;
+                }
+                else
+                {
+                    comboEvento.Enabled = true;
+                }
+            }
+            else
+            {
+                comboEvento.Enabled = false;
+            }
+        }//Movimientos PNL Servicios Escolares por ALUMNO
+        private void btnAdminUsrBaja_Click(object sender, EventArgs e)
+        {
+            if (tbAdminConfirmBaja.Text == "BAJA")
+            {
+                DialogResult dialogResult = MessageBox.Show("Seguro que desea cambiar la contraseña del usuario " + cbAdminCambioPswUsr.GetItemText(cbAdminCambioPswUsr.SelectedItem) + "?", "Cambiar contraseña?", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    try
+                    {
+                        string queryBorraUsr = "delete usuario where usuario = '" + cbAdminBajaUsr.GetItemText(cbAdminBajaUsr.SelectedItem) + "';";
+                        SqlCommand cmdBorraUsr = new SqlCommand(queryBorraUsr, conn);
+                        conn.Open();
+                        cmdBorraUsr.ExecuteNonQuery();
+                        conn.Close();
+                        MessageBox.Show("Cambio realizado con exito.", "Listo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LlenaCbUsuario();
+                        LlenaCbUsuario2();
+                        tbAdminConfirmBaja.Text = "";
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Se presento el siguiente error al realizar el cambio en la base de datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                }
+                else
+                {
+                    tbAdminConfirmBaja.Text = "";
+                }
+
+            }
+        } //BORRA USUARIO DE LA BD
+        private void btnAdminCambiaPsw_Click(object sender, EventArgs e)
+        {
+            if (tbAdminCambioPsw.Text == tbAdminCambioConfirmaPsw.Text)
+            {
+                DialogResult dialogResult = MessageBox.Show("Seguro que desea cambiar la contraseña del usuario " + cbAdminCambioPswUsr.GetItemText(cbAdminCambioPswUsr.SelectedItem) + "?", "Cambiar contraseña?", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    try
+                    {
+                        string queryCambiaPsw = "update usuario set contraseña = '" + tbAdminCambioPsw.Text + "' where usuario = '" + cbAdminCambioPswUsr.GetItemText(cbAdminCambioPswUsr.SelectedItem) + "';";
+                        SqlCommand cmdCambiaPsw = new SqlCommand(queryCambiaPsw, conn);
+                        conn.Open();
+                        cmdCambiaPsw.ExecuteNonQuery();
+                        conn.Close();
+                        MessageBox.Show("Cambio realizado con exito.", "Listo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LlenaCbUsuario();
+                        LlenaCbUsuario2();
+                        tbAdminCambioConfirmaPsw.Text = "";
+                        tbAdminCambioPsw.Text = "";
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Se presento el siguiente error al realizar el cambio en la base de datos: " + ex.Message + ". Asegurese de que los datos sean correctos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    tbAdminCambioConfirmaPsw.Text = "";
+                    tbAdminCambioPsw.Text = "";
+                }
+            }
+            else
+            {
+                MessageBox.Show("Contraseñas no coinciden", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        } //CAMBIA PSW DEL USUARIO
+        private void btnAdminAltaUsr_Click(object sender, EventArgs e)
+        {
+            if (tbAdminAltaPsw.Text == tbAdminAltaConfirmPsw.Text)
+            {
+                DialogResult dialogResult = MessageBox.Show("Seguro que desea agregar a la base de datos el usuario " + tbAdminAltaUsr.Text + "?", "Agregar usuario?", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    try
+                    {
+                        string queryAltaUsr = "insert into usuario (usuario, contraseña, nivel) values ('" + tbAdminAltaUsr.Text + "', '" + tbAdminAltaPsw.Text + "', 0);";
+                        SqlCommand cmdAltaUsr = new SqlCommand(queryAltaUsr, conn);
+                        conn.Open();
+                        cmdAltaUsr.ExecuteNonQuery();
+                        conn.Close();
+                        MessageBox.Show("Cambio realizado con exito.", "Listo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LlenaCbUsuario();
+                        LlenaCbUsuario2();
+                        tbAdminAltaConfirmPsw.Text = "";
+                        tbAdminAltaPsw.Text = "";
+                        tbAdminAltaUsr.Text = "";
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Se presento el siguiente error al realizar el cambio en la base de datos: " + ex.Message + ". Asegurese de que los datos sean correctos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    tbAdminAltaConfirmPsw.Text = "";
+                    tbAdminAltaPsw.Text = "";
+                    tbAdminAltaUsr.Text = "";
+                }
+            }
+            else
+            {
+                MessageBox.Show("Contraseñas no coinciden", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        } //AGREGA USUARIO A LA BD
+        private void cbSECarrera_OnChange(object sender, EventArgs e)
+        {
+            if (cbSECarrera.Checked)
+            {
+                comboCarrera.Enabled = true;
+            }
+            else
+            {
+                comboCarrera.Enabled = false;
+
+            }
+        }//Cambio de Bandera
+        private void cbSEGeneracion_OnChange(object sender, EventArgs e)
+        {
+            if (cbSEGeneracion.Checked)
+            {
+                comboGeneracion.Enabled = true;
+            }
+            else
+            {
+                comboGeneracion.Enabled = false;
+
+            }
+        }//Cambio de Bandera
+        private void cbSELapso_OnChange(object sender, EventArgs e)
+        {
+            if (cbSELapso.Checked)
+            {
+                dtpInicio.Enabled = true;
+                dtpFinal.Enabled = true;
+            }
+            else
+            {
+                dtpInicio.Enabled = false;
+                dtpFinal.Enabled = false;
+            }
+        }//Cambio de Banderas
+        private void botSEBuscar_Click(object sender, EventArgs e)
+        {
+            if (!cbSECarrera.Checked && !cbSELapso.Checked && !cbSEGeneracion.Checked && !cbEvento.Checked && !cbSEOtro.Checked)
+            {
+
+                MessageBox.Show(this, "Seleccione un parámetro de búsqueda", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+            else
+            {
+                BuscaConsulta(1);
+            }
+        }//Validacion de busqueda vacia
+        private void botBack_Click(object sender, EventArgs e)
+        {
+
+            if (!tabSEResultados.Visible)
+            {
+                MessageBox.Show(this, "Debe realizar una búsqueda primero", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                tabSEResultados.Hide();
+                btnExportar.Hide();
+                ShowControlesSE();
+                if (cbSEDocente.Checked)
+                {
+                    ShowControlesSE();
+                    cbSEGeneracion.Hide();
+                    cbEvento.Hide();
+                    comboEvento.Hide();
+                    comboGeneracion.Hide();
+                    lblSEEvento.Hide();
+                    lblSEEventoMini.Hide();
+                    lblSEGene.Hide();
+                    lblSEGeneMini.Hide();
+                }
+                else if (cbSEOtro.Checked)
+                {
+                    cbSECarrera.Hide();
+                    cbSEGeneracion.Hide();
+                    cbSELapso.Hide();
+                    comboCarrera.Hide();
+                    comboGeneracion.Hide();
+                    lblSECarreraArea.Hide();
+                    lblSEGene.Hide();
+                    lblSECarrArMini.Hide();
+                    lblSEGeneMini.Hide();
+                }
+            }
+        }//Regresa usuario al estado anterior
+        private void txbBusquedaClave_OnTextChange(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(txbBusquedaClave.Text, "^[a-zA-Z]+$") || txbBusquedaClave.Text.Length < 1)
+            {
+            }
+            else if (txbBusquedaClave.Text == " ")
+            {
+                txbBusquedaClave.Text = txbBusquedaClave.Text.Remove(txbBusquedaClave.Text.Length - 1);
+            }
+        }//Validacion SQL-INJECTION
+        private void botBusquedaAlumno_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if ((!cbOtroBusqueda.Checked && !cbAlumnoBusqueda.Checked && !cbDocenteBusqueda.Checked) || (!cbNoControl.Checked && !cbFecha.Checked))
+                {
+                    MessageBox.Show(this, "Ingrese los datos correctamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    lblControl.Hide();
+                    txbBusquedaClave.Hide();
+                    calCalendario.Hide();
+                    BuscaConsulta(2);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrio el siguiente problema: " + ex.Message + "Contecte al administrador." + "\t" + ex.GetType());
+                conn.Close();
+            }
+        }//Boton de búsqueda 
+        #endregion
+
+        #region Controles Simples
+        private void btnAtras_Click(object sender, EventArgs e) { pnlListaCerti.Hide(); }
+        private void ddbDocenteMedicamento2_Click(object sender, EventArgs e) { LlenaCbMedicamento2(); }
+        private void btnDocenteBuscar_Click(object sender, EventArgs e) { BuscaPaciente(); }
+        private void btnAlumnoBuscar_Click(object sender, EventArgs e) { BuscaPaciente(); }
+        private void btnOtro_OtroDiagnostico_Click(object sender, EventArgs e) { AbreDiagnostico(); }
+        private void btnDocente_OtroDiagnostico_Click(object sender, EventArgs e) { AbreDiagnostico(); }
+        private void btnAlumno_OtroDiagnostico_Click(object sender, EventArgs e) { AbreDiagnostico(); }
+        private void btnOtro_OtroMedicamento_Click(object sender, EventArgs e) { AbreMedicamento(); }
+        private void btnDocente_OtroMedicamento_Click(object sender, EventArgs e) { AbreMedicamento(); }
+        private void btnAlumno_OtroMedicamento_Click(object sender, EventArgs e) { AbreMedicamento(); }
+        private void cbOtroDiagnostico_Click(object sender, EventArgs e) { LlenaCbDiagnostico(); }
+        private void cbOtroMedicamento_Click(object sender, EventArgs e) { LlenaCbMedicamento(); }
+        private void ddbAlumnoDiagnostico_Click(object sender, EventArgs e) { LlenaCbDiagnostico(); }
+        private void ddbAlumnoMedicamento_Click(object sender, EventArgs e) { LlenaCbMedicamento(); }
+        private void ddbDocenteDiagnostico_Click(object sender, EventArgs e) { LlenaCbDiagnostico(); }
+        private void ddbDocenteMedicamento_Click(object sender, EventArgs e) { LlenaCbMedicamento(); }
+        private void ddbAlumnoMedicamento2_Click(object sender, EventArgs e) { LlenaCbMedicamento2(); }
+        private void ddbAlumnoMedicamento3_Click(object sender, EventArgs e) { LlenaCbMedicamento3(); }
+        private void ddbDocenteMedicamento3_Click(object sender, EventArgs e) { LlenaCbMedicamento3(); }
+        private void cbOtroMedicamento2_Click(object sender, EventArgs e) { LlenaCbMedicamento2(); }
+        private void cbOtroMedicamento3_Click(object sender, EventArgs e) { LlenaCbMedicamento3(); }
+        private void comboBox1_Click(object sender, EventArgs e) { LlenaCbMedicamento(); }
+        private void btnAdminExeAltaDocente_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Seguro que desea cambiar los docentes en la base de datos? (Debe tener el archivo excel listo) ", "Agregar docente", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            if (dialogResult == DialogResult.Yes)
+            {
+                try
+                {
+                    AltaDocente();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Se presento el siguiente error al realizar el cambio en la base de datos: " + ex.Message + ". Asegurese de que el formato del archivo excel sea el especificado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void btnAdminAltaDocente_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAdminAltaDocente_Click_1(object sender, EventArgs e)
+        {
+            pnlAdminMedDia.Hide();
+            pnlAltaAlumno.Hide();
+            pnlAdminUsr.Hide();
+            pnlAdminAltaDocente.Show();
+        }
+
+        private void cbAdminDia_Click(object sender, EventArgs e) { LlenaCbDiagnostico(); }
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e) { btnAdminAltaAlumnoEvento.Enabled = true; }
+        private void cbAdminAlumnoEvento_Click(object sender, EventArgs e) { LlenaCbEvento(); }
+        private void cbAdminCambioPswUsr_Click(object sender, EventArgs e) { LlenaCbUsuario(); }
+        private void cbAdminBajaUsr_Click(object sender, EventArgs e) { LlenaCbUsuario2(); }
+        private void tbFechaIniEvento_MouseClick(object sender, MouseEventArgs e) { calEventoIni.Show(); }
+        private void calEventoIni_DateChanged(object sender, DateRangeEventArgs e) { tbFechaIniEvento.Text = calEventoIni.SelectionStart.ToString(); }
+        private void calEventoIni_Leave(object sender, EventArgs e) { calEventoIni.Hide(); }
+        private void tbFechaFinEvento_MouseClick(object sender, MouseEventArgs e) { calEventoFin.Show(); }
+        private void calEventoFin_Leave(object sender, EventArgs e) { calEventoFin.Hide(); }
+        private void calEventoFin_DateChanged(object sender, DateRangeEventArgs e) { tbFechaFinEvento.Text = calEventoFin.SelectionStart.ToString(); }
+        private void pnlAgregarEvento_Click(object sender, EventArgs e) { calEventoFin.Hide(); calEventoIni.Hide(); }
         #endregion
     }
 }
