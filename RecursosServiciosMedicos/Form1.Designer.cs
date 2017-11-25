@@ -92,8 +92,6 @@
             this.tbUsuario.TabIndex = 1;
             this.tbUsuario.text = "Usuario";
             this.tbUsuario.OnTextChange += new System.EventHandler(this.tbUsuario_OnTextChange);
-            this.tbUsuario.KeyDown += new System.EventHandler(this.tbUsuario_KeyDown);
-            this.tbUsuario.KeyPress += new System.EventHandler(this.tbUsuario_KeyPress);
             this.tbUsuario.Enter += new System.EventHandler(this.tbUsuario_Enter);
             this.tbUsuario.Leave += new System.EventHandler(this.tbUsuario_Leave);
             // 
@@ -110,7 +108,6 @@
             this.tbContraseña.TabIndex = 2;
             this.tbContraseña.text = "Contraseña";
             this.tbContraseña.OnTextChange += new System.EventHandler(this.tbContraseña_OnTextChange);
-            this.tbContraseña.KeyPress += new System.EventHandler(this.tbContraseña_KeyPress);
             this.tbContraseña.Enter += new System.EventHandler(this.tbContraseña_Enter);
             this.tbContraseña.Leave += new System.EventHandler(this.tbContraseña_Leave);
             // 
@@ -186,8 +183,7 @@
             this.Controls.Add(this.bunifuFlatButton1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form1_KeyPress);
             this.ResumeLayout(false);
             this.PerformLayout();
