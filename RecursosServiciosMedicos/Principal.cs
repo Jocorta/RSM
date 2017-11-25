@@ -59,6 +59,7 @@ namespace RecursosServiciosMedicos
             LlenaCbUsuario2();
             cbAlumno.Checked = true;
             pnlAlumno.Show();
+            Checar();
 
             if (Usuario == "dse")
             {
@@ -110,6 +111,8 @@ namespace RecursosServiciosMedicos
                 pnlConsulta.Hide();
                 pnlServiciosEscolares.Show();
                 btnExportar.Hide();
+                pnlEvento.Hide();
+                pnlAgregarEvento.Hide();
 
             }
             else
@@ -125,6 +128,8 @@ namespace RecursosServiciosMedicos
                 pnlAdministracion.Hide();
                 pnlServiciosEscolares.Hide();
                 btnExportar.Hide();
+                pnlEvento.Hide();
+                pnlAgregarEvento.Hide();
             }
 
         }
@@ -208,6 +213,8 @@ namespace RecursosServiciosMedicos
                 pnlConsultoria.Hide();
                 pnlAdministracion.Show();
                 pnlServiciosEscolares.Hide();
+                pnlEvento.Hide();
+                pnlAgregarEvento.Hide();
             }
             else
             {
@@ -226,6 +233,8 @@ namespace RecursosServiciosMedicos
                 pnlListaCerti.Hide();
                 pnlConsultoria.Hide();
                 pnlServiciosEscolares.Hide();
+                pnlEvento.Hide();
+                pnlAgregarEvento.Hide();
             }      
         }
 
@@ -984,6 +993,8 @@ namespace RecursosServiciosMedicos
                 pnlServiciosEscolares.Hide();
                 btnConsultoria.Text = "Consultoría General";
                 bunifuDragControl1.TargetControl = pnlServiciosEscolares;
+                pnlEvento.Hide();
+                pnlAgregarEvento.Hide();
             }
             else
             {
@@ -995,6 +1006,8 @@ namespace RecursosServiciosMedicos
                 pnlServiciosEscolares.Hide();
                 pnlCertificado.Hide();
                 bunifuDragControl1.TargetControl = pnlConsultoria;
+                pnlEvento.Hide();
+                pnlAgregarEvento.Hide();
             }
         }
         private void btnEvento_Click(object sender, EventArgs e)
@@ -1006,6 +1019,8 @@ namespace RecursosServiciosMedicos
             pnlAdministracion.Hide();
             pnlConsultoria.Hide();
             pnlServiciosEscolares.Hide();
+            pnlEvento.Show();
+            pnlAgregarEvento.Show();
         }       
         private void btnDocenteBuscar_Click(object sender, EventArgs e){BuscaPaciente();}
         private void btnAlumnoBuscar_Click(object sender, EventArgs e){BuscaPaciente();}
@@ -2341,6 +2356,25 @@ namespace RecursosServiciosMedicos
             }
         }
 
+        private void btnAgregarEvento_Click(object sender, EventArgs e)
+        {
+            string fechi = calEventoIni.SelectionStart.ToString("yyyy-MM-dd h:mm tt");
+            string fechf = calEventoFin.SelectionStart.ToString("yyyy-MM-dd h:mm tt");
+            try
+            {
+                conn.Open();
+
+                SqlCommand comandoEvento = new SqlCommand("insert into evento (nombre, fecha_inicio, fecha_fin) values( '" + tbEvento.Text + "' ,  '" + fechi + "', '" + fechf + "');", conn);
+                comandoEvento.ExecuteNonQuery();
+                MessageBox.Show("El evento ha sido creado exitosamente.", "Creado", MessageBoxButtons.OK);
+                conn.Close();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Favor de ingresar todos los campos", "Alerta", MessageBoxButtons.OK);
+            }
+        }
+
         //Metodo Llenar Documento de Alguien del Plantel
         private void LlenarDocPlantel(Microsoft.Office.Interop.Word.Document doc, Microsoft.Office.Interop.Word.Application app, string tipodoc)
         {
@@ -2419,6 +2453,49 @@ namespace RecursosServiciosMedicos
 
             Imprimir(doc, app, finalpath);
         }
+
+        private void tbFechaIniEvento_MouseClick(object sender, MouseEventArgs e)
+        {
+            calEventoIni.Show();
+        }
+
+        private void calEventoIni_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            tbFechaIniEvento.Text = calEventoIni.SelectionStart.ToString();
+        }
+
+        private void calEventoIni_Leave(object sender, EventArgs e)
+        {
+            calEventoIni.Hide();
+        }
+
+        private void tbFechaFinEvento_MouseClick(object sender, MouseEventArgs e)
+        {
+            calEventoFin.Show();
+        }
+
+        private void calEventoFin_Leave(object sender, EventArgs e)
+        {
+            calEventoFin.Hide();
+        }
+
+        private void calEventoFin_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            tbFechaFinEvento.Text = calEventoFin.SelectionStart.ToString();
+        }
+
+        private void pnlAgregarEvento_Click(object sender, EventArgs e)
+        {
+            calEventoFin.Hide();
+            calEventoIni.Hide();
+        }
+
+        private void pnlEvento_Click(object sender, EventArgs e)
+        {
+            calEventoFin.Hide();
+            calEventoIni.Hide();
+        }
+
         //Metodo Llenar Documento de ALguien Fuera del Plantel
         private void LlenarDocFueraPlantel(Microsoft.Office.Interop.Word.Document doc, Microsoft.Office.Interop.Word.Application app, string tipodoc)
         {
@@ -4309,6 +4386,16 @@ namespace RecursosServiciosMedicos
             CR.Select();
             xlWorkSheet.PasteSpecial(CR, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, true);
         }
+
+        public void Checar()
+        {
+            conn.Open();
+            SqlCommand comandoEvento = new SqlCommand("delete alumno where evento in (select num_evento from evento where fecha_fin < ' " + DateTime.Now.ToString("yyyy-MM-dd h:mm tt") + "');", conn);
+            comandoEvento.ExecuteNonQuery();
+            MessageBox.Show("Se ha actualizado la base de datos", "Actualizacion", MessageBoxButtons.OK);
+            conn.Close();
+        }
+
 
         #endregion
     }

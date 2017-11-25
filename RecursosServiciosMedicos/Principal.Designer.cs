@@ -253,6 +253,18 @@
             this.btnAdminUsuarios = new Bunifu.Framework.UI.BunifuThinButton2();
             this.bunifuSeparator1 = new Bunifu.Framework.UI.BunifuSeparator();
             this.btnAdminMedDia = new Bunifu.Framework.UI.BunifuThinButton2();
+            this.pnlEvento = new System.Windows.Forms.Panel();
+            this.bunifuCustomLabel58 = new Bunifu.Framework.UI.BunifuCustomLabel();
+            this.pnlAgregarEvento = new System.Windows.Forms.Panel();
+            this.calEventoFin = new System.Windows.Forms.MonthCalendar();
+            this.btnAgregarEvento = new Bunifu.Framework.UI.BunifuThinButton2();
+            this.calEventoIni = new System.Windows.Forms.MonthCalendar();
+            this.tbEvento = new WindowsFormsControlLibrary1.BunifuCustomTextbox();
+            this.bunifuCustomLabel59 = new Bunifu.Framework.UI.BunifuCustomLabel();
+            this.tbFechaFinEvento = new WindowsFormsControlLibrary1.BunifuCustomTextbox();
+            this.bunifuCustomLabel60 = new Bunifu.Framework.UI.BunifuCustomLabel();
+            this.tbFechaIniEvento = new WindowsFormsControlLibrary1.BunifuCustomTextbox();
+            this.bunifuCustomLabel61 = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.pnlConsulta.SuspendLayout();
             this.pnlAlumno.SuspendLayout();
             this.pnlOtro.SuspendLayout();
@@ -271,6 +283,8 @@
             this.pnlAdminUsr.SuspendLayout();
             this.pnlAltaAlumno.SuspendLayout();
             this.pnlAdminMedDia.SuspendLayout();
+            this.pnlEvento.SuspendLayout();
+            this.pnlAgregarEvento.SuspendLayout();
             this.SuspendLayout();
             // 
             // bunifuElipse1
@@ -3830,12 +3844,182 @@
             this.btnAdminMedDia.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnAdminMedDia.Click += new System.EventHandler(this.btnAdminMedDia_Click);
             // 
+            // pnlEvento
+            // 
+            this.pnlEvento.BackColor = System.Drawing.Color.Transparent;
+            this.pnlEvento.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlEvento.Controls.Add(this.bunifuCustomLabel58);
+            this.pnlEvento.Controls.Add(this.pnlAgregarEvento);
+            this.pnlEvento.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlEvento.Location = new System.Drawing.Point(220, 0);
+            this.pnlEvento.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlEvento.Name = "pnlEvento";
+            this.pnlEvento.Size = new System.Drawing.Size(761, 577);
+            this.pnlEvento.TabIndex = 45;
+            this.ttSeguimiento.SetToolTip(this.pnlEvento, "lblSeguimiento");
+            this.pnlEvento.Visible = false;
+            this.pnlEvento.Click += new System.EventHandler(this.pnlEvento_Click);
+            // 
+            // bunifuCustomLabel58
+            // 
+            this.bunifuCustomLabel58.AutoSize = true;
+            this.bunifuCustomLabel58.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bunifuCustomLabel58.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.bunifuCustomLabel58.Location = new System.Drawing.Point(24, 10);
+            this.bunifuCustomLabel58.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.bunifuCustomLabel58.Name = "bunifuCustomLabel58";
+            this.bunifuCustomLabel58.Size = new System.Drawing.Size(152, 54);
+            this.bunifuCustomLabel58.TabIndex = 7;
+            this.bunifuCustomLabel58.Text = "Evento";
+            // 
+            // pnlAgregarEvento
+            // 
+            this.pnlAgregarEvento.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlAgregarEvento.Controls.Add(this.calEventoFin);
+            this.pnlAgregarEvento.Controls.Add(this.btnAgregarEvento);
+            this.pnlAgregarEvento.Controls.Add(this.calEventoIni);
+            this.pnlAgregarEvento.Controls.Add(this.tbEvento);
+            this.pnlAgregarEvento.Controls.Add(this.bunifuCustomLabel59);
+            this.pnlAgregarEvento.Controls.Add(this.tbFechaFinEvento);
+            this.pnlAgregarEvento.Controls.Add(this.bunifuCustomLabel60);
+            this.pnlAgregarEvento.Controls.Add(this.tbFechaIniEvento);
+            this.pnlAgregarEvento.Controls.Add(this.bunifuCustomLabel61);
+            this.pnlAgregarEvento.Location = new System.Drawing.Point(12, 130);
+            this.pnlAgregarEvento.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlAgregarEvento.Name = "pnlAgregarEvento";
+            this.pnlAgregarEvento.Size = new System.Drawing.Size(731, 412);
+            this.pnlAgregarEvento.TabIndex = 0;
+            this.pnlAgregarEvento.Visible = false;
+            this.pnlAgregarEvento.Click += new System.EventHandler(this.pnlAgregarEvento_Click);
+            // 
+            // calEventoFin
+            // 
+            this.calEventoFin.Location = new System.Drawing.Point(420, 151);
+            this.calEventoFin.Margin = new System.Windows.Forms.Padding(12, 11, 12, 11);
+            this.calEventoFin.Name = "calEventoFin";
+            this.calEventoFin.TabIndex = 38;
+            this.calEventoFin.Visible = false;
+            this.calEventoFin.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.calEventoFin_DateChanged);
+            this.calEventoFin.Leave += new System.EventHandler(this.calEventoFin_Leave);
+            // 
+            // btnAgregarEvento
+            // 
+            this.btnAgregarEvento.ActiveBorderThickness = 1;
+            this.btnAgregarEvento.ActiveCornerRadius = 20;
+            this.btnAgregarEvento.ActiveFillColor = System.Drawing.Color.DarkCyan;
+            this.btnAgregarEvento.ActiveForecolor = System.Drawing.Color.Transparent;
+            this.btnAgregarEvento.ActiveLineColor = System.Drawing.Color.DarkCyan;
+            this.btnAgregarEvento.AllowDrop = true;
+            this.btnAgregarEvento.BackColor = System.Drawing.Color.Transparent;
+            this.btnAgregarEvento.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAgregarEvento.BackgroundImage")));
+            this.btnAgregarEvento.ButtonText = "Agregar";
+            this.btnAgregarEvento.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAgregarEvento.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgregarEvento.ForeColor = System.Drawing.Color.DarkCyan;
+            this.btnAgregarEvento.IdleBorderThickness = 1;
+            this.btnAgregarEvento.IdleCornerRadius = 20;
+            this.btnAgregarEvento.IdleFillColor = System.Drawing.Color.LightCyan;
+            this.btnAgregarEvento.IdleForecolor = System.Drawing.Color.DarkCyan;
+            this.btnAgregarEvento.IdleLineColor = System.Drawing.Color.DarkCyan;
+            this.btnAgregarEvento.Location = new System.Drawing.Point(225, 284);
+            this.btnAgregarEvento.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
+            this.btnAgregarEvento.Name = "btnAgregarEvento";
+            this.btnAgregarEvento.Size = new System.Drawing.Size(208, 50);
+            this.btnAgregarEvento.TabIndex = 26;
+            this.btnAgregarEvento.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnAgregarEvento.Click += new System.EventHandler(this.btnAgregarEvento_Click);
+            // 
+            // calEventoIni
+            // 
+            this.calEventoIni.Location = new System.Drawing.Point(420, 98);
+            this.calEventoIni.Margin = new System.Windows.Forms.Padding(12, 11, 12, 11);
+            this.calEventoIni.Name = "calEventoIni";
+            this.calEventoIni.TabIndex = 37;
+            this.calEventoIni.Visible = false;
+            this.calEventoIni.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.calEventoIni_DateChanged);
+            this.calEventoIni.Leave += new System.EventHandler(this.calEventoIni_Leave);
+            // 
+            // tbEvento
+            // 
+            this.tbEvento.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.tbEvento.BorderColor = System.Drawing.Color.BlueViolet;
+            this.tbEvento.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbEvento.Location = new System.Drawing.Point(227, 22);
+            this.tbEvento.Margin = new System.Windows.Forms.Padding(4);
+            this.tbEvento.Multiline = true;
+            this.tbEvento.Name = "tbEvento";
+            this.tbEvento.Size = new System.Drawing.Size(314, 46);
+            this.tbEvento.TabIndex = 36;
+            // 
+            // bunifuCustomLabel59
+            // 
+            this.bunifuCustomLabel59.AutoSize = true;
+            this.bunifuCustomLabel59.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bunifuCustomLabel59.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.bunifuCustomLabel59.Location = new System.Drawing.Point(4, 18);
+            this.bunifuCustomLabel59.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.bunifuCustomLabel59.Name = "bunifuCustomLabel59";
+            this.bunifuCustomLabel59.Size = new System.Drawing.Size(195, 28);
+            this.bunifuCustomLabel59.TabIndex = 35;
+            this.bunifuCustomLabel59.Text = "Nombre del Evento";
+            // 
+            // tbFechaFinEvento
+            // 
+            this.tbFechaFinEvento.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.tbFechaFinEvento.BorderColor = System.Drawing.Color.BlueViolet;
+            this.tbFechaFinEvento.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbFechaFinEvento.Location = new System.Drawing.Point(227, 153);
+            this.tbFechaFinEvento.Margin = new System.Windows.Forms.Padding(4);
+            this.tbFechaFinEvento.Name = "tbFechaFinEvento";
+            this.tbFechaFinEvento.ReadOnly = true;
+            this.tbFechaFinEvento.Size = new System.Drawing.Size(251, 22);
+            this.tbFechaFinEvento.TabIndex = 34;
+            this.tbFechaFinEvento.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tbFechaFinEvento_MouseClick);
+            // 
+            // bunifuCustomLabel60
+            // 
+            this.bunifuCustomLabel60.AutoSize = true;
+            this.bunifuCustomLabel60.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bunifuCustomLabel60.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.bunifuCustomLabel60.Location = new System.Drawing.Point(45, 151);
+            this.bunifuCustomLabel60.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.bunifuCustomLabel60.Name = "bunifuCustomLabel60";
+            this.bunifuCustomLabel60.Size = new System.Drawing.Size(105, 28);
+            this.bunifuCustomLabel60.TabIndex = 33;
+            this.bunifuCustomLabel60.Text = "Fecha Fin:";
+            // 
+            // tbFechaIniEvento
+            // 
+            this.tbFechaIniEvento.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.tbFechaIniEvento.BorderColor = System.Drawing.Color.BlueViolet;
+            this.tbFechaIniEvento.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbFechaIniEvento.Location = new System.Drawing.Point(227, 97);
+            this.tbFechaIniEvento.Margin = new System.Windows.Forms.Padding(4);
+            this.tbFechaIniEvento.Name = "tbFechaIniEvento";
+            this.tbFechaIniEvento.ReadOnly = true;
+            this.tbFechaIniEvento.Size = new System.Drawing.Size(251, 22);
+            this.tbFechaIniEvento.TabIndex = 32;
+            this.tbFechaIniEvento.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tbFechaIniEvento_MouseClick);
+            // 
+            // bunifuCustomLabel61
+            // 
+            this.bunifuCustomLabel61.AutoSize = true;
+            this.bunifuCustomLabel61.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bunifuCustomLabel61.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.bunifuCustomLabel61.Location = new System.Drawing.Point(44, 101);
+            this.bunifuCustomLabel61.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.bunifuCustomLabel61.Name = "bunifuCustomLabel61";
+            this.bunifuCustomLabel61.Size = new System.Drawing.Size(129, 28);
+            this.bunifuCustomLabel61.TabIndex = 9;
+            this.bunifuCustomLabel61.Text = "Fecha Inicio:";
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(981, 577);
+            this.Controls.Add(this.pnlEvento);
             this.Controls.Add(this.pnlServiciosEscolares);
             this.Controls.Add(this.pnlConsultoria);
             this.Controls.Add(this.pnlAdministracion);
@@ -3880,6 +4064,10 @@
             this.pnlAltaAlumno.PerformLayout();
             this.pnlAdminMedDia.ResumeLayout(false);
             this.pnlAdminMedDia.PerformLayout();
+            this.pnlEvento.ResumeLayout(false);
+            this.pnlEvento.PerformLayout();
+            this.pnlAgregarEvento.ResumeLayout(false);
+            this.pnlAgregarEvento.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -4109,5 +4297,17 @@
         private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel57;
         private Bunifu.Framework.UI.BunifuCheckbox cbSEAlumno;
         private Bunifu.Framework.UI.BunifuThinButton2 btnExportar;
+        private System.Windows.Forms.Panel pnlEvento;
+        private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel58;
+        private System.Windows.Forms.Panel pnlAgregarEvento;
+        private System.Windows.Forms.MonthCalendar calEventoFin;
+        private Bunifu.Framework.UI.BunifuThinButton2 btnAgregarEvento;
+        private System.Windows.Forms.MonthCalendar calEventoIni;
+        private WindowsFormsControlLibrary1.BunifuCustomTextbox tbEvento;
+        private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel59;
+        private WindowsFormsControlLibrary1.BunifuCustomTextbox tbFechaFinEvento;
+        private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel60;
+        private WindowsFormsControlLibrary1.BunifuCustomTextbox tbFechaIniEvento;
+        private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel61;
     }
 }
