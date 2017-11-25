@@ -197,7 +197,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MedicamentoForm";
             this.Text = "MedicamentoForm";
-            this.Load += new System.EventHandler(this.MedicamentoForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

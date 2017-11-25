@@ -18,10 +18,8 @@ namespace RecursosServiciosMedicos
         }
         SqlConnection ConnDia = new SqlConnection("Data Source=(LocalDb)\\LocalDBDemo;initial catalog=RSM;integrated security=true");
 
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-        }
+        private void btnCancelar_Click_1(object sender, EventArgs e) { this.Hide(); }
+        private void btnCancelar_Click(object sender, EventArgs e){ this.Hide(); }
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
@@ -57,11 +55,6 @@ namespace RecursosServiciosMedicos
                     MessageBox.Show("Ocurrio el siguiente problema: " + ex.Message + ". Contecte al administrador." + "\t" + ex.GetType());
                 }
             }
-        }
-
-        private void btnCancelar_Click_1(object sender, EventArgs e)
-        {
-            this.Hide();
         }
 
         private void tbOtroNombre_TextChanged(object sender, EventArgs e)

@@ -16,31 +16,11 @@ namespace RecursosServiciosMedicos
         public MedicamentoForm()
         {
             InitializeComponent();
-            
         }
-        
+        SqlConnection ConnMed = new SqlConnection(@"Data Source=(LocalDb)\LocalDBDemo;initial catalog=RSM;integrated security=true");
 
-
-        SqlConnection ConnMed = new SqlConnection("Data Source=(LocalDb)\\LocalDBDemo;initial catalog=RSM;integrated security=true");
-        
-        
-
-
-private void tbOtroNombre_TextChanged(object sender, EventArgs e)
-        {
-            if (System.Text.RegularExpressions.Regex.IsMatch(tbMedicamento.Text, @"^[a-zA-Z0-9\s]+$") || tbMedicamento.Text.Length < 1)
-            {
-            }
-            else
-            {
-                tbMedicamento.Text = tbMedicamento.Text.Remove(tbMedicamento.Text.Length - 1);
-            }
-        }
-
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-        }
+        private void btnCancelar_Click(object sender, EventArgs e){ this.Hide(); }
+        private void bunifuFlatButton2_Click(object sender, EventArgs e) { this.Hide(); }
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
@@ -68,15 +48,17 @@ private void tbOtroNombre_TextChanged(object sender, EventArgs e)
                 }
             }            
         }
-
-        private void bunifuFlatButton2_Click(object sender, EventArgs e)
+        private void tbOtroNombre_TextChanged(object sender, EventArgs e)
         {
-            this.Hide();
+            if (System.Text.RegularExpressions.Regex.IsMatch(tbMedicamento.Text, @"^[a-zA-Z0-9\s]+$") || tbMedicamento.Text.Length < 1)
+            {
+            }
+            else
+            {
+                tbMedicamento.Text = tbMedicamento.Text.Remove(tbMedicamento.Text.Length - 1);
+            }
         }
 
-        private void MedicamentoForm_Load(object sender, EventArgs e)
-        {
-            
-        }
+
     }
 }
