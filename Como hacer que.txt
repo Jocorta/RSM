@@ -1,0 +1,6 @@
+la carpeta RSM poner en el C://
+
+Base de Datos
+1-. Dropear la base de datos RSM anterior
+2-.lo que esta en BASE_DE_DATOS_FINAL colocar en C:\Program Files\Microsoft SQL Server\MSSQL13.MSSQLSERVER\MSSQL\DATA
+3-. ir a sql click derecho en databases y attach y buscar los archivos que colocamos en la carpeta anterior

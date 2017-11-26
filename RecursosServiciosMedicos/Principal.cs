@@ -29,14 +29,14 @@ namespace RecursosServiciosMedicos
         DataTable dsMedicamento3 = new DataTable();
         bool Med2 = false;
         bool Med3 = false;
-        public string nombre = "", num_id = "", num_control = "", num_docente = "", seguimiento = "", fecha = "", medicamento = "", diagnostico = "", num_otro = "", edad = "", sexo = "", doctor = "";
+        public string nombre = "", num_id = "", num_control = "", num_docente = "", seguimiento = "", fecha = "",motivo="", medicamento = "", diagnostico = "", num_otro = "", edad = "", sexo = "", doctor = "",nombredoc="",cedula="";
         public bool RegistroSeleccionado = false, banderaalumno;
         public int tipo = 0;
         public Principal()
         {
             InitializeComponent();
         }
-        SqlConnection conn = new SqlConnection(@"Data Source=(LocalDb)\LocalDBDemo;initial catalog=RSM;integrated security=true");//conexion base de datos
+        SqlConnection conn = new SqlConnection(@"Data Source=DESKTOP-48PLDOP;initial catalog=RSM;integrated security=true");//conexion base de datos
         #region Funciones
         #region Funciones Limpiadoras
         private void LimpiaAlumno()
@@ -847,6 +847,7 @@ namespace RecursosServiciosMedicos
             }
             return (Añoescolar.ToString());
         }
+        
         //Metodo de Imprimir
         private void Imprimir(Microsoft.Office.Interop.Word.Document doc, Microsoft.Office.Interop.Word.Application app, string path)
         {
@@ -881,34 +882,6 @@ namespace RecursosServiciosMedicos
                 btnImprimir.Enabled = false;
             }
         }
-        private void btnImportar_Click(object sender, EventArgs e)
-        {
-            if (Usuario == "dse")
-            {
-                ImportarExcel(tabSEResultados);
-            }
-            else
-            {
-                ImportarExcel(tabResultados);
-            }
-        }
-        private void btnAgregarEvento_Click(object sender, EventArgs e)
-        {
-            string fechi = calEventoIni.SelectionStart.ToString("yyyy-MM-dd h:mm tt");
-            string fechf = calEventoFin.SelectionStart.ToString("yyyy-MM-dd h:mm tt");
-            try
-            {
-                conn.Open();
-                SqlCommand comandoEvento = new SqlCommand("insert into evento (nombre, fecha_inicio, fecha_fin) values( '" + tbEvento.Text + "' ,  '" + fechi + "', '" + fechf + "');", conn);
-                comandoEvento.ExecuteNonQuery();
-                MessageBox.Show("El evento ha sido creado exitosamente.", "Creado", MessageBoxButtons.OK);
-                conn.Close();
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Favor de ingresar todos los campos", "Alerta", MessageBoxButtons.OK);
-            }
-        }
         //Metodo Llenar Documento de Alguien del Plantel
         private void LlenarDocPlantel(Microsoft.Office.Interop.Word.Document doc, Microsoft.Office.Interop.Word.Application app, string tipodoc)
         {
@@ -928,29 +901,168 @@ namespace RecursosServiciosMedicos
                 doc = app.Documents.Add(Template: path + ".docx");
                 cadQuery = "Select * from docente where num_docente ='" + num_id + "' ";
             }
+            conn.Open();
+            SqlCommand comando = new SqlCommand(cadQuery, conn);
+            SqlDataReader leer3 = comando.ExecuteReader();
+
+            if (tipodoc == "CertificadoMedico")
+            {
+                if (leer3.Read() == true)
+                {
+                    foreach (Microsoft.Office.Interop.Word.Field field in doc.Fields)
+                    {
+                        if (field.Code.Text.Contains("Nombre"))
+                        {
+                            field.Select();
+                            string nombrecerti;
+                            if (banderaalumno == true)
+                            {
+                                //nombre de alumno
+                                nombrecerti = leer3["nombre"].ToString() + " " + leer3["nombre_paterno"].ToString() + " " + leer3["nombre_materno"].ToString();
+                                nombre = nombrecerti;
+                            }
+                            else
+                            {
+                                //nombre de docente
+                                nombrecerti = leer3["nombre"].ToString();
+                                nombre = nombrecerti;
+                            }
+                            conn.Close();
+                            app.Selection.TypeText(nombre);
+                        }
+                        else if (field.Code.Text.Contains("Edad"))
+                        {
+                            field.Select();
+                            app.Selection.TypeText(edad);
+                        }
+                        else if (field.Code.Text.Contains("Fecha"))
+                        {
+                            field.Select();
+                            app.Selection.TypeText(fecha);
+                        }
+                        else if (field.Code.Text.Contains("Doctor"))
+                        {
+                            string querydoc = "Select * from usuario where usuario='" + doctor + "'";
+                            SqlCommand comando2 = new SqlCommand(querydoc, conn);
+                            conn.Open();
+                            SqlDataReader leer4 = comando2.ExecuteReader();
+
+                            if (leer4.Read() == true)
+                            {
+                                nombredoc = leer4["nombre_usuario"].ToString();
+                                cedula = leer4["cedula"].ToString();
+                                field.Select();
+                                app.Selection.TypeText(nombredoc);
+                                leer4.Close();
+                            }
+                        }
+                        else if (field.Code.Text.Contains("Cedula"))
+                        {
+
+                            field.Select();
+                            app.Selection.TypeText(cedula);
+
+                        }
+                    }
+                    
+                }
+                conn.Close();
+            }
+            else if (tipodoc == "Receta")
+            {
+                if (leer3.Read() == true)
+                {
+                    foreach (Microsoft.Office.Interop.Word.Field field in doc.Fields)
+                    {
+                        if (field.Code.Text.Contains("Nombre"))
+                        {
+                            field.Select();
+                            string nombrecerti;
+                            if (banderaalumno == true)
+                            {
+                                //nombre de alumno
+                                nombrecerti = leer3["nombre"].ToString() + " " + leer3["nombre_paterno"].ToString() + " " + leer3["nombre_materno"].ToString();
+                                nombre = nombrecerti;
+                            }
+                            else
+                            {
+                                //nombre de docente
+                                nombrecerti = leer3["nombre"].ToString();
+                                nombre = nombrecerti;
+                            }
+                            app.Selection.TypeText(nombre);
+                        }
+                        else if (field.Code.Text.Contains("Fecha"))
+                        {
+                            field.Select();
+                            app.Selection.TypeText(fecha);
+                        }
+                        else if (field.Code.Text.Contains("Motivo"))
+                        {
+                            field.Select();
+                            app.Selection.TypeText(motivo);
+                        }
+                        else if (field.Code.Text.Contains("Diagnostico"))
+                        {
+                            field.Select();
+                            app.Selection.TypeText(diagnostico);
+                        }
+                        else if (field.Code.Text.Contains("Medicamento"))
+                        {
+                            field.Select();
+                            app.Selection.TypeText(medicamento);
+                        }
+                        else if (field.Code.Text.Contains("Doctor"))
+                        {
+                            string querydoc = "Select * from usuario where usuario='" + doctor + "'";
+                            SqlCommand comando2 = new SqlCommand(querydoc, conn);
+                            conn.Open();
+                            SqlDataReader leer4 = comando2.ExecuteReader();
+
+                            if (leer4.Read() == true)
+                            {
+                                nombredoc = leer4["nombre_usuario"].ToString();
+                                cedula = leer4["cedula"].ToString();
+                                field.Select();
+                                app.Selection.TypeText(nombredoc);
+                                leer4.Close();
+                            }
+                        }
+                        else if (field.Code.Text.Contains("Cedula"))
+                        {
+
+                            field.Select();
+                            app.Selection.TypeText(cedula);
+
+                        }
+
+
+
+                    }
+                }
+                conn.Close();
+            }
+            
+
+            doc.SaveAs(path + "-" + nombre + ".docx");
+            string finalpath = path + "-" + nombre + ".docx";
+            Imprimir(doc, app, finalpath);
+        }
+        //Metodo Llenar Documento de ALguien Fuera del Plantel
+        private void LlenarDocFueraPlantel(Microsoft.Office.Interop.Word.Document doc, Microsoft.Office.Interop.Word.Application app, string tipodoc)
+        {
+            string path = @"C:\RSM\DocumentosMedicos\" + tipodoc + @"s\Otros\" + tipodoc;
+            doc = app.Documents.Add(Template: path + ".docx");
+            String cadQuery = "Select * from consulta nombre ='" + nombre + "' ";
             SqlCommand comando = new SqlCommand(cadQuery, conn);
             conn.Open();
-            SqlDataReader leer3 = comando.ExecuteReader();
-            if (leer3.Read() == true)
+            if (tipodoc=="CertificadoMedico")
             {
                 foreach (Microsoft.Office.Interop.Word.Field field in doc.Fields)
                 {
                     if (field.Code.Text.Contains("Nombre"))
                     {
                         field.Select();
-                        string nombrecerti;
-                        if (banderaalumno == true)
-                        {
-                            //nombre de alumno
-                            nombrecerti = leer3["nombre"].ToString() + " " + leer3["nombre_paterno"].ToString() + " " + leer3["nombre_materno"].ToString();
-                            nombre = nombrecerti;
-                        }
-                        else
-                        {
-                            //nombre de docente
-                            nombrecerti = leer3["nombre"].ToString();
-                            nombre = nombrecerti;
-                        }
                         app.Selection.TypeText(nombre);
                     }
                     else if (field.Code.Text.Contains("Edad"))
@@ -965,63 +1077,92 @@ namespace RecursosServiciosMedicos
                     }
                     else if (field.Code.Text.Contains("Doctor"))
                     {
+                        string querydoc = "Select * from usuario where usuario='" + doctor + "'";
+                        SqlCommand comando2 = new SqlCommand(querydoc, conn);
+                        conn.Open();
+                        SqlDataReader leer4 = comando2.ExecuteReader();
+
+                        if (leer4.Read() == true)
+                        {
+                            nombredoc = leer4["nombre_usuario"].ToString();
+                            cedula = leer4["cedula"].ToString();
+                            field.Select();
+                            app.Selection.TypeText(nombredoc);
+                            leer4.Close();
+                        }
+                    }
+                    else if (field.Code.Text.Contains("Cedula"))
+                    {
+
                         field.Select();
-                        app.Selection.TypeText(doctor);
+                        app.Selection.TypeText(cedula);
+
                     }
                 }
             }
-            conn.Close();
-            doc.SaveAs(path + "-" + nombre + ".docx");
-            string finalpath = path + "-" + nombre + ".docx";
-            Imprimir(doc, app, finalpath);
-        }
-        private void pnlEvento_Click(object sender, EventArgs e) { calEventoFin.Hide(); calEventoIni.Hide(); }
-        //Metodo Llenar Documento de ALguien Fuera del Plantel
-        private void LlenarDocFueraPlantel(Microsoft.Office.Interop.Word.Document doc, Microsoft.Office.Interop.Word.Application app, string tipodoc)
-        {
-            string path = @"C:\RSM\DocumentosMedicos\" + tipodoc + @"s\Otros\" + tipodoc;
-            doc = app.Documents.Add(Template: path + ".docx");
-            String cadQuery = "Select * from consulta nombre ='" + nombre + "' ";
-            SqlCommand comando = new SqlCommand(cadQuery, conn);
-            conn.Open();
-            foreach (Microsoft.Office.Interop.Word.Field field in doc.Fields)
+            else if (tipodoc=="Receta")
             {
-                if (field.Code.Text.Contains("Nombre"))
+                foreach (Microsoft.Office.Interop.Word.Field field in doc.Fields)
                 {
-                    field.Select();
-                    app.Selection.TypeText(nombre);
-                }
-                else if (field.Code.Text.Contains("Edad"))
-                {
-                    field.Select();
-                    app.Selection.TypeText(edad);
-                }
-                else if (field.Code.Text.Contains("Fecha"))
-                {
-                    field.Select();
-                    app.Selection.TypeText(fecha);
-                }
-                else if (field.Code.Text.Contains("Diagnostico"))
-                {
-                    field.Select();
-                    app.Selection.TypeText(diagnostico);
-                }
-                else if (field.Code.Text.Contains("Medicamento"))
-                {
-                    field.Select();
-                    app.Selection.TypeText(medicamento);
-                }
-                else if (field.Code.Text.Contains("Doctor"))
-                {
-                    field.Select();
-                    app.Selection.TypeText(doctor);
+                    if (field.Code.Text.Contains("Nombre"))
+                    {
+                        app.Selection.TypeText(nombre);
+                        conn.Close();
+                    }
+                    else if (field.Code.Text.Contains("Fecha"))
+                    {
+                        field.Select();
+                        app.Selection.TypeText(fecha);
+                    }
+                    else if (field.Code.Text.Contains("Motivo"))
+                    {
+                        field.Select();
+                        app.Selection.TypeText(motivo);
+                    }
+                    else if (field.Code.Text.Contains("Diagnostico"))
+                    {
+                        field.Select();
+                        app.Selection.TypeText(diagnostico);
+                    }
+                    else if (field.Code.Text.Contains("Medicamento"))
+                    {
+                        field.Select();
+                        app.Selection.TypeText(medicamento);
+                    }
+                    else if (field.Code.Text.Contains("Doctor"))
+                    {
+                        string querydoc = "Select * from usuario where usuario='" + doctor + "'";
+                        SqlCommand comando2 = new SqlCommand(querydoc, conn);
+                        conn.Open();
+                        SqlDataReader leer4 = comando2.ExecuteReader();
+
+                        if (leer4.Read() == true)
+                        {
+                            nombredoc = leer4["nombre_usuario"].ToString();
+                            cedula = leer4["cedula"].ToString();
+                            field.Select();
+                            app.Selection.TypeText(nombredoc);
+                            leer4.Close();
+                        }
+                    }
+                    else if (field.Code.Text.Contains("Cedula"))
+                    {
+
+                        field.Select();
+                        app.Selection.TypeText(cedula);
+
+                    }
+
                 }
             }
+            
             conn.Close();
             doc.SaveAs(path + "-" + nombre + ".docx");
             string finalpath = path + "-" + nombre + ".docx";
             Imprimir(doc, app, finalpath);
         }
+        
+        
         //metodos CONSULTORIA
         private void HideControlesSE()
         {
@@ -3148,7 +3289,7 @@ namespace RecursosServiciosMedicos
                 {
 
                     input = tbCodigoCerti.Text;
-                    string cadQuery1 = "Select num_control,num_docente,fecha,diagnostico,medicamento,seguimiento,edad,sexo,doctor from consultas where num_control ='" + tbCodigoCerti.Text + "' or num_docente= '" + tbCodigoCerti.Text + "'";
+                    string cadQuery1 = "Select c.num_control,c.num_docente,c.fecha,c.motivo,c.diagnostico,c.medicamento,c.medicamento2,c.medicamento3,c.seguimiento,c.edad,c.sexo,c.doctor from consultas as c inner join usuario as u on c.doctor = u.usuario where c.num_control ='" + tbCodigoCerti.Text + "' or c.num_docente= '" + tbCodigoCerti.Text + "'";
                     pnlListaCerti.Show();
 
                     //llenado del Data Grid View
@@ -3167,12 +3308,13 @@ namespace RecursosServiciosMedicos
                         num_control = row.Cells[0].Value.ToString();
                         num_docente = row.Cells[1].Value.ToString();
                         fecha = row.Cells[2].Value.ToString();
-                        diagnostico = row.Cells[3].Value.ToString();
-                        medicamento = row.Cells[4].Value.ToString();
-                        seguimiento = row.Cells[5].Value.ToString();
-                        edad = row.Cells[6].Value.ToString();
-                        sexo = row.Cells[7].Value.ToString();
-                        doctor = row.Cells[8].Value.ToString();
+                        motivo= row.Cells[3].Value.ToString();
+                        diagnostico = row.Cells[4].Value.ToString();
+                        medicamento = row.Cells[5].Value.ToString()+""+ row.Cells[6].Value.ToString()+""+ row.Cells[7].Value.ToString();
+                        seguimiento = row.Cells[8].Value.ToString();
+                        edad = row.Cells[9].Value.ToString();
+                        sexo = row.Cells[10].Value.ToString();
+                        doctor = row.Cells[11].Value.ToString();
 
 
                     }
@@ -3198,7 +3340,7 @@ namespace RecursosServiciosMedicos
                 {
                     //Busqueda por nombre
                     input = tbCodigoCerti.Text;
-                    string cadQuery1 = "select o.nombre,c.edad,c.sexo,c.fecha,c.diagnostico,c.medicamento,c.seguimiento,c.doctor from consultas as c inner join otro as o on c.num_otro=o.num_otro where nombre like '%" + tbCodigoCerti.Text + "%'";
+                    string cadQuery1 = "select o.nombre,c.edad,c.sexo,c.fecha,c.motivo,c.diagnostico,c.medicamento,c.medicamento2,c.medicamento3,c.seguimiento,c.doctor from consultas as c inner join otro as o on c.num_otro=o.num_otro where nombre like '%" + tbCodigoCerti.Text + "%'";
                     pnlListaCerti.Show();
                     //dgvListaCerti.Rows.Clear();
 
@@ -3211,6 +3353,23 @@ namespace RecursosServiciosMedicos
 
                     conn.Close();
                     tbCodigoCerti.Text = input;
+
+                    foreach (DataGridViewRow row in dgvListaCerti.SelectedRows)
+                    {
+                        nombre = row.Cells[0].Value.ToString();
+                        edad = row.Cells[1].Value.ToString();
+                        sexo = row.Cells[2].Value.ToString();
+                        fecha = row.Cells[3].Value.ToString();
+                        motivo = row.Cells[4].Value.ToString();
+                        diagnostico = row.Cells[5].Value.ToString();
+                        medicamento = row.Cells[6].Value.ToString() + "" + row.Cells[7].Value.ToString() + "" + row.Cells[8].Value.ToString();
+                        seguimiento = row.Cells[9].Value.ToString();
+                        edad = row.Cells[10].Value.ToString();
+                        sexo = row.Cells[11].Value.ToString();
+                        doctor = row.Cells[12].Value.ToString();
+
+
+                    }
                 }
             }
             else
@@ -3227,12 +3386,13 @@ namespace RecursosServiciosMedicos
                     num_control = row.Cells[0].Value.ToString();
                     num_docente = row.Cells[1].Value.ToString();
                     fecha = row.Cells[2].Value.ToString();
-                    diagnostico = row.Cells[3].Value.ToString();
-                    medicamento = row.Cells[4].Value.ToString();
-                    seguimiento = row.Cells[5].Value.ToString();
-                    edad = row.Cells[6].Value.ToString();
-                    sexo = row.Cells[7].Value.ToString();
-                    doctor = row.Cells[8].Value.ToString();
+                    motivo = row.Cells[3].Value.ToString();
+                    diagnostico = row.Cells[4].Value.ToString();
+                    medicamento = row.Cells[5].Value.ToString() + "" + row.Cells[6].Value.ToString() + "" + row.Cells[7].Value.ToString();
+                    seguimiento = row.Cells[8].Value.ToString();
+                    edad = row.Cells[9].Value.ToString();
+                    sexo = row.Cells[10].Value.ToString();
+                    doctor = row.Cells[11].Value.ToString();
 
 
                 }
@@ -3265,10 +3425,13 @@ namespace RecursosServiciosMedicos
                     edad = row.Cells[1].Value.ToString();
                     sexo = row.Cells[2].Value.ToString();
                     fecha = row.Cells[3].Value.ToString();
-                    diagnostico = row.Cells[4].Value.ToString();
-                    medicamento = row.Cells[5].Value.ToString();
-                    seguimiento = row.Cells[6].Value.ToString();
-                    doctor = row.Cells[7].Value.ToString();
+                    motivo = row.Cells[4].Value.ToString();
+                    diagnostico = row.Cells[5].Value.ToString();
+                    medicamento = row.Cells[6].Value.ToString() + "" + row.Cells[7].Value.ToString() + "" + row.Cells[8].Value.ToString();
+                    seguimiento = row.Cells[9].Value.ToString();
+                    edad = row.Cells[10].Value.ToString();
+                    sexo = row.Cells[11].Value.ToString();
+                    doctor = row.Cells[12].Value.ToString();
 
                 }
 
@@ -4159,6 +4322,35 @@ namespace RecursosServiciosMedicos
         private void cbOtroMedicamento2_Click(object sender, EventArgs e) { LlenaCbMedicamento2(); }
         private void cbOtroMedicamento3_Click(object sender, EventArgs e) { LlenaCbMedicamento3(); }
         private void comboBox1_Click(object sender, EventArgs e) { LlenaCbMedicamento(); }
+        private void btnImportar_Click(object sender, EventArgs e)
+        {
+            if (Usuario == "dse")
+            {
+                ImportarExcel(tabSEResultados);
+            }
+            else
+            {
+                ImportarExcel(tabResultados);
+            }
+        }
+        private void btnAgregarEvento_Click(object sender, EventArgs e)
+        {
+            string fechi = calEventoIni.SelectionStart.ToString("yyyy-MM-dd h:mm tt");
+            string fechf = calEventoFin.SelectionStart.ToString("yyyy-MM-dd h:mm tt");
+            try
+            {
+                conn.Open();
+                SqlCommand comandoEvento = new SqlCommand("insert into evento (nombre, fecha_inicio, fecha_fin) values( '" + tbEvento.Text + "' ,  '" + fechi + "', '" + fechf + "');", conn);
+                comandoEvento.ExecuteNonQuery();
+                MessageBox.Show("El evento ha sido creado exitosamente.", "Creado", MessageBoxButtons.OK);
+                conn.Close();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Favor de ingresar todos los campos", "Alerta", MessageBoxButtons.OK);
+            }
+        }
+        private void pnlEvento_Click(object sender, EventArgs e) { calEventoFin.Hide(); calEventoIni.Hide(); }
         private void btnAdminExeAltaDocente_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("Seguro que desea cambiar los docentes en la base de datos? (Debe tener el archivo excel listo) ", "Agregar docente", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
