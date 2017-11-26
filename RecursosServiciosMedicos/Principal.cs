@@ -991,6 +991,7 @@ namespace RecursosServiciosMedicos
                                 nombre = nombrecerti;
                             }
                             app.Selection.TypeText(nombre);
+                            conn.Close();
                         }
                         else if (field.Code.Text.Contains("Fecha"))
                         {
@@ -1053,9 +1054,6 @@ namespace RecursosServiciosMedicos
         {
             string path = @"C:\RSM\DocumentosMedicos\" + tipodoc + @"s\Otros\" + tipodoc;
             doc = app.Documents.Add(Template: path + ".docx");
-            String cadQuery = "Select * from consulta nombre ='" + nombre + "' ";
-            SqlCommand comando = new SqlCommand(cadQuery, conn);
-            conn.Open();
             if (tipodoc=="CertificadoMedico")
             {
                 foreach (Microsoft.Office.Interop.Word.Field field in doc.Fields)
@@ -1107,7 +1105,6 @@ namespace RecursosServiciosMedicos
                     if (field.Code.Text.Contains("Nombre"))
                     {
                         app.Selection.TypeText(nombre);
-                        conn.Close();
                     }
                     else if (field.Code.Text.Contains("Fecha"))
                     {
@@ -3364,9 +3361,7 @@ namespace RecursosServiciosMedicos
                         diagnostico = row.Cells[5].Value.ToString();
                         medicamento = row.Cells[6].Value.ToString() + "" + row.Cells[7].Value.ToString() + "" + row.Cells[8].Value.ToString();
                         seguimiento = row.Cells[9].Value.ToString();
-                        edad = row.Cells[10].Value.ToString();
-                        sexo = row.Cells[11].Value.ToString();
-                        doctor = row.Cells[12].Value.ToString();
+                        doctor = row.Cells[10].Value.ToString();
 
 
                     }
@@ -3429,9 +3424,7 @@ namespace RecursosServiciosMedicos
                     diagnostico = row.Cells[5].Value.ToString();
                     medicamento = row.Cells[6].Value.ToString() + "" + row.Cells[7].Value.ToString() + "" + row.Cells[8].Value.ToString();
                     seguimiento = row.Cells[9].Value.ToString();
-                    edad = row.Cells[10].Value.ToString();
-                    sexo = row.Cells[11].Value.ToString();
-                    doctor = row.Cells[12].Value.ToString();
+                    doctor = row.Cells[10].Value.ToString();
 
                 }
 
