@@ -76,7 +76,6 @@ C:\Users\jc-mt\Documents\GitHub\RSM\RecursosServiciosMedicos\bin\Debug\RecursosS
 C:\Users\jc-mt\Documents\GitHub\RSM\RecursosServiciosMedicos\bin\Debug\RecursosServiciosMedicos.pdb
 C:\Users\jc-mt\Documents\GitHub\RSM\RecursosServiciosMedicos\bin\Debug\MySql.Data.dll
 C:\Users\jc-mt\Documents\GitHub\RSM\RecursosServiciosMedicos\bin\Debug\MySql.Data.xml
-C:\Users\jc-mt\Documents\GitHub\RSM\RecursosServiciosMedicos\obj\Debug\RecursosServiciosMedicos.csprojResolveAssemblyReference.cache
 C:\Users\jc-mt\Documents\GitHub\RSM\RecursosServiciosMedicos\obj\Debug\RecursosServiciosMedicos.csproj.ResolveComReference.cache
 C:\Users\jc-mt\Documents\GitHub\RSM\RecursosServiciosMedicos\obj\Debug\RecursosServiciosMedicos.DiagnosticoForm.resources
 C:\Users\jc-mt\Documents\GitHub\RSM\RecursosServiciosMedicos\obj\Debug\RecursosServiciosMedicos.Form1.resources

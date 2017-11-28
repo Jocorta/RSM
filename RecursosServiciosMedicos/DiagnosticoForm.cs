@@ -16,7 +16,7 @@ namespace RecursosServiciosMedicos
         {
             InitializeComponent();
         }
-        SqlConnection ConnDia = new SqlConnection("Data Source=(LocalDb)\\LocalDBDemo;initial catalog=RSM;integrated security=true");
+        SqlConnection ConnDia = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\RSM\Database\RSM.mdf;Integrated Security=True;Connect Timeout=30");
 
         private void btnCancelar_Click_1(object sender, EventArgs e) { this.Hide(); }
         private void btnCancelar_Click(object sender, EventArgs e){ this.Hide(); }

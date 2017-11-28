@@ -1,4 +1,5 @@
-la carpeta RSM poner en el C://
+la carpeta RSM poner en el C://!!!!!!!!!!!
+Correr Setup
 
 Base de Datos
 1-. Dropear la base de datos RSM anterior

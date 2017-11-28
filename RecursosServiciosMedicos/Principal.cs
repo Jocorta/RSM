@@ -37,7 +37,7 @@ namespace RecursosServiciosMedicos
         {
             InitializeComponent();
         }
-        SqlConnection conn = new SqlConnection(@"Data Source=(LocalDb)\LocalDBDemo;initial catalog=RSM;integrated security=true");//conexion base de datos
+        SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\RSM\Database\RSM.mdf;Integrated Security=True;Connect Timeout=30");//conexion base de datos
         #region Funciones
         #region Funciones Limpiadoras
         private void LimpiaAlumno()
@@ -1539,7 +1539,7 @@ namespace RecursosServiciosMedicos
                             conn.Close();
                             break;
                             #endregion
-                            break;
+                            
                         case 5: //Carrera, gene, evento
                             #region Carrera, gene, evento
                             if (comboCarrera.SelectedIndex == 0)
