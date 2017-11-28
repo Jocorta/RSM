@@ -216,22 +216,11 @@
             this.tbCodigoCerti = new WindowsFormsControlLibrary1.BunifuCustomTextbox();
             this.bunifuCustomLabel28 = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.pnlAdministracion = new System.Windows.Forms.Panel();
-            this.pnlAdminAltaDocente = new System.Windows.Forms.Panel();
-            this.bunifuCustomLabel64 = new Bunifu.Framework.UI.BunifuCustomLabel();
-            this.btnAdminExeAltaDocente = new Bunifu.Framework.UI.BunifuThinButton2();
-            this.bunifuCustomLabel62 = new Bunifu.Framework.UI.BunifuCustomLabel();
-            this.bunifuCustomLabel63 = new Bunifu.Framework.UI.BunifuCustomLabel();
-            this.bunifuSeparator9 = new Bunifu.Framework.UI.BunifuSeparator();
-            this.pnlAltaAlumno = new System.Windows.Forms.Panel();
-            this.btnAdminAltaAlumnoEvento = new Bunifu.Framework.UI.BunifuThinButton2();
-            this.cbAdminAlumnoEvento = new System.Windows.Forms.ComboBox();
-            this.btnAltaAlumnosITH = new Bunifu.Framework.UI.BunifuThinButton2();
-            this.bunifuCustomLabel34 = new Bunifu.Framework.UI.BunifuCustomLabel();
-            this.bunifuSeparator6 = new Bunifu.Framework.UI.BunifuSeparator();
-            this.bunifuCustomLabel33 = new Bunifu.Framework.UI.BunifuCustomLabel();
-            this.lblAltaDeAlumnos = new Bunifu.Framework.UI.BunifuCustomLabel();
-            this.bunifuSeparator5 = new Bunifu.Framework.UI.BunifuSeparator();
             this.pnlAdminUsr = new System.Windows.Forms.Panel();
+            this.tbAdminNombreCompleto = new System.Windows.Forms.TextBox();
+            this.tbAdminCedulaProfesional = new System.Windows.Forms.TextBox();
+            this.bunifuCustomLabel65 = new Bunifu.Framework.UI.BunifuCustomLabel();
+            this.bunifuCustomLabel66 = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.btnAdminAltaUsr = new Bunifu.Framework.UI.BunifuThinButton2();
             this.tbAdminAltaUsr = new System.Windows.Forms.TextBox();
             this.bunifuCustomLabel44 = new Bunifu.Framework.UI.BunifuCustomLabel();
@@ -257,6 +246,21 @@
             this.bunifuCustomLabel35 = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.bunifuCustomLabel36 = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.bunifuSeparator8 = new Bunifu.Framework.UI.BunifuSeparator();
+            this.pnlAdminAltaDocente = new System.Windows.Forms.Panel();
+            this.bunifuCustomLabel64 = new Bunifu.Framework.UI.BunifuCustomLabel();
+            this.btnAdminExeAltaDocente = new Bunifu.Framework.UI.BunifuThinButton2();
+            this.bunifuCustomLabel62 = new Bunifu.Framework.UI.BunifuCustomLabel();
+            this.bunifuCustomLabel63 = new Bunifu.Framework.UI.BunifuCustomLabel();
+            this.bunifuSeparator9 = new Bunifu.Framework.UI.BunifuSeparator();
+            this.pnlAltaAlumno = new System.Windows.Forms.Panel();
+            this.btnAdminAltaAlumnoEvento = new Bunifu.Framework.UI.BunifuThinButton2();
+            this.cbAdminAlumnoEvento = new System.Windows.Forms.ComboBox();
+            this.btnAltaAlumnosITH = new Bunifu.Framework.UI.BunifuThinButton2();
+            this.bunifuCustomLabel34 = new Bunifu.Framework.UI.BunifuCustomLabel();
+            this.bunifuSeparator6 = new Bunifu.Framework.UI.BunifuSeparator();
+            this.bunifuCustomLabel33 = new Bunifu.Framework.UI.BunifuCustomLabel();
+            this.lblAltaDeAlumnos = new Bunifu.Framework.UI.BunifuCustomLabel();
+            this.bunifuSeparator5 = new Bunifu.Framework.UI.BunifuSeparator();
             this.pnlAdminMedDia = new System.Windows.Forms.Panel();
             this.cbAdminDia = new System.Windows.Forms.ComboBox();
             this.btnAdminBorrarDia = new Bunifu.Framework.UI.BunifuThinButton2();
@@ -289,9 +293,9 @@
             this.pnlListaCerti.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListaCerti)).BeginInit();
             this.pnlAdministracion.SuspendLayout();
+            this.pnlAdminUsr.SuspendLayout();
             this.pnlAdminAltaDocente.SuspendLayout();
             this.pnlAltaAlumno.SuspendLayout();
-            this.pnlAdminUsr.SuspendLayout();
             this.pnlAdminMedDia.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -304,7 +308,7 @@
             // 
             this.bunifuDragControl1.Fixed = true;
             this.bunifuDragControl1.Horizontal = true;
-            this.bunifuDragControl1.TargetControl = this.pnlConsulta;
+            this.bunifuDragControl1.TargetControl = this.bunifuGradientPanel1;
             this.bunifuDragControl1.Vertical = true;
             // 
             // pnlConsulta
@@ -350,7 +354,7 @@
             this.cbSeguimiento.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.cbSeguimiento.ForeColor = System.Drawing.Color.White;
             this.cbSeguimiento.Location = new System.Drawing.Point(318, 444);
-            this.cbSeguimiento.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbSeguimiento.Margin = new System.Windows.Forms.Padding(4);
             this.cbSeguimiento.Name = "cbSeguimiento";
             this.cbSeguimiento.Size = new System.Drawing.Size(20, 20);
             this.cbSeguimiento.TabIndex = 34;
@@ -385,7 +389,7 @@
             this.cbOtro.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.cbOtro.ForeColor = System.Drawing.Color.White;
             this.cbOtro.Location = new System.Drawing.Point(592, 54);
-            this.cbOtro.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbOtro.Margin = new System.Windows.Forms.Padding(4);
             this.cbOtro.Name = "cbOtro";
             this.cbOtro.Size = new System.Drawing.Size(20, 20);
             this.cbOtro.TabIndex = 5;
@@ -410,7 +414,7 @@
             this.cbDocente.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.cbDocente.ForeColor = System.Drawing.Color.White;
             this.cbDocente.Location = new System.Drawing.Point(394, 54);
-            this.cbDocente.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbDocente.Margin = new System.Windows.Forms.Padding(4);
             this.cbDocente.Name = "cbDocente";
             this.cbDocente.Size = new System.Drawing.Size(20, 20);
             this.cbDocente.TabIndex = 3;
@@ -435,7 +439,7 @@
             this.cbAlumno.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.cbAlumno.ForeColor = System.Drawing.Color.White;
             this.cbAlumno.Location = new System.Drawing.Point(211, 54);
-            this.cbAlumno.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbAlumno.Margin = new System.Windows.Forms.Padding(4);
             this.cbAlumno.Name = "cbAlumno";
             this.cbAlumno.Size = new System.Drawing.Size(20, 20);
             this.cbAlumno.TabIndex = 1;
@@ -497,7 +501,7 @@
             this.btnAlumnoMasMed.IdleForecolor = System.Drawing.Color.DarkCyan;
             this.btnAlumnoMasMed.IdleLineColor = System.Drawing.Color.DarkCyan;
             this.btnAlumnoMasMed.Location = new System.Drawing.Point(423, 280);
-            this.btnAlumnoMasMed.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btnAlumnoMasMed.Margin = new System.Windows.Forms.Padding(5);
             this.btnAlumnoMasMed.Name = "btnAlumnoMasMed";
             this.btnAlumnoMasMed.Size = new System.Drawing.Size(122, 55);
             this.btnAlumnoMasMed.TabIndex = 44;
@@ -645,7 +649,7 @@
             this.btnAlumno_OtroMedicamento.IdleForecolor = System.Drawing.Color.DarkCyan;
             this.btnAlumno_OtroMedicamento.IdleLineColor = System.Drawing.Color.DarkCyan;
             this.btnAlumno_OtroMedicamento.Location = new System.Drawing.Point(425, 254);
-            this.btnAlumno_OtroMedicamento.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btnAlumno_OtroMedicamento.Margin = new System.Windows.Forms.Padding(5);
             this.btnAlumno_OtroMedicamento.Name = "btnAlumno_OtroMedicamento";
             this.btnAlumno_OtroMedicamento.Size = new System.Drawing.Size(109, 29);
             this.btnAlumno_OtroMedicamento.TabIndex = 27;
@@ -672,7 +676,7 @@
             this.btnAlumno_OtroDiagnostico.IdleForecolor = System.Drawing.Color.DarkCyan;
             this.btnAlumno_OtroDiagnostico.IdleLineColor = System.Drawing.Color.DarkCyan;
             this.btnAlumno_OtroDiagnostico.Location = new System.Drawing.Point(425, 229);
-            this.btnAlumno_OtroDiagnostico.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btnAlumno_OtroDiagnostico.Margin = new System.Windows.Forms.Padding(5);
             this.btnAlumno_OtroDiagnostico.Name = "btnAlumno_OtroDiagnostico";
             this.btnAlumno_OtroDiagnostico.Size = new System.Drawing.Size(109, 29);
             this.btnAlumno_OtroDiagnostico.TabIndex = 26;
@@ -699,7 +703,7 @@
             this.btnAlumnoRealizarConsulta.IdleForecolor = System.Drawing.Color.DarkCyan;
             this.btnAlumnoRealizarConsulta.IdleLineColor = System.Drawing.Color.DarkCyan;
             this.btnAlumnoRealizarConsulta.Location = new System.Drawing.Point(195, 323);
-            this.btnAlumnoRealizarConsulta.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btnAlumnoRealizarConsulta.Margin = new System.Windows.Forms.Padding(5);
             this.btnAlumnoRealizarConsulta.Name = "btnAlumnoRealizarConsulta";
             this.btnAlumnoRealizarConsulta.Size = new System.Drawing.Size(156, 41);
             this.btnAlumnoRealizarConsulta.TabIndex = 25;
@@ -772,7 +776,7 @@
             this.btnAlumnoBuscar.IdleForecolor = System.Drawing.Color.DarkCyan;
             this.btnAlumnoBuscar.IdleLineColor = System.Drawing.Color.DarkCyan;
             this.btnAlumnoBuscar.Location = new System.Drawing.Point(216, -2);
-            this.btnAlumnoBuscar.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btnAlumnoBuscar.Margin = new System.Windows.Forms.Padding(5);
             this.btnAlumnoBuscar.Name = "btnAlumnoBuscar";
             this.btnAlumnoBuscar.Size = new System.Drawing.Size(85, 41);
             this.btnAlumnoBuscar.TabIndex = 17;
@@ -908,7 +912,7 @@
             this.btnOtroMasMed.IdleForecolor = System.Drawing.Color.DarkCyan;
             this.btnOtroMasMed.IdleLineColor = System.Drawing.Color.DarkCyan;
             this.btnOtroMasMed.Location = new System.Drawing.Point(426, 258);
-            this.btnOtroMasMed.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btnOtroMasMed.Margin = new System.Windows.Forms.Padding(5);
             this.btnOtroMasMed.Name = "btnOtroMasMed";
             this.btnOtroMasMed.Size = new System.Drawing.Size(122, 55);
             this.btnOtroMasMed.TabIndex = 40;
@@ -1047,7 +1051,7 @@
             this.btnOtro_OtroMedicamento.IdleForecolor = System.Drawing.Color.DarkCyan;
             this.btnOtro_OtroMedicamento.IdleLineColor = System.Drawing.Color.DarkCyan;
             this.btnOtro_OtroMedicamento.Location = new System.Drawing.Point(425, 228);
-            this.btnOtro_OtroMedicamento.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btnOtro_OtroMedicamento.Margin = new System.Windows.Forms.Padding(5);
             this.btnOtro_OtroMedicamento.Name = "btnOtro_OtroMedicamento";
             this.btnOtro_OtroMedicamento.Size = new System.Drawing.Size(109, 29);
             this.btnOtro_OtroMedicamento.TabIndex = 27;
@@ -1074,7 +1078,7 @@
             this.btnOtro_OtroDiagnostico.IdleForecolor = System.Drawing.Color.DarkCyan;
             this.btnOtro_OtroDiagnostico.IdleLineColor = System.Drawing.Color.DarkCyan;
             this.btnOtro_OtroDiagnostico.Location = new System.Drawing.Point(425, 202);
-            this.btnOtro_OtroDiagnostico.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btnOtro_OtroDiagnostico.Margin = new System.Windows.Forms.Padding(5);
             this.btnOtro_OtroDiagnostico.Name = "btnOtro_OtroDiagnostico";
             this.btnOtro_OtroDiagnostico.Size = new System.Drawing.Size(109, 29);
             this.btnOtro_OtroDiagnostico.TabIndex = 26;
@@ -1101,7 +1105,7 @@
             this.btnOtroRealizarConsulta.IdleForecolor = System.Drawing.Color.DarkCyan;
             this.btnOtroRealizarConsulta.IdleLineColor = System.Drawing.Color.DarkCyan;
             this.btnOtroRealizarConsulta.Location = new System.Drawing.Point(195, 315);
-            this.btnOtroRealizarConsulta.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btnOtroRealizarConsulta.Margin = new System.Windows.Forms.Padding(5);
             this.btnOtroRealizarConsulta.Name = "btnOtroRealizarConsulta";
             this.btnOtroRealizarConsulta.Size = new System.Drawing.Size(156, 41);
             this.btnOtroRealizarConsulta.TabIndex = 25;
@@ -1252,7 +1256,7 @@
             this.btnDocenteMasMed.IdleForecolor = System.Drawing.Color.DarkCyan;
             this.btnDocenteMasMed.IdleLineColor = System.Drawing.Color.DarkCyan;
             this.btnDocenteMasMed.Location = new System.Drawing.Point(436, 260);
-            this.btnDocenteMasMed.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btnDocenteMasMed.Margin = new System.Windows.Forms.Padding(5);
             this.btnDocenteMasMed.Name = "btnDocenteMasMed";
             this.btnDocenteMasMed.Size = new System.Drawing.Size(122, 55);
             this.btnDocenteMasMed.TabIndex = 41;
@@ -1389,7 +1393,7 @@
             this.btnDocente_OtroMedicamento.IdleForecolor = System.Drawing.Color.DarkCyan;
             this.btnDocente_OtroMedicamento.IdleLineColor = System.Drawing.Color.DarkCyan;
             this.btnDocente_OtroMedicamento.Location = new System.Drawing.Point(425, 233);
-            this.btnDocente_OtroMedicamento.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btnDocente_OtroMedicamento.Margin = new System.Windows.Forms.Padding(5);
             this.btnDocente_OtroMedicamento.Name = "btnDocente_OtroMedicamento";
             this.btnDocente_OtroMedicamento.Size = new System.Drawing.Size(109, 29);
             this.btnDocente_OtroMedicamento.TabIndex = 27;
@@ -1416,7 +1420,7 @@
             this.btnDocente_OtroDiagnostico.IdleForecolor = System.Drawing.Color.DarkCyan;
             this.btnDocente_OtroDiagnostico.IdleLineColor = System.Drawing.Color.DarkCyan;
             this.btnDocente_OtroDiagnostico.Location = new System.Drawing.Point(425, 207);
-            this.btnDocente_OtroDiagnostico.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btnDocente_OtroDiagnostico.Margin = new System.Windows.Forms.Padding(5);
             this.btnDocente_OtroDiagnostico.Name = "btnDocente_OtroDiagnostico";
             this.btnDocente_OtroDiagnostico.Size = new System.Drawing.Size(109, 29);
             this.btnDocente_OtroDiagnostico.TabIndex = 26;
@@ -1443,7 +1447,7 @@
             this.btnDocenteRealizarConsulta.IdleForecolor = System.Drawing.Color.DarkCyan;
             this.btnDocenteRealizarConsulta.IdleLineColor = System.Drawing.Color.DarkCyan;
             this.btnDocenteRealizarConsulta.Location = new System.Drawing.Point(195, 319);
-            this.btnDocenteRealizarConsulta.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btnDocenteRealizarConsulta.Margin = new System.Windows.Forms.Padding(5);
             this.btnDocenteRealizarConsulta.Name = "btnDocenteRealizarConsulta";
             this.btnDocenteRealizarConsulta.Size = new System.Drawing.Size(156, 41);
             this.btnDocenteRealizarConsulta.TabIndex = 25;
@@ -1516,7 +1520,7 @@
             this.btnDocenteBuscar.IdleForecolor = System.Drawing.Color.DarkCyan;
             this.btnDocenteBuscar.IdleLineColor = System.Drawing.Color.DarkCyan;
             this.btnDocenteBuscar.Location = new System.Drawing.Point(229, -4);
-            this.btnDocenteBuscar.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btnDocenteBuscar.Margin = new System.Windows.Forms.Padding(5);
             this.btnDocenteBuscar.Name = "btnDocenteBuscar";
             this.btnDocenteBuscar.Size = new System.Drawing.Size(85, 41);
             this.btnDocenteBuscar.TabIndex = 17;
@@ -1739,7 +1743,7 @@
             this.bunifuSeparator2.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.bunifuSeparator2.LineThickness = 5;
             this.bunifuSeparator2.Location = new System.Drawing.Point(31, 80);
-            this.bunifuSeparator2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.bunifuSeparator2.Margin = new System.Windows.Forms.Padding(4);
             this.bunifuSeparator2.Name = "bunifuSeparator2";
             this.bunifuSeparator2.Size = new System.Drawing.Size(96, 10);
             this.bunifuSeparator2.TabIndex = 3;
@@ -1788,7 +1792,7 @@
             this.Separator.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.Separator.LineThickness = 2;
             this.Separator.Location = new System.Drawing.Point(15, 177);
-            this.Separator.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Separator.Margin = new System.Windows.Forms.Padding(4);
             this.Separator.Name = "Separator";
             this.Separator.Size = new System.Drawing.Size(136, 10);
             this.Separator.TabIndex = 1;
@@ -1906,7 +1910,7 @@
             this.cbSeguir.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.cbSeguir.ForeColor = System.Drawing.Color.White;
             this.cbSeguir.Location = new System.Drawing.Point(341, 24);
-            this.cbSeguir.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbSeguir.Margin = new System.Windows.Forms.Padding(4);
             this.cbSeguir.Name = "cbSeguir";
             this.cbSeguir.Size = new System.Drawing.Size(20, 20);
             this.cbSeguir.TabIndex = 38;
@@ -1942,7 +1946,7 @@
             this.cbFecha.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.cbFecha.ForeColor = System.Drawing.Color.White;
             this.cbFecha.Location = new System.Drawing.Point(64, 24);
-            this.cbFecha.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbFecha.Margin = new System.Windows.Forms.Padding(4);
             this.cbFecha.Name = "cbFecha";
             this.cbFecha.Size = new System.Drawing.Size(20, 20);
             this.cbFecha.TabIndex = 31;
@@ -1967,7 +1971,7 @@
             this.cbNoControl.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.cbNoControl.ForeColor = System.Drawing.Color.White;
             this.cbNoControl.Location = new System.Drawing.Point(185, 24);
-            this.cbNoControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbNoControl.Margin = new System.Windows.Forms.Padding(4);
             this.cbNoControl.Name = "cbNoControl";
             this.cbNoControl.Size = new System.Drawing.Size(20, 20);
             this.cbNoControl.TabIndex = 29;
@@ -2051,11 +2055,12 @@
             this.botBusquedaAlumno.IdleForecolor = System.Drawing.Color.DarkCyan;
             this.botBusquedaAlumno.IdleLineColor = System.Drawing.Color.DarkCyan;
             this.botBusquedaAlumno.Location = new System.Drawing.Point(204, 412);
-            this.botBusquedaAlumno.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.botBusquedaAlumno.Margin = new System.Windows.Forms.Padding(5);
             this.botBusquedaAlumno.Name = "botBusquedaAlumno";
             this.botBusquedaAlumno.Size = new System.Drawing.Size(156, 41);
             this.botBusquedaAlumno.TabIndex = 25;
             this.botBusquedaAlumno.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.botBusquedaAlumno.Click += new System.EventHandler(this.botBusquedaAlumno_Click);
             // 
             // cbOtroBusqueda
             // 
@@ -2065,7 +2070,7 @@
             this.cbOtroBusqueda.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.cbOtroBusqueda.ForeColor = System.Drawing.Color.White;
             this.cbOtroBusqueda.Location = new System.Drawing.Point(429, 65);
-            this.cbOtroBusqueda.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbOtroBusqueda.Margin = new System.Windows.Forms.Padding(4);
             this.cbOtroBusqueda.Name = "cbOtroBusqueda";
             this.cbOtroBusqueda.Size = new System.Drawing.Size(20, 20);
             this.cbOtroBusqueda.TabIndex = 5;
@@ -2090,7 +2095,7 @@
             this.cbDocenteBusqueda.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.cbDocenteBusqueda.ForeColor = System.Drawing.Color.White;
             this.cbDocenteBusqueda.Location = new System.Drawing.Point(231, 65);
-            this.cbDocenteBusqueda.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbDocenteBusqueda.Margin = new System.Windows.Forms.Padding(4);
             this.cbDocenteBusqueda.Name = "cbDocenteBusqueda";
             this.cbDocenteBusqueda.Size = new System.Drawing.Size(20, 20);
             this.cbDocenteBusqueda.TabIndex = 3;
@@ -2115,7 +2120,7 @@
             this.cbAlumnoBusqueda.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.cbAlumnoBusqueda.ForeColor = System.Drawing.Color.White;
             this.cbAlumnoBusqueda.Location = new System.Drawing.Point(48, 65);
-            this.cbAlumnoBusqueda.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbAlumnoBusqueda.Margin = new System.Windows.Forms.Padding(4);
             this.cbAlumnoBusqueda.Name = "cbAlumnoBusqueda";
             this.cbAlumnoBusqueda.Size = new System.Drawing.Size(20, 20);
             this.cbAlumnoBusqueda.TabIndex = 1;
@@ -2164,7 +2169,7 @@
             this.btnExportar.IdleForecolor = System.Drawing.Color.DarkCyan;
             this.btnExportar.IdleLineColor = System.Drawing.Color.DarkCyan;
             this.btnExportar.Location = new System.Drawing.Point(440, 406);
-            this.btnExportar.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btnExportar.Margin = new System.Windows.Forms.Padding(5);
             this.btnExportar.Name = "btnExportar";
             this.btnExportar.Size = new System.Drawing.Size(116, 50);
             this.btnExportar.TabIndex = 39;
@@ -2192,7 +2197,7 @@
             this.botBack.IdleForecolor = System.Drawing.Color.DarkCyan;
             this.botBack.IdleLineColor = System.Drawing.Color.DarkCyan;
             this.botBack.Location = new System.Drawing.Point(18, 408);
-            this.botBack.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.botBack.Margin = new System.Windows.Forms.Padding(5);
             this.botBack.Name = "botBack";
             this.botBack.Size = new System.Drawing.Size(68, 41);
             this.botBack.TabIndex = 38;
@@ -2396,7 +2401,7 @@
             this.cbSELapso.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.cbSELapso.ForeColor = System.Drawing.Color.White;
             this.cbSELapso.Location = new System.Drawing.Point(35, 77);
-            this.cbSELapso.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbSELapso.Margin = new System.Windows.Forms.Padding(4);
             this.cbSELapso.Name = "cbSELapso";
             this.cbSELapso.Size = new System.Drawing.Size(20, 20);
             this.cbSELapso.TabIndex = 41;
@@ -2421,7 +2426,7 @@
             this.cbEvento.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.cbEvento.ForeColor = System.Drawing.Color.White;
             this.cbEvento.Location = new System.Drawing.Point(341, 23);
-            this.cbEvento.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbEvento.Margin = new System.Windows.Forms.Padding(4);
             this.cbEvento.Name = "cbEvento";
             this.cbEvento.Size = new System.Drawing.Size(20, 20);
             this.cbEvento.TabIndex = 38;
@@ -2457,7 +2462,7 @@
             this.cbSECarrera.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.cbSECarrera.ForeColor = System.Drawing.Color.White;
             this.cbSECarrera.Location = new System.Drawing.Point(35, 23);
-            this.cbSECarrera.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbSECarrera.Margin = new System.Windows.Forms.Padding(4);
             this.cbSECarrera.Name = "cbSECarrera";
             this.cbSECarrera.Size = new System.Drawing.Size(20, 20);
             this.cbSECarrera.TabIndex = 31;
@@ -2482,7 +2487,7 @@
             this.cbSEGeneracion.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.cbSEGeneracion.ForeColor = System.Drawing.Color.White;
             this.cbSEGeneracion.Location = new System.Drawing.Point(35, 50);
-            this.cbSEGeneracion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbSEGeneracion.Margin = new System.Windows.Forms.Padding(4);
             this.cbSEGeneracion.Name = "cbSEGeneracion";
             this.cbSEGeneracion.Size = new System.Drawing.Size(20, 20);
             this.cbSEGeneracion.TabIndex = 29;
@@ -2553,7 +2558,7 @@
             this.botSEBuscar.IdleForecolor = System.Drawing.Color.DarkCyan;
             this.botSEBuscar.IdleLineColor = System.Drawing.Color.DarkCyan;
             this.botSEBuscar.Location = new System.Drawing.Point(204, 412);
-            this.botSEBuscar.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.botSEBuscar.Margin = new System.Windows.Forms.Padding(5);
             this.botSEBuscar.Name = "botSEBuscar";
             this.botSEBuscar.Size = new System.Drawing.Size(156, 41);
             this.botSEBuscar.TabIndex = 25;
@@ -2568,7 +2573,7 @@
             this.cbSEOtro.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.cbSEOtro.ForeColor = System.Drawing.Color.White;
             this.cbSEOtro.Location = new System.Drawing.Point(429, 65);
-            this.cbSEOtro.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbSEOtro.Margin = new System.Windows.Forms.Padding(4);
             this.cbSEOtro.Name = "cbSEOtro";
             this.cbSEOtro.Size = new System.Drawing.Size(20, 20);
             this.cbSEOtro.TabIndex = 5;
@@ -2593,7 +2598,7 @@
             this.cbSEDocente.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.cbSEDocente.ForeColor = System.Drawing.Color.White;
             this.cbSEDocente.Location = new System.Drawing.Point(231, 65);
-            this.cbSEDocente.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbSEDocente.Margin = new System.Windows.Forms.Padding(4);
             this.cbSEDocente.Name = "cbSEDocente";
             this.cbSEDocente.Size = new System.Drawing.Size(20, 20);
             this.cbSEDocente.TabIndex = 3;
@@ -2618,7 +2623,7 @@
             this.cbSEAlumno.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.cbSEAlumno.ForeColor = System.Drawing.Color.White;
             this.cbSEAlumno.Location = new System.Drawing.Point(48, 65);
-            this.cbSEAlumno.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbSEAlumno.Margin = new System.Windows.Forms.Padding(4);
             this.cbSEAlumno.Name = "cbSEAlumno";
             this.cbSEAlumno.Size = new System.Drawing.Size(20, 20);
             this.cbSEAlumno.TabIndex = 1;
@@ -2698,7 +2703,7 @@
             this.btnAgregarEvento.IdleForecolor = System.Drawing.Color.DarkCyan;
             this.btnAgregarEvento.IdleLineColor = System.Drawing.Color.DarkCyan;
             this.btnAgregarEvento.Location = new System.Drawing.Point(169, 231);
-            this.btnAgregarEvento.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btnAgregarEvento.Margin = new System.Windows.Forms.Padding(5);
             this.btnAgregarEvento.Name = "btnAgregarEvento";
             this.btnAgregarEvento.Size = new System.Drawing.Size(156, 41);
             this.btnAgregarEvento.TabIndex = 26;
@@ -2724,6 +2729,7 @@
             this.tbEvento.Name = "tbEvento";
             this.tbEvento.Size = new System.Drawing.Size(236, 38);
             this.tbEvento.TabIndex = 36;
+            this.tbEvento.TextChanged += new System.EventHandler(this.tbEvento_TextChanged);
             // 
             // bunifuCustomLabel59
             // 
@@ -2741,12 +2747,14 @@
             this.tbFechaFinEvento.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.tbFechaFinEvento.BorderColor = System.Drawing.Color.BlueViolet;
             this.tbFechaFinEvento.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbFechaFinEvento.Enabled = false;
             this.tbFechaFinEvento.Location = new System.Drawing.Point(170, 124);
             this.tbFechaFinEvento.Name = "tbFechaFinEvento";
             this.tbFechaFinEvento.ReadOnly = true;
             this.tbFechaFinEvento.Size = new System.Drawing.Size(189, 20);
             this.tbFechaFinEvento.TabIndex = 34;
             this.tbFechaFinEvento.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tbFechaFinEvento_MouseClick);
+            this.tbFechaFinEvento.TextChanged += new System.EventHandler(this.tbFechaFinEvento_TextChanged);
             // 
             // bunifuCustomLabel60
             // 
@@ -2770,6 +2778,7 @@
             this.tbFechaIniEvento.Size = new System.Drawing.Size(189, 20);
             this.tbFechaIniEvento.TabIndex = 32;
             this.tbFechaIniEvento.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tbFechaIniEvento_MouseClick);
+            this.tbFechaIniEvento.TextChanged += new System.EventHandler(this.tbFechaIniEvento_TextChanged);
             // 
             // bunifuCustomLabel61
             // 
@@ -2796,7 +2805,7 @@
             this.pnlCertificado.Controls.Add(this.bunifuCustomLabel28);
             this.pnlCertificado.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlCertificado.Location = new System.Drawing.Point(0, 0);
-            this.pnlCertificado.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlCertificado.Margin = new System.Windows.Forms.Padding(2);
             this.pnlCertificado.Name = "pnlCertificado";
             this.pnlCertificado.Size = new System.Drawing.Size(736, 469);
             this.pnlCertificado.TabIndex = 35;
@@ -2810,7 +2819,7 @@
             this.pnlListaCerti.Controls.Add(this.dgvListaCerti);
             this.pnlListaCerti.Controls.Add(this.bunifuCustomLabel30);
             this.pnlListaCerti.Location = new System.Drawing.Point(170, 53);
-            this.pnlListaCerti.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlListaCerti.Margin = new System.Windows.Forms.Padding(2);
             this.pnlListaCerti.Name = "pnlListaCerti";
             this.pnlListaCerti.Size = new System.Drawing.Size(508, 328);
             this.pnlListaCerti.TabIndex = 34;
@@ -2904,7 +2913,7 @@
             this.dgvListaCerti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvListaCerti.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dgvListaCerti.Location = new System.Drawing.Point(0, 44);
-            this.dgvListaCerti.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvListaCerti.Margin = new System.Windows.Forms.Padding(2);
             this.dgvListaCerti.Name = "dgvListaCerti";
             this.dgvListaCerti.RowTemplate.Height = 24;
             this.dgvListaCerti.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -2966,7 +2975,7 @@
             this.chbOtro.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chbOtro.ForeColor = System.Drawing.Color.DarkSlateBlue;
             this.chbOtro.Location = new System.Drawing.Point(174, 94);
-            this.chbOtro.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chbOtro.Margin = new System.Windows.Forms.Padding(2);
             this.chbOtro.Name = "chbOtro";
             this.chbOtro.Size = new System.Drawing.Size(212, 17);
             this.chbOtro.TabIndex = 36;
@@ -2983,7 +2992,7 @@
             "Certificado Medico",
             "Receta"});
             this.cbTipoDct.Location = new System.Drawing.Point(174, 137);
-            this.cbTipoDct.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbTipoDct.Margin = new System.Windows.Forms.Padding(2);
             this.cbTipoDct.Name = "cbTipoDct";
             this.cbTipoDct.Size = new System.Drawing.Size(177, 21);
             this.cbTipoDct.TabIndex = 35;
@@ -3108,9 +3117,9 @@
             // 
             // pnlAdministracion
             // 
+            this.pnlAdministracion.Controls.Add(this.pnlAdminUsr);
             this.pnlAdministracion.Controls.Add(this.pnlAdminAltaDocente);
             this.pnlAdministracion.Controls.Add(this.pnlAltaAlumno);
-            this.pnlAdministracion.Controls.Add(this.pnlAdminUsr);
             this.pnlAdministracion.Controls.Add(this.pnlAdminMedDia);
             this.pnlAdministracion.Controls.Add(this.btnAdminAlumno);
             this.pnlAdministracion.Controls.Add(this.btnAdminUsuarios);
@@ -3123,6 +3132,403 @@
             this.pnlAdministracion.Size = new System.Drawing.Size(571, 469);
             this.pnlAdministracion.TabIndex = 36;
             this.pnlAdministracion.Visible = false;
+            // 
+            // pnlAdminUsr
+            // 
+            this.pnlAdminUsr.Controls.Add(this.tbAdminNombreCompleto);
+            this.pnlAdminUsr.Controls.Add(this.tbAdminCedulaProfesional);
+            this.pnlAdminUsr.Controls.Add(this.bunifuCustomLabel65);
+            this.pnlAdminUsr.Controls.Add(this.bunifuCustomLabel66);
+            this.pnlAdminUsr.Controls.Add(this.btnAdminAltaUsr);
+            this.pnlAdminUsr.Controls.Add(this.tbAdminAltaUsr);
+            this.pnlAdminUsr.Controls.Add(this.bunifuCustomLabel44);
+            this.pnlAdminUsr.Controls.Add(this.tbAdminAltaConfirmPsw);
+            this.pnlAdminUsr.Controls.Add(this.tbAdminAltaPsw);
+            this.pnlAdminUsr.Controls.Add(this.bunifuCustomLabel45);
+            this.pnlAdminUsr.Controls.Add(this.bunifuCustomLabel43);
+            this.pnlAdminUsr.Controls.Add(this.btnAdminUsrBaja);
+            this.pnlAdminUsr.Controls.Add(this.bunifuCustomLabel41);
+            this.pnlAdminUsr.Controls.Add(this.tbAdminConfirmBaja);
+            this.pnlAdminUsr.Controls.Add(this.bunifuCustomLabel42);
+            this.pnlAdminUsr.Controls.Add(this.cbAdminBajaUsr);
+            this.pnlAdminUsr.Controls.Add(this.bunifuCustomLabel40);
+            this.pnlAdminUsr.Controls.Add(this.btnAdminCambiaPsw);
+            this.pnlAdminUsr.Controls.Add(this.bunifuCustomLabel39);
+            this.pnlAdminUsr.Controls.Add(this.tbAdminCambioConfirmaPsw);
+            this.pnlAdminUsr.Controls.Add(this.tbAdminCambioPsw);
+            this.pnlAdminUsr.Controls.Add(this.bunifuCustomLabel38);
+            this.pnlAdminUsr.Controls.Add(this.bunifuCustomLabel37);
+            this.pnlAdminUsr.Controls.Add(this.cbAdminCambioPswUsr);
+            this.pnlAdminUsr.Controls.Add(this.bunifuCustomLabel32);
+            this.pnlAdminUsr.Controls.Add(this.bunifuSeparator7);
+            this.pnlAdminUsr.Controls.Add(this.bunifuCustomLabel35);
+            this.pnlAdminUsr.Controls.Add(this.bunifuCustomLabel36);
+            this.pnlAdminUsr.Controls.Add(this.bunifuSeparator8);
+            this.pnlAdminUsr.Location = new System.Drawing.Point(12, 69);
+            this.pnlAdminUsr.Name = "pnlAdminUsr";
+            this.pnlAdminUsr.Size = new System.Drawing.Size(552, 396);
+            this.pnlAdminUsr.TabIndex = 24;
+            this.pnlAdminUsr.Visible = false;
+            // 
+            // tbAdminNombreCompleto
+            // 
+            this.tbAdminNombreCompleto.Enabled = false;
+            this.tbAdminNombreCompleto.Location = new System.Drawing.Point(209, 284);
+            this.tbAdminNombreCompleto.MaxLength = 60;
+            this.tbAdminNombreCompleto.Name = "tbAdminNombreCompleto";
+            this.tbAdminNombreCompleto.Size = new System.Drawing.Size(329, 20);
+            this.tbAdminNombreCompleto.TabIndex = 73;
+            this.tbAdminNombreCompleto.TextChanged += new System.EventHandler(this.tbAdminNombreCompleto_TextChanged);
+            // 
+            // tbAdminCedulaProfesional
+            // 
+            this.tbAdminCedulaProfesional.Enabled = false;
+            this.tbAdminCedulaProfesional.Location = new System.Drawing.Point(209, 323);
+            this.tbAdminCedulaProfesional.MaxLength = 20;
+            this.tbAdminCedulaProfesional.Name = "tbAdminCedulaProfesional";
+            this.tbAdminCedulaProfesional.Size = new System.Drawing.Size(180, 20);
+            this.tbAdminCedulaProfesional.TabIndex = 72;
+            this.tbAdminCedulaProfesional.TextChanged += new System.EventHandler(this.tbAdminCedulaProfesional_TextChanged);
+            // 
+            // bunifuCustomLabel65
+            // 
+            this.bunifuCustomLabel65.AutoSize = true;
+            this.bunifuCustomLabel65.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bunifuCustomLabel65.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.bunifuCustomLabel65.Location = new System.Drawing.Point(203, 302);
+            this.bunifuCustomLabel65.Name = "bunifuCustomLabel65";
+            this.bunifuCustomLabel65.Size = new System.Drawing.Size(154, 21);
+            this.bunifuCustomLabel65.TabIndex = 71;
+            this.bunifuCustomLabel65.Text = "Cedula Profesional";
+            // 
+            // bunifuCustomLabel66
+            // 
+            this.bunifuCustomLabel66.AutoSize = true;
+            this.bunifuCustomLabel66.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bunifuCustomLabel66.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.bunifuCustomLabel66.Location = new System.Drawing.Point(203, 263);
+            this.bunifuCustomLabel66.Name = "bunifuCustomLabel66";
+            this.bunifuCustomLabel66.Size = new System.Drawing.Size(152, 21);
+            this.bunifuCustomLabel66.TabIndex = 70;
+            this.bunifuCustomLabel66.Text = "Nombre Completo";
+            // 
+            // btnAdminAltaUsr
+            // 
+            this.btnAdminAltaUsr.ActiveBorderThickness = 1;
+            this.btnAdminAltaUsr.ActiveCornerRadius = 20;
+            this.btnAdminAltaUsr.ActiveFillColor = System.Drawing.Color.DarkRed;
+            this.btnAdminAltaUsr.ActiveForecolor = System.Drawing.Color.Transparent;
+            this.btnAdminAltaUsr.ActiveLineColor = System.Drawing.Color.DarkRed;
+            this.btnAdminAltaUsr.AllowDrop = true;
+            this.btnAdminAltaUsr.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnAdminAltaUsr.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAdminAltaUsr.BackgroundImage")));
+            this.btnAdminAltaUsr.ButtonText = "ALTA";
+            this.btnAdminAltaUsr.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAdminAltaUsr.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdminAltaUsr.ForeColor = System.Drawing.Color.DarkRed;
+            this.btnAdminAltaUsr.IdleBorderThickness = 1;
+            this.btnAdminAltaUsr.IdleCornerRadius = 20;
+            this.btnAdminAltaUsr.IdleFillColor = System.Drawing.Color.LightCoral;
+            this.btnAdminAltaUsr.IdleForecolor = System.Drawing.Color.Crimson;
+            this.btnAdminAltaUsr.IdleLineColor = System.Drawing.Color.DarkRed;
+            this.btnAdminAltaUsr.Location = new System.Drawing.Point(442, 349);
+            this.btnAdminAltaUsr.Margin = new System.Windows.Forms.Padding(5);
+            this.btnAdminAltaUsr.Name = "btnAdminAltaUsr";
+            this.btnAdminAltaUsr.Size = new System.Drawing.Size(80, 38);
+            this.btnAdminAltaUsr.TabIndex = 69;
+            this.btnAdminAltaUsr.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnAdminAltaUsr.Click += new System.EventHandler(this.btnAdminAltaUsr_Click);
+            // 
+            // tbAdminAltaUsr
+            // 
+            this.tbAdminAltaUsr.Location = new System.Drawing.Point(24, 280);
+            this.tbAdminAltaUsr.MaxLength = 40;
+            this.tbAdminAltaUsr.Name = "tbAdminAltaUsr";
+            this.tbAdminAltaUsr.Size = new System.Drawing.Size(145, 20);
+            this.tbAdminAltaUsr.TabIndex = 68;
+            this.tbAdminAltaUsr.TextChanged += new System.EventHandler(this.tbAdminAltaUsr_TextChanged);
+            // 
+            // bunifuCustomLabel44
+            // 
+            this.bunifuCustomLabel44.AutoSize = true;
+            this.bunifuCustomLabel44.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bunifuCustomLabel44.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.bunifuCustomLabel44.Location = new System.Drawing.Point(21, 342);
+            this.bunifuCustomLabel44.Name = "bunifuCustomLabel44";
+            this.bunifuCustomLabel44.Size = new System.Drawing.Size(122, 13);
+            this.bunifuCustomLabel44.TabIndex = 67;
+            this.bunifuCustomLabel44.Text = "Confirmar contraseña:";
+            // 
+            // tbAdminAltaConfirmPsw
+            // 
+            this.tbAdminAltaConfirmPsw.Enabled = false;
+            this.tbAdminAltaConfirmPsw.Location = new System.Drawing.Point(25, 357);
+            this.tbAdminAltaConfirmPsw.MaxLength = 40;
+            this.tbAdminAltaConfirmPsw.Name = "tbAdminAltaConfirmPsw";
+            this.tbAdminAltaConfirmPsw.Size = new System.Drawing.Size(145, 20);
+            this.tbAdminAltaConfirmPsw.TabIndex = 66;
+            this.tbAdminAltaConfirmPsw.TextChanged += new System.EventHandler(this.tbAdminAltaConfirmPsw_TextChanged);
+            // 
+            // tbAdminAltaPsw
+            // 
+            this.tbAdminAltaPsw.Enabled = false;
+            this.tbAdminAltaPsw.Location = new System.Drawing.Point(24, 319);
+            this.tbAdminAltaPsw.MaxLength = 40;
+            this.tbAdminAltaPsw.Name = "tbAdminAltaPsw";
+            this.tbAdminAltaPsw.Size = new System.Drawing.Size(145, 20);
+            this.tbAdminAltaPsw.TabIndex = 65;
+            this.tbAdminAltaPsw.TextChanged += new System.EventHandler(this.tbAdminAltaPsw_TextChanged);
+            // 
+            // bunifuCustomLabel45
+            // 
+            this.bunifuCustomLabel45.AutoSize = true;
+            this.bunifuCustomLabel45.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bunifuCustomLabel45.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.bunifuCustomLabel45.Location = new System.Drawing.Point(18, 298);
+            this.bunifuCustomLabel45.Name = "bunifuCustomLabel45";
+            this.bunifuCustomLabel45.Size = new System.Drawing.Size(100, 21);
+            this.bunifuCustomLabel45.TabIndex = 64;
+            this.bunifuCustomLabel45.Text = "Contraseña:";
+            // 
+            // bunifuCustomLabel43
+            // 
+            this.bunifuCustomLabel43.AutoSize = true;
+            this.bunifuCustomLabel43.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bunifuCustomLabel43.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.bunifuCustomLabel43.Location = new System.Drawing.Point(18, 259);
+            this.bunifuCustomLabel43.Name = "bunifuCustomLabel43";
+            this.bunifuCustomLabel43.Size = new System.Drawing.Size(73, 21);
+            this.bunifuCustomLabel43.TabIndex = 63;
+            this.bunifuCustomLabel43.Text = "Usuario:";
+            // 
+            // btnAdminUsrBaja
+            // 
+            this.btnAdminUsrBaja.ActiveBorderThickness = 1;
+            this.btnAdminUsrBaja.ActiveCornerRadius = 20;
+            this.btnAdminUsrBaja.ActiveFillColor = System.Drawing.Color.DarkRed;
+            this.btnAdminUsrBaja.ActiveForecolor = System.Drawing.Color.Transparent;
+            this.btnAdminUsrBaja.ActiveLineColor = System.Drawing.Color.DarkRed;
+            this.btnAdminUsrBaja.AllowDrop = true;
+            this.btnAdminUsrBaja.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnAdminUsrBaja.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAdminUsrBaja.BackgroundImage")));
+            this.btnAdminUsrBaja.ButtonText = "BAJA";
+            this.btnAdminUsrBaja.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAdminUsrBaja.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdminUsrBaja.ForeColor = System.Drawing.Color.DarkRed;
+            this.btnAdminUsrBaja.IdleBorderThickness = 1;
+            this.btnAdminUsrBaja.IdleCornerRadius = 20;
+            this.btnAdminUsrBaja.IdleFillColor = System.Drawing.Color.LightCoral;
+            this.btnAdminUsrBaja.IdleForecolor = System.Drawing.Color.Crimson;
+            this.btnAdminUsrBaja.IdleLineColor = System.Drawing.Color.DarkRed;
+            this.btnAdminUsrBaja.Location = new System.Drawing.Point(395, 175);
+            this.btnAdminUsrBaja.Margin = new System.Windows.Forms.Padding(5);
+            this.btnAdminUsrBaja.Name = "btnAdminUsrBaja";
+            this.btnAdminUsrBaja.Size = new System.Drawing.Size(80, 38);
+            this.btnAdminUsrBaja.TabIndex = 61;
+            this.btnAdminUsrBaja.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnAdminUsrBaja.Visible = false;
+            this.btnAdminUsrBaja.Click += new System.EventHandler(this.btnAdminUsrBaja_Click);
+            // 
+            // bunifuCustomLabel41
+            // 
+            this.bunifuCustomLabel41.AutoSize = true;
+            this.bunifuCustomLabel41.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bunifuCustomLabel41.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.bunifuCustomLabel41.Location = new System.Drawing.Point(333, 132);
+            this.bunifuCustomLabel41.Name = "bunifuCustomLabel41";
+            this.bunifuCustomLabel41.Size = new System.Drawing.Size(131, 13);
+            this.bunifuCustomLabel41.TabIndex = 60;
+            this.bunifuCustomLabel41.Text = "Escriba la palabra BAJA:";
+            // 
+            // tbAdminConfirmBaja
+            // 
+            this.tbAdminConfirmBaja.Location = new System.Drawing.Point(332, 150);
+            this.tbAdminConfirmBaja.MaxLength = 4;
+            this.tbAdminConfirmBaja.Name = "tbAdminConfirmBaja";
+            this.tbAdminConfirmBaja.Size = new System.Drawing.Size(73, 20);
+            this.tbAdminConfirmBaja.TabIndex = 59;
+            this.tbAdminConfirmBaja.TextChanged += new System.EventHandler(this.tbAdminConfirmBaja_TextChanged);
+            // 
+            // bunifuCustomLabel42
+            // 
+            this.bunifuCustomLabel42.AutoSize = true;
+            this.bunifuCustomLabel42.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bunifuCustomLabel42.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.bunifuCustomLabel42.Location = new System.Drawing.Point(328, 87);
+            this.bunifuCustomLabel42.Name = "bunifuCustomLabel42";
+            this.bunifuCustomLabel42.Size = new System.Drawing.Size(73, 21);
+            this.bunifuCustomLabel42.TabIndex = 57;
+            this.bunifuCustomLabel42.Text = "Usuario:";
+            // 
+            // cbAdminBajaUsr
+            // 
+            this.cbAdminBajaUsr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbAdminBajaUsr.FormattingEnabled = true;
+            this.cbAdminBajaUsr.Location = new System.Drawing.Point(332, 109);
+            this.cbAdminBajaUsr.Name = "cbAdminBajaUsr";
+            this.cbAdminBajaUsr.Size = new System.Drawing.Size(207, 21);
+            this.cbAdminBajaUsr.TabIndex = 56;
+            this.cbAdminBajaUsr.Click += new System.EventHandler(this.cbAdminBajaUsr_Click);
+            // 
+            // bunifuCustomLabel40
+            // 
+            this.bunifuCustomLabel40.AutoSize = true;
+            this.bunifuCustomLabel40.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bunifuCustomLabel40.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.bunifuCustomLabel40.Location = new System.Drawing.Point(325, 56);
+            this.bunifuCustomLabel40.Name = "bunifuCustomLabel40";
+            this.bunifuCustomLabel40.Size = new System.Drawing.Size(191, 32);
+            this.bunifuCustomLabel40.TabIndex = 55;
+            this.bunifuCustomLabel40.Text = "Baja de usuario";
+            // 
+            // btnAdminCambiaPsw
+            // 
+            this.btnAdminCambiaPsw.ActiveBorderThickness = 1;
+            this.btnAdminCambiaPsw.ActiveCornerRadius = 20;
+            this.btnAdminCambiaPsw.ActiveFillColor = System.Drawing.Color.DarkRed;
+            this.btnAdminCambiaPsw.ActiveForecolor = System.Drawing.Color.Transparent;
+            this.btnAdminCambiaPsw.ActiveLineColor = System.Drawing.Color.DarkRed;
+            this.btnAdminCambiaPsw.AllowDrop = true;
+            this.btnAdminCambiaPsw.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnAdminCambiaPsw.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAdminCambiaPsw.BackgroundImage")));
+            this.btnAdminCambiaPsw.ButtonText = "Cambiar contraseña";
+            this.btnAdminCambiaPsw.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAdminCambiaPsw.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdminCambiaPsw.ForeColor = System.Drawing.Color.DarkRed;
+            this.btnAdminCambiaPsw.IdleBorderThickness = 1;
+            this.btnAdminCambiaPsw.IdleCornerRadius = 20;
+            this.btnAdminCambiaPsw.IdleFillColor = System.Drawing.Color.LightCoral;
+            this.btnAdminCambiaPsw.IdleForecolor = System.Drawing.Color.Crimson;
+            this.btnAdminCambiaPsw.IdleLineColor = System.Drawing.Color.DarkRed;
+            this.btnAdminCambiaPsw.Location = new System.Drawing.Point(181, 143);
+            this.btnAdminCambiaPsw.Margin = new System.Windows.Forms.Padding(5);
+            this.btnAdminCambiaPsw.Name = "btnAdminCambiaPsw";
+            this.btnAdminCambiaPsw.Size = new System.Drawing.Size(120, 70);
+            this.btnAdminCambiaPsw.TabIndex = 54;
+            this.btnAdminCambiaPsw.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnAdminCambiaPsw.Visible = false;
+            this.btnAdminCambiaPsw.Click += new System.EventHandler(this.btnAdminCambiaPsw_Click);
+            // 
+            // bunifuCustomLabel39
+            // 
+            this.bunifuCustomLabel39.AutoSize = true;
+            this.bunifuCustomLabel39.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bunifuCustomLabel39.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.bunifuCustomLabel39.Location = new System.Drawing.Point(13, 175);
+            this.bunifuCustomLabel39.Name = "bunifuCustomLabel39";
+            this.bunifuCustomLabel39.Size = new System.Drawing.Size(122, 13);
+            this.bunifuCustomLabel39.TabIndex = 53;
+            this.bunifuCustomLabel39.Text = "Confirmar contraseña:";
+            // 
+            // tbAdminCambioConfirmaPsw
+            // 
+            this.tbAdminCambioConfirmaPsw.Enabled = false;
+            this.tbAdminCambioConfirmaPsw.Location = new System.Drawing.Point(16, 191);
+            this.tbAdminCambioConfirmaPsw.MaxLength = 40;
+            this.tbAdminCambioConfirmaPsw.Name = "tbAdminCambioConfirmaPsw";
+            this.tbAdminCambioConfirmaPsw.Size = new System.Drawing.Size(145, 20);
+            this.tbAdminCambioConfirmaPsw.TabIndex = 52;
+            this.tbAdminCambioConfirmaPsw.TextChanged += new System.EventHandler(this.tbAdminCambioConfirmaPsw_TextChanged);
+            // 
+            // tbAdminCambioPsw
+            // 
+            this.tbAdminCambioPsw.Location = new System.Drawing.Point(16, 154);
+            this.tbAdminCambioPsw.MaxLength = 40;
+            this.tbAdminCambioPsw.Name = "tbAdminCambioPsw";
+            this.tbAdminCambioPsw.Size = new System.Drawing.Size(145, 20);
+            this.tbAdminCambioPsw.TabIndex = 51;
+            this.tbAdminCambioPsw.TextChanged += new System.EventHandler(this.tbAdminCambioPsw_TextChanged);
+            // 
+            // bunifuCustomLabel38
+            // 
+            this.bunifuCustomLabel38.AutoSize = true;
+            this.bunifuCustomLabel38.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bunifuCustomLabel38.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.bunifuCustomLabel38.Location = new System.Drawing.Point(12, 131);
+            this.bunifuCustomLabel38.Name = "bunifuCustomLabel38";
+            this.bunifuCustomLabel38.Size = new System.Drawing.Size(152, 21);
+            this.bunifuCustomLabel38.TabIndex = 50;
+            this.bunifuCustomLabel38.Text = "Nueva contraseña:";
+            // 
+            // bunifuCustomLabel37
+            // 
+            this.bunifuCustomLabel37.AutoSize = true;
+            this.bunifuCustomLabel37.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bunifuCustomLabel37.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.bunifuCustomLabel37.Location = new System.Drawing.Point(12, 85);
+            this.bunifuCustomLabel37.Name = "bunifuCustomLabel37";
+            this.bunifuCustomLabel37.Size = new System.Drawing.Size(73, 21);
+            this.bunifuCustomLabel37.TabIndex = 49;
+            this.bunifuCustomLabel37.Text = "Usuario:";
+            // 
+            // cbAdminCambioPswUsr
+            // 
+            this.cbAdminCambioPswUsr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbAdminCambioPswUsr.FormattingEnabled = true;
+            this.cbAdminCambioPswUsr.Location = new System.Drawing.Point(16, 107);
+            this.cbAdminCambioPswUsr.Name = "cbAdminCambioPswUsr";
+            this.cbAdminCambioPswUsr.Size = new System.Drawing.Size(207, 21);
+            this.cbAdminCambioPswUsr.TabIndex = 48;
+            this.cbAdminCambioPswUsr.Click += new System.EventHandler(this.cbAdminCambioPswUsr_Click);
+            // 
+            // bunifuCustomLabel32
+            // 
+            this.bunifuCustomLabel32.AutoSize = true;
+            this.bunifuCustomLabel32.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bunifuCustomLabel32.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.bunifuCustomLabel32.Location = new System.Drawing.Point(10, 228);
+            this.bunifuCustomLabel32.Name = "bunifuCustomLabel32";
+            this.bunifuCustomLabel32.Size = new System.Drawing.Size(189, 32);
+            this.bunifuCustomLabel32.TabIndex = 47;
+            this.bunifuCustomLabel32.Text = "Alta de usuario";
+            // 
+            // bunifuSeparator7
+            // 
+            this.bunifuSeparator7.BackColor = System.Drawing.Color.Transparent;
+            this.bunifuSeparator7.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
+            this.bunifuSeparator7.LineThickness = 2;
+            this.bunifuSeparator7.Location = new System.Drawing.Point(21, 214);
+            this.bunifuSeparator7.Margin = new System.Windows.Forms.Padding(4);
+            this.bunifuSeparator7.Name = "bunifuSeparator7";
+            this.bunifuSeparator7.Size = new System.Drawing.Size(510, 10);
+            this.bunifuSeparator7.TabIndex = 46;
+            this.bunifuSeparator7.Transparency = 255;
+            this.bunifuSeparator7.Vertical = false;
+            // 
+            // bunifuCustomLabel35
+            // 
+            this.bunifuCustomLabel35.AutoSize = true;
+            this.bunifuCustomLabel35.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bunifuCustomLabel35.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.bunifuCustomLabel35.Location = new System.Drawing.Point(3, 52);
+            this.bunifuCustomLabel35.Name = "bunifuCustomLabel35";
+            this.bunifuCustomLabel35.Size = new System.Drawing.Size(270, 32);
+            this.bunifuCustomLabel35.TabIndex = 45;
+            this.bunifuCustomLabel35.Text = "Cambio de contraseña";
+            // 
+            // bunifuCustomLabel36
+            // 
+            this.bunifuCustomLabel36.AutoSize = true;
+            this.bunifuCustomLabel36.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bunifuCustomLabel36.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.bunifuCustomLabel36.Location = new System.Drawing.Point(94, 3);
+            this.bunifuCustomLabel36.Name = "bunifuCustomLabel36";
+            this.bunifuCustomLabel36.Size = new System.Drawing.Size(366, 37);
+            this.bunifuCustomLabel36.TabIndex = 44;
+            this.bunifuCustomLabel36.Text = "Administracion de usuarios";
+            // 
+            // bunifuSeparator8
+            // 
+            this.bunifuSeparator8.BackColor = System.Drawing.Color.Transparent;
+            this.bunifuSeparator8.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
+            this.bunifuSeparator8.LineThickness = 2;
+            this.bunifuSeparator8.Location = new System.Drawing.Point(18, 41);
+            this.bunifuSeparator8.Margin = new System.Windows.Forms.Padding(4);
+            this.bunifuSeparator8.Name = "bunifuSeparator8";
+            this.bunifuSeparator8.Size = new System.Drawing.Size(510, 10);
+            this.bunifuSeparator8.TabIndex = 43;
+            this.bunifuSeparator8.Transparency = 255;
+            this.bunifuSeparator8.Vertical = false;
             // 
             // pnlAdminAltaDocente
             // 
@@ -3168,7 +3574,7 @@
             this.btnAdminExeAltaDocente.IdleForecolor = System.Drawing.Color.Crimson;
             this.btnAdminExeAltaDocente.IdleLineColor = System.Drawing.Color.DarkRed;
             this.btnAdminExeAltaDocente.Location = new System.Drawing.Point(149, 134);
-            this.btnAdminExeAltaDocente.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btnAdminExeAltaDocente.Margin = new System.Windows.Forms.Padding(5);
             this.btnAdminExeAltaDocente.Name = "btnAdminExeAltaDocente";
             this.btnAdminExeAltaDocente.Size = new System.Drawing.Size(228, 55);
             this.btnAdminExeAltaDocente.TabIndex = 47;
@@ -3203,7 +3609,7 @@
             this.bunifuSeparator9.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.bunifuSeparator9.LineThickness = 2;
             this.bunifuSeparator9.Location = new System.Drawing.Point(24, 53);
-            this.bunifuSeparator9.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.bunifuSeparator9.Margin = new System.Windows.Forms.Padding(4);
             this.bunifuSeparator9.Name = "bunifuSeparator9";
             this.bunifuSeparator9.Size = new System.Drawing.Size(510, 10);
             this.bunifuSeparator9.TabIndex = 44;
@@ -3247,7 +3653,7 @@
             this.btnAdminAltaAlumnoEvento.IdleForecolor = System.Drawing.Color.Crimson;
             this.btnAdminAltaAlumnoEvento.IdleLineColor = System.Drawing.Color.DarkRed;
             this.btnAdminAltaAlumnoEvento.Location = new System.Drawing.Point(346, 252);
-            this.btnAdminAltaAlumnoEvento.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btnAdminAltaAlumnoEvento.Margin = new System.Windows.Forms.Padding(5);
             this.btnAdminAltaAlumnoEvento.Name = "btnAdminAltaAlumnoEvento";
             this.btnAdminAltaAlumnoEvento.Size = new System.Drawing.Size(171, 73);
             this.btnAdminAltaAlumnoEvento.TabIndex = 46;
@@ -3285,7 +3691,7 @@
             this.btnAltaAlumnosITH.IdleForecolor = System.Drawing.Color.Crimson;
             this.btnAltaAlumnosITH.IdleLineColor = System.Drawing.Color.DarkRed;
             this.btnAltaAlumnosITH.Location = new System.Drawing.Point(155, 112);
-            this.btnAltaAlumnosITH.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btnAltaAlumnosITH.Margin = new System.Windows.Forms.Padding(5);
             this.btnAltaAlumnosITH.Name = "btnAltaAlumnosITH";
             this.btnAltaAlumnosITH.Size = new System.Drawing.Size(228, 55);
             this.btnAltaAlumnosITH.TabIndex = 43;
@@ -3309,7 +3715,7 @@
             this.bunifuSeparator6.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.bunifuSeparator6.LineThickness = 2;
             this.bunifuSeparator6.Location = new System.Drawing.Point(19, 204);
-            this.bunifuSeparator6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.bunifuSeparator6.Margin = new System.Windows.Forms.Padding(4);
             this.bunifuSeparator6.Name = "bunifuSeparator6";
             this.bunifuSeparator6.Size = new System.Drawing.Size(510, 10);
             this.bunifuSeparator6.TabIndex = 41;
@@ -3344,363 +3750,12 @@
             this.bunifuSeparator5.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.bunifuSeparator5.LineThickness = 2;
             this.bunifuSeparator5.Location = new System.Drawing.Point(16, 56);
-            this.bunifuSeparator5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.bunifuSeparator5.Margin = new System.Windows.Forms.Padding(4);
             this.bunifuSeparator5.Name = "bunifuSeparator5";
             this.bunifuSeparator5.Size = new System.Drawing.Size(510, 10);
             this.bunifuSeparator5.TabIndex = 38;
             this.bunifuSeparator5.Transparency = 255;
             this.bunifuSeparator5.Vertical = false;
-            // 
-            // pnlAdminUsr
-            // 
-            this.pnlAdminUsr.Controls.Add(this.btnAdminAltaUsr);
-            this.pnlAdminUsr.Controls.Add(this.tbAdminAltaUsr);
-            this.pnlAdminUsr.Controls.Add(this.bunifuCustomLabel44);
-            this.pnlAdminUsr.Controls.Add(this.tbAdminAltaConfirmPsw);
-            this.pnlAdminUsr.Controls.Add(this.tbAdminAltaPsw);
-            this.pnlAdminUsr.Controls.Add(this.bunifuCustomLabel45);
-            this.pnlAdminUsr.Controls.Add(this.bunifuCustomLabel43);
-            this.pnlAdminUsr.Controls.Add(this.btnAdminUsrBaja);
-            this.pnlAdminUsr.Controls.Add(this.bunifuCustomLabel41);
-            this.pnlAdminUsr.Controls.Add(this.tbAdminConfirmBaja);
-            this.pnlAdminUsr.Controls.Add(this.bunifuCustomLabel42);
-            this.pnlAdminUsr.Controls.Add(this.cbAdminBajaUsr);
-            this.pnlAdminUsr.Controls.Add(this.bunifuCustomLabel40);
-            this.pnlAdminUsr.Controls.Add(this.btnAdminCambiaPsw);
-            this.pnlAdminUsr.Controls.Add(this.bunifuCustomLabel39);
-            this.pnlAdminUsr.Controls.Add(this.tbAdminCambioConfirmaPsw);
-            this.pnlAdminUsr.Controls.Add(this.tbAdminCambioPsw);
-            this.pnlAdminUsr.Controls.Add(this.bunifuCustomLabel38);
-            this.pnlAdminUsr.Controls.Add(this.bunifuCustomLabel37);
-            this.pnlAdminUsr.Controls.Add(this.cbAdminCambioPswUsr);
-            this.pnlAdminUsr.Controls.Add(this.bunifuCustomLabel32);
-            this.pnlAdminUsr.Controls.Add(this.bunifuSeparator7);
-            this.pnlAdminUsr.Controls.Add(this.bunifuCustomLabel35);
-            this.pnlAdminUsr.Controls.Add(this.bunifuCustomLabel36);
-            this.pnlAdminUsr.Controls.Add(this.bunifuSeparator8);
-            this.pnlAdminUsr.Location = new System.Drawing.Point(12, 69);
-            this.pnlAdminUsr.Name = "pnlAdminUsr";
-            this.pnlAdminUsr.Size = new System.Drawing.Size(552, 393);
-            this.pnlAdminUsr.TabIndex = 24;
-            this.pnlAdminUsr.Visible = false;
-            // 
-            // btnAdminAltaUsr
-            // 
-            this.btnAdminAltaUsr.ActiveBorderThickness = 1;
-            this.btnAdminAltaUsr.ActiveCornerRadius = 20;
-            this.btnAdminAltaUsr.ActiveFillColor = System.Drawing.Color.DarkRed;
-            this.btnAdminAltaUsr.ActiveForecolor = System.Drawing.Color.Transparent;
-            this.btnAdminAltaUsr.ActiveLineColor = System.Drawing.Color.DarkRed;
-            this.btnAdminAltaUsr.AllowDrop = true;
-            this.btnAdminAltaUsr.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.btnAdminAltaUsr.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAdminAltaUsr.BackgroundImage")));
-            this.btnAdminAltaUsr.ButtonText = "ALTA";
-            this.btnAdminAltaUsr.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAdminAltaUsr.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdminAltaUsr.ForeColor = System.Drawing.Color.DarkRed;
-            this.btnAdminAltaUsr.IdleBorderThickness = 1;
-            this.btnAdminAltaUsr.IdleCornerRadius = 20;
-            this.btnAdminAltaUsr.IdleFillColor = System.Drawing.Color.LightCoral;
-            this.btnAdminAltaUsr.IdleForecolor = System.Drawing.Color.Crimson;
-            this.btnAdminAltaUsr.IdleLineColor = System.Drawing.Color.DarkRed;
-            this.btnAdminAltaUsr.Location = new System.Drawing.Point(459, 343);
-            this.btnAdminAltaUsr.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.btnAdminAltaUsr.Name = "btnAdminAltaUsr";
-            this.btnAdminAltaUsr.Size = new System.Drawing.Size(80, 38);
-            this.btnAdminAltaUsr.TabIndex = 69;
-            this.btnAdminAltaUsr.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnAdminAltaUsr.Click += new System.EventHandler(this.btnAdminAltaUsr_Click);
-            // 
-            // tbAdminAltaUsr
-            // 
-            this.tbAdminAltaUsr.Location = new System.Drawing.Point(295, 276);
-            this.tbAdminAltaUsr.MaxLength = 40;
-            this.tbAdminAltaUsr.Name = "tbAdminAltaUsr";
-            this.tbAdminAltaUsr.Size = new System.Drawing.Size(145, 20);
-            this.tbAdminAltaUsr.TabIndex = 68;
-            this.tbAdminAltaUsr.TextChanged += new System.EventHandler(this.tbAdminAltaUsr_TextChanged);
-            // 
-            // bunifuCustomLabel44
-            // 
-            this.bunifuCustomLabel44.AutoSize = true;
-            this.bunifuCustomLabel44.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bunifuCustomLabel44.ForeColor = System.Drawing.Color.DarkSlateBlue;
-            this.bunifuCustomLabel44.Location = new System.Drawing.Point(292, 338);
-            this.bunifuCustomLabel44.Name = "bunifuCustomLabel44";
-            this.bunifuCustomLabel44.Size = new System.Drawing.Size(122, 13);
-            this.bunifuCustomLabel44.TabIndex = 67;
-            this.bunifuCustomLabel44.Text = "Confirmar contraseña:";
-            // 
-            // tbAdminAltaConfirmPsw
-            // 
-            this.tbAdminAltaConfirmPsw.Enabled = false;
-            this.tbAdminAltaConfirmPsw.Location = new System.Drawing.Point(296, 353);
-            this.tbAdminAltaConfirmPsw.MaxLength = 40;
-            this.tbAdminAltaConfirmPsw.Name = "tbAdminAltaConfirmPsw";
-            this.tbAdminAltaConfirmPsw.Size = new System.Drawing.Size(145, 20);
-            this.tbAdminAltaConfirmPsw.TabIndex = 66;
-            this.tbAdminAltaConfirmPsw.TextChanged += new System.EventHandler(this.tbAdminAltaConfirmPsw_TextChanged);
-            // 
-            // tbAdminAltaPsw
-            // 
-            this.tbAdminAltaPsw.Enabled = false;
-            this.tbAdminAltaPsw.Location = new System.Drawing.Point(295, 315);
-            this.tbAdminAltaPsw.MaxLength = 40;
-            this.tbAdminAltaPsw.Name = "tbAdminAltaPsw";
-            this.tbAdminAltaPsw.Size = new System.Drawing.Size(145, 20);
-            this.tbAdminAltaPsw.TabIndex = 65;
-            this.tbAdminAltaPsw.TextChanged += new System.EventHandler(this.tbAdminAltaPsw_TextChanged);
-            // 
-            // bunifuCustomLabel45
-            // 
-            this.bunifuCustomLabel45.AutoSize = true;
-            this.bunifuCustomLabel45.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bunifuCustomLabel45.ForeColor = System.Drawing.Color.DarkSlateBlue;
-            this.bunifuCustomLabel45.Location = new System.Drawing.Point(289, 294);
-            this.bunifuCustomLabel45.Name = "bunifuCustomLabel45";
-            this.bunifuCustomLabel45.Size = new System.Drawing.Size(100, 21);
-            this.bunifuCustomLabel45.TabIndex = 64;
-            this.bunifuCustomLabel45.Text = "Contraseña:";
-            // 
-            // bunifuCustomLabel43
-            // 
-            this.bunifuCustomLabel43.AutoSize = true;
-            this.bunifuCustomLabel43.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bunifuCustomLabel43.ForeColor = System.Drawing.Color.DarkSlateBlue;
-            this.bunifuCustomLabel43.Location = new System.Drawing.Point(289, 255);
-            this.bunifuCustomLabel43.Name = "bunifuCustomLabel43";
-            this.bunifuCustomLabel43.Size = new System.Drawing.Size(73, 21);
-            this.bunifuCustomLabel43.TabIndex = 63;
-            this.bunifuCustomLabel43.Text = "Usuario:";
-            // 
-            // btnAdminUsrBaja
-            // 
-            this.btnAdminUsrBaja.ActiveBorderThickness = 1;
-            this.btnAdminUsrBaja.ActiveCornerRadius = 20;
-            this.btnAdminUsrBaja.ActiveFillColor = System.Drawing.Color.DarkRed;
-            this.btnAdminUsrBaja.ActiveForecolor = System.Drawing.Color.Transparent;
-            this.btnAdminUsrBaja.ActiveLineColor = System.Drawing.Color.DarkRed;
-            this.btnAdminUsrBaja.AllowDrop = true;
-            this.btnAdminUsrBaja.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.btnAdminUsrBaja.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAdminUsrBaja.BackgroundImage")));
-            this.btnAdminUsrBaja.ButtonText = "BAJA";
-            this.btnAdminUsrBaja.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAdminUsrBaja.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdminUsrBaja.ForeColor = System.Drawing.Color.DarkRed;
-            this.btnAdminUsrBaja.IdleBorderThickness = 1;
-            this.btnAdminUsrBaja.IdleCornerRadius = 20;
-            this.btnAdminUsrBaja.IdleFillColor = System.Drawing.Color.LightCoral;
-            this.btnAdminUsrBaja.IdleForecolor = System.Drawing.Color.Crimson;
-            this.btnAdminUsrBaja.IdleLineColor = System.Drawing.Color.DarkRed;
-            this.btnAdminUsrBaja.Location = new System.Drawing.Point(89, 343);
-            this.btnAdminUsrBaja.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.btnAdminUsrBaja.Name = "btnAdminUsrBaja";
-            this.btnAdminUsrBaja.Size = new System.Drawing.Size(80, 38);
-            this.btnAdminUsrBaja.TabIndex = 61;
-            this.btnAdminUsrBaja.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnAdminUsrBaja.Visible = false;
-            this.btnAdminUsrBaja.Click += new System.EventHandler(this.btnAdminUsrBaja_Click);
-            // 
-            // bunifuCustomLabel41
-            // 
-            this.bunifuCustomLabel41.AutoSize = true;
-            this.bunifuCustomLabel41.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bunifuCustomLabel41.ForeColor = System.Drawing.Color.DarkSlateBlue;
-            this.bunifuCustomLabel41.Location = new System.Drawing.Point(27, 300);
-            this.bunifuCustomLabel41.Name = "bunifuCustomLabel41";
-            this.bunifuCustomLabel41.Size = new System.Drawing.Size(131, 13);
-            this.bunifuCustomLabel41.TabIndex = 60;
-            this.bunifuCustomLabel41.Text = "Escriba la palabra BAJA:";
-            // 
-            // tbAdminConfirmBaja
-            // 
-            this.tbAdminConfirmBaja.Location = new System.Drawing.Point(26, 318);
-            this.tbAdminConfirmBaja.MaxLength = 4;
-            this.tbAdminConfirmBaja.Name = "tbAdminConfirmBaja";
-            this.tbAdminConfirmBaja.Size = new System.Drawing.Size(73, 20);
-            this.tbAdminConfirmBaja.TabIndex = 59;
-            this.tbAdminConfirmBaja.TextChanged += new System.EventHandler(this.tbAdminConfirmBaja_TextChanged);
-            // 
-            // bunifuCustomLabel42
-            // 
-            this.bunifuCustomLabel42.AutoSize = true;
-            this.bunifuCustomLabel42.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bunifuCustomLabel42.ForeColor = System.Drawing.Color.DarkSlateBlue;
-            this.bunifuCustomLabel42.Location = new System.Drawing.Point(22, 255);
-            this.bunifuCustomLabel42.Name = "bunifuCustomLabel42";
-            this.bunifuCustomLabel42.Size = new System.Drawing.Size(73, 21);
-            this.bunifuCustomLabel42.TabIndex = 57;
-            this.bunifuCustomLabel42.Text = "Usuario:";
-            // 
-            // cbAdminBajaUsr
-            // 
-            this.cbAdminBajaUsr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbAdminBajaUsr.FormattingEnabled = true;
-            this.cbAdminBajaUsr.Location = new System.Drawing.Point(26, 277);
-            this.cbAdminBajaUsr.Name = "cbAdminBajaUsr";
-            this.cbAdminBajaUsr.Size = new System.Drawing.Size(207, 21);
-            this.cbAdminBajaUsr.TabIndex = 56;
-            this.cbAdminBajaUsr.Click += new System.EventHandler(this.cbAdminBajaUsr_Click);
-            // 
-            // bunifuCustomLabel40
-            // 
-            this.bunifuCustomLabel40.AutoSize = true;
-            this.bunifuCustomLabel40.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bunifuCustomLabel40.ForeColor = System.Drawing.Color.DarkSlateBlue;
-            this.bunifuCustomLabel40.Location = new System.Drawing.Point(19, 224);
-            this.bunifuCustomLabel40.Name = "bunifuCustomLabel40";
-            this.bunifuCustomLabel40.Size = new System.Drawing.Size(191, 32);
-            this.bunifuCustomLabel40.TabIndex = 55;
-            this.bunifuCustomLabel40.Text = "Baja de usuario";
-            // 
-            // btnAdminCambiaPsw
-            // 
-            this.btnAdminCambiaPsw.ActiveBorderThickness = 1;
-            this.btnAdminCambiaPsw.ActiveCornerRadius = 20;
-            this.btnAdminCambiaPsw.ActiveFillColor = System.Drawing.Color.DarkRed;
-            this.btnAdminCambiaPsw.ActiveForecolor = System.Drawing.Color.Transparent;
-            this.btnAdminCambiaPsw.ActiveLineColor = System.Drawing.Color.DarkRed;
-            this.btnAdminCambiaPsw.AllowDrop = true;
-            this.btnAdminCambiaPsw.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.btnAdminCambiaPsw.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAdminCambiaPsw.BackgroundImage")));
-            this.btnAdminCambiaPsw.ButtonText = "Cambiar contraseña";
-            this.btnAdminCambiaPsw.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAdminCambiaPsw.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdminCambiaPsw.ForeColor = System.Drawing.Color.DarkRed;
-            this.btnAdminCambiaPsw.IdleBorderThickness = 1;
-            this.btnAdminCambiaPsw.IdleCornerRadius = 20;
-            this.btnAdminCambiaPsw.IdleFillColor = System.Drawing.Color.LightCoral;
-            this.btnAdminCambiaPsw.IdleForecolor = System.Drawing.Color.Crimson;
-            this.btnAdminCambiaPsw.IdleLineColor = System.Drawing.Color.DarkRed;
-            this.btnAdminCambiaPsw.Location = new System.Drawing.Point(263, 137);
-            this.btnAdminCambiaPsw.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.btnAdminCambiaPsw.Name = "btnAdminCambiaPsw";
-            this.btnAdminCambiaPsw.Size = new System.Drawing.Size(120, 70);
-            this.btnAdminCambiaPsw.TabIndex = 54;
-            this.btnAdminCambiaPsw.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnAdminCambiaPsw.Visible = false;
-            this.btnAdminCambiaPsw.Click += new System.EventHandler(this.btnAdminCambiaPsw_Click);
-            // 
-            // bunifuCustomLabel39
-            // 
-            this.bunifuCustomLabel39.AutoSize = true;
-            this.bunifuCustomLabel39.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bunifuCustomLabel39.ForeColor = System.Drawing.Color.DarkSlateBlue;
-            this.bunifuCustomLabel39.Location = new System.Drawing.Point(27, 175);
-            this.bunifuCustomLabel39.Name = "bunifuCustomLabel39";
-            this.bunifuCustomLabel39.Size = new System.Drawing.Size(122, 13);
-            this.bunifuCustomLabel39.TabIndex = 53;
-            this.bunifuCustomLabel39.Text = "Confirmar contraseña:";
-            // 
-            // tbAdminCambioConfirmaPsw
-            // 
-            this.tbAdminCambioConfirmaPsw.Enabled = false;
-            this.tbAdminCambioConfirmaPsw.Location = new System.Drawing.Point(30, 191);
-            this.tbAdminCambioConfirmaPsw.MaxLength = 40;
-            this.tbAdminCambioConfirmaPsw.Name = "tbAdminCambioConfirmaPsw";
-            this.tbAdminCambioConfirmaPsw.Size = new System.Drawing.Size(145, 20);
-            this.tbAdminCambioConfirmaPsw.TabIndex = 52;
-            this.tbAdminCambioConfirmaPsw.TextChanged += new System.EventHandler(this.tbAdminCambioConfirmaPsw_TextChanged);
-            // 
-            // tbAdminCambioPsw
-            // 
-            this.tbAdminCambioPsw.Location = new System.Drawing.Point(30, 154);
-            this.tbAdminCambioPsw.MaxLength = 40;
-            this.tbAdminCambioPsw.Name = "tbAdminCambioPsw";
-            this.tbAdminCambioPsw.Size = new System.Drawing.Size(145, 20);
-            this.tbAdminCambioPsw.TabIndex = 51;
-            this.tbAdminCambioPsw.TextChanged += new System.EventHandler(this.tbAdminCambioPsw_TextChanged);
-            // 
-            // bunifuCustomLabel38
-            // 
-            this.bunifuCustomLabel38.AutoSize = true;
-            this.bunifuCustomLabel38.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bunifuCustomLabel38.ForeColor = System.Drawing.Color.DarkSlateBlue;
-            this.bunifuCustomLabel38.Location = new System.Drawing.Point(26, 131);
-            this.bunifuCustomLabel38.Name = "bunifuCustomLabel38";
-            this.bunifuCustomLabel38.Size = new System.Drawing.Size(152, 21);
-            this.bunifuCustomLabel38.TabIndex = 50;
-            this.bunifuCustomLabel38.Text = "Nueva contraseña:";
-            // 
-            // bunifuCustomLabel37
-            // 
-            this.bunifuCustomLabel37.AutoSize = true;
-            this.bunifuCustomLabel37.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bunifuCustomLabel37.ForeColor = System.Drawing.Color.DarkSlateBlue;
-            this.bunifuCustomLabel37.Location = new System.Drawing.Point(26, 85);
-            this.bunifuCustomLabel37.Name = "bunifuCustomLabel37";
-            this.bunifuCustomLabel37.Size = new System.Drawing.Size(73, 21);
-            this.bunifuCustomLabel37.TabIndex = 49;
-            this.bunifuCustomLabel37.Text = "Usuario:";
-            // 
-            // cbAdminCambioPswUsr
-            // 
-            this.cbAdminCambioPswUsr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbAdminCambioPswUsr.FormattingEnabled = true;
-            this.cbAdminCambioPswUsr.Location = new System.Drawing.Point(30, 107);
-            this.cbAdminCambioPswUsr.Name = "cbAdminCambioPswUsr";
-            this.cbAdminCambioPswUsr.Size = new System.Drawing.Size(207, 21);
-            this.cbAdminCambioPswUsr.TabIndex = 48;
-            this.cbAdminCambioPswUsr.Click += new System.EventHandler(this.cbAdminCambioPswUsr_Click);
-            // 
-            // bunifuCustomLabel32
-            // 
-            this.bunifuCustomLabel32.AutoSize = true;
-            this.bunifuCustomLabel32.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bunifuCustomLabel32.ForeColor = System.Drawing.Color.DarkSlateBlue;
-            this.bunifuCustomLabel32.Location = new System.Drawing.Point(281, 224);
-            this.bunifuCustomLabel32.Name = "bunifuCustomLabel32";
-            this.bunifuCustomLabel32.Size = new System.Drawing.Size(189, 32);
-            this.bunifuCustomLabel32.TabIndex = 47;
-            this.bunifuCustomLabel32.Text = "Alta de usuario";
-            // 
-            // bunifuSeparator7
-            // 
-            this.bunifuSeparator7.BackColor = System.Drawing.Color.Transparent;
-            this.bunifuSeparator7.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
-            this.bunifuSeparator7.LineThickness = 2;
-            this.bunifuSeparator7.Location = new System.Drawing.Point(21, 214);
-            this.bunifuSeparator7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.bunifuSeparator7.Name = "bunifuSeparator7";
-            this.bunifuSeparator7.Size = new System.Drawing.Size(510, 10);
-            this.bunifuSeparator7.TabIndex = 46;
-            this.bunifuSeparator7.Transparency = 255;
-            this.bunifuSeparator7.Vertical = false;
-            // 
-            // bunifuCustomLabel35
-            // 
-            this.bunifuCustomLabel35.AutoSize = true;
-            this.bunifuCustomLabel35.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bunifuCustomLabel35.ForeColor = System.Drawing.Color.DarkSlateBlue;
-            this.bunifuCustomLabel35.Location = new System.Drawing.Point(19, 52);
-            this.bunifuCustomLabel35.Name = "bunifuCustomLabel35";
-            this.bunifuCustomLabel35.Size = new System.Drawing.Size(270, 32);
-            this.bunifuCustomLabel35.TabIndex = 45;
-            this.bunifuCustomLabel35.Text = "Cambio de contraseña";
-            // 
-            // bunifuCustomLabel36
-            // 
-            this.bunifuCustomLabel36.AutoSize = true;
-            this.bunifuCustomLabel36.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bunifuCustomLabel36.ForeColor = System.Drawing.Color.DarkSlateBlue;
-            this.bunifuCustomLabel36.Location = new System.Drawing.Point(119, 3);
-            this.bunifuCustomLabel36.Name = "bunifuCustomLabel36";
-            this.bunifuCustomLabel36.Size = new System.Drawing.Size(307, 37);
-            this.bunifuCustomLabel36.TabIndex = 44;
-            this.bunifuCustomLabel36.Text = "Alta y baja de usuarios";
-            // 
-            // bunifuSeparator8
-            // 
-            this.bunifuSeparator8.BackColor = System.Drawing.Color.Transparent;
-            this.bunifuSeparator8.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
-            this.bunifuSeparator8.LineThickness = 2;
-            this.bunifuSeparator8.Location = new System.Drawing.Point(18, 41);
-            this.bunifuSeparator8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.bunifuSeparator8.Name = "bunifuSeparator8";
-            this.bunifuSeparator8.Size = new System.Drawing.Size(510, 10);
-            this.bunifuSeparator8.TabIndex = 43;
-            this.bunifuSeparator8.Transparency = 255;
-            this.bunifuSeparator8.Vertical = false;
             // 
             // pnlAdminMedDia
             // 
@@ -3749,7 +3804,7 @@
             this.btnAdminBorrarDia.IdleForecolor = System.Drawing.Color.Crimson;
             this.btnAdminBorrarDia.IdleLineColor = System.Drawing.Color.DarkRed;
             this.btnAdminBorrarDia.Location = new System.Drawing.Point(374, 270);
-            this.btnAdminBorrarDia.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btnAdminBorrarDia.Margin = new System.Windows.Forms.Padding(5);
             this.btnAdminBorrarDia.Name = "btnAdminBorrarDia";
             this.btnAdminBorrarDia.Size = new System.Drawing.Size(103, 55);
             this.btnAdminBorrarDia.TabIndex = 39;
@@ -3776,7 +3831,7 @@
             this.btnAdminBorrarMed.IdleForecolor = System.Drawing.Color.Crimson;
             this.btnAdminBorrarMed.IdleLineColor = System.Drawing.Color.DarkRed;
             this.btnAdminBorrarMed.Location = new System.Drawing.Point(374, 88);
-            this.btnAdminBorrarMed.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btnAdminBorrarMed.Margin = new System.Windows.Forms.Padding(5);
             this.btnAdminBorrarMed.Name = "btnAdminBorrarMed";
             this.btnAdminBorrarMed.Size = new System.Drawing.Size(103, 55);
             this.btnAdminBorrarMed.TabIndex = 38;
@@ -3800,7 +3855,7 @@
             this.bunifuSeparator4.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.bunifuSeparator4.LineThickness = 2;
             this.bunifuSeparator4.Location = new System.Drawing.Point(19, 49);
-            this.bunifuSeparator4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.bunifuSeparator4.Margin = new System.Windows.Forms.Padding(4);
             this.bunifuSeparator4.Name = "bunifuSeparator4";
             this.bunifuSeparator4.Size = new System.Drawing.Size(510, 10);
             this.bunifuSeparator4.TabIndex = 36;
@@ -3845,7 +3900,7 @@
             this.bunifuSeparator3.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.bunifuSeparator3.LineThickness = 2;
             this.bunifuSeparator3.Location = new System.Drawing.Point(18, 206);
-            this.bunifuSeparator3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.bunifuSeparator3.Margin = new System.Windows.Forms.Padding(4);
             this.bunifuSeparator3.Name = "bunifuSeparator3";
             this.bunifuSeparator3.Size = new System.Drawing.Size(510, 10);
             this.bunifuSeparator3.TabIndex = 22;
@@ -3872,7 +3927,7 @@
             this.btnAdminAlumno.IdleForecolor = System.Drawing.Color.DarkCyan;
             this.btnAdminAlumno.IdleLineColor = System.Drawing.Color.DarkCyan;
             this.btnAdminAlumno.Location = new System.Drawing.Point(426, 5);
-            this.btnAdminAlumno.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btnAdminAlumno.Margin = new System.Windows.Forms.Padding(5);
             this.btnAdminAlumno.Name = "btnAdminAlumno";
             this.btnAdminAlumno.Size = new System.Drawing.Size(103, 55);
             this.btnAdminAlumno.TabIndex = 21;
@@ -3899,7 +3954,7 @@
             this.btnAdminUsuarios.IdleForecolor = System.Drawing.Color.DarkCyan;
             this.btnAdminUsuarios.IdleLineColor = System.Drawing.Color.DarkCyan;
             this.btnAdminUsuarios.Location = new System.Drawing.Point(182, 6);
-            this.btnAdminUsuarios.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btnAdminUsuarios.Margin = new System.Windows.Forms.Padding(5);
             this.btnAdminUsuarios.Name = "btnAdminUsuarios";
             this.btnAdminUsuarios.Size = new System.Drawing.Size(103, 55);
             this.btnAdminUsuarios.TabIndex = 20;
@@ -3912,7 +3967,7 @@
             this.bunifuSeparator1.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.bunifuSeparator1.LineThickness = 2;
             this.bunifuSeparator1.Location = new System.Drawing.Point(30, 57);
-            this.bunifuSeparator1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.bunifuSeparator1.Margin = new System.Windows.Forms.Padding(4);
             this.bunifuSeparator1.Name = "bunifuSeparator1";
             this.bunifuSeparator1.Size = new System.Drawing.Size(510, 10);
             this.bunifuSeparator1.TabIndex = 9;
@@ -3939,7 +3994,7 @@
             this.btnAdminMedDia.IdleForecolor = System.Drawing.Color.DarkCyan;
             this.btnAdminMedDia.IdleLineColor = System.Drawing.Color.DarkCyan;
             this.btnAdminMedDia.Location = new System.Drawing.Point(33, 3);
-            this.btnAdminMedDia.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btnAdminMedDia.Margin = new System.Windows.Forms.Padding(5);
             this.btnAdminMedDia.Name = "btnAdminMedDia";
             this.btnAdminMedDia.Size = new System.Drawing.Size(139, 57);
             this.btnAdminMedDia.TabIndex = 18;
@@ -3966,7 +4021,7 @@
             this.btnAdminAltaDocente.IdleForecolor = System.Drawing.Color.DarkCyan;
             this.btnAdminAltaDocente.IdleLineColor = System.Drawing.Color.DarkCyan;
             this.btnAdminAltaDocente.Location = new System.Drawing.Point(302, 6);
-            this.btnAdminAltaDocente.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btnAdminAltaDocente.Margin = new System.Windows.Forms.Padding(5);
             this.btnAdminAltaDocente.Name = "btnAdminAltaDocente";
             this.btnAdminAltaDocente.Size = new System.Drawing.Size(103, 55);
             this.btnAdminAltaDocente.TabIndex = 28;
@@ -3979,8 +4034,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(736, 469);
-            this.Controls.Add(this.pnlAdministracion);
             this.Controls.Add(this.pnlEvento);
+            this.Controls.Add(this.pnlAdministracion);
             this.Controls.Add(this.pnlServiciosEscolares);
             this.Controls.Add(this.pnlConsultoria);
             this.Controls.Add(this.bunifuGradientPanel1);
@@ -4021,12 +4076,12 @@
             this.pnlListaCerti.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListaCerti)).EndInit();
             this.pnlAdministracion.ResumeLayout(false);
+            this.pnlAdminUsr.ResumeLayout(false);
+            this.pnlAdminUsr.PerformLayout();
             this.pnlAdminAltaDocente.ResumeLayout(false);
             this.pnlAdminAltaDocente.PerformLayout();
             this.pnlAltaAlumno.ResumeLayout(false);
             this.pnlAltaAlumno.PerformLayout();
-            this.pnlAdminUsr.ResumeLayout(false);
-            this.pnlAdminUsr.PerformLayout();
             this.pnlAdminMedDia.ResumeLayout(false);
             this.pnlAdminMedDia.PerformLayout();
             this.ResumeLayout(false);
@@ -4277,5 +4332,9 @@
         private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel62;
         private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel63;
         private Bunifu.Framework.UI.BunifuSeparator bunifuSeparator9;
+        private System.Windows.Forms.TextBox tbAdminNombreCompleto;
+        private System.Windows.Forms.TextBox tbAdminCedulaProfesional;
+        private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel65;
+        private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel66;
     }
 }
