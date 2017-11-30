@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Data.OleDb;
+using System.Globalization;
 
 namespace RecursosServiciosMedicos
 {
@@ -36,7 +37,7 @@ namespace RecursosServiciosMedicos
         {
             InitializeComponent();
         }
-        SqlConnection conn = new SqlConnection(@"Data Source=DESKTOP-48PLDOP;initial catalog=RSM;integrated security=true");//conexion base de datos
+        SqlConnection conn = new SqlConnection(@"Data Source=(LocalDb)\LocalDBDemo;initial catalog=RSM;integrated security=true");//conexion base de datos
         #region Funciones
         #region Funciones Limpiadoras
         private void LimpiaAlumno()
@@ -579,6 +580,7 @@ namespace RecursosServiciosMedicos
                 catch (Exception ex)
                 {
                     MessageBox.Show("Ocurrio el siguiente problema: " + ex.Message + ". Contecte al administrador." + "\t" + ex.GetType());
+                    conn.Close();
                 }
             }
             else if (cbDocente.Checked)
@@ -609,6 +611,7 @@ namespace RecursosServiciosMedicos
                 catch (Exception ex)
                 {
                     MessageBox.Show("Ocurrio el siguiente problema:" + ex.Message + "Contecte al administrador." + "\t" + ex.GetType());
+                    conn.Close();
                 }
             }
             else if (cbOtro.Checked)
@@ -661,16 +664,46 @@ namespace RecursosServiciosMedicos
                 catch (Exception ex)
                 {
                     MessageBox.Show("Ocurrio el siguiente problema: " + ex.Message + "Contecte al administrador." + "\t" + ex.GetType());
+                    conn.Close();
                 }
             }
-        }
+        }       
         private bool ListoParaAgregar()
         {
             if (cbAlumno.Checked)
             {
                 if (tbAlumnoNoControl.Text != "" && tbAlumnoNombre.Text != "" && tbAlumnoCarrera.Text != "" && tbAlumnoSemestre.Text != "" && tbAlumnoEdad.Text != "" && tbAlumnoSexo.Text != "" && tbAlumnoMotivo.Text != "" && ddbAlumnoDiagnostico.SelectedItem.ToString() != "" && ddbAlumnoMedicamento.SelectedItem.ToString() != "")
                 {
-                    return true;
+                    if (ddbAlumnoMedicamento2.Visible)
+                    {
+                        if (ddbAlumnoMedicamento2.SelectedItem != null)
+                        {
+                            if (ddbAlumnoMedicamento3.Visible)
+                            {
+                                if (ddbAlumnoMedicamento3.SelectedItem != null)
+                                {
+                                    return true;
+                                }
+                                else
+                                {
+                                    return false;
+                                }
+                            }
+                            else
+                            {
+                                return true;
+                            }
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                    
                 }
                 else
                 {
@@ -682,7 +715,35 @@ namespace RecursosServiciosMedicos
             {
                 if (tbDocenteNoDocente.Text != "" && tbDocenteNombre.Text != "" && tbDocenteArea.Text != "" && tbDocenteEdad.Text != "" && tbDocenteSexo.Text != "" && tbDocenteMotivo.Text != "" && ddbDocenteDiagnostico.SelectedItem.ToString() != "" && ddbDocenteMedicamento.SelectedItem.ToString() != "")
                 {
-                    return true;
+                    if (ddbAlumnoMedicamento2.Visible)
+                    {
+                        if (ddbDocenteMedicamento2.SelectedItem != null)
+                        {
+                            if (ddbDocenteMedicamento3.Visible)
+                            {
+                                if (ddbDocenteMedicamento3.SelectedItem != null)
+                                {
+                                    return true;
+                                }
+                                else
+                                {
+                                    return false;
+                                }
+                            }
+                            else
+                            {
+                                return true;
+                            }
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        return true;
+                    }
                 }
                 else
                 {
@@ -694,7 +755,35 @@ namespace RecursosServiciosMedicos
             {
                 if (tbOtroNombre.Text != "" && tbOtroRelacion.Text != "" && tbOtroEdad.Text != "" && ddbOtroSexo.SelectedItem.ToString() != "" && tbOtroMotivo.Text != "" && cbOtroDiagnostico.SelectedItem.ToString() != "" && cbOtroMedicamento.SelectedItem.ToString() != "")
                 {
-                    return true;
+                    if (cbOtroMedicamento2.Visible)
+                    {
+                        if (cbOtroMedicamento2.SelectedItem != null)
+                        {
+                            if (cbOtroMedicamento3.Visible)
+                            {
+                                if (cbOtroMedicamento3.SelectedItem != null)
+                                {
+                                    return true;
+                                }
+                                else
+                                {
+                                    return false;
+                                }
+                            }
+                            else
+                            {
+                                return true;
+                            }
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        return true;
+                    }
                 }
                 else
                 {
@@ -847,7 +936,6 @@ namespace RecursosServiciosMedicos
             }
             return (Añoescolar.ToString());
         }
-        
         //Metodo de Imprimir
         private void Imprimir(Microsoft.Office.Interop.Word.Document doc, Microsoft.Office.Interop.Word.Application app, string path)
         {
@@ -1158,8 +1246,6 @@ namespace RecursosServiciosMedicos
             string finalpath = path + "-" + nombre + ".docx";
             Imprimir(doc, app, finalpath);
         }
-        
-        
         //metodos CONSULTORIA
         private void HideControlesSE()
         {
@@ -3773,6 +3859,7 @@ namespace RecursosServiciosMedicos
             }
             else
             {
+                tbAdminAltaPsw.Text = "";
                 tbAdminAltaPsw.Enabled = false;
             }
         }//Multiple VALIDACION TB ALTA USR
@@ -3804,6 +3891,15 @@ namespace RecursosServiciosMedicos
             else
             {
                 tbAdminAltaConfirmPsw.Text = tbAdminAltaConfirmPsw.Text.Remove(tbAdminAltaConfirmPsw.Text.Length - 1);
+            }
+            if (tbAdminAltaConfirmPsw.Text.Length > 0)
+            {
+                tbAdminNombreCompleto.Enabled = true;
+            }
+            else
+            {
+                tbAdminNombreCompleto.Text = "";
+                tbAdminNombreCompleto.Enabled = false;
             }
         }// Validacion SQL-INJECTION
         private void btnConsultoria_Click(object sender, EventArgs e)
@@ -3841,6 +3937,7 @@ namespace RecursosServiciosMedicos
                 bunifuDragControl1.TargetControl = pnlConsultoria;
                 pnlEvento.Hide();
                 pnlAgregarEvento.Hide();
+                
             }
         }//Muestra PNL CONSULTAS AVANZADAS
         private void btnEvento_Click(object sender, EventArgs e)
@@ -4068,12 +4165,12 @@ namespace RecursosServiciosMedicos
         {
             if (tbAdminConfirmBaja.Text == "BAJA")
             {
-                DialogResult dialogResult = MessageBox.Show("Seguro que desea cambiar la contraseña del usuario " + cbAdminCambioPswUsr.GetItemText(cbAdminCambioPswUsr.SelectedItem) + "?", "Cambiar contraseña?", MessageBoxButtons.YesNo);
+                DialogResult dialogResult = MessageBox.Show("Seguro que desea cambiar la contraseña del usuario " + cbAdminBajaUsr.GetItemText(cbAdminBajaUsr.SelectedItem) + "?", "Cambiar contraseña?", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
                     try
                     {
-                        string queryBorraUsr = "delete usuario where usuario = '" + cbAdminBajaUsr.GetItemText(cbAdminBajaUsr.SelectedItem) + "';";
+                        string queryBorraUsr = "alter table consultas nocheck constraint all;delete usuario where usuario = '" + cbAdminBajaUsr.GetItemText(cbAdminBajaUsr.SelectedItem) + "';alter table consultas check constraint all;";
                         SqlCommand cmdBorraUsr = new SqlCommand(queryBorraUsr, conn);
                         conn.Open();
                         cmdBorraUsr.ExecuteNonQuery();
@@ -4086,6 +4183,7 @@ namespace RecursosServiciosMedicos
                     catch (Exception ex)
                     {
                         MessageBox.Show("Se presento el siguiente error al realizar el cambio en la base de datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        conn.Close();
                     }
 
                 }
@@ -4141,7 +4239,7 @@ namespace RecursosServiciosMedicos
                 {
                     try
                     {
-                        string queryAltaUsr = "insert into usuario (usuario, contraseña, nivel) values ('" + tbAdminAltaUsr.Text + "', '" + tbAdminAltaPsw.Text + "', 0);";
+                        string queryAltaUsr = "insert into usuario (usuario, contraseña, nivel, nombre_usuario, cedula) values ('" + tbAdminAltaUsr.Text + "', '" + tbAdminAltaPsw.Text + "', 0, '"+tbAdminNombreCompleto.Text+"', '"+tbAdminCedulaProfesional.Text+"');";
                         SqlCommand cmdAltaUsr = new SqlCommand(queryAltaUsr, conn);
                         conn.Open();
                         cmdAltaUsr.ExecuteNonQuery();
@@ -4156,6 +4254,7 @@ namespace RecursosServiciosMedicos
                     catch (Exception ex)
                     {
                         MessageBox.Show("Se presento el siguiente error al realizar el cambio en la base de datos: " + ex.Message + ". Asegurese de que los datos sean correctos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        conn.Close();
                     }
                 }
                 else
@@ -4163,6 +4262,8 @@ namespace RecursosServiciosMedicos
                     tbAdminAltaConfirmPsw.Text = "";
                     tbAdminAltaPsw.Text = "";
                     tbAdminAltaUsr.Text = "";
+                    tbAdminCedulaProfesional.Text = "";
+                    tbAdminNombreCompleto.Text = "";
                 }
             }
             else
@@ -4290,6 +4391,172 @@ namespace RecursosServiciosMedicos
                 conn.Close();
             }
         }//Boton de búsqueda 
+        private void btnAdminExeAltaDocente_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Seguro que desea cambiar los docentes en la base de datos? (Debe tener el archivo excel listo) ", "Agregar docente", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            if (dialogResult == DialogResult.Yes)
+            {
+                try
+                {
+                    AltaDocente();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Se presento el siguiente error al realizar el cambio en la base de datos: " + ex.Message + ". Asegurese de que el formato del archivo excel sea el especificado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }//Validacion pre ejecutar metodo AltaDocente
+        private void btnAdminAltaDocente_Click_1(object sender, EventArgs e)
+        {
+            pnlAdminMedDia.Hide();
+            pnlAltaAlumno.Hide();
+            pnlAdminUsr.Hide();
+            pnlAdminAltaDocente.Show();
+        }//Muestra el panel de AltaDocente
+        private void btnImportar_Click(object sender, EventArgs e)
+        {
+            if (Usuario == "dse")
+            {
+                ImportarExcel(tabSEResultados);
+            }
+            else
+            {
+                ImportarExcel(tabResultados);
+            }
+        }//EXPORTA tabla a EXCEL
+        private void tbFechaIniEvento_TextChanged(object sender, EventArgs e)
+        {
+            if (tbFechaIniEvento.Text.Length > 0)
+            {
+                tbFechaFinEvento.Enabled = true;
+            }
+            else
+            {
+                tbFechaFinEvento.Text = "";
+                tbFechaFinEvento.Enabled = false;
+            }
+        }//Validacion Simple
+        private void btnAgregarEvento_Click(object sender, EventArgs e)
+        {
+            string fechi = calEventoIni.SelectionStart.ToString("yyyy-MM-dd h:mm tt");
+            string fechf = calEventoFin.SelectionStart.ToString("yyyy-MM-dd h:mm tt");
+            try
+            {
+                if (tbEvento.Text.Length > 0 && tbFechaIniEvento.Text.Length > 0 && tbFechaFinEvento.Text.Length > 0)
+                {
+                    bool validado = true;
+                    conn.Open();
+                    SqlCommand verificaEvento = new SqlCommand("select nombre from evento", conn);
+                    verificaEvento.ExecuteNonQuery();
+                    SqlDataAdapter da = new SqlDataAdapter(verificaEvento);
+                    DataTable dtevento = new DataTable();
+                    da.Fill(dtevento);
+                    foreach (DataRow dr in dtevento.Rows)
+                    {
+                        if (dr["nombre"].ToString() == tbEvento.Text)
+                        {
+                            validado = false;
+                            MessageBox.Show("El evento ya existe.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            tbEvento.Text = "";
+                            tbFechaIniEvento.Text = "";
+                            tbFechaFinEvento.Text = "";
+                        }
+                    }
+                    conn.Close();
+                    if (validado)
+                    {
+                        conn.Open();
+                        SqlCommand comandoEvento = new SqlCommand("insert into evento (nombre, fecha_inicio, fecha_fin) values( '" + tbEvento.Text + "' ,  '" + fechi + "', '" + fechf + "');", conn);
+                        comandoEvento.ExecuteNonQuery();
+                        MessageBox.Show("El evento ha sido creado exitosamente.", "Creado", MessageBoxButtons.OK);
+                        conn.Close();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Llene todos los campos.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    tbEvento.Text = "";
+                    tbFechaIniEvento.Text = "";
+                    tbFechaFinEvento.Text = "";
+                }
+                               
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrio el siguiente error: "+ex.Message+" Favor de verificar que los datos sean correctos", "Alerta", MessageBoxButtons.OK);
+                conn.Close();
+            }
+        }//AGREGA el EVENTO a la BD
+        private void tbAdminNombreCompleto_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(tbAdminNombreCompleto.Text, @"^[a-zA-Z0-9\s]+$") || tbAdminNombreCompleto.Text.Length < 1)
+            {
+            }
+            else
+            {
+                tbAdminNombreCompleto.Text = tbAdminNombreCompleto.Text.Remove(tbAdminNombreCompleto.Text.Length - 1);
+            }
+            if (tbAdminNombreCompleto.Text.Length > 0)
+            {
+                tbAdminCedulaProfesional.Enabled = true;
+            }
+            else
+            {
+                tbAdminCedulaProfesional.Text = "";
+                tbAdminCedulaProfesional.Enabled = false;
+            }
+        }//Validacion SQL-INJECTION
+        private void tbAdminCedulaProfesional_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(tbAdminCedulaProfesional.Text, @"^[a-zA-Z0-9\s]+$") || tbAdminCedulaProfesional.Text.Length < 1)
+            {
+            }
+            else
+            {
+                tbAdminCedulaProfesional.Text = tbAdminCedulaProfesional.Text.Remove(tbAdminCedulaProfesional.Text.Length - 1);
+            }
+            if (tbAdminCedulaProfesional.Text.Length > 0)
+            {
+                btnAdminAltaUsr.Show();
+            }
+            else
+            {
+                btnAdminAltaUsr.Hide();
+            }
+        }//Validaciones Simples
+        private void tbEvento_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(tbEvento.Text, @"^[a-zA-Z0-9\s]+$") || tbEvento.Text.Length < 1)
+            {
+            }
+            else
+            {
+                tbEvento.Text = tbEvento.Text.Remove(tbEvento.Text.Length - 1);
+            }
+        }//Validacion SQL-INJECTION
+        private void tbFechaFinEvento_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (tbFechaIniEvento.Text == "" && tbFechaFinEvento.Text == "")
+                {
+                }
+                else
+                {
+                    if (Convert.ToDateTime(tbFechaIniEvento.Text) > Convert.ToDateTime(tbFechaFinEvento.Text))
+                    {
+                        MessageBox.Show("Procure que la fecha final no sea menor a la fecha inicial.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        tbFechaIniEvento.Text = "";
+                        tbFechaFinEvento.Text = "";
+                        calEventoFin.Hide();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Verifique que todos los datos sean correctos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+        }//Validacion Creacion evento
         #endregion
 
         #region Controles Simples
@@ -4314,65 +4581,8 @@ namespace RecursosServiciosMedicos
         private void ddbDocenteMedicamento3_Click(object sender, EventArgs e) { LlenaCbMedicamento3(); }
         private void cbOtroMedicamento2_Click(object sender, EventArgs e) { LlenaCbMedicamento2(); }
         private void cbOtroMedicamento3_Click(object sender, EventArgs e) { LlenaCbMedicamento3(); }
-        private void comboBox1_Click(object sender, EventArgs e) { LlenaCbMedicamento(); }
-        private void btnImportar_Click(object sender, EventArgs e)
-        {
-            if (Usuario == "dse")
-            {
-                ImportarExcel(tabSEResultados);
-            }
-            else
-            {
-                ImportarExcel(tabResultados);
-            }
-        }
-        private void btnAgregarEvento_Click(object sender, EventArgs e)
-        {
-            string fechi = calEventoIni.SelectionStart.ToString("yyyy-MM-dd h:mm tt");
-            string fechf = calEventoFin.SelectionStart.ToString("yyyy-MM-dd h:mm tt");
-            try
-            {
-                conn.Open();
-                SqlCommand comandoEvento = new SqlCommand("insert into evento (nombre, fecha_inicio, fecha_fin) values( '" + tbEvento.Text + "' ,  '" + fechi + "', '" + fechf + "');", conn);
-                comandoEvento.ExecuteNonQuery();
-                MessageBox.Show("El evento ha sido creado exitosamente.", "Creado", MessageBoxButtons.OK);
-                conn.Close();
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Favor de ingresar todos los campos", "Alerta", MessageBoxButtons.OK);
-            }
-        }
+        private void comboBox1_Click(object sender, EventArgs e) { LlenaCbMedicamento(); }       
         private void pnlEvento_Click(object sender, EventArgs e) { calEventoFin.Hide(); calEventoIni.Hide(); }
-        private void btnAdminExeAltaDocente_Click(object sender, EventArgs e)
-        {
-            DialogResult dialogResult = MessageBox.Show("Seguro que desea cambiar los docentes en la base de datos? (Debe tener el archivo excel listo) ", "Agregar docente", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-            if (dialogResult == DialogResult.Yes)
-            {
-                try
-                {
-                    AltaDocente();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Se presento el siguiente error al realizar el cambio en la base de datos: " + ex.Message + ". Asegurese de que el formato del archivo excel sea el especificado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        private void btnAdminAltaDocente_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnAdminAltaDocente_Click_1(object sender, EventArgs e)
-        {
-            pnlAdminMedDia.Hide();
-            pnlAltaAlumno.Hide();
-            pnlAdminUsr.Hide();
-            pnlAdminAltaDocente.Show();
-        }
-
         private void cbAdminDia_Click(object sender, EventArgs e) { LlenaCbDiagnostico(); }
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e) { btnAdminAltaAlumnoEvento.Enabled = true; }
         private void cbAdminAlumnoEvento_Click(object sender, EventArgs e) { LlenaCbEvento(); }
