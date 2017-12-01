@@ -1,5 +1,0 @@
-la carpeta RSM poner en el C://
- 
-
-Base de Datos
-Con poner la Carpeta en el RSM la base de datos sera detectada automaticamente

@@ -1,0 +1,4 @@
+Abra la carpeta de Install
+
+La carpeta "RSM" Muevala a la direccion "C://" antes de instalar
+Corra el Archivo "Setup" y siga los pasos de instalacion
