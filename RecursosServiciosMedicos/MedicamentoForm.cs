@@ -17,7 +17,7 @@ namespace RecursosServiciosMedicos
         {
             InitializeComponent();
         }
-        SqlConnection ConnMed = new SqlConnection(@"Data Source=(LocalDb)\LocalDBDemo;initial catalog=RSM;integrated security=true");
+        SqlConnection ConnMed = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\RSM\Database\RSM.mdf;Integrated Security=True;Connect Timeout=30");
 
         private void btnCancelar_Click(object sender, EventArgs e){ this.Hide(); }
         private void bunifuFlatButton2_Click(object sender, EventArgs e) { this.Hide(); }

@@ -37,7 +37,7 @@ namespace RecursosServiciosMedicos
         {
             InitializeComponent();
         }
-        SqlConnection conn = new SqlConnection(@"Data Source=(LocalDb)\LocalDBDemo;initial catalog=RSM;integrated security=true");//conexion base de datos
+        SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\RSM\Database\RSM.mdf;Integrated Security=True;Connect Timeout=30");//conexion base de datos
         #region Funciones
         #region Funciones Limpiadoras
         private void LimpiaAlumno()
@@ -3015,10 +3015,11 @@ namespace RecursosServiciosMedicos
             cbAlumno.Checked = true;
             pnlAlumno.Show();
             Checar();
+            btnCertificadoMed.Text = "   Documentos" + Environment.NewLine + "Medicos";
 
             if (Usuario == "dse")
             {
-                btnCertificadoMed.Text = "Administracion";
+                btnCertificadoMed.Text = "       Administracion";
                 ttSeguimiento.Active = false;
                 pnlBusqueda.Hide();
                 pnlConsulta.Hide();
@@ -3027,11 +3028,12 @@ namespace RecursosServiciosMedicos
                 pnlConsultoria.Hide();
                 pnlServiciosEscolares.Show();
                 pnlAdministracion.Hide();
-                btnConsulta.Text = "Consultoría Específica";
-                btnConsultoria.Text = "Consultoría General";
+                btnConsulta.Text = "Consultoría" + Environment.NewLine + "Especifica";
+                btnConsultoria.Text = "Consultoría" + Environment.NewLine + "General";
                 bunifuCustomLabel30.Text = "Servicios Médicos";
             }
 
+            
             LlenaCbDiagnostico();
             LlenaCbMedicamento();
             LlenarComboBoxServEsc(comboEvento, "Select nombre from evento", "nombre"); //Llena los ComboBox de evento
@@ -3054,7 +3056,7 @@ namespace RecursosServiciosMedicos
         {
             if (Usuario == "dse")
             {
-                Separator.Location = new Point(15, 177);
+                Separator.Location = new Point(14, 130);
                 Separator.Show();
                 cbSEOtro.Checked = false;
                 cbSEAlumno.Checked = false;
@@ -3070,7 +3072,7 @@ namespace RecursosServiciosMedicos
             }
             else
             {
-                Separator.Location = new Point(15, 177);
+                Separator.Location = new Point(14, 130);
                 Separator.Show();
                 LimpiaAlumno();
                 LimpiaDocente();
@@ -3156,7 +3158,7 @@ namespace RecursosServiciosMedicos
                 cbSEOtro.Checked = false;
                 cbSEAlumno.Checked = false;
                 cbSEDocente.Checked = false;
-                Separator.Location = new Point(15, 272);
+                Separator.Location = new Point(14, 190);
                 Separator.Show();
                 pnlConsulta.Hide();
                 pnlConsultoria.Hide();
@@ -3167,7 +3169,7 @@ namespace RecursosServiciosMedicos
             }
             else
             {
-                Separator.Location = new Point(15, 272);
+                Separator.Location = new Point(14,190);
                 Separator.Show();
                 pnlConsulta.Hide();
                 pnlCertificado.Show();
@@ -3904,7 +3906,7 @@ namespace RecursosServiciosMedicos
         }// Validacion SQL-INJECTION
         private void btnConsultoria_Click(object sender, EventArgs e)
         {
-            Separator.Location = new Point(15, 364);
+            Separator.Location = new Point(14,250);
             Separator.Show();
             pnlBusqueda.Hide();
             if (Usuario == "dse")
@@ -3913,14 +3915,14 @@ namespace RecursosServiciosMedicos
                 cbAlumnoBusqueda.Checked = false;
                 cbDocenteBusqueda.Checked = false;
                 cbOtroBusqueda.Checked = false;
-                Separator.Location = new Point(15, 364);
+                Separator.Location = new Point(14, 250);
                 Separator.Show();
                 pnlBusqueda.Hide();
                 pnlCertificado.Hide();
                 pnlConsultoria.Show();
                 pnlAdministracion.Hide();
                 pnlServiciosEscolares.Hide();
-                btnConsultoria.Text = "Consultoría General";
+                btnConsultoria.Text = "Consultoría" + Environment.NewLine + "General";
                 bunifuDragControl1.TargetControl = pnlServiciosEscolares;
                 pnlEvento.Hide();
                 pnlAgregarEvento.Hide();
@@ -3942,7 +3944,7 @@ namespace RecursosServiciosMedicos
         }//Muestra PNL CONSULTAS AVANZADAS
         private void btnEvento_Click(object sender, EventArgs e)
         {
-            Separator.Location = new Point(15, 454);
+            Separator.Location = new Point(14, 310);
             Separator.Show();
             pnlConsulta.Hide();
             pnlCertificado.Hide();
@@ -3951,6 +3953,9 @@ namespace RecursosServiciosMedicos
             pnlServiciosEscolares.Hide();
             pnlEvento.Show();
             pnlAgregarEvento.Show();
+            tbEvento.Text = "";
+            tbFechaIniEvento.Text = "";
+            tbFechaFinEvento.Text = "";
         }        //Muestra PNL EVENTO
         private void txbBusquedaClave_KeyPress(object sender, KeyPressEventArgs e)
         {
