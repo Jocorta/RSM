@@ -99,18 +99,30 @@ namespace RecursosServiciosMedicos
                 Microsoft.Office.Interop.Excel.Worksheet hoja = xldoc.Sheets[1] as Microsoft.Office.Interop.Excel.Worksheet;
                 xldoc = xlapp.Workbooks.Add(data_source);
                 hoja = xldoc.Sheets[1] as Microsoft.Office.Interop.Excel.Worksheet;
+                //formatoExcel
+                FormatoDocente(data_source, xlapp, xldoc, hoja);
                 //conexion OleDb para jalar la info del excel
                 string conexion = "Provider=Microsoft.Jet.OleDb.4.0; Data Source=" + data_source + ";Extended Properties=\"Excel 8.0; HDR=Yes\"";//conexion al archivo excel
                 OleDbConnection origen = default(OleDbConnection);
                 origen = new OleDbConnection(conexion);
                 //seleccion de todo dentro de la hoja
                 OleDbCommand seleccion = default(OleDbCommand);
-                seleccion = new OleDbCommand("Select * From [" + hoja.Name + "$]", origen);
+                seleccion = new OleDbCommand("Select [num_docente],[nombre],[fecha_nac],[curp],[departamento] From [" + hoja.Name + "$]", origen);
                 //llenador
                 OleDbDataAdapter adaptador = new OleDbDataAdapter();
                 adaptador.SelectCommand = seleccion;
                 DataSet ds = new DataSet();
                 adaptador.Fill(ds);
+                System.Data.DataTable Exceldt = ds.Tables[0];
+                //
+                for (int i = Exceldt.Rows.Count - 1; i >= 0; i--)
+                {
+                    if (Exceldt.Rows[i]["num_docente"] == DBNull.Value || Exceldt.Rows[i]["nombre"] == DBNull.Value)
+                    {
+                        Exceldt.Rows[i].Delete();
+                    }
+                }
+                Exceldt.AcceptChanges();
                 //cerrar cosas abiertas
                 origen.Close();
                 xldoc.Close(SaveChanges: false);
@@ -121,7 +133,8 @@ namespace RecursosServiciosMedicos
                 conn.Open();
                 //Limpiar Tabla
                 string commandText = "ALTER TABLE docente nocheck constraint all; " +
-                    "ALTER TABLE consultas nocheck constraint all; delete from docente; " +
+                    "ALTER TABLE consultas nocheck constraint all;" +
+                    "delete from docente; " +
                     "ALTER TABLE docente check constraint all; " +
                     "ALTER TABLE consultas check constraint all;";
                 using (SqlCommand cmd = new SqlCommand(commandText, conn))
@@ -131,14 +144,127 @@ namespace RecursosServiciosMedicos
                 //Importar lo dentro del data set
                 SqlBulkCopy importar = default(SqlBulkCopy);
                 importar = new SqlBulkCopy(conn);
+                //Mapping Table column
+                importar.ColumnMappings.Add("[num_docente]", "num_docente");
+                importar.ColumnMappings.Add("[nombre]", "nombre");
+                importar.ColumnMappings.Add("[fecha_nac]", "fecha_nac");
+                importar.ColumnMappings.Add("[curp]", "curp");
+                importar.ColumnMappings.Add("[departamento]", "departamento");
+                //
                 importar.DestinationTableName = "docente";
-                importar.WriteToServer(ds.Tables[0]);
+                importar.WriteToServer(Exceldt);
                 conn.Close();
+                MessageBox.Show("Datos Importados con Exito", "Importacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
+                MessageBox.Show("Datos No Importados", "Importacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
+        }
+        private void FormatoDocente(string path, Microsoft.Office.Interop.Excel.Application xl, Microsoft.Office.Interop.Excel.Workbook wb, Microsoft.Office.Interop.Excel.Worksheet ws)
+        {
+
+            double fecha, año;
+            string mes;
+            string fecha_completa;
+            wb = xl.Workbooks.Add(path);
+            ws = wb.Sheets[1] as Microsoft.Office.Interop.Excel.Worksheet;
+
+            ws.Cells[1, 1] = "num_docente";
+            ws.Cells[1, 2] = "nombre";
+            ws.Range[ws.Cells[1, 3], ws.Cells[1, 5]].UnMerge();
+            ws.Cells[1, 3] = "fecha_nac";
+            ws.Cells[1, 4] = "curp";
+            ws.Cells[1, 5] = "departamento";
+            ws.Cells[1, 6] = "";
+            ws.Cells[1, 7] = "";
+
+            for (int i = 2; i < 100; i++)
+            {
+
+                if (ws.Cells[i, 3].Value2 == null)
+                {
+                    break;
+                }
+                else
+                {
+                    //ajuste nombre
+                    ws.Cells[i, 2].NumberFormat = "General";
+                    //ajsute fecha
+
+                    fecha = ws.Cells[i, 3].Value2;
+                    mes = ws.Cells[i, 4].Value2;
+                    # region meses
+                    if (mes == "ENERO")
+                    {
+                        mes = "01";
+
+                    }
+                    else if (mes == "FEBRERO")
+                    {
+                        mes = "02";
+                    }
+                    else if (mes == "MARZO")
+                    {
+                        mes = "03";
+                    }
+                    else if (mes == "ABRIL")
+                    {
+                        mes = "04";
+                    }
+                    else if (mes == "MAYO")
+                    {
+                        mes = "05";
+                    }
+                    else if (mes == "JUNIO")
+                    {
+                        mes = "06";
+                    }
+                    else if (mes == "JULIO")
+                    {
+                        mes = "07";
+                    }
+                    else if (mes == "AGOSTO")
+                    {
+                        mes = "08";
+                    }
+                    else if (mes == "SEPT")
+                    {
+                        mes = "09";
+                    }
+                    else if (mes == "OCT")
+                    {
+                        mes = "10";
+                    }
+                    else if (mes == "NOV")
+                    {
+                        mes = "11";
+                    }
+                    else
+                    {
+                        mes = "12";
+                    }
+                    #endregion
+                    año = ws.Cells[i, 5].Value2;
+                    ws.Cells[i, 3] = "";
+                    fecha_completa = mes + "/" + fecha.ToString() + "/" + año.ToString();
+                    ws.Cells[i, 3].NumberFormat = "MM/DD/yyyy";
+                    ws.Cells[i, 3] = fecha_completa;
+                    //ajuste curp
+                    string curpx = ws.Cells[i, 6].Value2;
+                    ws.Cells[i, 4].NumberFormat = "General";
+                    ws.Cells[i, 4] = curpx.Trim();
+                    ws.Cells[i, 6] = "";
+                    //ajuste departamento
+                    string departamentox = ws.Cells[i, 7].Value2;
+                    ws.Cells[i, 5].NumberFormat = "General";
+                    ws.Cells[i, 5] = departamentox;
+                    ws.Cells[i, 7] = "";
+                }
+
+            }
+            wb.Save();
         }
         private void AltaAlumnoIth()
         {
