@@ -154,11 +154,11 @@ namespace RecursosServiciosMedicos
                 importar.DestinationTableName = "docente";
                 importar.WriteToServer(Exceldt);
                 conn.Close();
-                MessageBox.Show("Datos Importados con Exito", "Importacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Datos Dados de Alta con Exito", "Importacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                MessageBox.Show("Datos No Importados", "Importacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Datos No Dados de Alta", "Importacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
         }
@@ -334,10 +334,11 @@ namespace RecursosServiciosMedicos
                 conn.Close();
 
 
+                MessageBox.Show("Datos Dados de Alta con Exito", "Importacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-
+                MessageBox.Show("Datos No Dados de Alta", "Importacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
         }
@@ -388,10 +389,11 @@ namespace RecursosServiciosMedicos
                 importar.WriteToServer(ds.Tables[0]);
                 conn.Close();
 
+                MessageBox.Show("Datos Dados de Alta con Exito", "Importacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-
+                MessageBox.Show("Datos No Dados de Alta", "Importacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
         }
@@ -683,25 +685,39 @@ namespace RecursosServiciosMedicos
                 try
                 {
                     conn.Open();
+                    DateTime now = DateTime.Now;
                     if (!ddbAlumnoMedicamento2.Visible && !ddbAlumnoMedicamento3.Visible)
                     {
-                        SqlCommand comandoAlumno = new SqlCommand("insert into consultas (num_control, seguimiento, fecha, medicamento, diagnostico, edad, sexo, motivo, doctor) values('" + tbAlumnoNoControl.Text + "', '" + Seguimiento() + "', '" + DateTime.Now + "', '" + ddbAlumnoMedicamento.GetItemText(ddbAlumnoMedicamento.SelectedItem) + "', '" + ddbAlumnoDiagnostico.GetItemText(ddbAlumnoDiagnostico.SelectedItem) + "', " + tbAlumnoEdad.Text + ", '" + tbAlumnoSexo.Text + "', '" + tbAlumnoMotivo.Text + "', '" + Usuario + "');", conn);
+                        SqlCommand comandoAlumno = new SqlCommand("insert into consultas (num_control, seguimiento, fecha, medicamento, diagnostico, edad, sexo, motivo, doctor) values('" + tbAlumnoNoControl.Text + "', '" + Seguimiento() + "', '" + now + "', '" + ddbAlumnoMedicamento.GetItemText(ddbAlumnoMedicamento.SelectedItem) + "', '" + ddbAlumnoDiagnostico.GetItemText(ddbAlumnoDiagnostico.SelectedItem) + "', " + tbAlumnoEdad.Text + ", '" + tbAlumnoSexo.Text + "', '" + tbAlumnoMotivo.Text + "', '" + Usuario + "');", conn);
                         comandoAlumno.ExecuteNonQuery();
                         MessageBox.Show("La consulta fue agregada a la base de datos exitosamente.", "Agregado", MessageBoxButtons.OK);
+
                     }
                     else if (ddbAlumnoMedicamento2.Visible && !ddbAlumnoMedicamento3.Visible)
                     {
-                        SqlCommand comandoAlumno = new SqlCommand("insert into consultas (num_control, seguimiento, fecha, medicamento, medicamento2, diagnostico, edad, sexo, motivo, doctor) values('" + tbAlumnoNoControl.Text + "', '" + Seguimiento() + "', '" + DateTime.Now + "', '" + ddbAlumnoMedicamento.GetItemText(ddbAlumnoMedicamento.SelectedItem) + "', '" + ddbAlumnoMedicamento2.GetItemText(ddbAlumnoMedicamento2.SelectedItem) + "', '" + ddbAlumnoDiagnostico.GetItemText(ddbAlumnoDiagnostico.SelectedItem) + "', " + tbAlumnoEdad.Text + ", '" + tbAlumnoSexo.Text + "', '" + tbAlumnoMotivo.Text + "', '" + Usuario + "');", conn);
+                        SqlCommand comandoAlumno = new SqlCommand("insert into consultas (num_control, seguimiento, fecha, medicamento, medicamento2, diagnostico, edad, sexo, motivo, doctor) values('" + tbAlumnoNoControl.Text + "', '" + Seguimiento() + "', '" + now + "', '" + ddbAlumnoMedicamento.GetItemText(ddbAlumnoMedicamento.SelectedItem) + "', '" + ddbAlumnoMedicamento2.GetItemText(ddbAlumnoMedicamento2.SelectedItem) + "', '" + ddbAlumnoDiagnostico.GetItemText(ddbAlumnoDiagnostico.SelectedItem) + "', " + tbAlumnoEdad.Text + ", '" + tbAlumnoSexo.Text + "', '" + tbAlumnoMotivo.Text + "', '" + Usuario + "');", conn);
                         comandoAlumno.ExecuteNonQuery();
                         MessageBox.Show("La consulta fue agregada a la base de datos exitosamente.", "Agregado", MessageBoxButtons.OK);
                     }
                     else if (ddbAlumnoMedicamento2.Visible && ddbAlumnoMedicamento3.Visible)
                     {
-                        SqlCommand comandoAlumno = new SqlCommand("insert into consultas (num_control, seguimiento, fecha, medicamento, medicamento2, medicamento3, diagnostico, edad, sexo, motivo, doctor) values('" + tbAlumnoNoControl.Text + "', '" + Seguimiento() + "', '" + DateTime.Now + "', '" + ddbAlumnoMedicamento.GetItemText(ddbAlumnoMedicamento.SelectedItem) + "', '" + ddbAlumnoMedicamento2.GetItemText(ddbAlumnoMedicamento2.SelectedItem) + "', '" + ddbAlumnoMedicamento3.GetItemText(ddbAlumnoMedicamento3.SelectedItem) + "', '" + ddbAlumnoDiagnostico.GetItemText(ddbAlumnoDiagnostico.SelectedItem) + "', " + tbAlumnoEdad.Text + ", '" + tbAlumnoSexo.Text + "', '" + tbAlumnoMotivo.Text + "', '" + Usuario + "');", conn);
+                        SqlCommand comandoAlumno = new SqlCommand("insert into consultas (num_control, seguimiento, fecha, medicamento, medicamento2, medicamento3, diagnostico, edad, sexo, motivo, doctor) values('" + tbAlumnoNoControl.Text + "', '" + Seguimiento() + "', '" + now + "', '" + ddbAlumnoMedicamento.GetItemText(ddbAlumnoMedicamento.SelectedItem) + "', '" + ddbAlumnoMedicamento2.GetItemText(ddbAlumnoMedicamento2.SelectedItem) + "', '" + ddbAlumnoMedicamento3.GetItemText(ddbAlumnoMedicamento3.SelectedItem) + "', '" + ddbAlumnoDiagnostico.GetItemText(ddbAlumnoDiagnostico.SelectedItem) + "', " + tbAlumnoEdad.Text + ", '" + tbAlumnoSexo.Text + "', '" + tbAlumnoMotivo.Text + "', '" + Usuario + "');", conn);
                         comandoAlumno.ExecuteNonQuery();
                         MessageBox.Show("La consulta fue agregada a la base de datos exitosamente.", "Agregado", MessageBoxButtons.OK);
+
                     }
                     conn.Close();
+
+                    DialogResult dialogResult = MessageBox.Show("Desea Imprimir Receta?", "Receta", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        string meds = ddbAlumnoMedicamento.GetItemText(ddbAlumnoMedicamento.SelectedItem) + ", " + ddbAlumnoMedicamento2.GetItemText(ddbAlumnoMedicamento2.SelectedItem) + " y " + ddbAlumnoMedicamento3.GetItemText(ddbAlumnoMedicamento3.SelectedItem);
+                        ImprimirTrasConsultaAlumno(tbAlumnoNoControl.Text, Seguimiento(), now.ToString(), meds, ddbAlumnoDiagnostico.GetItemText(ddbAlumnoDiagnostico.SelectedItem), tbAlumnoEdad.Text, tbAlumnoSexo.Text, tbAlumnoMotivo.Text, Usuario);
+                    }
+                    else if (dialogResult == DialogResult.No)
+                    {
+                        //do nothing
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -714,6 +730,7 @@ namespace RecursosServiciosMedicos
                 try
                 {
                     conn.Open();
+                    DateTime now = DateTime.Now;
                     if (!ddbDocenteMedicamento2.Visible && !ddbDocenteMedicamento3.Visible)
                     {
                         SqlCommand cmd = new SqlCommand("insert into consultas (num_docente, seguimiento, fecha, medicamento, diagnostico, edad, sexo, motivo, doctor) values(" + tbDocenteNoDocente.Text + ", '" + Seguimiento() + "', '" + DateTime.Now + "', '" + ddbDocenteMedicamento.GetItemText(ddbDocenteMedicamento.SelectedItem) + "', '" + ddbDocenteDiagnostico.GetItemText(ddbDocenteDiagnostico.SelectedItem) + "', " + tbDocenteEdad.Text + ", '" + tbDocenteSexo.Text + "', '" + tbDocenteMotivo.Text + "', '" + Usuario + "');", conn);
@@ -733,6 +750,16 @@ namespace RecursosServiciosMedicos
                         MessageBox.Show("Consulta Agregada.");
                     }
                     conn.Close();
+                    DialogResult dialogResult = MessageBox.Show("Desea Imprimir Receta?", "Receta", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        string meds = ddbDocenteMedicamento.GetItemText(ddbDocenteMedicamento.SelectedItem) + ", " + ddbDocenteMedicamento2.GetItemText(ddbDocenteMedicamento2.SelectedItem) + " y " + ddbDocenteMedicamento3.GetItemText(ddbDocenteMedicamento3.SelectedItem);
+                        ImprimirTrasConsultaDocente(tbDocenteNoDocente.Text, Seguimiento(), now.ToString(), meds, ddbDocenteDiagnostico.GetItemText(ddbAlumnoDiagnostico.SelectedItem), tbDocenteEdad.Text, tbDocenteSexo.Text, tbDocenteMotivo.Text, Usuario);
+                    }
+                    else if (dialogResult == DialogResult.No)
+                    {
+                        //do nothing
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -746,6 +773,7 @@ namespace RecursosServiciosMedicos
                 {
                     string idOtro = "";
                     conn.Open();
+                    DateTime now = DateTime.Now;
                     //Se tiene que insertar primero en la tabla Otro, despues leer de Otro el valor del ultimo index y despues insertar en consultas la informacion
 
                     SqlCommand cmdd = new SqlCommand("insert into otro (nombre, relacion, edad, sexo) values('" + tbOtroNombre.Text + "', '" + tbOtroRelacion.Text + "', " + tbOtroEdad.Text + ", '" + ddbOtroSexo.SelectedItem + "');", conn);
@@ -786,6 +814,17 @@ namespace RecursosServiciosMedicos
                         MessageBox.Show("Consulta Agregada a consultas.");
                     }
                     conn.Close();
+
+                    DialogResult dialogResult = MessageBox.Show("Desea Imprimir Receta?", "Receta", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        string meds = cbOtroMedicamento.GetItemText(cbOtroMedicamento.SelectedItem) + ", " + cbOtroMedicamento2.GetItemText(cbOtroMedicamento2.SelectedItem) + " y " + cbOtroMedicamento3.GetItemText(cbOtroMedicamento3.SelectedItem);
+                        ImprimirTrasConsultaOtro(tbOtroNombre.Text, Seguimiento(), now.ToString(), meds, cbOtroDiagnostico.GetItemText(cbOtroDiagnostico.SelectedItem), tbDocenteEdad.Text, ddbOtroSexo.GetItemText(ddbOtroSexo.SelectedItem), tbOtroMotivo.Text, Usuario);
+                    }
+                    else if (dialogResult == DialogResult.No)
+                    {
+                        //do nothing
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -793,7 +832,60 @@ namespace RecursosServiciosMedicos
                     conn.Close();
                 }
             }
-        }       
+        }
+        private void ImprimirTrasConsultaAlumno(string inum_control,string iseguimiento, string ifecha, string imedicamento,string idiagnostico, string iedad, string isexo, string imotivo, string idoctor)
+        {
+            num_id = inum_control;
+            seguimiento = iseguimiento;
+            fecha = ifecha;
+            motivo = imotivo;
+            diagnostico = idiagnostico;
+            medicamento = imedicamento;
+            edad = iedad;
+            sexo = isexo;
+            doctor = idoctor;
+
+            string tipo = "Receta";
+            banderaalumno = true;
+            var iapplication = new Microsoft.Office.Interop.Word.Application();
+            var idocument = new Microsoft.Office.Interop.Word.Document();
+            LlenarDocPlantel(idocument, iapplication, tipo);
+        }
+        private void ImprimirTrasConsultaDocente(string inum_control, string iseguimiento, string ifecha, string imedicamento, string idiagnostico, string iedad, string isexo, string imotivo, string idoctor)
+        {
+            num_id = inum_control;
+            seguimiento = iseguimiento;
+            fecha = ifecha;
+            motivo = imotivo;
+            diagnostico = idiagnostico;
+            medicamento = imedicamento;
+            edad = iedad;
+            sexo = isexo;
+            doctor = idoctor;
+
+            string tipo = "Receta";
+            banderaalumno = false;
+            var iapplication = new Microsoft.Office.Interop.Word.Application();
+            var idocument = new Microsoft.Office.Interop.Word.Document();
+            LlenarDocPlantel(idocument, iapplication, tipo);
+        }
+        private void ImprimirTrasConsultaOtro(string inombre, string iseguimiento, string ifecha, string imedicamento, string idiagnostico, string iedad, string isexo, string imotivo, string idoctor)
+        {
+            nombre = inombre;
+            seguimiento = iseguimiento;
+            fecha = ifecha;
+            motivo = imotivo;
+            diagnostico = idiagnostico;
+            medicamento = imedicamento;
+            edad = iedad;
+            sexo = isexo;
+            doctor = idoctor;
+
+            string tipo = "Receta";
+            var iapplication = new Microsoft.Office.Interop.Word.Application();
+            var idocument = new Microsoft.Office.Interop.Word.Document();
+            LlenarDocFueraPlantel(idocument, iapplication, tipo);
+        }
         private bool ListoParaAgregar()
         {
             if (cbAlumno.Checked)
@@ -1062,7 +1154,6 @@ namespace RecursosServiciosMedicos
             }
             return (Añoescolar.ToString());
         }
-        //Metodo de Imprimir
         private void Imprimir(Microsoft.Office.Interop.Word.Document doc, Microsoft.Office.Interop.Word.Application app, string path)
         {
             PrintDialog pDialog = new PrintDialog();
@@ -1096,7 +1187,6 @@ namespace RecursosServiciosMedicos
                 btnImprimir.Enabled = false;
             }
         }
-        //Metodo Llenar Documento de Alguien del Plantel
         private void LlenarDocPlantel(Microsoft.Office.Interop.Word.Document doc, Microsoft.Office.Interop.Word.Application app, string tipodoc)
         {
             string cadQuery;
@@ -1263,7 +1353,6 @@ namespace RecursosServiciosMedicos
             string finalpath = path + "-" + nombre + ".docx";
             Imprimir(doc, app, finalpath);
         }
-        //Metodo Llenar Documento de ALguien Fuera del Plantel
         private void LlenarDocFueraPlantel(Microsoft.Office.Interop.Word.Document doc, Microsoft.Office.Interop.Word.Application app, string tipodoc)
         {
             string path = @"C:\RSM\DocumentosMedicos\" + tipodoc + @"s\Otros\" + tipodoc;
@@ -3521,7 +3610,7 @@ namespace RecursosServiciosMedicos
                         fecha = row.Cells[2].Value.ToString();
                         motivo= row.Cells[3].Value.ToString();
                         diagnostico = row.Cells[4].Value.ToString();
-                        medicamento = row.Cells[5].Value.ToString()+""+ row.Cells[6].Value.ToString()+""+ row.Cells[7].Value.ToString();
+                        medicamento = row.Cells[5].Value.ToString()+", "+ row.Cells[6].Value.ToString()+" y "+ row.Cells[7].Value.ToString();
                         seguimiento = row.Cells[8].Value.ToString();
                         edad = row.Cells[9].Value.ToString();
                         sexo = row.Cells[10].Value.ToString();
@@ -3573,7 +3662,7 @@ namespace RecursosServiciosMedicos
                         fecha = row.Cells[3].Value.ToString();
                         motivo = row.Cells[4].Value.ToString();
                         diagnostico = row.Cells[5].Value.ToString();
-                        medicamento = row.Cells[6].Value.ToString() + "" + row.Cells[7].Value.ToString() + "" + row.Cells[8].Value.ToString();
+                        medicamento = row.Cells[6].Value.ToString() + ", " + row.Cells[7].Value.ToString() + " y " + row.Cells[8].Value.ToString();
                         seguimiento = row.Cells[9].Value.ToString();
                         doctor = row.Cells[10].Value.ToString();
 
@@ -3597,7 +3686,7 @@ namespace RecursosServiciosMedicos
                     fecha = row.Cells[2].Value.ToString();
                     motivo = row.Cells[3].Value.ToString();
                     diagnostico = row.Cells[4].Value.ToString();
-                    medicamento = row.Cells[5].Value.ToString() + "" + row.Cells[6].Value.ToString() + "" + row.Cells[7].Value.ToString();
+                    medicamento = row.Cells[5].Value.ToString() + ", " + row.Cells[6].Value.ToString() + " y " + row.Cells[7].Value.ToString();
                     seguimiento = row.Cells[8].Value.ToString();
                     edad = row.Cells[9].Value.ToString();
                     sexo = row.Cells[10].Value.ToString();
@@ -3636,7 +3725,7 @@ namespace RecursosServiciosMedicos
                     fecha = row.Cells[3].Value.ToString();
                     motivo = row.Cells[4].Value.ToString();
                     diagnostico = row.Cells[5].Value.ToString();
-                    medicamento = row.Cells[6].Value.ToString() + "" + row.Cells[7].Value.ToString() + "" + row.Cells[8].Value.ToString();
+                    medicamento = row.Cells[6].Value.ToString() + ", " + row.Cells[7].Value.ToString() + " y " + row.Cells[8].Value.ToString();
                     seguimiento = row.Cells[9].Value.ToString();
                     doctor = row.Cells[10].Value.ToString();
 
