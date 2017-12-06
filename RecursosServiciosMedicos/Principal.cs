@@ -30,7 +30,7 @@ namespace RecursosServiciosMedicos
         DataTable dsMedicamento3 = new DataTable();
         bool Med2 = false;
         bool Med3 = false;
-        public string nombre = "", num_id = "", num_control = "", num_docente = "", seguimiento = "", fecha = "",motivo="", medicamento = "", diagnostico = "", num_otro = "", edad = "", sexo = "", doctor = "",nombredoc="",cedula="";
+        public string nombre = "", num_id = "", num_control = "", num_docente = "", seguimiento = "", fecha = "",motivo="", medicamento = "", diagnostico = "", num_otro = "", edad = "", sexo = "", doctor = "",nombredoc="",cedula="",meds="";
         public bool RegistroSeleccionado = false, banderaalumno;
         public int tipo = 0;
         public Principal()
@@ -711,7 +711,7 @@ namespace RecursosServiciosMedicos
                     DialogResult dialogResult = MessageBox.Show("Desea Imprimir Receta?", "Receta", MessageBoxButtons.YesNo);
                     if (dialogResult == DialogResult.Yes)
                     {
-                        string meds = ddbAlumnoMedicamento.GetItemText(ddbAlumnoMedicamento.SelectedItem) + ", " + ddbAlumnoMedicamento2.GetItemText(ddbAlumnoMedicamento2.SelectedItem) + " y " + ddbAlumnoMedicamento3.GetItemText(ddbAlumnoMedicamento3.SelectedItem);
+                        MedicamentosyLineas(ddbAlumnoMedicamento, ddbAlumnoMedicamento2, ddbAlumnoMedicamento3);
                         ImprimirTrasConsultaAlumno(tbAlumnoNoControl.Text, Seguimiento(), now.ToString(), meds, ddbAlumnoDiagnostico.GetItemText(ddbAlumnoDiagnostico.SelectedItem), tbAlumnoEdad.Text, tbAlumnoSexo.Text, tbAlumnoMotivo.Text, Usuario);
                     }
                     else if (dialogResult == DialogResult.No)
@@ -753,7 +753,7 @@ namespace RecursosServiciosMedicos
                     DialogResult dialogResult = MessageBox.Show("Desea Imprimir Receta?", "Receta", MessageBoxButtons.YesNo);
                     if (dialogResult == DialogResult.Yes)
                     {
-                        string meds = ddbDocenteMedicamento.GetItemText(ddbDocenteMedicamento.SelectedItem) + ", " + ddbDocenteMedicamento2.GetItemText(ddbDocenteMedicamento2.SelectedItem) + " y " + ddbDocenteMedicamento3.GetItemText(ddbDocenteMedicamento3.SelectedItem);
+                        MedicamentosyLineas(ddbDocenteMedicamento, ddbDocenteMedicamento2, ddbDocenteMedicamento3);
                         ImprimirTrasConsultaDocente(tbDocenteNoDocente.Text, Seguimiento(), now.ToString(), meds, ddbDocenteDiagnostico.GetItemText(ddbAlumnoDiagnostico.SelectedItem), tbDocenteEdad.Text, tbDocenteSexo.Text, tbDocenteMotivo.Text, Usuario);
                     }
                     else if (dialogResult == DialogResult.No)
@@ -818,7 +818,7 @@ namespace RecursosServiciosMedicos
                     DialogResult dialogResult = MessageBox.Show("Desea Imprimir Receta?", "Receta", MessageBoxButtons.YesNo);
                     if (dialogResult == DialogResult.Yes)
                     {
-                        string meds = cbOtroMedicamento.GetItemText(cbOtroMedicamento.SelectedItem) + ", " + cbOtroMedicamento2.GetItemText(cbOtroMedicamento2.SelectedItem) + " y " + cbOtroMedicamento3.GetItemText(cbOtroMedicamento3.SelectedItem);
+                        MedicamentosyLineas(cbOtroMedicamento, cbOtroMedicamento2, cbOtroMedicamento3);
                         ImprimirTrasConsultaOtro(tbOtroNombre.Text, Seguimiento(), now.ToString(), meds, cbOtroDiagnostico.GetItemText(cbOtroDiagnostico.SelectedItem), tbDocenteEdad.Text, ddbOtroSexo.GetItemText(ddbOtroSexo.SelectedItem), tbOtroMotivo.Text, Usuario);
                     }
                     else if (dialogResult == DialogResult.No)
@@ -885,6 +885,22 @@ namespace RecursosServiciosMedicos
             var iapplication = new Microsoft.Office.Interop.Word.Application();
             var idocument = new Microsoft.Office.Interop.Word.Document();
             LlenarDocFueraPlantel(idocument, iapplication, tipo);
+        }
+        private void MedicamentosyLineas(ComboBox cb1, ComboBox cb2, ComboBox cb3)
+        {
+            if (!cb2.Visible && !cb3.Visible)
+            {
+                meds = cb1.GetItemText(cb1.SelectedItem) + "_______________";
+            }
+            else if (cb2.Visible && !cb3.Visible)
+            {
+                meds = cb1.GetItemText(cb1.SelectedItem) + "_______________ y "+cb2.GetItemText(cb2.SelectedItem) + "_______________";
+            }
+            else
+            {
+                meds = cb1.GetItemText(cb1.SelectedItem) + "_______________, " + cb2.GetItemText(cb2.SelectedItem) + "_______________ y " + cb3.GetItemText(cb3.SelectedItem)+ "_______________";
+            }
+
         }
         private bool ListoParaAgregar()
         {
@@ -3610,7 +3626,18 @@ namespace RecursosServiciosMedicos
                         fecha = row.Cells[2].Value.ToString();
                         motivo= row.Cells[3].Value.ToString();
                         diagnostico = row.Cells[4].Value.ToString();
-                        medicamento = row.Cells[5].Value.ToString()+", "+ row.Cells[6].Value.ToString()+" y "+ row.Cells[7].Value.ToString();
+                        if (row.Cells[6].Value.ToString()=="" && row.Cells[7].Value.ToString()=="")
+                        {
+                            medicamento = row.Cells[5].Value.ToString() + "_______________";
+                        }
+                        else if (row.Cells[7].Value.ToString()=="")
+                        {
+                            medicamento = row.Cells[5].Value.ToString() + "_______________ y " + row.Cells[6].Value.ToString() + "_______________";
+                        }
+                        else
+                        {
+                            medicamento = row.Cells[5].Value.ToString() + "_______________, " + row.Cells[6].Value.ToString() + "_______________ y " + row.Cells[7].Value.ToString()+ "_______________";
+                        }
                         seguimiento = row.Cells[8].Value.ToString();
                         edad = row.Cells[9].Value.ToString();
                         sexo = row.Cells[10].Value.ToString();
@@ -3662,7 +3689,18 @@ namespace RecursosServiciosMedicos
                         fecha = row.Cells[3].Value.ToString();
                         motivo = row.Cells[4].Value.ToString();
                         diagnostico = row.Cells[5].Value.ToString();
-                        medicamento = row.Cells[6].Value.ToString() + ", " + row.Cells[7].Value.ToString() + " y " + row.Cells[8].Value.ToString();
+                        if (row.Cells[7].Value.ToString() == "" && row.Cells[8].Value.ToString() == "")
+                        {
+                            medicamento = row.Cells[6].Value.ToString() + "_______________";
+                        }
+                        else if (row.Cells[8].Value.ToString() == "")
+                        {
+                            medicamento = row.Cells[6].Value.ToString() + "_______________ y " + row.Cells[6].Value.ToString() + "_______________";
+                        }
+                        else
+                        {
+                            medicamento = row.Cells[6].Value.ToString() + "_______________, " + row.Cells[6].Value.ToString() + "_______________ y " + row.Cells[7].Value.ToString() + "_______________";
+                        }
                         seguimiento = row.Cells[9].Value.ToString();
                         doctor = row.Cells[10].Value.ToString();
 
@@ -3686,7 +3724,18 @@ namespace RecursosServiciosMedicos
                     fecha = row.Cells[2].Value.ToString();
                     motivo = row.Cells[3].Value.ToString();
                     diagnostico = row.Cells[4].Value.ToString();
-                    medicamento = row.Cells[5].Value.ToString() + ", " + row.Cells[6].Value.ToString() + " y " + row.Cells[7].Value.ToString();
+                    if (row.Cells[6].Value.ToString() == "" && row.Cells[7].Value.ToString() == "")
+                    {
+                        medicamento = row.Cells[5].Value.ToString() + "_______________";
+                    }
+                    else if (row.Cells[7].Value.ToString() == "")
+                    {
+                        medicamento = row.Cells[5].Value.ToString() + "_______________ y " + row.Cells[6].Value.ToString() + "_______________";
+                    }
+                    else
+                    {
+                        medicamento = row.Cells[5].Value.ToString() + "_______________, " + row.Cells[6].Value.ToString() + "_______________ y " + row.Cells[7].Value.ToString() + "_______________";
+                    }
                     seguimiento = row.Cells[8].Value.ToString();
                     edad = row.Cells[9].Value.ToString();
                     sexo = row.Cells[10].Value.ToString();
@@ -3725,7 +3774,18 @@ namespace RecursosServiciosMedicos
                     fecha = row.Cells[3].Value.ToString();
                     motivo = row.Cells[4].Value.ToString();
                     diagnostico = row.Cells[5].Value.ToString();
-                    medicamento = row.Cells[6].Value.ToString() + ", " + row.Cells[7].Value.ToString() + " y " + row.Cells[8].Value.ToString();
+                    if (row.Cells[7].Value.ToString() == "" && row.Cells[8].Value.ToString() == "")
+                    {
+                        medicamento = row.Cells[6].Value.ToString() + "_______________";
+                    }
+                    else if (row.Cells[8].Value.ToString() == "")
+                    {
+                        medicamento = row.Cells[6].Value.ToString() + "_______________ y " + row.Cells[6].Value.ToString() + "_______________";
+                    }
+                    else
+                    {
+                        medicamento = row.Cells[6].Value.ToString() + "_______________, " + row.Cells[6].Value.ToString() + "_______________ y " + row.Cells[7].Value.ToString() + "_______________";
+                    }
                     seguimiento = row.Cells[9].Value.ToString();
                     doctor = row.Cells[10].Value.ToString();
 
