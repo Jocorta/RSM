@@ -154,11 +154,13 @@
             this.btnExportar = new Bunifu.Framework.UI.BunifuThinButton2();
             this.botBack = new Bunifu.Framework.UI.BunifuThinButton2();
             this.pnlSE = new System.Windows.Forms.Panel();
+            this.cbDiagnostico = new Bunifu.Framework.UI.BunifuCheckbox();
+            this.lblSEDiag = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.lblKEv = new System.Windows.Forms.Label();
             this.lblTotalRegistros = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.lblDiagnostico = new System.Windows.Forms.Label();
             this.lblSEEventoMini = new System.Windows.Forms.Label();
-            this.comboIT = new System.Windows.Forms.ComboBox();
+            this.comboDiagnostico = new System.Windows.Forms.ComboBox();
             this.comboEvento = new System.Windows.Forms.ComboBox();
             this.lblSEFechaFinal = new System.Windows.Forms.Label();
             this.lblSEFechaInicio = new System.Windows.Forms.Label();
@@ -330,7 +332,7 @@
             this.bunifuGradientPanel1.GradientTopLeft = System.Drawing.Color.White;
             this.bunifuGradientPanel1.GradientTopRight = System.Drawing.Color.LightSkyBlue;
             this.bunifuGradientPanel1.Location = new System.Drawing.Point(0, 0);
-            this.bunifuGradientPanel1.Margin = new System.Windows.Forms.Padding(4);
+            this.bunifuGradientPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.bunifuGradientPanel1.Name = "bunifuGradientPanel1";
             this.bunifuGradientPanel1.Quality = 10;
             this.bunifuGradientPanel1.Size = new System.Drawing.Size(220, 577);
@@ -341,8 +343,8 @@
             this.Separator.BackColor = System.Drawing.Color.Transparent;
             this.Separator.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.Separator.LineThickness = 2;
-            this.Separator.Location = new System.Drawing.Point(14, 170);
-            this.Separator.Margin = new System.Windows.Forms.Padding(5);
+            this.Separator.Location = new System.Drawing.Point(13, 170);
+            this.Separator.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.Separator.Name = "Separator";
             this.Separator.Size = new System.Drawing.Size(181, 16);
             this.Separator.TabIndex = 1;
@@ -467,9 +469,9 @@
             this.bunifuSeparator2.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.bunifuSeparator2.LineThickness = 5;
             this.bunifuSeparator2.Location = new System.Drawing.Point(13, 100);
-            this.bunifuSeparator2.Margin = new System.Windows.Forms.Padding(5);
+            this.bunifuSeparator2.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.bunifuSeparator2.Name = "bunifuSeparator2";
-            this.bunifuSeparator2.Size = new System.Drawing.Size(182, 10);
+            this.bunifuSeparator2.Size = new System.Drawing.Size(181, 10);
             this.bunifuSeparator2.TabIndex = 3;
             this.bunifuSeparator2.Transparency = 255;
             this.bunifuSeparator2.Vertical = false;
@@ -580,7 +582,7 @@
             this.pnlConsulta.Controls.Add(this.pnlDocente);
             this.pnlConsulta.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlConsulta.Location = new System.Drawing.Point(0, 0);
-            this.pnlConsulta.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlConsulta.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlConsulta.Name = "pnlConsulta";
             this.pnlConsulta.Size = new System.Drawing.Size(981, 577);
             this.pnlConsulta.TabIndex = 1;
@@ -595,9 +597,9 @@
             this.lblSeguimiento.Location = new System.Drawing.Point(252, 545);
             this.lblSeguimiento.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSeguimiento.Name = "lblSeguimiento";
-            this.lblSeguimiento.Size = new System.Drawing.Size(151, 28);
+            this.lblSeguimiento.Size = new System.Drawing.Size(142, 28);
             this.lblSeguimiento.TabIndex = 33;
-            this.lblSeguimiento.Text = "Seguimiento? :";
+            this.lblSeguimiento.Text = "Subsecuente :";
             this.ttSeguimiento.SetToolTip(this.lblSeguimiento, "Marca si la consulta es seguimiento de alguna consulta anterior.");
             // 
             // cbSeguimiento
@@ -608,7 +610,7 @@
             this.cbSeguimiento.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.cbSeguimiento.ForeColor = System.Drawing.Color.White;
             this.cbSeguimiento.Location = new System.Drawing.Point(424, 546);
-            this.cbSeguimiento.Margin = new System.Windows.Forms.Padding(5);
+            this.cbSeguimiento.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.cbSeguimiento.Name = "cbSeguimiento";
             this.cbSeguimiento.Size = new System.Drawing.Size(20, 20);
             this.cbSeguimiento.TabIndex = 34;
@@ -647,7 +649,7 @@
             this.cbOtro.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.cbOtro.ForeColor = System.Drawing.Color.White;
             this.cbOtro.Location = new System.Drawing.Point(789, 66);
-            this.cbOtro.Margin = new System.Windows.Forms.Padding(5);
+            this.cbOtro.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.cbOtro.Name = "cbOtro";
             this.cbOtro.Size = new System.Drawing.Size(20, 20);
             this.cbOtro.TabIndex = 5;
@@ -674,7 +676,7 @@
             this.cbDocente.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.cbDocente.ForeColor = System.Drawing.Color.White;
             this.cbDocente.Location = new System.Drawing.Point(525, 66);
-            this.cbDocente.Margin = new System.Windows.Forms.Padding(5);
+            this.cbDocente.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.cbDocente.Name = "cbDocente";
             this.cbDocente.Size = new System.Drawing.Size(20, 20);
             this.cbDocente.TabIndex = 3;
@@ -701,7 +703,7 @@
             this.cbAlumno.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.cbAlumno.ForeColor = System.Drawing.Color.White;
             this.cbAlumno.Location = new System.Drawing.Point(281, 66);
-            this.cbAlumno.Margin = new System.Windows.Forms.Padding(5);
+            this.cbAlumno.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.cbAlumno.Name = "cbAlumno";
             this.cbAlumno.Size = new System.Drawing.Size(20, 20);
             this.cbAlumno.TabIndex = 1;
@@ -738,7 +740,7 @@
             this.pnlAlumno.Controls.Add(this.bunifuCustomLabel6);
             this.pnlAlumno.Controls.Add(this.bunifuCustomLabel5);
             this.pnlAlumno.Location = new System.Drawing.Point(224, 96);
-            this.pnlAlumno.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlAlumno.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlAlumno.Name = "pnlAlumno";
             this.pnlAlumno.Size = new System.Drawing.Size(749, 446);
             this.pnlAlumno.TabIndex = 0;
@@ -776,7 +778,7 @@
             this.ddbAlumnoMedicamento3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddbAlumnoMedicamento3.FormattingEnabled = true;
             this.ddbAlumnoMedicamento3.Location = new System.Drawing.Point(183, 375);
-            this.ddbAlumnoMedicamento3.Margin = new System.Windows.Forms.Padding(4);
+            this.ddbAlumnoMedicamento3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ddbAlumnoMedicamento3.Name = "ddbAlumnoMedicamento3";
             this.ddbAlumnoMedicamento3.Size = new System.Drawing.Size(372, 24);
             this.ddbAlumnoMedicamento3.TabIndex = 43;
@@ -788,7 +790,7 @@
             this.ddbAlumnoMedicamento2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddbAlumnoMedicamento2.FormattingEnabled = true;
             this.ddbAlumnoMedicamento2.Location = new System.Drawing.Point(183, 346);
-            this.ddbAlumnoMedicamento2.Margin = new System.Windows.Forms.Padding(4);
+            this.ddbAlumnoMedicamento2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ddbAlumnoMedicamento2.Name = "ddbAlumnoMedicamento2";
             this.ddbAlumnoMedicamento2.Size = new System.Drawing.Size(372, 24);
             this.ddbAlumnoMedicamento2.TabIndex = 42;
@@ -828,7 +830,7 @@
             this.ddbAlumnoMedicamento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddbAlumnoMedicamento.FormattingEnabled = true;
             this.ddbAlumnoMedicamento.Location = new System.Drawing.Point(156, 315);
-            this.ddbAlumnoMedicamento.Margin = new System.Windows.Forms.Padding(4);
+            this.ddbAlumnoMedicamento.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ddbAlumnoMedicamento.Name = "ddbAlumnoMedicamento";
             this.ddbAlumnoMedicamento.Size = new System.Drawing.Size(396, 24);
             this.ddbAlumnoMedicamento.TabIndex = 34;
@@ -839,7 +841,7 @@
             this.ddbAlumnoDiagnostico.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddbAlumnoDiagnostico.FormattingEnabled = true;
             this.ddbAlumnoDiagnostico.Location = new System.Drawing.Point(156, 286);
-            this.ddbAlumnoDiagnostico.Margin = new System.Windows.Forms.Padding(4);
+            this.ddbAlumnoDiagnostico.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ddbAlumnoDiagnostico.Name = "ddbAlumnoDiagnostico";
             this.ddbAlumnoDiagnostico.Size = new System.Drawing.Size(396, 24);
             this.ddbAlumnoDiagnostico.TabIndex = 33;
@@ -851,7 +853,7 @@
             this.tbAlumnoSexo.BorderColor = System.Drawing.Color.BlueViolet;
             this.tbAlumnoSexo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbAlumnoSexo.Location = new System.Drawing.Point(156, 155);
-            this.tbAlumnoSexo.Margin = new System.Windows.Forms.Padding(4);
+            this.tbAlumnoSexo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbAlumnoSexo.Name = "tbAlumnoSexo";
             this.tbAlumnoSexo.ReadOnly = true;
             this.tbAlumnoSexo.Size = new System.Drawing.Size(469, 22);
@@ -863,7 +865,7 @@
             this.tbAlumnoEdad.BorderColor = System.Drawing.Color.BlueViolet;
             this.tbAlumnoEdad.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbAlumnoEdad.Location = new System.Drawing.Point(156, 127);
-            this.tbAlumnoEdad.Margin = new System.Windows.Forms.Padding(4);
+            this.tbAlumnoEdad.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbAlumnoEdad.Name = "tbAlumnoEdad";
             this.tbAlumnoEdad.ReadOnly = true;
             this.tbAlumnoEdad.Size = new System.Drawing.Size(469, 22);
@@ -875,7 +877,7 @@
             this.tbAlumnoSemestre.BorderColor = System.Drawing.Color.BlueViolet;
             this.tbAlumnoSemestre.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbAlumnoSemestre.Location = new System.Drawing.Point(156, 98);
-            this.tbAlumnoSemestre.Margin = new System.Windows.Forms.Padding(4);
+            this.tbAlumnoSemestre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbAlumnoSemestre.Name = "tbAlumnoSemestre";
             this.tbAlumnoSemestre.ReadOnly = true;
             this.tbAlumnoSemestre.Size = new System.Drawing.Size(469, 22);
@@ -887,7 +889,7 @@
             this.tbAlumnoCarrera.BorderColor = System.Drawing.Color.BlueViolet;
             this.tbAlumnoCarrera.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbAlumnoCarrera.Location = new System.Drawing.Point(156, 70);
-            this.tbAlumnoCarrera.Margin = new System.Windows.Forms.Padding(4);
+            this.tbAlumnoCarrera.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbAlumnoCarrera.Name = "tbAlumnoCarrera";
             this.tbAlumnoCarrera.ReadOnly = true;
             this.tbAlumnoCarrera.Size = new System.Drawing.Size(469, 22);
@@ -899,7 +901,7 @@
             this.tbAlumnoNombre.BorderColor = System.Drawing.Color.BlueViolet;
             this.tbAlumnoNombre.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbAlumnoNombre.Location = new System.Drawing.Point(156, 43);
-            this.tbAlumnoNombre.Margin = new System.Windows.Forms.Padding(4);
+            this.tbAlumnoNombre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbAlumnoNombre.Name = "tbAlumnoNombre";
             this.tbAlumnoNombre.ReadOnly = true;
             this.tbAlumnoNombre.Size = new System.Drawing.Size(469, 22);
@@ -1031,7 +1033,7 @@
             this.tbAlumnoMotivo.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.tbAlumnoMotivo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbAlumnoMotivo.Location = new System.Drawing.Point(228, 183);
-            this.tbAlumnoMotivo.Margin = new System.Windows.Forms.Padding(4);
+            this.tbAlumnoMotivo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbAlumnoMotivo.MaxLength = 200;
             this.tbAlumnoMotivo.Multiline = true;
             this.tbAlumnoMotivo.Name = "tbAlumnoMotivo";
@@ -1072,7 +1074,7 @@
             this.tbAlumnoNoControl.BorderColor = System.Drawing.Color.BlueViolet;
             this.tbAlumnoNoControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbAlumnoNoControl.Location = new System.Drawing.Point(139, 12);
-            this.tbAlumnoNoControl.Margin = new System.Windows.Forms.Padding(4);
+            this.tbAlumnoNoControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbAlumnoNoControl.MaxLength = 50;
             this.tbAlumnoNoControl.Name = "tbAlumnoNoControl";
             this.tbAlumnoNoControl.Size = new System.Drawing.Size(141, 22);
@@ -1183,7 +1185,7 @@
             this.pnlOtro.Controls.Add(this.bunifuCustomLabel26);
             this.pnlOtro.Controls.Add(this.bunifuCustomLabel27);
             this.pnlOtro.Location = new System.Drawing.Point(224, 96);
-            this.pnlOtro.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlOtro.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlOtro.Name = "pnlOtro";
             this.pnlOtro.Size = new System.Drawing.Size(749, 446);
             this.pnlOtro.TabIndex = 33;
@@ -1249,7 +1251,7 @@
             this.cbOtroMedicamento3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbOtroMedicamento3.FormattingEnabled = true;
             this.cbOtroMedicamento3.Location = new System.Drawing.Point(177, 353);
-            this.cbOtroMedicamento3.Margin = new System.Windows.Forms.Padding(4);
+            this.cbOtroMedicamento3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbOtroMedicamento3.Name = "cbOtroMedicamento3";
             this.cbOtroMedicamento3.Size = new System.Drawing.Size(387, 24);
             this.cbOtroMedicamento3.TabIndex = 37;
@@ -1261,7 +1263,7 @@
             this.cbOtroMedicamento2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbOtroMedicamento2.FormattingEnabled = true;
             this.cbOtroMedicamento2.Location = new System.Drawing.Point(179, 321);
-            this.cbOtroMedicamento2.Margin = new System.Windows.Forms.Padding(4);
+            this.cbOtroMedicamento2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbOtroMedicamento2.Name = "cbOtroMedicamento2";
             this.cbOtroMedicamento2.Size = new System.Drawing.Size(387, 24);
             this.cbOtroMedicamento2.TabIndex = 36;
@@ -1273,7 +1275,7 @@
             this.cbOtroMedicamento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbOtroMedicamento.FormattingEnabled = true;
             this.cbOtroMedicamento.Location = new System.Drawing.Point(165, 287);
-            this.cbOtroMedicamento.Margin = new System.Windows.Forms.Padding(4);
+            this.cbOtroMedicamento.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbOtroMedicamento.Name = "cbOtroMedicamento";
             this.cbOtroMedicamento.Size = new System.Drawing.Size(387, 24);
             this.cbOtroMedicamento.TabIndex = 35;
@@ -1284,7 +1286,7 @@
             this.cbOtroDiagnostico.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbOtroDiagnostico.FormattingEnabled = true;
             this.cbOtroDiagnostico.Location = new System.Drawing.Point(165, 251);
-            this.cbOtroDiagnostico.Margin = new System.Windows.Forms.Padding(4);
+            this.cbOtroDiagnostico.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbOtroDiagnostico.Name = "cbOtroDiagnostico";
             this.cbOtroDiagnostico.Size = new System.Drawing.Size(387, 24);
             this.cbOtroDiagnostico.TabIndex = 34;
@@ -1298,7 +1300,7 @@
             "Hombre",
             "Mujer"});
             this.ddbOtroSexo.Location = new System.Drawing.Point(156, 123);
-            this.ddbOtroSexo.Margin = new System.Windows.Forms.Padding(4);
+            this.ddbOtroSexo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ddbOtroSexo.Name = "ddbOtroSexo";
             this.ddbOtroSexo.Size = new System.Drawing.Size(208, 24);
             this.ddbOtroSexo.TabIndex = 33;
@@ -1309,7 +1311,7 @@
             this.tbOtroEdad.BorderColor = System.Drawing.Color.BlueViolet;
             this.tbOtroEdad.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbOtroEdad.Location = new System.Drawing.Point(156, 96);
-            this.tbOtroEdad.Margin = new System.Windows.Forms.Padding(4);
+            this.tbOtroEdad.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbOtroEdad.Name = "tbOtroEdad";
             this.tbOtroEdad.Size = new System.Drawing.Size(73, 22);
             this.tbOtroEdad.TabIndex = 31;
@@ -1321,7 +1323,7 @@
             this.tbOtroRelacion.BorderColor = System.Drawing.Color.BlueViolet;
             this.tbOtroRelacion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbOtroRelacion.Location = new System.Drawing.Point(156, 33);
-            this.tbOtroRelacion.Margin = new System.Windows.Forms.Padding(4);
+            this.tbOtroRelacion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbOtroRelacion.Multiline = true;
             this.tbOtroRelacion.Name = "tbOtroRelacion";
             this.tbOtroRelacion.Size = new System.Drawing.Size(469, 59);
@@ -1334,7 +1336,7 @@
             this.tbOtroNombre.BorderColor = System.Drawing.Color.BlueViolet;
             this.tbOtroNombre.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbOtroNombre.Location = new System.Drawing.Point(156, 5);
-            this.tbOtroNombre.Margin = new System.Windows.Forms.Padding(4);
+            this.tbOtroNombre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbOtroNombre.Name = "tbOtroNombre";
             this.tbOtroNombre.Size = new System.Drawing.Size(469, 22);
             this.tbOtroNombre.TabIndex = 28;
@@ -1466,7 +1468,7 @@
             this.tbOtroMotivo.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.tbOtroMotivo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbOtroMotivo.Location = new System.Drawing.Point(228, 153);
-            this.tbOtroMotivo.Margin = new System.Windows.Forms.Padding(4);
+            this.tbOtroMotivo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbOtroMotivo.MaxLength = 200;
             this.tbOtroMotivo.Multiline = true;
             this.tbOtroMotivo.Name = "tbOtroMotivo";
@@ -1555,7 +1557,7 @@
             this.pnlDocente.Controls.Add(this.bunifuCustomLabel20);
             this.pnlDocente.Controls.Add(this.bunifuCustomLabel21);
             this.pnlDocente.Location = new System.Drawing.Point(224, 96);
-            this.pnlDocente.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlDocente.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlDocente.Name = "pnlDocente";
             this.pnlDocente.Size = new System.Drawing.Size(749, 446);
             this.pnlDocente.TabIndex = 10;
@@ -1593,7 +1595,7 @@
             this.ddbDocenteMedicamento3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddbDocenteMedicamento3.FormattingEnabled = true;
             this.ddbDocenteMedicamento3.Location = new System.Drawing.Point(183, 358);
-            this.ddbDocenteMedicamento3.Margin = new System.Windows.Forms.Padding(4);
+            this.ddbDocenteMedicamento3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ddbDocenteMedicamento3.Name = "ddbDocenteMedicamento3";
             this.ddbDocenteMedicamento3.Size = new System.Drawing.Size(396, 24);
             this.ddbDocenteMedicamento3.TabIndex = 39;
@@ -1605,7 +1607,7 @@
             this.ddbDocenteMedicamento2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddbDocenteMedicamento2.FormattingEnabled = true;
             this.ddbDocenteMedicamento2.Location = new System.Drawing.Point(183, 330);
-            this.ddbDocenteMedicamento2.Margin = new System.Windows.Forms.Padding(4);
+            this.ddbDocenteMedicamento2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ddbDocenteMedicamento2.Name = "ddbDocenteMedicamento2";
             this.ddbDocenteMedicamento2.Size = new System.Drawing.Size(396, 24);
             this.ddbDocenteMedicamento2.TabIndex = 38;
@@ -1645,7 +1647,7 @@
             this.ddbDocenteMedicamento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddbDocenteMedicamento.FormattingEnabled = true;
             this.ddbDocenteMedicamento.Location = new System.Drawing.Point(156, 294);
-            this.ddbDocenteMedicamento.Margin = new System.Windows.Forms.Padding(4);
+            this.ddbDocenteMedicamento.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ddbDocenteMedicamento.Name = "ddbDocenteMedicamento";
             this.ddbDocenteMedicamento.Size = new System.Drawing.Size(396, 24);
             this.ddbDocenteMedicamento.TabIndex = 35;
@@ -1656,7 +1658,7 @@
             this.ddbDocenteDiagnostico.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddbDocenteDiagnostico.FormattingEnabled = true;
             this.ddbDocenteDiagnostico.Location = new System.Drawing.Point(156, 257);
-            this.ddbDocenteDiagnostico.Margin = new System.Windows.Forms.Padding(4);
+            this.ddbDocenteDiagnostico.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ddbDocenteDiagnostico.Name = "ddbDocenteDiagnostico";
             this.ddbDocenteDiagnostico.Size = new System.Drawing.Size(396, 24);
             this.ddbDocenteDiagnostico.TabIndex = 34;
@@ -1668,7 +1670,7 @@
             this.tbDocenteSexo.BorderColor = System.Drawing.Color.BlueViolet;
             this.tbDocenteSexo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbDocenteSexo.Location = new System.Drawing.Point(156, 130);
-            this.tbDocenteSexo.Margin = new System.Windows.Forms.Padding(4);
+            this.tbDocenteSexo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbDocenteSexo.Name = "tbDocenteSexo";
             this.tbDocenteSexo.ReadOnly = true;
             this.tbDocenteSexo.Size = new System.Drawing.Size(469, 22);
@@ -1680,7 +1682,7 @@
             this.tbDocenteEdad.BorderColor = System.Drawing.Color.BlueViolet;
             this.tbDocenteEdad.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbDocenteEdad.Location = new System.Drawing.Point(156, 100);
-            this.tbDocenteEdad.Margin = new System.Windows.Forms.Padding(4);
+            this.tbDocenteEdad.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbDocenteEdad.Name = "tbDocenteEdad";
             this.tbDocenteEdad.ReadOnly = true;
             this.tbDocenteEdad.Size = new System.Drawing.Size(469, 22);
@@ -1692,7 +1694,7 @@
             this.tbDocenteArea.BorderColor = System.Drawing.Color.BlueViolet;
             this.tbDocenteArea.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbDocenteArea.Location = new System.Drawing.Point(156, 70);
-            this.tbDocenteArea.Margin = new System.Windows.Forms.Padding(4);
+            this.tbDocenteArea.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbDocenteArea.Name = "tbDocenteArea";
             this.tbDocenteArea.ReadOnly = true;
             this.tbDocenteArea.Size = new System.Drawing.Size(469, 22);
@@ -1704,7 +1706,7 @@
             this.tbDocenteNombre.BorderColor = System.Drawing.Color.BlueViolet;
             this.tbDocenteNombre.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbDocenteNombre.Location = new System.Drawing.Point(156, 42);
-            this.tbDocenteNombre.Margin = new System.Windows.Forms.Padding(4);
+            this.tbDocenteNombre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbDocenteNombre.Name = "tbDocenteNombre";
             this.tbDocenteNombre.ReadOnly = true;
             this.tbDocenteNombre.Size = new System.Drawing.Size(469, 22);
@@ -1836,7 +1838,7 @@
             this.tbDocenteMotivo.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.tbDocenteMotivo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbDocenteMotivo.Location = new System.Drawing.Point(228, 161);
-            this.tbDocenteMotivo.Margin = new System.Windows.Forms.Padding(4);
+            this.tbDocenteMotivo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbDocenteMotivo.MaxLength = 200;
             this.tbDocenteMotivo.Multiline = true;
             this.tbDocenteMotivo.Name = "tbDocenteMotivo";
@@ -1877,7 +1879,7 @@
             this.tbDocenteNoDocente.BorderColor = System.Drawing.Color.BlueViolet;
             this.tbDocenteNoDocente.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbDocenteNoDocente.Location = new System.Drawing.Point(156, 12);
-            this.tbDocenteNoDocente.Margin = new System.Windows.Forms.Padding(4);
+            this.tbDocenteNoDocente.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbDocenteNoDocente.MaxLength = 50;
             this.tbDocenteNoDocente.Name = "tbDocenteNoDocente";
             this.tbDocenteNoDocente.Size = new System.Drawing.Size(141, 22);
@@ -1969,7 +1971,7 @@
             this.pnlConsultoria.Controls.Add(this.cbAlumnoBusqueda);
             this.pnlConsultoria.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlConsultoria.Location = new System.Drawing.Point(220, 0);
-            this.pnlConsultoria.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlConsultoria.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlConsultoria.Name = "pnlConsultoria";
             this.pnlConsultoria.Size = new System.Drawing.Size(761, 577);
             this.pnlConsultoria.TabIndex = 40;
@@ -1991,7 +1993,7 @@
             this.pnlBusqueda.Controls.Add(this.txbBuscador);
             this.pnlBusqueda.Controls.Add(this.tabResultados);
             this.pnlBusqueda.Location = new System.Drawing.Point(16, 113);
-            this.pnlBusqueda.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlBusqueda.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlBusqueda.Name = "pnlBusqueda";
             this.pnlBusqueda.Size = new System.Drawing.Size(721, 379);
             this.pnlBusqueda.TabIndex = 37;
@@ -2030,7 +2032,7 @@
             this.cbSeguir.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.cbSeguir.ForeColor = System.Drawing.Color.White;
             this.cbSeguir.Location = new System.Drawing.Point(455, 30);
-            this.cbSeguir.Margin = new System.Windows.Forms.Padding(5);
+            this.cbSeguir.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.cbSeguir.Name = "cbSeguir";
             this.cbSeguir.Size = new System.Drawing.Size(20, 20);
             this.cbSeguir.TabIndex = 38;
@@ -2070,7 +2072,7 @@
             this.cbFecha.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.cbFecha.ForeColor = System.Drawing.Color.White;
             this.cbFecha.Location = new System.Drawing.Point(85, 30);
-            this.cbFecha.Margin = new System.Windows.Forms.Padding(5);
+            this.cbFecha.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.cbFecha.Name = "cbFecha";
             this.cbFecha.Size = new System.Drawing.Size(20, 20);
             this.cbFecha.TabIndex = 31;
@@ -2097,7 +2099,7 @@
             this.cbNoControl.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.cbNoControl.ForeColor = System.Drawing.Color.White;
             this.cbNoControl.Location = new System.Drawing.Point(247, 30);
-            this.cbNoControl.Margin = new System.Windows.Forms.Padding(5);
+            this.cbNoControl.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.cbNoControl.Name = "cbNoControl";
             this.cbNoControl.Size = new System.Drawing.Size(20, 20);
             this.cbNoControl.TabIndex = 29;
@@ -2109,7 +2111,7 @@
             this.txbBusquedaClave.BorderColor = System.Drawing.Color.BlueViolet;
             this.txbBusquedaClave.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txbBusquedaClave.Location = new System.Drawing.Point(340, 171);
-            this.txbBusquedaClave.Margin = new System.Windows.Forms.Padding(4);
+            this.txbBusquedaClave.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txbBusquedaClave.Name = "txbBusquedaClave";
             this.txbBusquedaClave.Size = new System.Drawing.Size(141, 22);
             this.txbBusquedaClave.TabIndex = 28;
@@ -2136,7 +2138,7 @@
             this.tabResultados.BackgroundColor = System.Drawing.Color.MediumAquamarine;
             this.tabResultados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tabResultados.Location = new System.Drawing.Point(65, 341);
-            this.tabResultados.Margin = new System.Windows.Forms.Padding(4);
+            this.tabResultados.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabResultados.Name = "tabResultados";
             this.tabResultados.ReadOnly = true;
             this.tabResultados.Size = new System.Drawing.Size(13, 14);
@@ -2204,7 +2206,7 @@
             this.cbOtroBusqueda.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.cbOtroBusqueda.ForeColor = System.Drawing.Color.White;
             this.cbOtroBusqueda.Location = new System.Drawing.Point(572, 80);
-            this.cbOtroBusqueda.Margin = new System.Windows.Forms.Padding(5);
+            this.cbOtroBusqueda.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.cbOtroBusqueda.Name = "cbOtroBusqueda";
             this.cbOtroBusqueda.Size = new System.Drawing.Size(20, 20);
             this.cbOtroBusqueda.TabIndex = 5;
@@ -2231,7 +2233,7 @@
             this.cbDocenteBusqueda.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.cbDocenteBusqueda.ForeColor = System.Drawing.Color.White;
             this.cbDocenteBusqueda.Location = new System.Drawing.Point(308, 80);
-            this.cbDocenteBusqueda.Margin = new System.Windows.Forms.Padding(5);
+            this.cbDocenteBusqueda.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.cbDocenteBusqueda.Name = "cbDocenteBusqueda";
             this.cbDocenteBusqueda.Size = new System.Drawing.Size(20, 20);
             this.cbDocenteBusqueda.TabIndex = 3;
@@ -2258,7 +2260,7 @@
             this.cbAlumnoBusqueda.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.cbAlumnoBusqueda.ForeColor = System.Drawing.Color.White;
             this.cbAlumnoBusqueda.Location = new System.Drawing.Point(64, 80);
-            this.cbAlumnoBusqueda.Margin = new System.Windows.Forms.Padding(5);
+            this.cbAlumnoBusqueda.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.cbAlumnoBusqueda.Name = "cbAlumnoBusqueda";
             this.cbAlumnoBusqueda.Size = new System.Drawing.Size(20, 20);
             this.cbAlumnoBusqueda.TabIndex = 1;
@@ -2281,7 +2283,7 @@
             this.pnlServiciosEscolares.Controls.Add(this.cbSEAlumno);
             this.pnlServiciosEscolares.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlServiciosEscolares.Location = new System.Drawing.Point(220, 0);
-            this.pnlServiciosEscolares.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlServiciosEscolares.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlServiciosEscolares.Name = "pnlServiciosEscolares";
             this.pnlServiciosEscolares.Size = new System.Drawing.Size(761, 577);
             this.pnlServiciosEscolares.TabIndex = 44;
@@ -2346,11 +2348,13 @@
             // pnlSE
             // 
             this.pnlSE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlSE.Controls.Add(this.cbDiagnostico);
+            this.pnlSE.Controls.Add(this.lblSEDiag);
             this.pnlSE.Controls.Add(this.lblKEv);
             this.pnlSE.Controls.Add(this.lblTotalRegistros);
-            this.pnlSE.Controls.Add(this.label5);
+            this.pnlSE.Controls.Add(this.lblDiagnostico);
             this.pnlSE.Controls.Add(this.lblSEEventoMini);
-            this.pnlSE.Controls.Add(this.comboIT);
+            this.pnlSE.Controls.Add(this.comboDiagnostico);
             this.pnlSE.Controls.Add(this.comboEvento);
             this.pnlSE.Controls.Add(this.lblSEFechaFinal);
             this.pnlSE.Controls.Add(this.lblSEFechaInicio);
@@ -2372,11 +2376,38 @@
             this.pnlSE.Controls.Add(this.bunifuCustomLabel53);
             this.pnlSE.Controls.Add(this.tabSEResultados);
             this.pnlSE.Location = new System.Drawing.Point(16, 113);
-            this.pnlSE.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlSE.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlSE.Name = "pnlSE";
             this.pnlSE.Size = new System.Drawing.Size(721, 379);
             this.pnlSE.TabIndex = 37;
             this.pnlSE.Visible = false;
+            // 
+            // cbDiagnostico
+            // 
+            this.cbDiagnostico.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.cbDiagnostico.ChechedOffColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.cbDiagnostico.Checked = false;
+            this.cbDiagnostico.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.cbDiagnostico.ForeColor = System.Drawing.Color.White;
+            this.cbDiagnostico.Location = new System.Drawing.Point(455, 62);
+            this.cbDiagnostico.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.cbDiagnostico.Name = "cbDiagnostico";
+            this.cbDiagnostico.Size = new System.Drawing.Size(20, 20);
+            this.cbDiagnostico.TabIndex = 58;
+            this.cbDiagnostico.OnChange += new System.EventHandler(this.cbDiagnostico_OnChange);
+            // 
+            // lblSEDiag
+            // 
+            this.lblSEDiag.AutoSize = true;
+            this.lblSEDiag.Font = new System.Drawing.Font("Segoe UI Semibold", 12.75F, System.Drawing.FontStyle.Bold);
+            this.lblSEDiag.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.lblSEDiag.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.lblSEDiag.Location = new System.Drawing.Point(489, 63);
+            this.lblSEDiag.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSEDiag.Name = "lblSEDiag";
+            this.lblSEDiag.Size = new System.Drawing.Size(131, 30);
+            this.lblSEDiag.TabIndex = 57;
+            this.lblSEDiag.Text = "Diagnóstico";
             // 
             // lblKEv
             // 
@@ -2406,17 +2437,16 @@
             this.lblTotalRegistros.Text = "Total de registros= 0";
             this.lblTotalRegistros.Visible = false;
             // 
-            // label5
+            // lblDiagnostico
             // 
-            this.label5.AutoSize = true;
-            this.label5.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label5.Location = new System.Drawing.Point(511, 190);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(57, 17);
-            this.label5.TabIndex = 54;
-            this.label5.Text = "Instituto";
-            this.label5.Visible = false;
+            this.lblDiagnostico.AutoSize = true;
+            this.lblDiagnostico.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.lblDiagnostico.Location = new System.Drawing.Point(511, 190);
+            this.lblDiagnostico.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblDiagnostico.Name = "lblDiagnostico";
+            this.lblDiagnostico.Size = new System.Drawing.Size(82, 17);
+            this.lblDiagnostico.TabIndex = 54;
+            this.lblDiagnostico.Text = "Diagnóstico";
             // 
             // lblSEEventoMini
             // 
@@ -2429,19 +2459,18 @@
             this.lblSEEventoMini.TabIndex = 53;
             this.lblSEEventoMini.Text = "Evento";
             // 
-            // comboIT
+            // comboDiagnostico
             // 
-            this.comboIT.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboIT.Enabled = false;
-            this.comboIT.FormattingEnabled = true;
-            this.comboIT.Items.AddRange(new object[] {
-            "SELECCIONE INSTITUTO"});
-            this.comboIT.Location = new System.Drawing.Point(455, 209);
-            this.comboIT.Margin = new System.Windows.Forms.Padding(4);
-            this.comboIT.Name = "comboIT";
-            this.comboIT.Size = new System.Drawing.Size(204, 24);
-            this.comboIT.TabIndex = 52;
-            this.comboIT.Visible = false;
+            this.comboDiagnostico.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboDiagnostico.Enabled = false;
+            this.comboDiagnostico.FormattingEnabled = true;
+            this.comboDiagnostico.Items.AddRange(new object[] {
+            "SELECCIONE DIAGNÓSTICO"});
+            this.comboDiagnostico.Location = new System.Drawing.Point(455, 209);
+            this.comboDiagnostico.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboDiagnostico.Name = "comboDiagnostico";
+            this.comboDiagnostico.Size = new System.Drawing.Size(204, 24);
+            this.comboDiagnostico.TabIndex = 52;
             // 
             // comboEvento
             // 
@@ -2451,7 +2480,7 @@
             this.comboEvento.Items.AddRange(new object[] {
             "SELECCIONE EVENTO"});
             this.comboEvento.Location = new System.Drawing.Point(455, 155);
-            this.comboEvento.Margin = new System.Windows.Forms.Padding(4);
+            this.comboEvento.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.comboEvento.Name = "comboEvento";
             this.comboEvento.Size = new System.Drawing.Size(204, 24);
             this.comboEvento.TabIndex = 51;
@@ -2504,7 +2533,7 @@
             // 
             this.dtpFinal.Enabled = false;
             this.dtpFinal.Location = new System.Drawing.Point(57, 332);
-            this.dtpFinal.Margin = new System.Windows.Forms.Padding(4);
+            this.dtpFinal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dtpFinal.Name = "dtpFinal";
             this.dtpFinal.Size = new System.Drawing.Size(265, 22);
             this.dtpFinal.TabIndex = 46;
@@ -2513,7 +2542,7 @@
             // 
             this.dtpInicio.Enabled = false;
             this.dtpInicio.Location = new System.Drawing.Point(57, 274);
-            this.dtpInicio.Margin = new System.Windows.Forms.Padding(4);
+            this.dtpInicio.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dtpInicio.Name = "dtpInicio";
             this.dtpInicio.Size = new System.Drawing.Size(265, 22);
             this.dtpInicio.TabIndex = 45;
@@ -2526,7 +2555,7 @@
             this.comboGeneracion.Items.AddRange(new object[] {
             "SELECCIONE GENERACION"});
             this.comboGeneracion.Location = new System.Drawing.Point(57, 209);
-            this.comboGeneracion.Margin = new System.Windows.Forms.Padding(4);
+            this.comboGeneracion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.comboGeneracion.Name = "comboGeneracion";
             this.comboGeneracion.Size = new System.Drawing.Size(233, 24);
             this.comboGeneracion.TabIndex = 44;
@@ -2539,7 +2568,7 @@
             this.comboCarrera.Items.AddRange(new object[] {
             "SELECCIONE"});
             this.comboCarrera.Location = new System.Drawing.Point(57, 155);
-            this.comboCarrera.Margin = new System.Windows.Forms.Padding(4);
+            this.comboCarrera.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.comboCarrera.Name = "comboCarrera";
             this.comboCarrera.Size = new System.Drawing.Size(345, 24);
             this.comboCarrera.TabIndex = 43;
@@ -2565,7 +2594,7 @@
             this.cbSELapso.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.cbSELapso.ForeColor = System.Drawing.Color.White;
             this.cbSELapso.Location = new System.Drawing.Point(47, 95);
-            this.cbSELapso.Margin = new System.Windows.Forms.Padding(5);
+            this.cbSELapso.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.cbSELapso.Name = "cbSELapso";
             this.cbSELapso.Size = new System.Drawing.Size(20, 20);
             this.cbSELapso.TabIndex = 41;
@@ -2592,7 +2621,7 @@
             this.cbEvento.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.cbEvento.ForeColor = System.Drawing.Color.White;
             this.cbEvento.Location = new System.Drawing.Point(455, 28);
-            this.cbEvento.Margin = new System.Windows.Forms.Padding(5);
+            this.cbEvento.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.cbEvento.Name = "cbEvento";
             this.cbEvento.Size = new System.Drawing.Size(20, 20);
             this.cbEvento.TabIndex = 38;
@@ -2632,7 +2661,7 @@
             this.cbSECarrera.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.cbSECarrera.ForeColor = System.Drawing.Color.White;
             this.cbSECarrera.Location = new System.Drawing.Point(47, 28);
-            this.cbSECarrera.Margin = new System.Windows.Forms.Padding(5);
+            this.cbSECarrera.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.cbSECarrera.Name = "cbSECarrera";
             this.cbSECarrera.Size = new System.Drawing.Size(20, 20);
             this.cbSECarrera.TabIndex = 31;
@@ -2659,7 +2688,7 @@
             this.cbSEGeneracion.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.cbSEGeneracion.ForeColor = System.Drawing.Color.White;
             this.cbSEGeneracion.Location = new System.Drawing.Point(47, 62);
-            this.cbSEGeneracion.Margin = new System.Windows.Forms.Padding(5);
+            this.cbSEGeneracion.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.cbSEGeneracion.Name = "cbSEGeneracion";
             this.cbSEGeneracion.Size = new System.Drawing.Size(20, 20);
             this.cbSEGeneracion.TabIndex = 29;
@@ -2684,7 +2713,7 @@
             this.tabSEResultados.BackgroundColor = System.Drawing.Color.MediumAquamarine;
             this.tabSEResultados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tabSEResultados.Location = new System.Drawing.Point(65, 341);
-            this.tabSEResultados.Margin = new System.Windows.Forms.Padding(4);
+            this.tabSEResultados.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabSEResultados.Name = "tabSEResultados";
             this.tabSEResultados.ReadOnly = true;
             this.tabSEResultados.Size = new System.Drawing.Size(13, 14);
@@ -2752,7 +2781,7 @@
             this.cbSEOtro.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.cbSEOtro.ForeColor = System.Drawing.Color.White;
             this.cbSEOtro.Location = new System.Drawing.Point(572, 80);
-            this.cbSEOtro.Margin = new System.Windows.Forms.Padding(5);
+            this.cbSEOtro.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.cbSEOtro.Name = "cbSEOtro";
             this.cbSEOtro.Size = new System.Drawing.Size(20, 20);
             this.cbSEOtro.TabIndex = 5;
@@ -2779,7 +2808,7 @@
             this.cbSEDocente.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.cbSEDocente.ForeColor = System.Drawing.Color.White;
             this.cbSEDocente.Location = new System.Drawing.Point(308, 80);
-            this.cbSEDocente.Margin = new System.Windows.Forms.Padding(5);
+            this.cbSEDocente.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.cbSEDocente.Name = "cbSEDocente";
             this.cbSEDocente.Size = new System.Drawing.Size(20, 20);
             this.cbSEDocente.TabIndex = 3;
@@ -2806,7 +2835,7 @@
             this.cbSEAlumno.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.cbSEAlumno.ForeColor = System.Drawing.Color.White;
             this.cbSEAlumno.Location = new System.Drawing.Point(64, 80);
-            this.cbSEAlumno.Margin = new System.Windows.Forms.Padding(5);
+            this.cbSEAlumno.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.cbSEAlumno.Name = "cbSEAlumno";
             this.cbSEAlumno.Size = new System.Drawing.Size(20, 20);
             this.cbSEAlumno.TabIndex = 1;
@@ -2820,7 +2849,7 @@
             this.pnlEvento.Controls.Add(this.pnlAgregarEvento);
             this.pnlEvento.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlEvento.Location = new System.Drawing.Point(220, 0);
-            this.pnlEvento.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlEvento.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlEvento.Name = "pnlEvento";
             this.pnlEvento.Size = new System.Drawing.Size(761, 577);
             this.pnlEvento.TabIndex = 45;
@@ -2854,7 +2883,7 @@
             this.pnlAgregarEvento.Controls.Add(this.tbFechaIniEvento);
             this.pnlAgregarEvento.Controls.Add(this.bunifuCustomLabel61);
             this.pnlAgregarEvento.Location = new System.Drawing.Point(16, 100);
-            this.pnlAgregarEvento.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlAgregarEvento.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlAgregarEvento.Name = "pnlAgregarEvento";
             this.pnlAgregarEvento.Size = new System.Drawing.Size(731, 412);
             this.pnlAgregarEvento.TabIndex = 0;
@@ -2916,7 +2945,7 @@
             this.tbEvento.BorderColor = System.Drawing.Color.BlueViolet;
             this.tbEvento.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbEvento.Location = new System.Drawing.Point(227, 22);
-            this.tbEvento.Margin = new System.Windows.Forms.Padding(4);
+            this.tbEvento.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbEvento.Multiline = true;
             this.tbEvento.Name = "tbEvento";
             this.tbEvento.Size = new System.Drawing.Size(314, 46);
@@ -2943,7 +2972,7 @@
             this.tbFechaFinEvento.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbFechaFinEvento.Enabled = false;
             this.tbFechaFinEvento.Location = new System.Drawing.Point(227, 153);
-            this.tbFechaFinEvento.Margin = new System.Windows.Forms.Padding(4);
+            this.tbFechaFinEvento.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbFechaFinEvento.Name = "tbFechaFinEvento";
             this.tbFechaFinEvento.ReadOnly = true;
             this.tbFechaFinEvento.Size = new System.Drawing.Size(251, 22);
@@ -2970,7 +2999,7 @@
             this.tbFechaIniEvento.BorderColor = System.Drawing.Color.BlueViolet;
             this.tbFechaIniEvento.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbFechaIniEvento.Location = new System.Drawing.Point(227, 97);
-            this.tbFechaIniEvento.Margin = new System.Windows.Forms.Padding(4);
+            this.tbFechaIniEvento.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbFechaIniEvento.Name = "tbFechaIniEvento";
             this.tbFechaIniEvento.ReadOnly = true;
             this.tbFechaIniEvento.Size = new System.Drawing.Size(251, 22);
@@ -3308,7 +3337,7 @@
             this.tbCodigoCerti.BorderColor = System.Drawing.Color.BlueViolet;
             this.tbCodigoCerti.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbCodigoCerti.Location = new System.Drawing.Point(232, 91);
-            this.tbCodigoCerti.Margin = new System.Windows.Forms.Padding(4);
+            this.tbCodigoCerti.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbCodigoCerti.Name = "tbCodigoCerti";
             this.tbCodigoCerti.Size = new System.Drawing.Size(609, 22);
             this.tbCodigoCerti.TabIndex = 29;
@@ -3340,7 +3369,7 @@
             this.pnlAdministracion.Controls.Add(this.btnAdminAltaDocente);
             this.pnlAdministracion.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlAdministracion.Location = new System.Drawing.Point(220, 0);
-            this.pnlAdministracion.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlAdministracion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlAdministracion.Name = "pnlAdministracion";
             this.pnlAdministracion.Size = new System.Drawing.Size(761, 577);
             this.pnlAdministracion.TabIndex = 36;
@@ -3378,7 +3407,7 @@
             this.pnlAdminUsr.Controls.Add(this.bunifuCustomLabel36);
             this.pnlAdminUsr.Controls.Add(this.bunifuSeparator8);
             this.pnlAdminUsr.Location = new System.Drawing.Point(16, 85);
-            this.pnlAdminUsr.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlAdminUsr.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlAdminUsr.Name = "pnlAdminUsr";
             this.pnlAdminUsr.Size = new System.Drawing.Size(736, 487);
             this.pnlAdminUsr.TabIndex = 24;
@@ -3388,7 +3417,7 @@
             // 
             this.tbAdminNombreCompleto.Enabled = false;
             this.tbAdminNombreCompleto.Location = new System.Drawing.Point(279, 350);
-            this.tbAdminNombreCompleto.Margin = new System.Windows.Forms.Padding(4);
+            this.tbAdminNombreCompleto.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbAdminNombreCompleto.MaxLength = 60;
             this.tbAdminNombreCompleto.Name = "tbAdminNombreCompleto";
             this.tbAdminNombreCompleto.Size = new System.Drawing.Size(437, 22);
@@ -3399,7 +3428,7 @@
             // 
             this.tbAdminCedulaProfesional.Enabled = false;
             this.tbAdminCedulaProfesional.Location = new System.Drawing.Point(279, 398);
-            this.tbAdminCedulaProfesional.Margin = new System.Windows.Forms.Padding(4);
+            this.tbAdminCedulaProfesional.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbAdminCedulaProfesional.MaxLength = 20;
             this.tbAdminCedulaProfesional.Name = "tbAdminCedulaProfesional";
             this.tbAdminCedulaProfesional.Size = new System.Drawing.Size(239, 22);
@@ -3462,7 +3491,7 @@
             // tbAdminAltaUsr
             // 
             this.tbAdminAltaUsr.Location = new System.Drawing.Point(32, 345);
-            this.tbAdminAltaUsr.Margin = new System.Windows.Forms.Padding(4);
+            this.tbAdminAltaUsr.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbAdminAltaUsr.MaxLength = 40;
             this.tbAdminAltaUsr.Name = "tbAdminAltaUsr";
             this.tbAdminAltaUsr.Size = new System.Drawing.Size(192, 22);
@@ -3486,7 +3515,7 @@
             // 
             this.tbAdminAltaConfirmPsw.Enabled = false;
             this.tbAdminAltaConfirmPsw.Location = new System.Drawing.Point(33, 439);
-            this.tbAdminAltaConfirmPsw.Margin = new System.Windows.Forms.Padding(4);
+            this.tbAdminAltaConfirmPsw.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbAdminAltaConfirmPsw.MaxLength = 40;
             this.tbAdminAltaConfirmPsw.Name = "tbAdminAltaConfirmPsw";
             this.tbAdminAltaConfirmPsw.Size = new System.Drawing.Size(192, 22);
@@ -3497,7 +3526,7 @@
             // 
             this.tbAdminAltaPsw.Enabled = false;
             this.tbAdminAltaPsw.Location = new System.Drawing.Point(32, 393);
-            this.tbAdminAltaPsw.Margin = new System.Windows.Forms.Padding(4);
+            this.tbAdminAltaPsw.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbAdminAltaPsw.MaxLength = 40;
             this.tbAdminAltaPsw.Name = "tbAdminAltaPsw";
             this.tbAdminAltaPsw.Size = new System.Drawing.Size(192, 22);
@@ -3574,7 +3603,7 @@
             // tbAdminConfirmBaja
             // 
             this.tbAdminConfirmBaja.Location = new System.Drawing.Point(443, 185);
-            this.tbAdminConfirmBaja.Margin = new System.Windows.Forms.Padding(4);
+            this.tbAdminConfirmBaja.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbAdminConfirmBaja.MaxLength = 4;
             this.tbAdminConfirmBaja.Name = "tbAdminConfirmBaja";
             this.tbAdminConfirmBaja.Size = new System.Drawing.Size(96, 22);
@@ -3599,7 +3628,7 @@
             this.cbAdminBajaUsr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbAdminBajaUsr.FormattingEnabled = true;
             this.cbAdminBajaUsr.Location = new System.Drawing.Point(443, 134);
-            this.cbAdminBajaUsr.Margin = new System.Windows.Forms.Padding(4);
+            this.cbAdminBajaUsr.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbAdminBajaUsr.Name = "cbAdminBajaUsr";
             this.cbAdminBajaUsr.Size = new System.Drawing.Size(275, 24);
             this.cbAdminBajaUsr.TabIndex = 56;
@@ -3663,7 +3692,7 @@
             // 
             this.tbAdminCambioConfirmaPsw.Enabled = false;
             this.tbAdminCambioConfirmaPsw.Location = new System.Drawing.Point(21, 235);
-            this.tbAdminCambioConfirmaPsw.Margin = new System.Windows.Forms.Padding(4);
+            this.tbAdminCambioConfirmaPsw.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbAdminCambioConfirmaPsw.MaxLength = 40;
             this.tbAdminCambioConfirmaPsw.Name = "tbAdminCambioConfirmaPsw";
             this.tbAdminCambioConfirmaPsw.Size = new System.Drawing.Size(192, 22);
@@ -3673,7 +3702,7 @@
             // tbAdminCambioPsw
             // 
             this.tbAdminCambioPsw.Location = new System.Drawing.Point(21, 190);
-            this.tbAdminCambioPsw.Margin = new System.Windows.Forms.Padding(4);
+            this.tbAdminCambioPsw.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbAdminCambioPsw.MaxLength = 40;
             this.tbAdminCambioPsw.Name = "tbAdminCambioPsw";
             this.tbAdminCambioPsw.Size = new System.Drawing.Size(192, 22);
@@ -3711,7 +3740,7 @@
             this.cbAdminCambioPswUsr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbAdminCambioPswUsr.FormattingEnabled = true;
             this.cbAdminCambioPswUsr.Location = new System.Drawing.Point(21, 132);
-            this.cbAdminCambioPswUsr.Margin = new System.Windows.Forms.Padding(4);
+            this.cbAdminCambioPswUsr.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbAdminCambioPswUsr.Name = "cbAdminCambioPswUsr";
             this.cbAdminCambioPswUsr.Size = new System.Drawing.Size(275, 24);
             this.cbAdminCambioPswUsr.TabIndex = 48;
@@ -3736,7 +3765,7 @@
             this.bunifuSeparator7.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.bunifuSeparator7.LineThickness = 2;
             this.bunifuSeparator7.Location = new System.Drawing.Point(28, 263);
-            this.bunifuSeparator7.Margin = new System.Windows.Forms.Padding(5);
+            this.bunifuSeparator7.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.bunifuSeparator7.Name = "bunifuSeparator7";
             this.bunifuSeparator7.Size = new System.Drawing.Size(680, 12);
             this.bunifuSeparator7.TabIndex = 46;
@@ -3775,7 +3804,7 @@
             this.bunifuSeparator8.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.bunifuSeparator8.LineThickness = 2;
             this.bunifuSeparator8.Location = new System.Drawing.Point(24, 50);
-            this.bunifuSeparator8.Margin = new System.Windows.Forms.Padding(5);
+            this.bunifuSeparator8.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.bunifuSeparator8.Name = "bunifuSeparator8";
             this.bunifuSeparator8.Size = new System.Drawing.Size(680, 12);
             this.bunifuSeparator8.TabIndex = 43;
@@ -3790,7 +3819,7 @@
             this.pnlAdminAltaDocente.Controls.Add(this.bunifuCustomLabel63);
             this.pnlAdminAltaDocente.Controls.Add(this.bunifuSeparator9);
             this.pnlAdminAltaDocente.Location = new System.Drawing.Point(16, 85);
-            this.pnlAdminAltaDocente.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlAdminAltaDocente.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlAdminAltaDocente.Name = "pnlAdminAltaDocente";
             this.pnlAdminAltaDocente.Size = new System.Drawing.Size(736, 485);
             this.pnlAdminAltaDocente.TabIndex = 27;
@@ -3868,7 +3897,7 @@
             this.bunifuSeparator9.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.bunifuSeparator9.LineThickness = 2;
             this.bunifuSeparator9.Location = new System.Drawing.Point(32, 65);
-            this.bunifuSeparator9.Margin = new System.Windows.Forms.Padding(5);
+            this.bunifuSeparator9.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.bunifuSeparator9.Name = "bunifuSeparator9";
             this.bunifuSeparator9.Size = new System.Drawing.Size(680, 12);
             this.bunifuSeparator9.TabIndex = 44;
@@ -3886,7 +3915,7 @@
             this.pnlAltaAlumno.Controls.Add(this.lblAltaDeAlumnos);
             this.pnlAltaAlumno.Controls.Add(this.bunifuSeparator5);
             this.pnlAltaAlumno.Location = new System.Drawing.Point(16, 85);
-            this.pnlAltaAlumno.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlAltaAlumno.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlAltaAlumno.Name = "pnlAltaAlumno";
             this.pnlAltaAlumno.Size = new System.Drawing.Size(732, 482);
             this.pnlAltaAlumno.TabIndex = 23;
@@ -3925,7 +3954,7 @@
             this.cbAdminAlumnoEvento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbAdminAlumnoEvento.FormattingEnabled = true;
             this.cbAdminAlumnoEvento.Location = new System.Drawing.Point(29, 336);
-            this.cbAdminAlumnoEvento.Margin = new System.Windows.Forms.Padding(4);
+            this.cbAdminAlumnoEvento.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbAdminAlumnoEvento.Name = "cbAdminAlumnoEvento";
             this.cbAdminAlumnoEvento.Size = new System.Drawing.Size(396, 24);
             this.cbAdminAlumnoEvento.TabIndex = 45;
@@ -3978,7 +4007,7 @@
             this.bunifuSeparator6.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.bunifuSeparator6.LineThickness = 2;
             this.bunifuSeparator6.Location = new System.Drawing.Point(25, 251);
-            this.bunifuSeparator6.Margin = new System.Windows.Forms.Padding(5);
+            this.bunifuSeparator6.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.bunifuSeparator6.Name = "bunifuSeparator6";
             this.bunifuSeparator6.Size = new System.Drawing.Size(680, 12);
             this.bunifuSeparator6.TabIndex = 41;
@@ -4017,7 +4046,7 @@
             this.bunifuSeparator5.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.bunifuSeparator5.LineThickness = 2;
             this.bunifuSeparator5.Location = new System.Drawing.Point(21, 69);
-            this.bunifuSeparator5.Margin = new System.Windows.Forms.Padding(5);
+            this.bunifuSeparator5.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.bunifuSeparator5.Name = "bunifuSeparator5";
             this.bunifuSeparator5.Size = new System.Drawing.Size(680, 12);
             this.bunifuSeparator5.TabIndex = 38;
@@ -4036,7 +4065,7 @@
             this.pnlAdminMedDia.Controls.Add(this.lblAdminMed);
             this.pnlAdminMedDia.Controls.Add(this.bunifuSeparator3);
             this.pnlAdminMedDia.Location = new System.Drawing.Point(16, 85);
-            this.pnlAdminMedDia.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlAdminMedDia.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlAdminMedDia.Name = "pnlAdminMedDia";
             this.pnlAdminMedDia.Size = new System.Drawing.Size(732, 482);
             this.pnlAdminMedDia.TabIndex = 22;
@@ -4047,7 +4076,7 @@
             this.cbAdminDia.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbAdminDia.FormattingEnabled = true;
             this.cbAdminDia.Location = new System.Drawing.Point(25, 311);
-            this.cbAdminDia.Margin = new System.Windows.Forms.Padding(4);
+            this.cbAdminDia.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbAdminDia.Name = "cbAdminDia";
             this.cbAdminDia.Size = new System.Drawing.Size(396, 24);
             this.cbAdminDia.TabIndex = 40;
@@ -4126,7 +4155,7 @@
             this.bunifuSeparator4.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.bunifuSeparator4.LineThickness = 2;
             this.bunifuSeparator4.Location = new System.Drawing.Point(25, 60);
-            this.bunifuSeparator4.Margin = new System.Windows.Forms.Padding(5);
+            this.bunifuSeparator4.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.bunifuSeparator4.Name = "bunifuSeparator4";
             this.bunifuSeparator4.Size = new System.Drawing.Size(680, 12);
             this.bunifuSeparator4.TabIndex = 36;
@@ -4138,7 +4167,7 @@
             this.cbAdminMed.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbAdminMed.FormattingEnabled = true;
             this.cbAdminMed.Location = new System.Drawing.Point(29, 121);
-            this.cbAdminMed.Margin = new System.Windows.Forms.Padding(4);
+            this.cbAdminMed.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbAdminMed.Name = "cbAdminMed";
             this.cbAdminMed.Size = new System.Drawing.Size(396, 24);
             this.cbAdminMed.TabIndex = 35;
@@ -4176,7 +4205,7 @@
             this.bunifuSeparator3.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.bunifuSeparator3.LineThickness = 2;
             this.bunifuSeparator3.Location = new System.Drawing.Point(24, 254);
-            this.bunifuSeparator3.Margin = new System.Windows.Forms.Padding(5);
+            this.bunifuSeparator3.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.bunifuSeparator3.Name = "bunifuSeparator3";
             this.bunifuSeparator3.Size = new System.Drawing.Size(680, 12);
             this.bunifuSeparator3.TabIndex = 22;
@@ -4243,7 +4272,7 @@
             this.bunifuSeparator1.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.bunifuSeparator1.LineThickness = 2;
             this.bunifuSeparator1.Location = new System.Drawing.Point(40, 70);
-            this.bunifuSeparator1.Margin = new System.Windows.Forms.Padding(5);
+            this.bunifuSeparator1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.bunifuSeparator1.Name = "bunifuSeparator1";
             this.bunifuSeparator1.Size = new System.Drawing.Size(680, 12);
             this.bunifuSeparator1.TabIndex = 9;
@@ -4319,7 +4348,7 @@
             this.Controls.Add(this.pnlCertificado);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Principal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Principal";
@@ -4559,9 +4588,9 @@
         private System.Windows.Forms.Panel pnlSE;
         private System.Windows.Forms.Label lblKEv;
         private System.Windows.Forms.Label lblTotalRegistros;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblDiagnostico;
         private System.Windows.Forms.Label lblSEEventoMini;
-        private System.Windows.Forms.ComboBox comboIT;
+        private System.Windows.Forms.ComboBox comboDiagnostico;
         private System.Windows.Forms.ComboBox comboEvento;
         private System.Windows.Forms.Label lblSEFechaFinal;
         private System.Windows.Forms.Label lblSEFechaInicio;
@@ -4614,5 +4643,7 @@
         private System.Windows.Forms.TextBox tbAdminCedulaProfesional;
         private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel65;
         private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel66;
+        private Bunifu.Framework.UI.BunifuCheckbox cbDiagnostico;
+        private Bunifu.Framework.UI.BunifuCustomLabel lblSEDiag;
     }
 }

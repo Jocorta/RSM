@@ -45,7 +45,7 @@ namespace RecursosServiciosMedicos
                     ConnDia.Close();
                     //Vuelve a cargar en panel principal los ComboBoxes:
                     Principal priDia = new Principal();
-                    priDia.LlenaCbDiagnostico();
+                    //priDia.LlenaCbDiagnostico();
                     priDia.LlenaCbMedicamento();
                     // El form se cierra una vez se agrego el nuevo valor
                     this.Hide();
@@ -66,6 +66,16 @@ namespace RecursosServiciosMedicos
             {
                 tbDiagnostico.Text = tbDiagnostico.Text.Remove(tbDiagnostico.Text.Length - 1);
             }
+        }
+
+        private void bunifuCustomLabel3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DiagnosticoForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

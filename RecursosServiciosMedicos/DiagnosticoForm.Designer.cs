@@ -56,6 +56,7 @@
             this.bunifuCustomLabel3.Size = new System.Drawing.Size(331, 45);
             this.bunifuCustomLabel3.TabIndex = 30;
             this.bunifuCustomLabel3.Text = "Agregar Diagnostico";
+            this.bunifuCustomLabel3.Click += new System.EventHandler(this.bunifuCustomLabel3_Click);
             // 
             // bunifuDragControl1
             // 
@@ -197,6 +198,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "DiagnosticoForm";
             this.Text = "DiagnosticoForm";
+            this.Load += new System.EventHandler(this.DiagnosticoForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

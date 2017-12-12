@@ -36,7 +36,7 @@ namespace RecursosServiciosMedicos
                     ConnMed.Close();
                     //Vuelve a cargar en panel principal los ComboBoxes:
                     Principal priMed = new Principal();
-                    priMed.LlenaCbDiagnostico();
+                    //priMed.LlenaCbDiagnostico();
                     priMed.LlenaCbMedicamento();
                     
                     // El form se cierra una vez se agrego el nuevo valor
@@ -57,6 +57,11 @@ namespace RecursosServiciosMedicos
             {
                 tbMedicamento.Text = tbMedicamento.Text.Remove(tbMedicamento.Text.Length - 1);
             }
+        }
+
+        private void bunifuCustomLabel3_Click(object sender, EventArgs e)
+        {
+
         }
 
 

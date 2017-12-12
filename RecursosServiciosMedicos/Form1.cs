@@ -15,7 +15,7 @@ namespace RecursosServiciosMedicos
 {
     public partial class Form1 : Form
     {
-        
+
         SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\RSM\Database\RSM.mdf;Integrated Security=True;Connect Timeout=30");
         Boolean UserEnter = true, PasswordEnter = true;
         private void bunifuFlatButton1_Click(object sender, EventArgs e) { login(); }
@@ -138,6 +138,11 @@ namespace RecursosServiciosMedicos
             {
                 login();
             }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

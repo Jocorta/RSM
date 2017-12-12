@@ -101,3 +101,18 @@ C:\Users\jorge\Documents\Ing.SistemasComputacionales\Semestre 5\ing software\Pro
 C:\Users\jorge\Documents\Ing.SistemasComputacionales\Semestre 5\ing software\Proyecto final\master bueno\RSM\RecursosServiciosMedicos\obj\Debug\RecursosServiciosMedicos.csproj.GenerateResource.Cache
 C:\Users\jorge\Documents\Ing.SistemasComputacionales\Semestre 5\ing software\Proyecto final\master bueno\RSM\RecursosServiciosMedicos\obj\Debug\RecursosServiciosMedicos.exe
 C:\Users\jorge\Documents\Ing.SistemasComputacionales\Semestre 5\ing software\Proyecto final\master bueno\RSM\RecursosServiciosMedicos\obj\Debug\RecursosServiciosMedicos.pdb
+C:\Users\usuario\Desktop\RSM\RecursosServiciosMedicos\bin\Debug\RecursosServiciosMedicos.exe.config
+C:\Users\usuario\Desktop\RSM\RecursosServiciosMedicos\obj\Debug\RecursosServiciosMedicos.csproj.ResolveComReference.cache
+C:\Users\usuario\Desktop\RSM\RecursosServiciosMedicos\obj\Debug\RecursosServiciosMedicos.exe
+C:\Users\usuario\Desktop\RSM\RecursosServiciosMedicos\obj\Debug\RecursosServiciosMedicos.pdb
+C:\Users\usuario\Desktop\RSM\RecursosServiciosMedicos\obj\Debug\RecursosServiciosMedicos.csprojResolveAssemblyReference.cache
+C:\Users\usuario\Desktop\RSM\RecursosServiciosMedicos\obj\Debug\RecursosServiciosMedicos.DiagnosticoForm.resources
+C:\Users\usuario\Desktop\RSM\RecursosServiciosMedicos\obj\Debug\RecursosServiciosMedicos.Form1.resources
+C:\Users\usuario\Desktop\RSM\RecursosServiciosMedicos\obj\Debug\RecursosServiciosMedicos.MedicamentoForm.resources
+C:\Users\usuario\Desktop\RSM\RecursosServiciosMedicos\obj\Debug\RecursosServiciosMedicos.Principal.resources
+C:\Users\usuario\Desktop\RSM\RecursosServiciosMedicos\obj\Debug\RecursosServiciosMedicos.Properties.Resources.resources
+C:\Users\usuario\Desktop\RSM\RecursosServiciosMedicos\obj\Debug\RecursosServiciosMedicos.csproj.GenerateResource.Cache
+C:\Users\usuario\Desktop\RSM\RecursosServiciosMedicos\bin\Debug\RecursosServiciosMedicos.exe
+C:\Users\usuario\Desktop\RSM\RecursosServiciosMedicos\bin\Debug\RecursosServiciosMedicos.pdb
+C:\Users\usuario\Desktop\RSM\RecursosServiciosMedicos\bin\Debug\MySql.Data.dll
+C:\Users\usuario\Desktop\RSM\RecursosServiciosMedicos\bin\Debug\MySql.Data.xml

@@ -1480,10 +1480,13 @@ namespace RecursosServiciosMedicos
         //metodos CONSULTORIA
         private void HideControlesSE()
         {
+            lblDiagnostico.Visible = false;
+            comboDiagnostico.Visible = false;
             cbSEGeneracion.Hide();
             cbSECarrera.Hide();
             cbSELapso.Hide();
             cbEvento.Hide();
+            cbDiagnostico.Hide();
             comboGeneracion.Hide();
             comboCarrera.Hide();
             comboEvento.Hide();
@@ -1494,6 +1497,7 @@ namespace RecursosServiciosMedicos
             lblSEEvento.Hide();
             lblSEEventoMini.Hide();
             lblSEGene.Hide();
+            lblSEDiag.Hide();
             lblSECarreraArea.Hide();
             lblSEGeneMini.Hide();
             lblSELapso.Hide();
@@ -1506,11 +1510,15 @@ namespace RecursosServiciosMedicos
             cbSECarrera.Show();
             cbSELapso.Show();
             cbEvento.Show();
+            cbDiagnostico.Show();
             comboGeneracion.Show();
             comboCarrera.Show();
             comboEvento.Show();
+            comboDiagnostico.Show();
             dtpInicio.Show();
             dtpFinal.Show();
+            lblSEDiag.Show();
+            lblDiagnostico.Show();
             lblSECarreraArea.Show();
             lblSECarrArMini.Show();
             lblSEEvento.Show();
@@ -1599,8 +1607,8 @@ namespace RecursosServiciosMedicos
                             }
                             conn.Open();
                             buscar = " select c.num_control as 'Número de Control', a.nombre as 'Nombre', a.nombre_paterno as 'Apellido Paterno', " +
-                                            " a.nombre_materno as 'Apellido Materno', a.carrera as Carrera, c.seguimiento as Seguimiento," +
-                                            "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento from " +
+                                            " a.nombre_materno as 'Apellido Materno', a.carrera as Carrera, c.seguimiento as Subsecuente," +
+                                            "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento1, c.medicamento2 as Medicamento2, c.medicamento3 as Medicamento3 from " +
                                             "consultas as c inner join alumno as a on c.num_control=a.num_control inner join  evento as e on e.num_evento=a.evento where a." + control + " = '" + txb +
                                             "' and c.fecha >= '" + dtpInicio.Value.Year + "-" + dtpInicio.Value.Month + "-" + dtpInicio.Value.Day + " 00:00' and c.fecha <= '" +
                                             dtpFinal.Value.Year + "-" + dtpFinal.Value.Month + "-" + dtpFinal.Value.Day + " 23:59' and substring(a.num_control,1,2)= " + comboGeneracion.SelectedItem +
@@ -1647,8 +1655,8 @@ namespace RecursosServiciosMedicos
 
                             conn.Open();
                             buscar = " select c.num_control as 'Número de Control', a.nombre as 'Nombre', a.nombre_paterno as 'Apellido Paterno', " +
-                                                " a.nombre_materno as 'Apellido Materno', a.carrera as Carrera, c.seguimiento as Seguimiento," +
-                                                "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento from " +
+                                             " a.nombre_materno as 'Apellido Materno', a.carrera as Carrera, c.seguimiento as Subsecuente," +
+                                             "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento1, c.medicamento2 as Medicamento2, c.medicamento3 as Medicamento3 from " +
                                                 "consultas as c inner join alumno as a on c.num_control=a.num_control where a." + control + " = '" + txb +
                                                 "' and c.fecha >= '" + dtpInicio.Value.Year + "-" + dtpInicio.Value.Month + "-" + dtpInicio.Value.Day + " 00:00' and c.fecha <= '" +
                                                 dtpFinal.Value.Year + "-" + dtpFinal.Value.Month + "-" + dtpFinal.Value.Day + " 23:59' and substring(a.num_control,1,2)= " + comboGeneracion.SelectedItem +
@@ -1695,8 +1703,8 @@ namespace RecursosServiciosMedicos
                             }
                             conn.Open();
                             buscar = " select c.num_control as 'Número de Control', a.nombre as 'Nombre', a.nombre_paterno as 'Apellido Paterno', " +
-                                            " a.nombre_materno as 'Apellido Materno', a.carrera as Carrera, c.seguimiento as Seguimiento," +
-                                            "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento from " +
+                                             " a.nombre_materno as 'Apellido Materno', a.carrera as Carrera, c.seguimiento as Subsecuente," +
+                                             "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento1, c.medicamento2 as Medicamento2, c.medicamento3 as Medicamento3 from " +
                                             "consultas as c inner join alumno as a on c.num_control=a.num_control inner join  evento as e on e.num_evento=a.evento where a." + control + " = '" + txb +
                                             "' and c.fecha >= '" + dtpInicio.Value.Year + "-" + dtpInicio.Value.Month + "-" + dtpInicio.Value.Day + " 00:00' and c.fecha <= '" +
                                             dtpFinal.Value.Year + "-" + dtpFinal.Value.Month + "-" + dtpFinal.Value.Day + " 23:59' and e.nombre = '" + comboEvento.SelectedItem + "'";
@@ -1738,8 +1746,8 @@ namespace RecursosServiciosMedicos
 
                             conn.Open();
                             buscar = " select c.num_control as 'Número de Control', a.nombre as 'Nombre', a.nombre_paterno as 'Apellido Paterno', " +
-                                                " a.nombre_materno as 'Apellido Materno', a.carrera as Carrera, c.seguimiento as Seguimiento," +
-                                                "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento from " +
+                                            " a.nombre_materno as 'Apellido Materno', a.carrera as Carrera, c.seguimiento as Subsecuente," +
+                                            "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento1, c.medicamento2 as Medicamento2, c.medicamento3 as Medicamento3 from " +
                                                 "consultas as c inner join alumno as a on c.num_control=a.num_control where a." + control + " = '" + txb +
                                                 "' and c.fecha >= '" + dtpInicio.Value.Year + "-" + dtpInicio.Value.Month + "-" + dtpInicio.Value.Day + " 00:00' and c.fecha <= '" +
                                                 dtpFinal.Value.Year + "-" + dtpFinal.Value.Month + "-" + dtpFinal.Value.Day + " 23:59' and a.evento is null";
@@ -1791,8 +1799,8 @@ namespace RecursosServiciosMedicos
 
                             conn.Open();
                             buscar = " select c.num_control as 'Número de Control', a.nombre as 'Nombre', a.nombre_paterno as 'Apellido Paterno', " +
-                                           " a.nombre_materno as 'Apellido Materno', a.carrera as Carrera, c.seguimiento as Seguimiento," +
-                                            "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento from " +
+                                             " a.nombre_materno as 'Apellido Materno', a.carrera as Carrera, c.seguimiento as Subsecuente," +
+                                             "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento1, c.medicamento2 as Medicamento2, c.medicamento3 as Medicamento3 from " +
                                             "consultas as c inner join alumno as a on c.num_control=a.num_control inner join  evento as e on e.num_evento=a.evento where a." + control + " = '" + txb +
                                             "' and substring(a.num_control,1,2)= " + comboGeneracion.SelectedItem + " and e.nombre = '" + comboEvento.SelectedItem + "'";
 
@@ -1837,8 +1845,8 @@ namespace RecursosServiciosMedicos
 
                             conn.Open();
                             buscar = " select c.num_control as 'Número de Control', a.nombre as 'Nombre', a.nombre_paterno as 'Apellido Paterno', " +
-                                           " a.nombre_materno as 'Apellido Materno', a.carrera as Carrera, c.seguimiento as Seguimiento," +
-                                            "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento from " +
+                                            " a.nombre_materno as 'Apellido Materno', a.carrera as Carrera, c.seguimiento as Subsecuente," +
+                                            "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento1, c.medicamento2 as Medicamento2, c.medicamento3 as Medicamento3 from " +
                                             "consultas as c inner join alumno as a on c.num_control=a.num_control where a." + control + " = '" + txb +
                                             "' and substring(a.num_control,1,2)= " + comboGeneracion.SelectedItem + " and a.evento is null";
 
@@ -1883,8 +1891,8 @@ namespace RecursosServiciosMedicos
 
                             conn.Open();
                             buscar = " select c.num_control as 'Número de Control', a.nombre as 'Nombre', a.nombre_paterno as 'Apellido Paterno', " +
-                                           " a.nombre_materno as 'Apellido Materno', a.carrera as Carrera, c.seguimiento as Seguimiento," +
-                                            "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento from " +
+                                            " a.nombre_materno as 'Apellido Materno', a.carrera as Carrera, c.seguimiento as Subsecuente," +
+                                            "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento1, c.medicamento2 as Medicamento2, c.medicamento3 as Medicamento3 from " +
                                             "consultas as c inner join alumno as a on c.num_control=a.num_control inner join  evento as e on e.num_evento=a.evento where a." + control + " = '" + txb +
                                             "' and e.nombre = '" + comboEvento.SelectedItem + "'";
 
@@ -1925,8 +1933,8 @@ namespace RecursosServiciosMedicos
 
                             conn.Open();
                             buscar = " select c.num_control as 'Número de Control', a.nombre as 'Nombre', a.nombre_paterno as 'Apellido Paterno', " +
-                                                " a.nombre_materno as 'Apellido Materno', a.carrera as Carrera, c.seguimiento as Seguimiento," +
-                                                "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento from " +
+                                            " a.nombre_materno as 'Apellido Materno', a.carrera as Carrera, c.seguimiento as Subsecuente," +
+                                            "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento1, c.medicamento2 as Medicamento2, c.medicamento3 as Medicamento3 from " +
                                                 "consultas as c inner join alumno as a on c.num_control=a.num_control where a." + control + " = '" + txb + "' and a.evento is null";
 
                             if (!Reader(buscar))
@@ -1969,8 +1977,8 @@ namespace RecursosServiciosMedicos
                             }
                             conn.Open();
                             buscar = " select c.num_control as 'Número de Control', a.nombre as 'Nombre', a.nombre_paterno as 'Apellido Paterno', " +
-                                            " a.nombre_materno as 'Apellido Materno', a.carrera as Carrera, c.seguimiento as Seguimiento," +
-                                            "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento from " +
+                                            " a.nombre_materno as 'Apellido Materno', a.carrera as Carrera, c.seguimiento as Subsecuente," +
+                                            "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento1, c.medicamento2 as Medicamento2, c.medicamento3 as Medicamento3 from " +
                                             "consultas as c inner join alumno as a on c.num_control=a.num_control inner join  evento as e on e.num_evento=a.evento where c.fecha >= '" +
                                             dtpInicio.Value.Year + "-" + dtpInicio.Value.Month + "-" + dtpInicio.Value.Day + " 00:00' and c.fecha <= '" +
                                             dtpFinal.Value.Year + "-" + dtpFinal.Value.Month + "-" + dtpFinal.Value.Day + " 23:59' and substring(a.num_control,1,2)= " + comboGeneracion.SelectedItem +
@@ -2011,8 +2019,8 @@ namespace RecursosServiciosMedicos
 
                             conn.Open();
                             buscar = " select c.num_control as 'Número de Control', a.nombre as 'Nombre', a.nombre_paterno as 'Apellido Paterno', " +
-                                                " a.nombre_materno as 'Apellido Materno', a.carrera as Carrera, c.seguimiento as Seguimiento," +
-                                                "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento from " +
+                                            " a.nombre_materno as 'Apellido Materno', a.carrera as Carrera, c.seguimiento as Subsecuente," +
+                                            "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento1, c.medicamento2 as Medicamento2, c.medicamento3 as Medicamento3 from " +
                                                 "consultas as c inner join alumno as a on c.num_control=a.num_control where c.fecha >= '" + dtpInicio.Value.Year + "-" +
                                                 dtpInicio.Value.Month + "-" + dtpInicio.Value.Day + " 00:00' and c.fecha <= '" + dtpFinal.Value.Year + "-" +
                                                 dtpFinal.Value.Month + "-" + dtpFinal.Value.Day + " 23:59' and substring(a.num_control,1,2)= " + comboGeneracion.SelectedItem + " and a.evento is null";
@@ -2052,8 +2060,8 @@ namespace RecursosServiciosMedicos
                             }
                             conn.Open();
                             buscar = " select c.num_control as 'Número de Control', a.nombre as 'Nombre', a.nombre_paterno as 'Apellido Paterno', " +
-                                            " a.nombre_materno as 'Apellido Materno', a.carrera as Carrera, c.seguimiento as Seguimiento," +
-                                            "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento from " +
+                                             " a.nombre_materno as 'Apellido Materno', a.carrera as Carrera, c.seguimiento as Subsecuente," +
+                                             "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento1, c.medicamento2 as Medicamento2, c.medicamento3 as Medicamento3 from " +
                                             "consultas as c inner join alumno as a on c.num_control=a.num_control inner join  evento as e on e.num_evento=a.evento where c.fecha >= '" +
                                             dtpInicio.Value.Year + "-" + dtpInicio.Value.Month + "-" + dtpInicio.Value.Day + " 00:00' and c.fecha <= '" +
                                             dtpFinal.Value.Year + "-" + dtpFinal.Value.Month + "-" + dtpFinal.Value.Day + " 23:59' and e.nombre = '" + comboEvento.SelectedItem + "'";
@@ -2088,8 +2096,8 @@ namespace RecursosServiciosMedicos
 
                             conn.Open();
                             buscar = " select c.num_control as 'Número de Control', a.nombre as 'Nombre', a.nombre_paterno as 'Apellido Paterno', " +
-                                                " a.nombre_materno as 'Apellido Materno', a.carrera as Carrera, c.seguimiento as Seguimiento," +
-                                                "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento from " +
+                                            " a.nombre_materno as 'Apellido Materno', a.carrera as Carrera, c.seguimiento as Subsecuente," +
+                                            "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento1, c.medicamento2 as Medicamento2, c.medicamento3 as Medicamento3 from " +
                                                 "consultas as c inner join alumno as a on c.num_control=a.num_control where c.fecha >= '" + dtpInicio.Value.Year + "-" +
                                                 dtpInicio.Value.Month + "-" + dtpInicio.Value.Day + " 00:00' and c.fecha <= '" + dtpFinal.Value.Year + "-" +
                                                 dtpFinal.Value.Month + "-" + dtpFinal.Value.Day + " 23:59'";
@@ -2134,8 +2142,8 @@ namespace RecursosServiciosMedicos
                             }
                             conn.Open();
                             buscar = " select c.num_control as 'Número de Control', a.nombre as 'Nombre', a.nombre_paterno as 'Apellido Paterno', " +
-                                            " a.nombre_materno as 'Apellido Materno', a.carrera as Carrera, c.seguimiento as Seguimiento," +
-                                            "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento from " +
+                                            " a.nombre_materno as 'Apellido Materno', a.carrera as Carrera, c.seguimiento as Subsecuente," +
+                                            "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento1, c.medicamento2 as Medicamento2, c.medicamento3 as Medicamento3 from " +
                                             "consultas as c inner join alumno as a on c.num_control=a.num_control inner join  evento as e on e.num_evento=a.evento where substring(a.num_control,1,2)= " +
                                             comboGeneracion.SelectedItem + " and e.nombre = '" + comboEvento.SelectedItem + "'";
                             if (!Reader(buscar))
@@ -2174,8 +2182,8 @@ namespace RecursosServiciosMedicos
 
                             conn.Open();
                             buscar = " select c.num_control as 'Número de Control', a.nombre as 'Nombre', a.nombre_paterno as 'Apellido Paterno', " +
-                                                " a.nombre_materno as 'Apellido Materno', a.carrera as Carrera, c.seguimiento as Seguimiento," +
-                                                "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento from " +
+                                             " a.nombre_materno as 'Apellido Materno', a.carrera as Carrera, c.seguimiento as Subsecuente," +
+                                             "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento1, c.medicamento2 as Medicamento2, c.medicamento3 as Medicamento3 from " +
                                                 "consultas as c inner join alumno as a on c.num_control=a.num_control where substring(a.num_control,1,2)= " +
                                                 comboGeneracion.SelectedItem + " and a.evento is null";
 
@@ -2214,8 +2222,8 @@ namespace RecursosServiciosMedicos
                             }
                             conn.Open();
                             buscar = " select c.num_control as 'Número de Control', a.nombre as 'Nombre', a.nombre_paterno as 'Apellido Paterno', " +
-                                            " a.nombre_materno as 'Apellido Materno', a.carrera as Carrera, c.seguimiento as Seguimiento," +
-                                            "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento from " +
+                                            " a.nombre_materno as 'Apellido Materno', a.carrera as Carrera, c.seguimiento as Subsecuente," +
+                                            "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento1, c.medicamento2 as Medicamento2, c.medicamento3 as Medicamento3 from " +
                                             "consultas as c inner join alumno as a on c.num_control=a.num_control inner join  evento as e on e.num_evento=a.evento where e.nombre = '" +
                                             comboEvento.SelectedItem + "'";
                             if (!Reader(buscar))
@@ -2244,6 +2252,46 @@ namespace RecursosServiciosMedicos
                             conn.Close();
                             #endregion
                             break;
+                        #region Diagnostico
+                        case 69: //Diagnostico
+                            if (comboDiagnostico.SelectedIndex == 0)
+                            {
+                                MessageBox.Show(this, "Seleccione un disgníostico", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                break;
+                            }
+
+                            conn.Open();
+                            buscar = " select c.num_control as 'Número de Control', a.nombre as 'Nombre', a.nombre_paterno as 'Apellido Paterno', " +
+                                            " a.nombre_materno as 'Apellido Materno', a.carrera as Carrera, c.seguimiento as Subsecuente," +
+                                            "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento1, c.medicamento2 as Medicamento2, c.medicamento3 as Medicamento3 from " +
+                                                "consultas as c inner join alumno as a on c.num_control=a.num_control where c.diagnostico = '" + txb + "'";
+
+                            if (!Reader(buscar))
+                            {
+                                MessageBox.Show(this, "No se encontró consulta registrada con estos datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                lblControl.Show();
+                                txbBusquedaClave.Show();
+                                conn.Close();
+                            }
+                            else
+                            {
+                                Aparece(tabSEResultados);
+                                var dataAdapter = new SqlDataAdapter(buscar, conn);
+                                var commandBuilder = new SqlCommandBuilder(dataAdapter);
+                                var ds = new DataSet();
+                                dataAdapter.Fill(ds);
+                                tabSEResultados.ReadOnly = true;
+                                tabSEResultados.DataSource = ds.Tables[0];
+                                lblTotalRegistros.Show();
+                                lblTotalRegistros.Text = "Total de registros = " + tabSEResultados.RowCount.ToString();
+                                lblKEv.Text = "Diagnósticos";
+                                lblKEv.Show();
+                                btnExportar.Visible = true;
+                            }
+
+                            conn.Close();
+                            break;
+                        #endregion
 
                         #endregion  //No sé, pero no se mueve porque si no está, no funciona :)
                         #endregion //Alumno
@@ -2263,8 +2311,8 @@ namespace RecursosServiciosMedicos
                                 break;
                             }
                             conn.Open();
-                            buscar = " select d.num_docente as 'Número de Control', d.nombre as 'Nombre', d.departamento as Departamento, c.seguimiento as Seguimiento," +
-                                            "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento from " +
+                            buscar = " select d.num_docente as 'Número de Control', d.nombre as 'Nombre', d.departamento as Departamento, c.seguimiento as Subsecuente," +
+                                            "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento1, c.medicamento2 as Medicamento2, c.medicamento3 as Medicamento3 from " +
                                             "consultas as c inner join docente as d on c.num_docente=c.num_docente where d.departamento = '" + comboCarrera.SelectedItem +
                                             "' and c.fecha >= '" + dtpInicio.Value.Year + "-" + dtpInicio.Value.Month + "-" + dtpInicio.Value.Day + " 00:00' and c.fecha <= '" +
                                             dtpFinal.Value.Year + "-" + dtpFinal.Value.Month + "-" + dtpFinal.Value.Day + " 23:59'";
@@ -2306,8 +2354,8 @@ namespace RecursosServiciosMedicos
                             #region Lapso
 
                             conn.Open();
-                            buscar = " select d.num_docente as 'Número de Control', d.nombre as 'Nombre', d.departamento as Departamento, c.seguimiento as Seguimiento," +
-                                            "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento from " +
+                            buscar = " select d.num_docente as 'Número de Control', d.nombre as 'Nombre', d.departamento as Departamento, c.seguimiento as Subsecuente," +
+                                            "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento1, c.medicamento2 as Medicamento2, c.medicamento3 as Medicamento3 from " +
                                             "consultas as c inner join docente as d on c.num_docente=c.num_docente where c.fecha >= '" + dtpInicio.Value.Year + "-" +
                                             dtpInicio.Value.Month + "-" + dtpInicio.Value.Day + " 00:00' and c.fecha <= '" + dtpFinal.Value.Year + "-" + dtpFinal.Value.Month +
                                             "-" + dtpFinal.Value.Day + " 23:59'";
@@ -2354,8 +2402,8 @@ namespace RecursosServiciosMedicos
                                 break;
                             }
                             conn.Open();
-                            buscar = " select d.num_docente as 'Número de Control', d.nombre as 'Nombre', d.departamento as Departamento, c.seguimiento as Seguimiento," +
-                                            "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento from " +
+                            buscar = " select d.num_docente as 'Número de Control', d.nombre as 'Nombre', d.departamento as Departamento, c.seguimiento as Subsecuente," +
+                                            "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento1, c.medicamento2 as Medicamento2, c.medicamento3 as Medicamento3 from " +
                                             "consultas as c inner join docente as d on c.num_docente=c.num_docente where d.departamento = '" + comboCarrera.SelectedItem + "'";
                             if (!Reader(buscar))
                             {
@@ -2385,6 +2433,46 @@ namespace RecursosServiciosMedicos
                             #endregion
                             break;
 
+                        case 6969: //Diagnóstico
+                            #region Diagnostico
+
+                            if (comboDiagnostico.SelectedIndex == 0)
+                            {
+                                MessageBox.Show(this, "Seleccione un diagnóstico", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                break;
+                            }
+                            conn.Open();
+                            buscar = " select d.num_docente as 'Número de Control', d.nombre as 'Nombre', d.departamento as Departamento, c.seguimiento as Subsecuente," +
+                                            "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento1, c.medicamento2 as Medicamento2, c.medicamento3 as Medicamento3 from " +
+                                            "consultas as c inner join docente as d on c.num_docente=c.num_docente where c.diagnostico = '" + txb + "'";
+                            if (!Reader(buscar))
+                            {
+                                MessageBox.Show(this, "No se encontró consulta registrada con estos datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                lblControl.Show();
+                                txbBusquedaClave.Show();
+                                conn.Close();
+                            }
+                            else
+                            {
+                                Aparece(tabSEResultados);
+                                var dataAdapter = new SqlDataAdapter(buscar, conn);
+                                var commandBuilder = new SqlCommandBuilder(dataAdapter);
+                                var ds = new DataSet();
+                                dataAdapter.Fill(ds);
+                                tabSEResultados.ReadOnly = true;
+                                tabSEResultados.DataSource = ds.Tables[0];
+                                lblTotalRegistros.Show();
+                                lblKEv.Show();
+                                lblTotalRegistros.Text = "Total de registros = " + tabSEResultados.RowCount.ToString();
+                                lblKEv.Text = "Diagnóstico";
+                                btnExportar.Visible = true;
+                            }
+
+                            conn.Close();
+
+                            #endregion
+                            break;
+
                         //Evento
                         //case 22:
                         //    #region Evento
@@ -2403,8 +2491,8 @@ namespace RecursosServiciosMedicos
                                 break;
                             }
                             conn.Open();
-                            buscar = "select o.nombre as 'Nombre', c.seguimiento as Seguimiento, o.relacion as Relación, " +
-                                            "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento from " +
+                            buscar = "select o.nombre as 'Nombre', c.seguimiento as Subsecuente, o.relacion as Relación, " +
+                                            "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento1, c.medicamento2 as Medicamento2, c.medicamento3 as Medicamento3 from " +
                                             "consultas as c inner join otro as o on c.num_otro=o.num_otro where c.fecha >= '" + dtpInicio.Value.Year + "-" + dtpInicio.Value.Month +
                                             "-" + dtpInicio.Value.Day + " 00:00' and c.fecha <= '" + dtpFinal.Value.Year + "-" + dtpFinal.Value.Month + "-" + dtpFinal.Value.Day +
                                             " 23:59' and o.relacion like '%Evento%'";
@@ -2439,8 +2527,8 @@ namespace RecursosServiciosMedicos
                         case 24:
                             #region Lapso
                             conn.Open();
-                            buscar = " select o.nombre as 'Nombre', c.seguimiento as Seguimiento, o.relacion as Relación, " +
-                                                "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento from " +
+                            buscar = " select o.nombre as 'Nombre', c.seguimiento as Subsecuente, o.relacion as Relación, " +
+                                                "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento1, c.medicamento2 as Medicamento2, c.medicamento3 as Medicamento3 from " +
                                                 "consultas as c inner join otro as o on c.num_otro=o.num_otro  where c.fecha >= '" + dtpInicio.Value.Year + "-" + dtpInicio.Value.Month +
                                                 "-" + dtpInicio.Value.Day + " 00:00' and c.fecha <= '" +
                                                 dtpFinal.Value.Year + "-" + dtpFinal.Value.Month + "-" + dtpFinal.Value.Day + " 23:59' and o.relacion not like '%Evento%'";
@@ -2472,6 +2560,45 @@ namespace RecursosServiciosMedicos
                             #endregion
                             break;
 
+                        case 696969:
+                            #region Diagnostico
+                            if (comboDiagnostico.SelectedIndex == 0)
+                            {
+                                MessageBox.Show(this, "Seleccione un diagnóstico", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                break;
+                            }
+                            conn.Open();
+                            buscar = " select o.nombre as 'Nombre', c.seguimiento as Subsecuente, o.relacion as Relación, " +
+                                                "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento1, c.medicamento2 as Medicamento2, c.medicamento3 as Medicamento3 from " +
+                                                "consultas as c inner join otro as o on c.num_otro=o.num_otro  where c.diagnostico = '" + txb + "' and o.relacion not like '%Evento%'";
+
+                            if (!Reader(buscar))
+                            {
+                                MessageBox.Show(this, "No se encontró consulta registrada con estos datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                lblControl.Show();
+                                txbBusquedaClave.Show();
+                                conn.Close();
+                            }
+                            else
+                            {
+                                Aparece(tabSEResultados);
+                                var dataAdapter = new SqlDataAdapter(buscar, conn);
+                                var commandBuilder = new SqlCommandBuilder(dataAdapter);
+                                var ds = new DataSet();
+                                dataAdapter.Fill(ds);
+                                tabSEResultados.ReadOnly = true;
+                                tabSEResultados.DataSource = ds.Tables[0];
+                                lblTotalRegistros.Show();
+                                lblTotalRegistros.Text = "Total de registros = " + tabSEResultados.RowCount.ToString();
+                                lblKEv.Text = "Diagnóstico";
+                                lblKEv.Show();
+                                btnExportar.Visible = true;
+                            }
+
+                            conn.Close();
+                            #endregion
+                            break;
+
                             #endregion //Otro
                     }
                     #endregion //Usuario SE
@@ -2486,8 +2613,8 @@ namespace RecursosServiciosMedicos
                             case 1: //Alumno fecha y seguimiento
                                 conn.Open();
                                 buscar = " select c.num_control as 'Número de Control', a.nombre as 'Nombre', a.nombre_paterno as 'Apellido Paterno', " +
-                                                " a.nombre_materno as 'Apellido Materno', a.carrera as Carrera, c.seguimiento as Seguimiento," +
-                                                "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento from " +
+                                                " a.nombre_materno as 'Apellido Materno', a.carrera as Carrera, c.seguimiento as Subsecuente," +
+                                                "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento1, c.medicamento2 as Medicamento2, c.medicamento3 as Medicamento3 from " +
                                                 "consultas as c inner join alumno as a on c.num_control=a.num_control where c.seguimiento='Si' and c." + control + " >= '" + txb + " 00:00'" +
                                                 " and " + "c." + control + " <= '" + txb + " 23:59'";
                                 if (!Reader(buscar))
@@ -2513,8 +2640,8 @@ namespace RecursosServiciosMedicos
                             case 2:  //Alumno clave y seguimiento
                                 conn.Open();
                                 buscar = " select c.num_control as 'Número de Control', a.nombre as 'Nombre', a.nombre_paterno as 'Apellido Paterno', " +
-                                                " a.nombre_materno as 'Apellido Materno', a.carrera as Carrera, c.seguimiento as Seguimiento," +
-                                                "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento from " +
+                                                " a.nombre_materno as 'Apellido Materno', a.carrera as Carrera, c.seguimiento as Subsecuente," +
+                                                "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento1, c.medicamento2 as Medicamento2, c.medicamento3 as Medicamento3 from " +
                                                 "consultas as c inner join alumno as a on c.num_control=a.num_control where c.seguimiento='Si' and c." + control + " = " + txb;
                                 if (!Reader(buscar))
                                 {
@@ -2538,8 +2665,8 @@ namespace RecursosServiciosMedicos
                                 break;
                             case 3: //Docente fecha y seguimiento
                                 conn.Open();
-                                buscar = " select c.num_docente as 'Número de Control', d.nombre as 'Nombre', d.departamento as Área, c.seguimiento as Seguimiento," +
-                                                        "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento from " +
+                                buscar = " select c.num_docente as 'Número de Control', d.nombre as 'Nombre', d.departamento as Área, c.seguimiento as Subsecuente," +
+                                                        "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento1, c.medicamento2 as Medicamento2, c.medicamento3 as Medicamento3 from " +
                                                         "consultas as c inner join docente as d on c.num_docente=d.num_docente where c.seguimiento='Si' and c." + control + " >= '" + txb + " 00:00'" +
                                                         " and " + "c." + control + " <= '" + txb + " 23:59'";
                                 if (!Reader(buscar))
@@ -2564,8 +2691,8 @@ namespace RecursosServiciosMedicos
                                 break;
                             case 4: //Docente clave y seguimiento
                                 conn.Open();
-                                buscar = " select c.num_docente as 'Número de Control', d.nombre as 'Nombre', d.departamento as Área, c.seguimiento as Seguimiento," +
-                                                "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento from " +
+                                buscar = " select c.num_docente as 'Número de Control', d.nombre as 'Nombre', d.departamento as Área, c.seguimiento as Subsecuente," +
+                                                "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento1, c.medicamento2 as Medicamento2, c.medicamento3 as Medicamento3 from " +
                                                 "consultas as c inner join docente as d on c.num_docente=d.num_docente where c.seguimiento = 'Si' and c." + control + " = " + txb;
                                 if (!Reader(buscar))
                                 {
@@ -2589,8 +2716,8 @@ namespace RecursosServiciosMedicos
                                 break;
                             case 5: //Otro fecha y seguimiento
                                 conn.Open();
-                                buscar = " select o.nombre as 'Nombre', c.seguimiento as Seguimiento, o.relacion as 'Relación', " +
-                                                        "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento from " +
+                                buscar = " select o.nombre as 'Nombre', c.seguimiento as Subsecuente, o.relacion as 'Relación', " +
+                                                        "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento1, c.medicamento2 as Medicamento2, c.medicamento3 as Medicamento3 from " +
                                                         "consultas as c inner join otro as o on c.num_otro=o.num_otro where c.seguimiento='Si' and c." + control + " >= '" + txb + " 00:00'" +
                                                         " and " + "c." + control + " <= '" + txb + " 23:59'";
                                 if (!Reader(buscar))
@@ -2615,8 +2742,8 @@ namespace RecursosServiciosMedicos
                                 break;
                             case 6: //Otro nombre y seguimiento
                                 conn.Open();
-                                buscar = " select o.nombre as 'Nombre', c.seguimiento as Seguimiento, o.relacion as 'Relación', " +
-                                                        "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento from " +
+                                buscar = " select o.nombre as 'Nombre', c.seguimiento as Subsecuente, o.relacion as 'Relación', " +
+                                                        "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento1, c.medicamento2 as Medicamento2, c.medicamento3 as Medicamento3 from " +
                                                         "consultas as c inner join otro as o on c.num_otro=o.num_otro where c.seguimiento='Si' and o." + control + " like '%" + txb + "%'";
                                 if (!Reader(buscar))
                                 {
@@ -2647,8 +2774,8 @@ namespace RecursosServiciosMedicos
                             case 1: //Alumno fecha y sin seguimiento
                                 conn.Open();
                                 buscar = " select c.num_control as 'Número de Control', a.nombre as 'Nombre', a.nombre_paterno as 'Apellido Paterno', " +
-                                                " a.nombre_materno as 'Apellido Materno', a.carrera as Carrera, c.seguimiento as Seguimiento," +
-                                                "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento from " +
+                                                " a.nombre_materno as 'Apellido Materno', a.carrera as Carrera, c.seguimiento as Subsecuente," +
+                                                "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento1, c.medicamento2 as Medicamento2, c.medicamento3 as Medicamento3 from " +
                                                 "consultas as c inner join alumno as a on c.num_control=a.num_control where c." + control + " >= '" + txb + " 00:00'" +
                                                 " and " + "c." + control + " <= '" + txb + " 23:59'";
                                 if (!Reader(buscar))
@@ -2674,8 +2801,8 @@ namespace RecursosServiciosMedicos
                             case 2: //Alumno clave y sin seguimiento
                                 conn.Open();
                                 buscar = " select c.num_control as 'Número de Control', a.nombre as 'Nombre', a.nombre_paterno as 'Apellido Paterno', " +
-                                                " a.nombre_materno as 'Apellido Materno', a.carrera as Carrera, c.seguimiento as Seguimiento," +
-                                                "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento from " +
+                                                " a.nombre_materno as 'Apellido Materno', a.carrera as Carrera, c.seguimiento as Subsecuente," +
+                                                "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento1, c.medicamento2 as Medicamento2, c.medicamento3 as Medicamento3 from " +
                                                 "consultas as c inner join alumno as a on c.num_control=a.num_control where c." + control + " = " + txb;
                                 if (!Reader(buscar))
                                 {
@@ -2699,8 +2826,8 @@ namespace RecursosServiciosMedicos
                                 break;
                             case 3: //Docente fecha y sin seguimento
                                 conn.Open();
-                                buscar = " select c.num_docente as 'Número de Control', d.nombre as 'Nombre', d.departamento as Área, c.seguimiento as Seguimiento," +
-                                                        "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento from " +
+                                buscar = " select c.num_docente as 'Número de Control', d.nombre as 'Nombre', d.departamento as Área, c.seguimiento as Subsecuente," +
+                                                        "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento1, c.medicamento2 as Medicamento2, c.medicamento3 as Medicamento3 from " +
                                                         "consultas as c inner join docente as d on c.num_docente=d.num_docente where c." + control + " >= '" + txb + " 00:00'" +
                                                         " and " + "c." + control + " <= '" + txb + " 23:59'";
                                 if (!Reader(buscar))
@@ -2725,8 +2852,8 @@ namespace RecursosServiciosMedicos
                                 break;
                             case 4: //Docente clave y sin seguimiento
                                 conn.Open();
-                                buscar = " select c.num_docente as 'Número de Control', d.nombre as 'Nombre', d.departamento as Área, c.seguimiento as Seguimiento," +
-                                                "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento from " +
+                                buscar = " select c.num_docente as 'Número de Control', d.nombre as 'Nombre', d.departamento as Área, c.seguimiento as Subsecuente," +
+                                                "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento1, c.medicamento2 as Medicamento2, c.medicamento3 as Medicamento3 from " +
                                                 "consultas as c inner join docente as d on c.num_docente=d.num_docente where c." + control + " = " + txb;
                                 if (!Reader(buscar))
                                 {
@@ -2750,8 +2877,8 @@ namespace RecursosServiciosMedicos
                                 break;
                             case 5: //Otro fecha y sin seguimiento
                                 conn.Open();
-                                buscar = " select o.nombre as 'Nombre', c.seguimiento as Seguimiento, o.relacion as 'Relación', " +
-                                                        "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento from " +
+                                buscar = " select o.nombre as 'Nombre', c.seguimiento as Subsecuente, o.relacion as 'Relación', " +
+                                                        "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento1, c.medicamento2 as Medicamento2, c.medicamento3 as Medicamento3 from " +
                                                         "consultas as c inner join otro as o on c.num_otro=o.num_otro where c." + control + " >= '" + txb + " 00:00'" +
                                                         " and " + "c." + control + " <= '" + txb + " 23:59'";
                                 if (!Reader(buscar))
@@ -2776,8 +2903,8 @@ namespace RecursosServiciosMedicos
                                 break;
                             case 6: //Otro nombre y sin seguimiento
                                 conn.Open();
-                                buscar = " select o.nombre as 'Nombre', c.seguimiento as Seguimiento, o.relacion as 'Relación', " +
-                                                        "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento from " +
+                                buscar = " select o.nombre as 'Nombre', c.seguimiento as Subsecuente, o.relacion as 'Relación', " +
+                                                        "c.fecha as 'Fecha de consulta' , c.doctor as Doctor, c.diagnostico as Diagnóstio , c.medicamento as Medicamento1, c.medicamento2 as Medicamento2, c.medicamento3 as Medicamento3 from " +
                                                         "consultas as c inner join otro as o on c.num_otro=o.num_otro where o." + control + " like '%" + txb + "%'";
                                 if (!Reader(buscar))
                                 {
@@ -2840,6 +2967,10 @@ namespace RecursosServiciosMedicos
                         {
                             case 1:
                                 #region Casos B de alumno
+                                if (cbDiagnostico.Checked)
+                                {
+                                    b = 69;
+                                }
                                 if (cbSECarrera.Checked)
                                 {
                                     if (cbSELapso.Checked)
@@ -2908,29 +3039,30 @@ namespace RecursosServiciosMedicos
                                     }
                                 }
                                 else
-                                      if (cbSEGeneracion.Checked)
-                                {
-                                    if (cbEvento.Checked)
+                                    if (cbSEGeneracion.Checked)
                                     {
-                                        b = 13; //Gene, evento
+                                        if (cbEvento.Checked)
+                                        {
+                                            b = 13; //Gene, evento
+                                        }
+                                        else
+                                        {
+                                            b = 14; //Gene
+                                        }
+                                    }
+                                    else if (cbEvento.Checked)
+                                    {
+                                        b = 15; //Evento
                                     }
                                     else
                                     {
-                                        b = 14; //Gene
+                                        
                                     }
-                                }
-                                else if (cbEvento.Checked)
-                                {
-                                    b = 15; //Evento
-                                }
-                                else
-                                {
-                                    b = 0; //0
-                                }
                                 #endregion //Casos B alumno
                                 #region Switch b alumno
                                 switch (b)
                                 {
+
                                     //Carrera, lapso, gene, evento
                                     case 1:
                                         HacerConsulta(comboCarrera.SelectedItem.ToString(), b, "carrera", tiposDeUsuario);
@@ -2991,11 +3123,19 @@ namespace RecursosServiciosMedicos
                                     case 15:
                                         HacerConsulta(null, b, "", tiposDeUsuario);
                                         break;
+                                    case 69:
+                                        HacerConsulta(comboDiagnostico.SelectedItem.ToString(), 69, "nombre", tiposDeUsuario);
+                                        break;
                                 }
                                 #endregion //Switch B alumno
                                 break;
                             case 2:
                                 #region Casos B de Docente
+
+                                if (cbDiagnostico.Checked)
+                                {
+                                    b = 6969;
+                                }
                                 if (cbSELapso.Checked)
                                 {
                                     if (cbSECarrera.Checked)
@@ -3036,7 +3176,7 @@ namespace RecursosServiciosMedicos
                                 }
                                 else
                                 {
-                                    b = 0; //0
+                                  
                                 }
                                 #endregion //Casos B Docente
                                 #region Switch B Docente
@@ -3063,14 +3203,19 @@ namespace RecursosServiciosMedicos
                                     case 21:
                                         HacerConsulta(comboCarrera.SelectedItem.ToString(), b, "departamento", tiposDeUsuario);
                                         break;
-                                        //Evento
-                                        //case 22: HacerConsulta(comboEvento.SelectedItem.ToString(), b, "evento", tiposDeUsuario);
-                                        //    break;
+                                    //Evento
+                                    //case 22: HacerConsulta(comboEvento.SelectedItem.ToString(), b, "evento", tiposDeUsuario);
+                                    //    break;
+                                    case 6969:
+                                        HacerConsulta(comboDiagnostico.SelectedItem.ToString(), 6969, "nombre", tiposDeUsuario);
+                                        break;
                                 }
                                 #endregion //Switch B docente
                                 break;
                             case 3:
                                 #region Casos B Otros
+
+                                
                                 if (cbEvento.Checked)
                                 {
                                     b = 23; //Lapso y evento, incluidos docentes
@@ -3078,6 +3223,10 @@ namespace RecursosServiciosMedicos
                                 else
                                 {
                                     b = 24; //Lapso ITH
+                                }
+                                if (cbDiagnostico.Checked)
+                                {
+                                    b = 696969;
                                 }
                                 #endregion //B Otro
                                 #region Switch Otro
@@ -3090,6 +3239,9 @@ namespace RecursosServiciosMedicos
                                     //Lapso
                                     case 24:
                                         HacerConsulta(null, b, "", tiposDeUsuario);
+                                        break;
+                                    case 696969:
+                                        HacerConsulta(comboDiagnostico.SelectedItem.ToString(), 696969, "nombre", tiposDeUsuario);
                                         break;
                                 }
                                 #endregion //Switch Otro
@@ -3246,6 +3398,7 @@ namespace RecursosServiciosMedicos
             cbAlumno.Checked = true;
             pnlAlumno.Show();
             Checar();
+            comboDiagnostico.SelectedItem = 0;
             btnCertificadoMed.Text = "   Documentos" + Environment.NewLine + "Medicos";
 
             if (Usuario == "dse")
@@ -3269,7 +3422,8 @@ namespace RecursosServiciosMedicos
             LlenaCbMedicamento();
             LlenarComboBoxServEsc(comboEvento, "Select nombre from evento", "nombre"); //Llena los ComboBox de evento
             LlenarComboBoxServEsc(comboGeneracion, "select distinct substring(num_control,1,2) as 'Generación' from alumno order by Generación asc", "Generación"); //Llena ComboBox de generación
-                                                                                                                                                                    // LlenarComboBoxServEsc(comboIT,"",""); //Llena el ComboBox de institutos para eventos
+            LlenarComboBoxServEsc(comboDiagnostico, "Select distinct nombre from diagnostico", "nombre"); //Llena el ComboBox de institutos para eventos
+
             pnlConsultoria.Hide();
 
         } // FUNCTION LOAD
@@ -3299,6 +3453,7 @@ namespace RecursosServiciosMedicos
                 btnExportar.Hide();
                 pnlEvento.Hide();
                 pnlAgregarEvento.Hide();
+                pnlSE.Hide();
 
             }
             else
@@ -4351,9 +4506,11 @@ namespace RecursosServiciosMedicos
             ShowControlesSE();
             comboCarrera.Items.Clear();
             comboCarrera.Items.Insert(0, "Seleccione");
+            comboDiagnostico.Enabled = false;
             LlenarComboBoxServEsc(comboCarrera, "select distinct carrera from alumno", "carrera");//Llena ComboBox Carrera
             cbFalse();
             cbSEAlumno.Checked = true;
+            cbDiagnostico.Checked=false;
             cbSEDocente.Checked = false;
             cbSEOtro.Checked = false;
             cbSELapso.Location = new Point(35, 77);
@@ -4361,6 +4518,7 @@ namespace RecursosServiciosMedicos
             dtpFinal.Location = new Point(43, 270);
             lblSECarreraArea.Text = "Carrera";
             lblSECarrArMini.Text = "Carrera";
+            lblDiagnostico.Enabled = false;
             lblSELapso.Location = new Point(66, 77);
             lblSEFechaInicio.Location = new Point(81, 207);
             lblSEFechaFinal.Location = new Point(81, 254);
@@ -4373,9 +4531,11 @@ namespace RecursosServiciosMedicos
             ShowControlesSE();
             comboCarrera.Items.Clear();
             comboCarrera.Items.Insert(0, "Seleccione");
+            comboDiagnostico.Enabled = false;
             LlenarComboBoxServEsc(comboCarrera, "select distinct departamento from docente", "departamento");//Llena ComboBox Carrera
             cbFalse();
             cbEvento.Hide();
+            cbDiagnostico.Checked = false;
             cbSEAlumno.Checked = false;
             cbSEDocente.Checked = true;
             cbSEOtro.Checked = false;
@@ -4386,6 +4546,7 @@ namespace RecursosServiciosMedicos
             dtpInicio.Location = new Point(43, 170);
             dtpFinal.Location = new Point(43, 217);
             lblSEEvento.Hide();
+            lblDiagnostico.Enabled = false;
             lblSEEventoMini.Hide();
             lblSECarreraArea.Text = "Área";
             lblSECarrArMini.Text = "Área";
@@ -4399,6 +4560,7 @@ namespace RecursosServiciosMedicos
         private void cbSEOtro_OnChange(object sender, EventArgs e)
         {
             ShowControlesSE();
+            comboDiagnostico.Enabled = false;
             cbFalse();
             cbSEAlumno.Checked = false;
             cbSEDocente.Checked = false;
@@ -4406,6 +4568,7 @@ namespace RecursosServiciosMedicos
             cbSECarrera.Hide();
             cbSEGeneracion.Hide();
             cbSELapso.Show();
+            cbDiagnostico.Checked = false;
             comboCarrera.Hide();
             comboGeneracion.Hide();
             dtpInicio.Location = new Point(43, 126);
@@ -4413,6 +4576,7 @@ namespace RecursosServiciosMedicos
             dtpFinal.Location = new Point(43, 173);
             dtpFinal.Enabled = false;
             lblSECarreraArea.Hide();
+            lblDiagnostico.Enabled = false;
             lblSEGene.Hide();
             cbSELapso.Location = new Point(60, 23);
             lblSELapso.Location = new Point(81, 23);
@@ -4590,7 +4754,7 @@ namespace RecursosServiciosMedicos
         }//Cambio de Banderas
         private void botSEBuscar_Click(object sender, EventArgs e)
         {
-            if (!cbSECarrera.Checked && !cbSELapso.Checked && !cbSEGeneracion.Checked && !cbEvento.Checked && !cbSEOtro.Checked)
+            if (!cbSECarrera.Checked && !cbDiagnostico.Checked && !cbSELapso.Checked && !cbSEGeneracion.Checked && !cbEvento.Checked && !cbSEOtro.Checked)
             {
 
                 MessageBox.Show(this, "Seleccione un parámetro de búsqueda", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -4599,6 +4763,8 @@ namespace RecursosServiciosMedicos
             else
             {
                 BuscaConsulta(1);
+                
+
             }
         }//Validacion de busqueda vacia
         private void botBack_Click(object sender, EventArgs e)
@@ -4613,6 +4779,8 @@ namespace RecursosServiciosMedicos
                 tabSEResultados.Hide();
                 btnExportar.Hide();
                 ShowControlesSE();
+                lblDiagnostico.Visible = true;
+                comboDiagnostico.Visible = true;
                 if (cbSEDocente.Checked)
                 {
                     ShowControlesSE();
@@ -4875,6 +5043,111 @@ namespace RecursosServiciosMedicos
         private void calEventoFin_Leave(object sender, EventArgs e) { calEventoFin.Hide(); }
         private void calEventoFin_DateChanged(object sender, DateRangeEventArgs e) { tbFechaFinEvento.Text = calEventoFin.SelectionStart.ToString(); }
         private void pnlAgregarEvento_Click(object sender, EventArgs e) { calEventoFin.Hide(); calEventoIni.Hide(); }
-        #endregion
+        private void cbDiagnostico_OnChange(object sender, EventArgs e)
+        {
+            if (cbDiagnostico.Checked)
+            {
+                HideControlesSE();
+                lblDiagnostico.Enabled = true;
+                comboDiagnostico.Enabled = true;
+                lblDiagnostico.Show();
+                comboDiagnostico.Show();
+                cbDiagnostico.Show();
+                lblSEDiag.Show();
+            }
+            else
+            {
+                if (cbSEAlumno.Checked)
+                {
+                    ShowControlesSE();
+                    comboCarrera.Items.Clear();
+                    comboCarrera.Items.Insert(0, "Seleccione");
+                    comboDiagnostico.Enabled = false;
+                    LlenarComboBoxServEsc(comboCarrera, "select distinct carrera from alumno", "carrera");//Llena ComboBox Carrera
+                    cbFalse();
+                    cbSEAlumno.Checked = true;
+                    cbDiagnostico.Checked = false;
+                    cbSEDocente.Checked = false;
+                    cbSEOtro.Checked = false;
+                    cbSELapso.Location = new Point(35, 77);
+                    dtpInicio.Location = new Point(43, 223);
+                    dtpFinal.Location = new Point(43, 270);
+                    lblSECarreraArea.Text = "Carrera";
+                    lblSECarrArMini.Text = "Carrera";
+                    lblDiagnostico.Enabled = false;
+                    lblSELapso.Location = new Point(66, 77);
+                    lblSEFechaInicio.Location = new Point(81, 207);
+                    lblSEFechaFinal.Location = new Point(81, 254);
+
+
+                    pnlSE.Show();
+                }
+                else if (cbSEDocente.Checked)
+                {
+                    ShowControlesSE();
+                    comboCarrera.Items.Clear();
+                    comboCarrera.Items.Insert(0, "Seleccione");
+                    comboDiagnostico.Enabled = false;
+                    LlenarComboBoxServEsc(comboCarrera, "select distinct departamento from docente", "departamento");//Llena ComboBox Carrera
+                    cbFalse();
+                    cbEvento.Hide();
+                    cbDiagnostico.Checked = false;
+                    cbSEAlumno.Checked = false;
+                    cbSEDocente.Checked = true;
+                    cbSEOtro.Checked = false;
+                    cbSEGeneracion.Hide();
+                    cbSELapso.Location = cbSEGeneracion.Location;
+                    comboGeneracion.Hide();
+                    comboEvento.Hide();
+                    dtpInicio.Location = new Point(43, 170);
+                    dtpFinal.Location = new Point(43, 217);
+                    lblSEEvento.Hide();
+                    lblDiagnostico.Enabled = false;
+                    lblSEEventoMini.Hide();
+                    lblSECarreraArea.Text = "Área";
+                    lblSECarrArMini.Text = "Área";
+                    lblSEGene.Hide();
+                    lblSEGeneMini.Hide();
+                    lblSELapso.Location = lblSEGene.Location;
+                    lblSEFechaInicio.Location = new Point(81, 154);
+                    lblSEFechaFinal.Location = new Point(81, 201);
+                    pnlSE.Show();
+                }
+                else if (cbSEOtro.Checked)
+                {
+                    ShowControlesSE();
+                    comboDiagnostico.Enabled = false;
+                    cbFalse();
+                    cbSEAlumno.Checked = false;
+                    cbSEDocente.Checked = false;
+                    cbSEOtro.Checked = true;
+                    cbSECarrera.Hide();
+                    cbSEGeneracion.Hide();
+                    cbSELapso.Show();
+                    cbDiagnostico.Checked = false;
+                    comboCarrera.Hide();
+                    comboGeneracion.Hide();
+                    dtpInicio.Location = new Point(43, 126);
+                    dtpInicio.Enabled = false;
+                    dtpFinal.Location = new Point(43, 173);
+                    dtpFinal.Enabled = false;
+                    lblSECarreraArea.Hide();
+                    lblDiagnostico.Enabled = false;
+                    lblSEGene.Hide();
+                    cbSELapso.Location = new Point(60, 23);
+                    lblSELapso.Location = new Point(81, 23);
+                    lblSECarrArMini.Hide();
+                    lblSEGeneMini.Hide();
+                    lblSEFechaInicio.Location = new Point(81, 110);
+                    lblSEFechaFinal.Location = new Point(81, 157);
+                    pnlSE.Show();
+                }
+            }
+        }
+
+        
     }
+        #endregion
+
+        
 }

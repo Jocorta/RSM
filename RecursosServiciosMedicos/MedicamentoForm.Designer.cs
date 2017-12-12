@@ -56,6 +56,7 @@
             this.bunifuCustomLabel3.Size = new System.Drawing.Size(358, 45);
             this.bunifuCustomLabel3.TabIndex = 31;
             this.bunifuCustomLabel3.Text = "Agregar Medicamento";
+            this.bunifuCustomLabel3.Click += new System.EventHandler(this.bunifuCustomLabel3_Click);
             // 
             // btnCancelar
             // 
